@@ -1,0 +1,6 @@
+@CodeBook_HostAddress = http://localhost:5252
+
+GET {{CodeBook_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
