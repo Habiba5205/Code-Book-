@@ -1,6 +1,7 @@
-﻿namespace CodeBook.Methods
+﻿using System;
+namespace CodeBook.Business.App.Methods
 {
-    public class Posts
+    public class Posts : IPostService
     {
         void CreatePost(string userId, string post) 
         {

@@ -1,4 +1,5 @@
-﻿namespace CodeBook.Services
+﻿using System;
+namespace CodeBook.Business.App.Services
 {
     public interface ICommentService
     {

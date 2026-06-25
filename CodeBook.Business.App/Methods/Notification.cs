@@ -1,4 +1,5 @@
-﻿namespace CodeBook.Methods
+﻿using System;
+namespace CodeBook.Business.App.Methods
 {
     public class Notification
     {
