@@ -4,8 +4,8 @@ namespace CodeBook.Business.App.Services
 {
 	public interface IReportService
     {
-        Task SubmitReport(int reporterId, ReportRequest request);
-        Task<List<ReportDto>> GetPendingReports();
-        Task UpdateReportStatusAsync(int reportId, string status);
+        void SubmitReport(int reporterId, ReportRequest request);
+        List<ReportDto> GetPendingReports();
+        void UpdateReportStatus(int reportId, string status);
     }
 }

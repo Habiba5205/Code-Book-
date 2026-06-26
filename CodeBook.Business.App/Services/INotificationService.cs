@@ -4,8 +4,8 @@ namespace CodeBook.Business.App.Services
 {
     public interface INotificationService
     {
-        Task CreateNotificationAsync(int reciepentId, int? actorId, string type, int? postId, int? commentId, string message, string link);
-        Task <List<NotificationDTO>> GetUserNotificationAsync(int userId);
-        Task MarkAsRead(int notificationId);
+        void CreateNotification(int reciepentId, int? actorId, string type, int? postId, int? commentId, string message, string link);
+        List<NotificationDTO> GetUserNotification(int userId);
+        void MarkAsRead(int notificationId);
     }
 }

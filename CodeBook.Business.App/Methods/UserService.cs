@@ -40,9 +40,13 @@ namespace CodeBook.Business.App.Methods
             userdata.SaveChanges();
 
         }
-        public bool VerifyPassword(string password) 
-        { 
-            return false; 
+        public bool VerifyPassword(string password,int userId)
+        {
+            User user = userdata.Users.FirstOrDefault(u => u.UserId == userId);
+            if (user == null)
+                throw new Exception("User Not Found!");
+
+            return BCrypt.Net.BCrypt.Verify(password, user.PasswordHash);
         }
         public void Follow(int followerId, int followeeId)
         {

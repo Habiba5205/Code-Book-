@@ -4,6 +4,6 @@ namespace CodeBook.Business.App.Services
 {
     public interface ISearchService
     {
-      Task Task<List<PostResponse>> SearchPostsAsync(SearchQuery query);
+      List<PostResponse> SearchPosts(SearchQuery query);
     }
 }
