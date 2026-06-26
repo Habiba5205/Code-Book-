@@ -3,6 +3,45 @@
   "WorkspaceRootPath": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\dtos\\searchquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\dtos\\reportrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\dtos\\postresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\dtos\\moderationrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\methods\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\methods\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\methods\\reportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\methods\\reactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\methods\\postsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\methods\\communityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\methods\\commentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\methods\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\codebook.business.app.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.data.app\\codebookcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|solutionrelative:codebook.data.app\\codebookcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -27,11 +66,180 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SearchQuery.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\DTOs\\SearchQuery.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\DTOs\\SearchQuery.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\DTOs\\SearchQuery.cs",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\DTOs\\SearchQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T21:46:50.122Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ReportRequest.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\DTOs\\ReportRequest.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\DTOs\\ReportRequest.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\DTOs\\ReportRequest.cs",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\DTOs\\ReportRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T21:46:49.286Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "PostResponse.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\DTOs\\PostResponse.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\DTOs\\PostResponse.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\DTOs\\PostResponse.cs",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\DTOs\\PostResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T21:46:48.417Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Methods\\UserService.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\Methods\\UserService.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Methods\\UserService.cs",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\Methods\\UserService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T21:46:33.471Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ReportService.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Methods\\ReportService.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\Methods\\ReportService.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Methods\\ReportService.cs",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\Methods\\ReportService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T21:46:28.058Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ReactionService.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Methods\\ReactionService.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\Methods\\ReactionService.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Methods\\ReactionService.cs",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\Methods\\ReactionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T21:46:22.815Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PostsService.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Methods\\PostsService.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\Methods\\PostsService.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Methods\\PostsService.cs",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\Methods\\PostsService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T21:46:16.718Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Notification.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Methods\\Notification.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\Methods\\Notification.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Methods\\Notification.cs",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\Methods\\Notification.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T21:45:41.403Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CommunityService.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Methods\\CommunityService.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\Methods\\CommunityService.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Methods\\CommunityService.cs",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\Methods\\CommunityService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T21:45:36.846Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ModerationRequest.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\DTOs\\ModerationRequest.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\DTOs\\ModerationRequest.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\DTOs\\ModerationRequest.cs",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\DTOs\\ModerationRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T21:43:17.826Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CommentService.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Methods\\CommentService.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\Methods\\CommentService.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Methods\\CommentService.cs",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\Methods\\CommentService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T21:45:21.312Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Methods\\AuthService.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\Methods\\AuthService.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Methods\\AuthService.cs",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\Methods\\AuthService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T21:43:25.414Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CodeBook.Business.App",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\CodeBook.Business.App.csproj",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\CodeBook.Business.App.csproj",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\CodeBook.Business.App.csproj",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\CodeBook.Business.App.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-06-26T21:42:02.37Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "BaseEntity.cs",
               "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Models.App\\BaseEntity.cs",
               "RelativeDocumentMoniker": "..\\CodeBook.Models.App\\BaseEntity.cs",
@@ -39,13 +247,12 @@
               "RelativeToolTip": "..\\CodeBook.Models.App\\BaseEntity.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-25T12:04:37.437Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-25T12:04:37.437Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CodeBook.Models.App",
+              "DocumentIndex": 17,
+              "Title": "CodeBook.Models.App.csproj",
               "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Models.App\\CodeBook.Models.App.csproj",
               "RelativeDocumentMoniker": "..\\CodeBook.Models.App\\CodeBook.Models.App.csproj",
               "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Models.App\\CodeBook.Models.App.csproj",
@@ -57,8 +264,8 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CodeBook.Data.App",
+              "DocumentIndex": 16,
+              "Title": "CodeBook.Data.App.csproj",
               "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\CodeBook.Data.App.csproj",
               "RelativeDocumentMoniker": "CodeBook.Data.App\\CodeBook.Data.App.csproj",
               "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\CodeBook.Data.App.csproj",
@@ -70,7 +277,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 14,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Models.App\\User.cs",
               "RelativeDocumentMoniker": "..\\CodeBook.Models.App\\User.cs",
@@ -78,18 +285,17 @@
               "RelativeToolTip": "..\\CodeBook.Models.App\\User.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAA1wAcAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-25T11:49:59.041Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-25T11:49:59.041Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 13,
               "Title": "CodeBookContext.cs",
               "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\CodeBookContext.cs",
               "RelativeDocumentMoniker": "CodeBook.Data.App\\CodeBookContext.cs",
               "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\CodeBookContext.cs",
               "RelativeToolTip": "CodeBook.Data.App\\CodeBookContext.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAYwBoAAABSAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAzwBEAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-25T11:48:29.429Z",
               "EditorCaption": ""
