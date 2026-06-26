@@ -3,8 +3,8 @@ namespace CodeBook.Business.App.Services
 {
     public interface ICommentService
     {
-        void AddComment(string userId,string postId,string comment) { }
-        void DeleteComment(string commentid) { }
-        void EditComment(string commentid,string comment) { }
+        void AddComment(int authorId, int postId, string CommentBody);
+        void DeleteComment(int commentId);
+        void EditComment(int commentId, string CommentBody);
     }
 }

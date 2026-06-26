@@ -3,13 +3,12 @@ namespace CodeBook.Business.App.Services
 {
     public interface IPostService
     {
-        void CreatePost(string userId,string post) { }
-        void UpdatePost(string postId,string post) { }
-        void DeletePost(string postId) { }
-        void PublishPost(string postId) { }
-        void ArchivePost(string postId)  { }
-        void getFeed(string postId) { }
-        void SavePost(string userid,string postId) { }
+        void CreatePost(int authorId, string title, string body, bool isPublic, int? communityId, string? CodeSnippet, string? Language);
+        void UpdatePost(int postId, string title, string body, bool isPublic, int? communityId, string? CodeSnippet, string? Language);
+        void DeletePost(int postId);
+        void PublishPost(int postId);
+        int getFeed(int postId);
+        void SavePost(int userid, int postId);
 
 
     }

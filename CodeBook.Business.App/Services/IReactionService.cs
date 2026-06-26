@@ -3,8 +3,8 @@ namespace CodeBook.Business.App.Services
 {
     public interface IReactionService
     {
-        void AddReaction(string userId,string postId,string reaction) { }
-        void RemoveReaction(string postId) { }
+        void AddReaction(int userId, int postId, ReactionType reactionType);
+        void RemoveReaction(int postId, int userId);
 
     }
 }
