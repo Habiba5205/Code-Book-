@@ -20,6 +20,6 @@
 		public ICollection<PostTag> PostTags {get; set;} = new List<PostTag>();
 		public ICollection<PostSaved> SavedByUsers {get; set;} = new List<PostSaved>();
 		public ICollection<Report> Reports {get; set;} = new List<Report>();
-		public ICollection<PostRemoval> Removals {get; set;} = new List<PostRemoval>(); 
+		public PostRemoval Removal { get; set; }
     }
 }

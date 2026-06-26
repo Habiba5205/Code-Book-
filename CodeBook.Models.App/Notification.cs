@@ -1,5 +1,4 @@
 ﻿
-using CodeBook.Models.App.Enums;
 namespace CodeBook.Models.App
 {
     public class Notification : BaseEntity

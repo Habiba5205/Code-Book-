@@ -1,4 +1,4 @@
-﻿using CodeBook.Models.App.Enums;
+﻿
 namespace CodeBook.Models.App
 
 {

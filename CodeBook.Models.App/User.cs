@@ -1,5 +1,4 @@
-﻿using CodeBook.Models.App.Enums;
-namespace CodeBook.Models.App
+﻿namespace CodeBook.Models.App
 {
     public class User : BaseEntity
     {
@@ -17,7 +16,9 @@ namespace CodeBook.Models.App
         public ICollection<Community> Communities { get; set; } = new List<Community>();
         public ICollection<CommunityMember> CommunityMembership { get; set; } = new List<CommunityMember>();
         public ICollection<PostSaved> SavedPosts { get; set; } = new List<PostSaved>();
+        public ICollection<PostRemoval> PostRemovals { get; set; } = new List<PostRemoval>();
         public ICollection<Follow> Following { get; set; } = new List<Follow>();
         public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
+        public ICollection<Report> Reports { get; set; } = new List<Report>();
     }
 }
