@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CodeBook.Business.App.DTOs
 {
@@ -11,6 +9,5 @@ namespace CodeBook.Business.App.DTOs
         public string DisplayName { get; set; }
         public string Bio { get; set; }
         public string AvatarUrl { get; set; }
-        public string Website { get; set; }
     }
 }
