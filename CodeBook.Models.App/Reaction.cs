@@ -4,14 +4,14 @@ namespace CodeBook.Models.App
 
     public class Reaction : BaseEntity
     {
-        public int UserId { set; get; }
-        public int? PostId { set; get; }
-        public int? CommentId { set; get; }
-        public ReactionType Type { set; get; }
+        public int UserId {get; set;}
+        public int? PostId {get; set;}
+        public int? CommentId {get; set;}
+        public ReactionType Type {get; set;}
 
-        public User User { set; get; }
-        public Post? Post { set; get; }
-        public Comment? Comment { set; get; }
+        public User User { get; set; } = null!;
+        public Post? Post {get; set;}
+        public Comment? Comment {get; set;}
 
     }
 }

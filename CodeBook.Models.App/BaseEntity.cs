@@ -3,8 +3,8 @@
 {
     public abstract class BaseEntity
     {
-        public int ID { set; get; };
-        public DateTime DateCreated { set; get; };
-        public DateTime DateUpdated { set; get; };
+        public int Id {get; set;}
+        public DateTime DateCreated {get; set;} = DateTime.UtcNow;
+        public DateTime DateUpdated {get; set;} = DateTime.UtcNow;
     }
 }

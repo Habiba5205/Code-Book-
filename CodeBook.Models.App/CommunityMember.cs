@@ -4,12 +4,12 @@ namespace CodeBook.Models.App
 {
 	public class CommunityMember
 	{
-        public int UserId { set; get; }
-        public int CommunityId { set; get; }
-        public CommunityRole Role { set; get; }
-		public DateTime JoinedAt { set; get; }
+        public int UserId {get; set;}
+        public int CommunityId {get; set;}
+		public CommunityRole Role {get; set;} = CommunityRole.Member;
+		public DateTime JoinedAt {get; set;} = DateTime.UtcNow;
 
-		public User User { set; get; }
-		public CommunityMember Community { set; get; }
+		public User User {get; set;} = null!;
+		public Community Community {get; set;} = null!;
 	}
 }

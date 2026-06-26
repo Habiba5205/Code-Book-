@@ -3,12 +3,12 @@
 {
 	public class Follow
 	{
-		public int FollowerUserId { set; get; }
-		public int FollowedUserId { set; get; }
-		public DateTime CreatedAt { set; get; } = DateTime.UtcNow;
+		public int FollowerUserId {get; set;}
+		public int FolloweeUserId {get; set;}
+		public DateTime CreatedAt {get; set;} = DateTime.UtcNow;
 
-		public User Follower { set; get; }
-		public User Followed { set; get; }
+		public User Follower { get; set; } = null!;
+		public User Followee { get; set; } = null!;
 	
 
 }

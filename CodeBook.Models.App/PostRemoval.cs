@@ -4,14 +4,14 @@
 	public class PostRemoval:BaseEntity
 
 	{
-		public int PostId { set; get; }
-		public int RemoverId { set; get; }
-		public int? ReportId { set; get; }
-		public string Reason { set; get; }
+		public int PostId {get; set;}
+		public int RemoverId {get; set;}
+		public int? ReportId {get; set;}
+		public string Reason {get; set;}
 
-		public Post Post { set; get; }
-		public User Remover { set; get; }
-		public Report? Report { set; get; }
+		public Post Post { get; set; } = null!;
+		public User Remover { get; set; } = null!;
+		public Report? Report {get; set;}
 	
 	}
 }

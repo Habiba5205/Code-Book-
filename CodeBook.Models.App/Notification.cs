@@ -4,13 +4,13 @@ namespace CodeBook.Models.App
 {
     public class Notification : BaseEntity
     {
-        public NotificationType Type { set; get; }
-        public int UserId { set; get; }
-        public string Message { set; get; }
-        public int ReferenceId { set; get; }
-        public bool IsSeen { set; get; }
+        public NotificationType Type {get; set;}
+        public int UserId {get; set;}
+        public string Message {get; set;}
+        public int ReferenceId {get; set;}
+        public bool IsSeen {get; set;}
 
-        public User User { set; get; }
+        public User User { get; set; } = null!;
 
     }
 

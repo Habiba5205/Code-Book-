@@ -3,14 +3,15 @@ namespace CodeBook.Models.App
 {
     public class Report : BaseEntity
     {
-        public int ReporterId { set; get; }
-        public int? PostId { set; get; }
-        public int? CommentId { set; get; }
-        public string reason { set; get; }
-        public ReportStatus Status { set; get; }
+        public int ReporterId { get; set; }
+        public int? PostId { get; set; }
+        public int? CommentId { get; set; }
+        public string Reason { get; set; } = string.Empty;
+        public string? Description { get; set; }
+        public ReportStatus Status { get; set; }
 
-        public User Reporter { set; get; }
-        public Post? Post { set; get; }
+        public User Reporter { get; set; } = null!;
+        public Post? Post { get; set; }
 
-    }
+        }
 }

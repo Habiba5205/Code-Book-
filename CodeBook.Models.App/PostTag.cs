@@ -4,9 +4,10 @@
 
 	public class PostTag
 	{
-		public int PostId { set; get; }
-		public int TagId { set; get; }
-		public Post Post { set; get; }
-		public Tag Tag { set; get; }
+		public int PostId {get; set;}
+		public int TagId {get; set;}
+
+		public Post Post { get; set; } = null!;
+		public Tag Tag { get; set; } = null!;
 	}
 }

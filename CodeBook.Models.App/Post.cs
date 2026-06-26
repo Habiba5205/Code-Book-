@@ -2,24 +2,24 @@
 {
 	public class Post: BaseEntity
 	{
-		public string Title { set; get; }
-		public string Body { set; get; }
-		public string? CodeSnippet { set; get; }
-		public string? Language { set; get; }
-		public int LikeCount { set; get; }
-		public int CommentCount { set; get; }
-		public bool IsRemoved { set; get; }
+		public string Title {get; set;}=string.Empty;
+		public string Body {get; set;}= string.Empty;
+		public string? CodeSnippet {get; set;}
+		public string? Language {get; set;}
+		public int LikeCount {get; set;} = 0;
+		public int CommentCount {get; set;} = 0;
+		public bool IsRemoved {get; set;} = false;
 
-		public int AuthorId { set; get; }
-		public int CommunityId { set; get; }
+		public int AuthorId {get; set;}
+		public int? CommunityId {get; set;}
 
-		public User Author { set; get; }
-		public Community? Community { set; get; }
-		public ICollection<Comment> Comments { set; get; } = new List<Comment>();
-		public ICollection<Reaction> Reactions { set; get; } = new List<Reaction>();
-		public Icollection<PostTag> PostTags { set; get; } = new List<PostTag>();
-		public Icollection<PostSaved> SavedByUsers { set; get; } = new List<PostSaved>();
-		public Icollection<Report> Reports { set; get; } = new List<Report>();
-		public ICollection<PostRemoval> Removals { set; get; } = new List<PostRemoval>(); 
+		public User Author {get; set;} = null!;
+		public Community? Community {get; set;}
+		public ICollection<Comment> Comments {get; set;} = new List<Comment>();
+		public ICollection<Reaction> Reactions {get; set;} = new List<Reaction>();
+		public ICollection<PostTag> PostTags {get; set;} = new List<PostTag>();
+		public ICollection<PostSaved> SavedByUsers {get; set;} = new List<PostSaved>();
+		public ICollection<Report> Reports {get; set;} = new List<Report>();
+		public ICollection<PostRemoval> Removals {get; set;} = new List<PostRemoval>(); 
     }
 }

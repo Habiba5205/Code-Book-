@@ -4,9 +4,9 @@
 
 	public class Tag:BaseEntity
 	{
-		public string Name { set; get; }
-		public string Slug { set; get; }
+		public string Name { get; set; }
+        public string Slug { get; set; }
 
-		public ICollection<PostTag> PostTags { set; get; } = new List<PostTag>();
+        public ICollection<PostTag> PostTags { get; set; } = new List<PostTag>();
 	}
 }
