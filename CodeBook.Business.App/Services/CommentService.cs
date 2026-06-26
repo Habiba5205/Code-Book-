@@ -1,9 +1,9 @@
 ﻿using System;
-using CodeBook.Business.App.Services;
+using CodeBook.Business.App.Interfaces;
 using CodeBook.Data.App;
 using CodeBook.Models.App;
 
-namespace CodeBook.Business.App.Methods
+namespace CodeBook.Business.App.Services
 {
 
     public class CommentService : ICommentService
@@ -15,7 +15,7 @@ namespace CodeBook.Business.App.Methods
             commentdata = Commentdata;
         }
 
-        public void Add(int authorId,int postId, string CommentBody)
+        public void AddComment(int authorId,int postId, string CommentBody)
         {
             Comment comment = new Comment();
             comment.AuthorId = authorId;
@@ -25,18 +25,18 @@ namespace CodeBook.Business.App.Methods
             commentdata.SaveChanges();
 
         }
-        public void Edit(int commentId,string CommentBody)
+        public void EditComment(int commentId,string CommentBody)
         {
-            Comment comment = commentdata.comments.FirstOrDefault(c => c.CommentId == commentId);
+            Comment comment = commentdata.comments.FirstOrDefault(c => c.Id == commentId);
             if (comment == null)
                 throw new Exception("Comment Not Found!!");
             comment.Body = CommentBody;
             commentdata.SaveChanges();
 
         }
-        public void Delete(int commentId)
+        public void DeleteComment(int commentId)
         {
-            Comment comment = commentdata.comments.FirstOrDefault(c => c.CommentId == commentId);
+            Comment comment = commentdata.comments.FirstOrDefault(c => c.Id == commentId);
             if (comment == null)
                 throw new Exception("Comment Not Found!!");
             commentdata.comments.Remove(comment);

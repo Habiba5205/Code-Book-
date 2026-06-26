@@ -1,5 +1,5 @@
 ﻿using System;
-namespace CodeBook.Business.App.Methods
+namespace CodeBook.Business.App.Services
 {
     public class Report
     {

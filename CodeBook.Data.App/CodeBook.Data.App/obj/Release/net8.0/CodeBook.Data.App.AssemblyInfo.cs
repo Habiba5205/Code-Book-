@@ -14,11 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CodeBook.Data.App")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< Updated upstream
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2f7001da295ba9337060f49ac4fdeafff57ab6c8")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+abf88c32b68f3fe899d46cbf110c77332d8b5dc1")]
->>>>>>> Stashed changes
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+55f8109f4578da0cb5e8342770fd128978b91d9c")]
 [assembly: System.Reflection.AssemblyProductAttribute("CodeBook.Data.App")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CodeBook.Data.App")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

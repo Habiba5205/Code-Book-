@@ -1,10 +1,10 @@
 ﻿using System;
-using CodeBook.Business.App.Services;
+using CodeBook.Business.App.Interfaces;
 using CodeBook.Data.App;
+using CodeBook.Business.App.DTOs;
 using CodeBook.Models.App;
 
-namespace CodeBook.Business.App.Methods
-
+namespace CodeBook.Business.App.Services
 {
     public class UserService : IuserService
     {
@@ -15,7 +15,7 @@ namespace CodeBook.Business.App.Methods
         }
         public void DeleteAccount(int userId) 
         {
-            User user = userdata.users.FirstOrDefault(u => u.UserId == userId);
+            User user = userdata.users.FirstOrDefault(u => u.Id == userId);
             if (user == null)
                 throw new Exception("User Not Found");
             
@@ -25,15 +25,15 @@ namespace CodeBook.Business.App.Methods
         }
         public User GetProfile(int userId) 
         {
-            User user = userdata.users.FirstOrDefault(u=>u.UserId == userId);
+            User user = userdata.users.FirstOrDefault(u=>u.Id == userId);
             if (user == null)
                 throw new Exception("User Not Found");
 
             return user;        
         }
-        public void updateProfile(int userId,UpdateProfileDto data) 
+        public void UpdateProfile(int userId,UpdateProfileDto data) 
         {
-            User user = userdata.users.FirstOrDefault(u => u.UserId == userId);
+            User user = userdata.users.FirstOrDefault(u => u.Id == userId);
             if (user == null)
                 throw new Exception("User Not Found!Please Create an Account");
 
@@ -45,7 +45,7 @@ namespace CodeBook.Business.App.Methods
         }
         public bool VerifyPassword(string password,int userId)
         {
-            User user = userdata.users.FirstOrDefault(u => u.UserId == userId);
+            User user = userdata.users.FirstOrDefault(u => u.Id == userId);
             if (user == null)
                 throw new Exception("User Not Found!");
 
@@ -62,7 +62,7 @@ namespace CodeBook.Business.App.Methods
 
         }
 
-        public void UnFollow(int followerId, int followeeId)
+        public void Unfollow(int followerId, int followeeId)
         {
             Follow follow = userdata.follows.FirstOrDefault(f =>f.FollowerUserId == followerId && f.FolloweeUserId == followeeId);
             if (follow == null)

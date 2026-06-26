@@ -1,5 +1,5 @@
 ﻿using System;
-namespace CodeBook.Business.App.Services
+namespace CodeBook.Business.App.Interfaces
 {
     public interface IAuthService
     {

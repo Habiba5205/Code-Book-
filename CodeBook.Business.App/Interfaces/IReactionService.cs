@@ -1,5 +1,6 @@
 ﻿using System;
-namespace CodeBook.Business.App.Services
+using CodeBook.Models.App;
+namespace CodeBook.Business.App.Interfaces
 {
     public interface IReactionService
     {

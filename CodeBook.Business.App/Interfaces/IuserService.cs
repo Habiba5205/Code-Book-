@@ -1,12 +1,14 @@
 ﻿using System;
-namespace CodeBook.Business.App.Services
+using CodeBook.Models.App;
+using CodeBook.Business.App.DTOs;
+namespace CodeBook.Business.App.Interfaces
 {
     public interface IuserService
     {
         void DeleteAccount(int userId);
         User GetProfile(int userId);
-        void updateProfile(int userId, UpdateProfileDto data);
-        bool VerifyPassword(string password);
+        void UpdateProfile(int userId, UpdateProfileDto data);
+        bool VerifyPassword(string password, int userId);
         void Follow(int followerId, int followeeId);
         void Unfollow(int followerId, int followeeId);
 

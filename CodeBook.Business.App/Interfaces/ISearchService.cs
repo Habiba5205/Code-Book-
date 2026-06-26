@@ -1,6 +1,9 @@
 ﻿using System;
 using CodeBook.Business.App.DTOs;
-namespace CodeBook.Business.App.Services
+using CodeBook.Models.App;
+using CodeBook.Data.App;
+
+namespace CodeBook.Business.App.Interfaces
 {
     public interface ISearchService
     {

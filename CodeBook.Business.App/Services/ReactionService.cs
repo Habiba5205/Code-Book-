@@ -1,10 +1,10 @@
 ﻿using System;
-using CodeBook.Business.App.Services;
+using CodeBook.Business.App.Interfaces;
 using CodeBook.Data.App;
 using CodeBook.Models.App;
 
 
-namespace CodeBook.Business.App.Methods
+namespace CodeBook.Business.App.Services
 {
     public class ReactionService : IReactionService
     {
@@ -14,7 +14,7 @@ namespace CodeBook.Business.App.Methods
         {
             Reactiondata = reactionData;
         }
-        public void Add(int userId,int postId,ReactionType reactionType)
+        public void AddReaction(int userId,int postId,ReactionType reactionType)
         {
             Reaction reaction = new Reaction();
             reaction.UserId = userId;
@@ -23,7 +23,7 @@ namespace CodeBook.Business.App.Methods
             Reactiondata.reactions.Add(reaction);
             Reactiondata.SaveChanges();
         }
-        public void Remove(int postId,int userId)
+        public void RemoveReaction(int postId,int userId)
         {
             Reaction reaction = Reactiondata.reactions.FirstOrDefault(r =>  r.PostId == postId && r.UserId == userId);
             if (reaction == null)
