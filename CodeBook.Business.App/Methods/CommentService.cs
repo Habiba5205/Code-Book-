@@ -21,13 +21,13 @@ namespace CodeBook.Business.App.Methods
             comment.AuthorId = authorId;
             comment.PostId = postId;
             comment.Body = CommentBody;
-            commentdata.Comments.Add(comment);
+            commentdata.comments.Add(comment);
             commentdata.SaveChanges();
 
         }
         public void Edit(int commentId,string CommentBody)
         {
-            Comment comment = commentdata.Comments.FirstOrDefault(c => c.CommentId == commentId);
+            Comment comment = commentdata.comments.FirstOrDefault(c => c.CommentId == commentId);
             if (comment == null)
                 throw new Exception("Comment Not Found!!");
             comment.Body = CommentBody;
@@ -36,10 +36,10 @@ namespace CodeBook.Business.App.Methods
         }
         public void Delete(int commentId)
         {
-            Comment comment = commentdata.Comments.FirstOrDefault(c => c.CommentId == commentId);
+            Comment comment = commentdata.comments.FirstOrDefault(c => c.CommentId == commentId);
             if (comment == null)
                 throw new Exception("Comment Not Found!!");
-            commentdata.Comments.Remove(comment);
+            commentdata.comments.Remove(comment);
             commentdata.SaveChanges();
         }
     }

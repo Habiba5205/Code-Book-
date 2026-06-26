@@ -20,14 +20,14 @@ namespace CodeBook.Business.App.Methods
             community.OwnerId = OwnerId;
             community.Name = name;
             community.Description = description;
-            CommunityData.Communities.Add(community);
+            CommunityData.communities.Add(community);
             CommunityData.SaveChanges();
 
 
         }
         public void UpdateCommunity(int communityId,string name,string description)
         {
-            Community community = CommunityData.Communities.FirstOrDefault(c => c.Id == communityId);
+            Community community = CommunityData.communities.FirstOrDefault(c => c.Id == communityId);
             if (community == null)
                 throw new Exception("Community Not Found!!");
             community.Name = name;
@@ -37,11 +37,11 @@ namespace CodeBook.Business.App.Methods
         }
         public void DeleteCommunity(int communityId)
         {
-            Community community = CommunityData.Communities.FirstOrDefault(c => c.Id == communityId);
+            Community community = CommunityData.communities.FirstOrDefault(c => c.Id == communityId);
             if (community == null)
                 throw new Exception("Community Not Found!!");
 
-            CommunityData.Communities.Remove(community);
+            CommunityData.communities.Remove(community);
             CommunityData.SaveChanges();
 
 
@@ -49,11 +49,11 @@ namespace CodeBook.Business.App.Methods
         }
         public void JoinCommunity(int communityId,CommunityMember newMember)
         {
-            Community community = CommunityData.Communities.FirstOrDefault(c => c.Id == communityId);
+            Community community = CommunityData.communities.FirstOrDefault(c => c.Id == communityId);
             if (community == null)
                 throw new Exception("Community Not Found!!");
 
-            community.Members.Add(newMember);
+            community.communityMembers.Add(newMember);
             CommunityData.SaveChanges();
 
 

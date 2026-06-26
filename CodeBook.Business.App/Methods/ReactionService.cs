@@ -20,15 +20,15 @@ namespace CodeBook.Business.App.Methods
             reaction.UserId = userId;
             reaction.PostId = postId;
             reaction.Type = reactionType;
-            Reactiondata.Reactions.Add(reaction);
+            Reactiondata.reactions.Add(reaction);
             Reactiondata.SaveChanges();
         }
         public void Remove(int postId,int userId)
         {
-            Reaction reaction = Reactiondata.Reactions.FirstOrDefault(r =>  r.PostId == postId && r.UserId == userId);
+            Reaction reaction = Reactiondata.reactions.FirstOrDefault(r =>  r.PostId == postId && r.UserId == userId);
             if (reaction == null)
                 throw new Exception("Post Not Found!!");
-            Reactiondata.Reactions.Remove(reaction);
+            Reactiondata.reactions.Remove(reaction);
             Reactiondata.SaveChanges();
 
         }

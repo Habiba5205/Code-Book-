@@ -15,17 +15,17 @@ namespace CodeBook.Business.App.Methods
         }
         public void DeleteAccount(int userId) 
         {
-            User user = userdata.Users.FirstOrDefault(u => u.UserId == userId);
+            User user = userdata.users.FirstOrDefault(u => u.UserId == userId);
             if (user == null)
                 throw new Exception("User Not Found");
             
-            userdata.Users.Remove(user);
+            userdata.users.Remove(user);
             userdata.SaveChanges();
 
         }
         public User GetProfile(int userId) 
         {
-            User user = userdata.Users.FirstOrDefault(u=>u.UserId == userId);
+            User user = userdata.users.FirstOrDefault(u=>u.UserId == userId);
             if (user == null)
                 throw new Exception("User Not Found");
 
@@ -33,7 +33,7 @@ namespace CodeBook.Business.App.Methods
         }
         public void updateProfile(int userId,UpdateProfileDto data) 
         {
-            User user = userdata.Users.FirstOrDefault(u => u.UserId == userId);
+            User user = userdata.users.FirstOrDefault(u => u.UserId == userId);
             if (user == null)
                 throw new Exception("User Not Found!Please Create an Account");
 
@@ -45,7 +45,7 @@ namespace CodeBook.Business.App.Methods
         }
         public bool VerifyPassword(string password,int userId)
         {
-            User user = userdata.Users.FirstOrDefault(u => u.UserId == userId);
+            User user = userdata.users.FirstOrDefault(u => u.UserId == userId);
             if (user == null)
                 throw new Exception("User Not Found!");
 
@@ -55,8 +55,8 @@ namespace CodeBook.Business.App.Methods
         {
             Follow follow = new Follow();
             follow.FollowerUserId = followerId;
-            follow.FollowedUserId = followeeId;
-            userdata.Follows.Add(follow);
+            follow.FolloweeUserId = followeeId;
+            userdata.follows.Add(follow);
             userdata.SaveChanges();
 
 
@@ -64,11 +64,11 @@ namespace CodeBook.Business.App.Methods
 
         public void UnFollow(int followerId, int followeeId)
         {
-            Follow follow = userdata.Follows.FirstOrDefault(f =>f.FollowerId == followerId && f.FolloweeId == followeeId);
+            Follow follow = userdata.follows.FirstOrDefault(f =>f.FollowerUserId == followerId && f.FolloweeUserId == followeeId);
             if (follow == null)
                 throw new Exception("Follow Record Not Found");
 
-            userdata.Follows.Remove(follow);
+            userdata.follows.Remove(follow);
             userdata.SaveChanges();
 
         }

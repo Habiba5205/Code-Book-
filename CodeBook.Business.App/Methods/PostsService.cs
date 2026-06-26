@@ -24,13 +24,13 @@ namespace CodeBook.Business.App.Methods
             post.CommunityId = communityId;
             post.CodeSnippet = CodeSnippet;
             post.Language = Language;
-            Postdata.Posts.Add(post);
+            Postdata.posts.Add(post);
             Postdata.SaveChanges();
 
         }
         public void UpdatePost(int postId, string title, string body, bool isPublic, int? communityId, string? CodeSnippet, string? Language) 
         {
-            Post post = Postdata.Posts.FirstOrDefault(p =>  p.PostId == postId);
+            Post post = Postdata.posts.FirstOrDefault(p =>  p.PostId == postId);
             if (post == null)
                 throw new Exception("Post Not Found!!");
 
@@ -44,16 +44,16 @@ namespace CodeBook.Business.App.Methods
         }
         public void DeletePost(int postId) 
         {
-            Post post = Postdata.Posts.FirstOrDefault(p => p.PostId == postId);
+            Post post = Postdata.posts.FirstOrDefault(p => p.PostId == postId);
             if (post == null)
                 throw new Exception("Post Not Found!!");
             
-            Postdata.Posts.Remove(post);
+            Postdata.posts.Remove(post);
             Postdata.SaveChanges();
         }
         public void PublishPost(int postId) 
         {
-            Post post = Postdata.Posts.FirstOrDefault(p => p.PostId == postId);
+            Post post = Postdata.posts.FirstOrDefault(p => p.PostId == postId);
             if (post == null)
                 throw new Exception("Post Not Found!!");
             
@@ -64,7 +64,7 @@ namespace CodeBook.Business.App.Methods
 
         public List<Post> GetFeed(int postId) 
         {
-            return Postdata.Posts.Where(p => p.IsPublic == true).ToList();
+            return Postdata.posts.Where(p => p.IsPublic == true).ToList();
 
         }
          public void SavePost(int userId, int postId) 
@@ -72,7 +72,7 @@ namespace CodeBook.Business.App.Methods
             PostSaved saved = new PostSaved();
             saved.UserId = userId;
             saved.PostId = postId;
-            Postdata.PostsSaved.Add(saved);
+            Postdata.postsSaved.Add(saved);
             Postdata.SaveChanges();
         }
     }
