@@ -1,9 +1,11 @@
-﻿using System;
+﻿using AutoMapper;
+using BCrypt.Net;
+using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
 using CodeBook.Data.App.IRepositories;
-using CodeBook.Business.App.DTOs;
 using CodeBook.Models.App;
-using BCrypt.Net;
+using CodeBook.Business.App.Mapping;
+using System;
 
 namespace CodeBook.Business.App.Services
 {
@@ -11,10 +13,12 @@ namespace CodeBook.Business.App.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IFollowRepository _followRepository;
-        public UserService(IUserRepository userRepository, IFollowRepository followRepository)
+        private readonly IMapper mapper;
+        public UserService(IUserRepository userRepository, IFollowRepository followRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _followRepository = followRepository;
+            this.mapper = mapper;
         }
         public void DeleteAccount(int userId) 
         {
@@ -24,11 +28,11 @@ namespace CodeBook.Business.App.Services
             _userRepository.SaveChanges();
 
         }
-        public User GetProfile(int userId) 
+        public UserProfileResponse GetProfile(int userId) 
         {
             User user = _userRepository.GetProfileById(userId);
-
-            return user;        
+            return mapper.Map<UserProfileResponse>(user);
+            //return user;        
         }
         public void UpdateProfile(int userId,UpdateProfileDto data) 
         {

@@ -6,7 +6,7 @@ namespace CodeBook.Business.App.Interfaces
     public interface IuserService
     {
         void DeleteAccount(int userId);
-        User GetProfile(int userId);
+        UpdateProfileDto GetProfile(int userId);
         void UpdateProfile(int userId, UpdateProfileDto data);
         bool VerifyPassword(string password, int userId);
         void Follow(int followerId, int followeeId);
