@@ -3,3 +3,15 @@ C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Models.App\obj\Deb
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Models.App\obj\Debug\net8.0\CodeBook.Models.App.AssemblyInfo.cs
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Models.App\obj\Debug\net8.0\CodeBook.Models.App.csproj.CoreCompileInputs.cache
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Models.App\obj\Debug\net8.0\CodeBook.Models.App.sourcelink.json
+C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Models.App\bin\Debug\net8.0\CodeBook.Models.App.deps.json
+C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Models.App\bin\Debug\net8.0\CodeBook.Models.App.dll
+C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Models.App\bin\Debug\net8.0\CodeBook.Models.App.pdb
+C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Models.App\obj\Debug\net8.0\CodeBook.Models.App.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Models.App\obj\Debug\net8.0\CodeBook.Models.App.AssemblyInfoInputs.cache
+C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Models.App\obj\Debug\net8.0\CodeBook.Models.App.AssemblyInfo.cs
+C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Models.App\obj\Debug\net8.0\CodeBook.Models.App.csproj.CoreCompileInputs.cache
+C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Models.App\obj\Debug\net8.0\CodeBook.Models.App.sourcelink.json
+C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Models.App\obj\Debug\net8.0\CodeBook.Models.App.dll
+C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Models.App\obj\Debug\net8.0\refint\CodeBook.Models.App.dll
+C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Models.App\obj\Debug\net8.0\CodeBook.Models.App.pdb
+C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Models.App\obj\Debug\net8.0\ref\CodeBook.Models.App.dll

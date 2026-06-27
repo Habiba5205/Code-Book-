@@ -8,23 +8,23 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Habiba Ahmed\\.nuget\\packages\\": {},
+    "C:\\Users\\pc\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Habiba Ahmed\\Desktop\\Code-Book-\\CodeBook.Models.App\\CodeBook.Models.App.csproj",
+      "projectUniqueName": "C:\\Users\\pc\\Documents\\GitHub\\Code-Book-\\CodeBook.Models.App\\CodeBook.Models.App.csproj",
       "projectName": "CodeBook.Models.App",
-      "projectPath": "C:\\Users\\Habiba Ahmed\\Desktop\\Code-Book-\\CodeBook.Models.App\\CodeBook.Models.App.csproj",
-      "packagesPath": "C:\\Users\\Habiba Ahmed\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Habiba Ahmed\\Desktop\\Code-Book-\\CodeBook.Models.App\\obj\\",
+      "projectPath": "C:\\Users\\pc\\Documents\\GitHub\\Code-Book-\\CodeBook.Models.App\\CodeBook.Models.App.csproj",
+      "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\pc\\Documents\\GitHub\\Code-Book-\\CodeBook.Models.App\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Habiba Ahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -69,20 +69,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.28, 8.0.28]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.28, 8.0.28]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[8.0.28, 8.0.28]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
