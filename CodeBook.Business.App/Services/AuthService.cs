@@ -3,6 +3,8 @@ using CodeBook.Business.App.Services;
 using CodeBook.Data.App;
 using CodeBook.Models.App;
 using CodeBook.Business.App.Interfaces;
+using BCrypt.Net;
+
 namespace CodeBook.Business.App.Methods
 
 {
@@ -36,7 +38,7 @@ namespace CodeBook.Business.App.Methods
             user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
 			user.UserName = userName;
 			user.Bio = bio;
-			user.Role = role;
+			user.Role = UserRole.NormalUser;
 			user.AvatarUrl = AvatarUrl;
 
 			Authdata.users.Add(user);

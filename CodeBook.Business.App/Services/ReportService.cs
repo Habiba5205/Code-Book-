@@ -1,17 +1,20 @@
-﻿using System;
-using CodeBook.Business.App.DTOs;
+﻿using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
-using CodeBook.Models.App;
+using AutoMapper;
 using CodeBook.Data.App;
+using CodeBook.Models.App;
+using System;
 namespace CodeBook.Business.App.Services
 {
     public class ReportService : IReportService
     {
         private readonly CodeBookContext context;
+        private readonly IMapper mapper;
 
-        public ReportService(CodeBookContext context)
+        public ReportService(CodeBookContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
         public void SubmitReport(int reporterId, ReportRequest request)
         {
@@ -32,19 +35,21 @@ namespace CodeBook.Business.App.Services
 
         public List<ReportDTO> GetPendingReports()
         {
-            return context.reports
-                .Where(r => r.Status == ReportStatus.Pending)
-                .Select(r => new ReportDTO
-                {
-                    Id = r.Id,
-                    ReporterId = r.ReporterId,
-                    PostId = r.PostId,
-                    CommentId = r.CommentId,
-                    Reason = r.Reason,
-                    Description = r.Description,
-                    Status = r.Status.ToString(),
-                    DateCreated = r.DateCreated
-                }).ToList();
+            var report = context.reports.Where(r => r.Status == ReportStatus.Pending);
+            return mapper.Map<List<ReportDTO>>(report);
+            /* context.reports
+                 .Where(r => r.Status == ReportStatus.Pending)
+                 .Select(r => new ReportDTO
+                 {
+                     Id = r.Id,
+                     ReporterId = r.ReporterId,
+                     PostId = r.PostId,
+                     CommentId = r.CommentId,
+                     Reason = r.Reason,
+                     Description = r.Description,
+                     Status = r.Status.ToString(),
+                     DateCreated = r.DateCreated
+                 }).ToList();*/
         }
 
         public void UpdateReportStatus(int reportId, string status)

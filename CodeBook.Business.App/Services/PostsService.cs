@@ -1,18 +1,22 @@
-﻿using System;
+﻿using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
+using AutoMapper;
 using CodeBook.Data.App;
 using CodeBook.Models.App;
+using System;
 
 namespace CodeBook.Business.App.Services
 {
     public class PostsService : IPostService
     {
         private CodeBookContext Postdata;
+        private readonly IMapper mapper;
 
 
-        public PostsService(CodeBookContext postData)
+        public PostsService(CodeBookContext postData, IMapper mapper)
         {
             this.Postdata = postData;
+            this.mapper = mapper;
         }
         public void CreatePost(int authorId, string title,string body,bool isPublic,int? communityId,string? CodeSnippet,string? Language) 
         {
@@ -20,7 +24,7 @@ namespace CodeBook.Business.App.Services
             post.AuthorId = authorId;
             post.Title = title;
             post.Body = body;
-           // post.IsPublic = isPublic;
+            post.IsPublic = isPublic;
             post.CommunityId = communityId;
             post.CodeSnippet = CodeSnippet;
             post.Language = Language;
@@ -36,7 +40,7 @@ namespace CodeBook.Business.App.Services
 
             post.Title = title;
             post.Body = body;
-         //   post.IsPublic = isPublic;
+            post.IsPublic = isPublic;
             post.CommunityId = communityId;
             post.CodeSnippet = CodeSnippet;
             Postdata.SaveChanges();
@@ -57,17 +61,18 @@ namespace CodeBook.Business.App.Services
             if (post == null)
                 throw new Exception("Post Not Found!!");
             
-        //    post.IsPublic = true;
+           post.IsPublic = true;
             Postdata.SaveChanges();
 
         }
 
-       /* public List<Post> getFeed(int postId) 
+        public List<PostResponse> GetFeed(int postId) 
         {
-            return Postdata.posts.Where(p => p.IsPublic == true).ToList();
+          var feed = Postdata.posts.Where(p => p.IsPublic == true && p.IsRemoved == false).ToList();
+            return mapper.Map<List<PostResponse>>(feed);
 
         }
-       */
+   
          public void SavePost(int userId, int postId) 
         {
             PostSaved saved = new PostSaved();
@@ -76,5 +81,34 @@ namespace CodeBook.Business.App.Services
             Postdata.postsSaved.Add(saved);
             Postdata.SaveChanges();
         }
+        public List<PostTagDto> GetPostTags(int postId)
+        {
+            var tag =  Postdata.postTags.Where(p => p.PostId == postId).ToList();
+            return mapper.Map<List<PostTagDto>>(tag);
+        }
+        public void AddTag(int postId,int tagId)
+        {
+            Post post = Postdata.posts.FirstOrDefault(p => p.Id == postId);
+            if (post == null)
+                throw new Exception("Post Not Found!!");
+            PostTag postTag = new PostTag();
+            postTag.PostId = postId;
+            postTag.TagId = tagId;
+            Postdata.postTags.Add(postTag);
+            Postdata.SaveChanges();
+        }
+        public void RemoveTag(int postId, int tagId)
+        {
+            Post post = Postdata.posts.FirstOrDefault(p => p.Id == postId);
+            if (post == null)
+                throw new Exception("Post Not Found!!");
+            PostTag postTag = Postdata.postTags.FirstOrDefault(p => p.PostId == postId && p.TagId == tagId);
+            if (postTag == null)
+                throw new Exception("Tag Not Found");
+
+            Postdata.postTags.Remove(postTag);
+            Postdata.SaveChanges();
+        }
+
     }
 }

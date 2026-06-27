@@ -1,6 +1,8 @@
 ﻿using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
+using AutoMapper;
 using CodeBook.Data.App;
+using CodeBook.Models.App;
 using System;
 
 namespace CodeBook.Business.App.Services
@@ -8,9 +10,11 @@ namespace CodeBook.Business.App.Services
     public class SearchService : ISearchService
     {
         private readonly CodeBookContext context;
-        public SearchService(CodeBookContext context)
+        private readonly IMapper mapper;
+        public SearchService(CodeBookContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
         public List<PostResponse> SearchPosts(SearchQuery query)
@@ -32,16 +36,17 @@ namespace CodeBook.Business.App.Services
             if (!string.IsNullOrEmpty(query.Tag))
                 posts = posts.Where(p => p.PostTags
                              .Any(t => t.Tag.Name == query.Tag));
-            return posts.Select(p => new PostResponse
-            {
-                Id = p.Id,
-                Title = p.Title,
-                Body = p.Body,
-                CodeSnippet = p.CodeSnippet,
-                Language = p.Language,
-                AuthorUsername = p.Author.UserName,
-                DateCreated = p.DateCreated
-            }).ToList();
+           return mapper.Map<List<PostResponse>>(posts);
+            /* return posts.Select(p => new PostResponse
+             {
+                 Id = p.Id,
+                 Title = p.Title,
+                 Body = p.Body,
+                 CodeSnippet = p.CodeSnippet,
+                 Language = p.Language,
+                 AuthorUsername = p.Author.UserName,
+                 DateCreated = p.DateCreated
+             }).ToList();*/
         }
     }
 }

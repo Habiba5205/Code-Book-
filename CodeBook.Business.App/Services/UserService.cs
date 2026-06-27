@@ -3,6 +3,7 @@ using CodeBook.Business.App.Interfaces;
 using CodeBook.Data.App;
 using CodeBook.Business.App.DTOs;
 using CodeBook.Models.App;
+using BCrypt.Net;
 
 namespace CodeBook.Business.App.Services
 {

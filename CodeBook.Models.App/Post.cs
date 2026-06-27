@@ -9,7 +9,8 @@
 		public int LikeCount {get; set;} = 0;
 		public int CommentCount {get; set;} = 0;
 		public bool IsRemoved {get; set;} = false;
-
+		public bool IsPublic { get; set; } = false;
+		public DateTime? DateRemoved { get; set; } = DateTime.UtcNow;
 		public int AuthorId {get; set;}
 		public int? CommunityId {get; set;}
 
