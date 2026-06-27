@@ -37,7 +37,7 @@ namespace CodeBook.Data.App
                 user.HasIndex(u => u.Email).IsUnique();
                 user.Property(u => u.PasswordHash).IsRequired().HasMaxLength(250);
                 user.Property(u => u.Bio).HasMaxLength(500);
-                user.Property(u => u.ProfilePicURL).HasMaxLength(2050);
+                user.Property(u => u.AvatarUrl).HasMaxLength(2050);
                 user.Property(u => u.Role).HasMaxLength(30);
             });
 
