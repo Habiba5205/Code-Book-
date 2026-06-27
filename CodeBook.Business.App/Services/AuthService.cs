@@ -2,7 +2,7 @@
 using CodeBook.Business.App.Services;
 using CodeBook.Data.App;
 using CodeBook.Models.App;
-
+using CodeBook.Business.App.Interfaces;
 namespace CodeBook.Business.App.Methods
 
 {
@@ -17,7 +17,7 @@ namespace CodeBook.Business.App.Methods
 		}
 		public bool Login(string email, string password)
 		{
-            User existinguser = Authdata.Users.FirstOrDefault(e => e.Email == email);
+            User existinguser = Authdata.users.FirstOrDefault(e => e.Email == email);
             if (existinguser == null)
                 throw new Exception("Email Not Found!!");
 
@@ -25,9 +25,9 @@ namespace CodeBook.Business.App.Methods
 
 
         }
-        public bool Register(string email, string password,string userName)
+        public bool Register(string email, string password,string userName, string bio, string AvatarUrl, UserRole role)
 		{
-			User existinguser = Authdata.Users.FirstOrDefault(e =>  e.Email == email);
+			User existinguser = Authdata.users.FirstOrDefault(e =>  e.Email == email);
 			if (existinguser != null)
 				throw new Exception("Email Already Exists!!Just Login");
             
@@ -35,7 +35,11 @@ namespace CodeBook.Business.App.Methods
             user.Email = email;
             user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
 			user.UserName = userName;
-			Authdata.Users.Add(user);
+			user.Bio = bio;
+			user.Role = role;
+			user.AvatarUrl = AvatarUrl;
+
+			Authdata.users.Add(user);
 			Authdata.SaveChanges();
 			return true;
         }

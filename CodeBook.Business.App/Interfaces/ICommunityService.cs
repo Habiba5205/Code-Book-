@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeBook.Models.App;
 namespace CodeBook.Business.App.Interfaces
 {
     public interface ICommunityService

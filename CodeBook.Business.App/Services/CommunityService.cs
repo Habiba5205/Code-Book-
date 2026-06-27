@@ -53,7 +53,7 @@ namespace CodeBook.Business.App.Services
             if (community == null)
                 throw new Exception("Community Not Found!!");
 
-            community.communityMembers.Add(newMember);
+            CommunityData.communityMembers.Add(newMember);
             CommunityData.SaveChanges();
 
         }
