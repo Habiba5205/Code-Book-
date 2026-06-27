@@ -31,6 +31,11 @@ namespace CodeBook.Data.App.Repositories
         {
             return _context.notifications.FirstOrDefault(n => n.Id == notificationId);
         }
+
+        public int GetUnreadNotificationCount(int userId)
+        {
+            return _context.notifications.Where(u => u.UserId == userId && !u.IsSeen).Count();
+        }
         public bool SaveChanges()
         {
             return _context.SaveChanges() >= 0;
