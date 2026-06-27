@@ -1,7 +1,7 @@
-﻿using CodeBook.Business.App.DTOs;
+﻿using AutoMapper;
+using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
-using AutoMapper;
-using CodeBook.Data.App;
+using CodeBook.Data.App.IRepositories;
 using CodeBook.Models.App;
 using System;
 
@@ -9,13 +9,13 @@ namespace CodeBook.Business.App.Services
 {
     public class PostsService : IPostService
     {
-        private CodeBookContext Postdata;
+        private readonly IPostRepository _postRepository;
         private readonly IMapper mapper;
 
 
-        public PostsService(CodeBookContext postData, IMapper mapper)
+        public PostsService(IPostRepository postRepository, IMapper mapper)
         {
-            this.Postdata = postData;
+            this._postRepository = postRepository;
             this.mapper = mapper;
         }
         public void CreatePost(int authorId, string title,string body,bool isPublic,int? communityId,string? CodeSnippet,string? Language) 
@@ -28,47 +28,42 @@ namespace CodeBook.Business.App.Services
             post.CommunityId = communityId;
             post.CodeSnippet = CodeSnippet;
             post.Language = Language;
-            Postdata.posts.Add(post);
-            Postdata.SaveChanges();
+            _postRepository.Add(post);
+            _postRepository.SaveChanges();
 
         }
         public void UpdatePost(int postId, string title, string body, bool isPublic, int? communityId, string? CodeSnippet, string? Language) 
         {
-            Post post = Postdata.posts.FirstOrDefault(p =>  p.Id == postId);
-            if (post == null)
-                throw new Exception("Post Not Found!!");
+            Post post = _postRepository.GetPostById(postId);
 
             post.Title = title;
             post.Body = body;
             post.IsPublic = isPublic;
             post.CommunityId = communityId;
             post.CodeSnippet = CodeSnippet;
-            Postdata.SaveChanges();
+            _postRepository.SaveChanges();
 
         }
         public void DeletePost(int postId) 
         {
-            Post post = Postdata.posts.FirstOrDefault(p => p.Id == postId);
-            if (post == null)
-                throw new Exception("Post Not Found!!");
-            
-            Postdata.posts.Remove(post);
-            Postdata.SaveChanges();
+            Post post = _postRepository.GetPostById(postId);
+
+            _postRepository.Delete(post);
+            _postRepository.SaveChanges();
         }
         public void PublishPost(int postId) 
         {
-            Post post = Postdata.posts.FirstOrDefault(p => p.Id == postId);
-            if (post == null)
-                throw new Exception("Post Not Found!!");
-            
-           post.IsPublic = true;
-            Postdata.SaveChanges();
+            Post post = _postRepository.GetPostById(postId);
+
+            post.IsPublic = true;
+            _postRepository.SaveChanges();
 
         }
 
         public List<PostResponse> GetFeed(int postId) 
         {
-          var feed = Postdata.posts.Where(p => p.IsPublic == true && p.IsRemoved == false).ToList();
+
+            var feed = _postRepository.Getfeed();
             return mapper.Map<List<PostResponse>>(feed);
 
         }
@@ -78,36 +73,30 @@ namespace CodeBook.Business.App.Services
             PostSaved saved = new PostSaved();
             saved.UserId = userId;
             saved.PostId = postId;
-            Postdata.postsSaved.Add(saved);
-            Postdata.SaveChanges();
+            _postRepository.SavePost(saved);
+            _postRepository.SaveChanges();
         }
         public List<PostTagDto> GetPostTags(int postId)
         {
-            var tag =  Postdata.postTags.Where(p => p.PostId == postId).ToList();
+            var tag = _postRepository.GetPostTags(postId);
             return mapper.Map<List<PostTagDto>>(tag);
         }
         public void AddTag(int postId,int tagId)
         {
-            Post post = Postdata.posts.FirstOrDefault(p => p.Id == postId);
-            if (post == null)
-                throw new Exception("Post Not Found!!");
+            Post post = _postRepository.GetPostById(postId);
             PostTag postTag = new PostTag();
             postTag.PostId = postId;
             postTag.TagId = tagId;
-            Postdata.postTags.Add(postTag);
-            Postdata.SaveChanges();
+            _postRepository.AddTag(postTag);
+            _postRepository.SaveChanges();
         }
         public void RemoveTag(int postId, int tagId)
         {
-            Post post = Postdata.posts.FirstOrDefault(p => p.Id == postId);
-            if (post == null)
-                throw new Exception("Post Not Found!!");
-            PostTag postTag = Postdata.postTags.FirstOrDefault(p => p.PostId == postId && p.TagId == tagId);
-            if (postTag == null)
-                throw new Exception("Tag Not Found");
+            Post post = _postRepository.GetPostById(postId);
+            PostTag postTag = _postRepository.GetPostTagbyId(postId, tagId);
 
-            Postdata.postTags.Remove(postTag);
-            Postdata.SaveChanges();
+            _postRepository.RemoveTag(postTag);
+            _postRepository.SaveChanges();
         }
 
     }

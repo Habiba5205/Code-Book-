@@ -1,6 +1,6 @@
 ﻿using CodeBook.Business.App.Interfaces;
 using CodeBook.Models.App;
-using CodeBook.Data.App;
+using CodeBook.Data.App.IRepositories;
 using System;
 
 
@@ -8,16 +8,18 @@ namespace CodeBook.Business.App.Services
 {
     public class ModerationService : IModerationService
     {
-        private CodeBookContext context;
+        private readonly IPostRepository _postRepository;
+        private readonly IReportRepository _reportRepository;
 
-        public ModerationService(CodeBookContext context)
+        public ModerationService(IPostRepository postRepository, IReportRepository reportRepository)
         {
-            this.context = context;
+            _postRepository = postRepository;
+            _reportRepository = reportRepository;
         }
 
         public void RemovePost(int removerid, int postId, int? reportId, string reason)
         {
-            var post = context.posts.FirstOrDefault(p => p.Id == postId);
+            var post = _postRepository.GetPostById(postId);
 
             if (post != null)
             {
@@ -30,22 +32,22 @@ namespace CodeBook.Business.App.Services
                     RemoverId = removerid,
                     ReportId = reportId,
                     Reason = reason,
-                    DateCreated = DateTime.Now,
-                    DateUpdated = DateTime.Now
+                    DateCreated = DateTime.Now
                 };
-                context.postsRemovals.Add(removal);
+                _postRepository.AddRemovalRecord(removal);
 
                 if (reportId != null)
                 {
-                    var report = context.reports.FirstOrDefault(r => r.Id == reportId);
+                    var report = _reportRepository.GetReportbyId(reportId);
                     if (report != null)
                     {
                         report.Status = ReportStatus.Accepted;
                         report.DateUpdated = DateTime.UtcNow;
+                        _reportRepository.Update(report);
                     }
 
                 }
-                context.SaveChanges();
+                _postRepository.SaveChanges();
             }
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System;
 using CodeBook.Business.App.Interfaces;
-using CodeBook.Data.App;
+using CodeBook.Data.App.IRepositories;
 using CodeBook.Models.App;
 
 namespace CodeBook.Business.App.Services
@@ -8,11 +8,11 @@ namespace CodeBook.Business.App.Services
 
     public class CommentService : ICommentService
     {
-        private CodeBookContext commentdata;
+        private readonly ICommentRepository _commentRepository;
 
-        public CommentService(CodeBookContext Commentdata)
+        public CommentService(ICommentRepository commentRepository)
         {
-            commentdata = Commentdata;
+            _commentRepository = commentRepository;
         }
 
         public void AddComment(int authorId,int postId, string CommentBody)
@@ -21,26 +21,23 @@ namespace CodeBook.Business.App.Services
             comment.AuthorId = authorId;
             comment.PostId = postId;
             comment.Body = CommentBody;
-            commentdata.comments.Add(comment);
-            commentdata.SaveChanges();
+           _commentRepository.Add(comment);
+           _commentRepository.SaveChanges();
 
         }
         public void EditComment(int commentId,string CommentBody)
         {
-            Comment comment = commentdata.comments.FirstOrDefault(c => c.Id == commentId);
-            if (comment == null)
-                throw new Exception("Comment Not Found!!");
+            Comment comment = _commentRepository.GetCommentById(commentId);
             comment.Body = CommentBody;
-            commentdata.SaveChanges();
+            _commentRepository.Update(comment);
+            _commentRepository.SaveChanges();
 
         }
         public void DeleteComment(int commentId)
         {
-            Comment comment = commentdata.comments.FirstOrDefault(c => c.Id == commentId);
-            if (comment == null)
-                throw new Exception("Comment Not Found!!");
-            commentdata.comments.Remove(comment);
-            commentdata.SaveChanges();
+            Comment comment = _commentRepository.GetCommentById(commentId);
+            _commentRepository.Delete(comment);
+            _commentRepository.SaveChanges();
         }
     }
 }

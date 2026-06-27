@@ -2,17 +2,18 @@
 using CodeBook.Business.App.Interfaces;
 using CodeBook.Data.App;
 using CodeBook.Models.App;
+using CodeBook.Data.App.IRepositories;
 
 
 namespace CodeBook.Business.App.Services
 {
     public class ReactionService : IReactionService
     {
-        private CodeBookContext Reactiondata;
+        private readonly IReactionRepository _reactionRepository;
 
-        public ReactionService(CodeBookContext reactionData ) 
+        public ReactionService(IReactionRepository reactionRepository) 
         {
-            Reactiondata = reactionData;
+            this._reactionRepository = reactionRepository;
         }
         public void AddReaction(int userId,int postId,ReactionType reactionType)
         {
@@ -20,16 +21,14 @@ namespace CodeBook.Business.App.Services
             reaction.UserId = userId;
             reaction.PostId = postId;
             reaction.Type = reactionType;
-            Reactiondata.reactions.Add(reaction);
-            Reactiondata.SaveChanges();
+            _reactionRepository.Add(reaction);
+            _reactionRepository.SaveChanges();
         }
         public void RemoveReaction(int postId,int userId)
         {
-            Reaction reaction = Reactiondata.reactions.FirstOrDefault(r =>  r.PostId == postId && r.UserId == userId);
-            if (reaction == null)
-                throw new Exception("Post Not Found!!");
-            Reactiondata.reactions.Remove(reaction);
-            Reactiondata.SaveChanges();
+            Reaction reaction = _reactionRepository.GetReaction(postId,userId);
+            _reactionRepository.Remove(reaction);
+            _reactionRepository.SaveChanges();
 
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System;
 using CodeBook.Business.App.Interfaces;
-using CodeBook.Data.App;
+using CodeBook.Data.App.IRepositories;
 using CodeBook.Business.App.DTOs;
 using CodeBook.Models.App;
 using BCrypt.Net;
@@ -9,46 +9,41 @@ namespace CodeBook.Business.App.Services
 {
     public class UserService : IuserService
     {
-        private CodeBookContext userdata;
-        public UserService(CodeBookContext userData)
+        private readonly IUserRepository _userRepository;
+        private readonly IFollowRepository _followRepository;
+        public UserService(IUserRepository userRepository, IFollowRepository followRepository)
         {
-            userdata = userData;
+            _userRepository = userRepository;
+            _followRepository = followRepository;
         }
         public void DeleteAccount(int userId) 
         {
-            User user = userdata.users.FirstOrDefault(u => u.Id == userId);
-            if (user == null)
-                throw new Exception("User Not Found");
+            User user = _userRepository.GetProfileById(userId);
             
-            userdata.users.Remove(user);
-            userdata.SaveChanges();
+            _userRepository.Remove(user);
+            _userRepository.SaveChanges();
 
         }
         public User GetProfile(int userId) 
         {
-            User user = userdata.users.FirstOrDefault(u=>u.Id == userId);
-            if (user == null)
-                throw new Exception("User Not Found");
+            User user = _userRepository.GetProfileById(userId);
 
             return user;        
         }
         public void UpdateProfile(int userId,UpdateProfileDto data) 
         {
-            User user = userdata.users.FirstOrDefault(u => u.Id == userId);
-            if (user == null)
-                throw new Exception("User Not Found!Please Create an Account");
+            User user = _userRepository.GetProfileById(userId);
 
             user.Bio = data.Bio;
             user.UserName = data.UserName;
             user.AvatarUrl = data.AvatarUrl;
-            userdata.SaveChanges();
+            _userRepository.Update(user);
+            _userRepository.SaveChanges();
 
         }
         public bool VerifyPassword(string password,int userId)
         {
-            User user = userdata.users.FirstOrDefault(u => u.Id == userId);
-            if (user == null)
-                throw new Exception("User Not Found!");
+            User user = _userRepository.GetProfileById(userId);
 
             return BCrypt.Net.BCrypt.Verify(password, user.PasswordHash);
         }
@@ -57,20 +52,18 @@ namespace CodeBook.Business.App.Services
             Follow follow = new Follow();
             follow.FollowerUserId = followerId;
             follow.FolloweeUserId = followeeId;
-            userdata.follows.Add(follow);
-            userdata.SaveChanges();
+            _followRepository.AddFollow(follow);
+            _followRepository.SaveChanges();
 
 
         }
 
         public void Unfollow(int followerId, int followeeId)
         {
-            Follow follow = userdata.follows.FirstOrDefault(f =>f.FollowerUserId == followerId && f.FolloweeUserId == followeeId);
-            if (follow == null)
-                throw new Exception("Follow Record Not Found");
+            Follow follow = _followRepository.GetFollow(followerId, followeeId);
 
-            userdata.follows.Remove(follow);
-            userdata.SaveChanges();
+            _followRepository.RemoveFollow(follow);
+            _followRepository.SaveChanges();
 
         }
     }

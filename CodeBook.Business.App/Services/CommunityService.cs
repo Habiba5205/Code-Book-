@@ -1,6 +1,6 @@
 ﻿using System;
 using CodeBook.Business.App.Interfaces;
-using CodeBook.Data.App;
+using CodeBook.Data.App.IRepositories;
 using CodeBook.Models.App;
 
 namespace CodeBook.Business.App.Services
@@ -8,11 +8,11 @@ namespace CodeBook.Business.App.Services
 {
     public class CommunityService : ICommunityService
     {
-        private CodeBookContext CommunityData;
+        private readonly ICommunityRepository _communityRepository;
 
-        public CommunityService(CodeBookContext CommunityData)
+        public CommunityService(ICommunityRepository communityRepository)
         {
-            this.CommunityData = CommunityData;
+            _communityRepository = communityRepository;
         }
         public void CreateCommunity(int OwnerId,string name,string description)
         {
@@ -20,53 +20,45 @@ namespace CodeBook.Business.App.Services
             community.OwnerId = OwnerId;
             community.Name = name;
             community.Description = description;
-            CommunityData.communities.Add(community);
-            CommunityData.SaveChanges();
+            _communityRepository.Add(community);
+            _communityRepository.SaveChanges();
 
 
         }
         public void UpdateCommunity(int communityId,string name,string description)
         {
-            Community community = CommunityData.communities.FirstOrDefault(c => c.Id == communityId);
-            if (community == null)
-                throw new Exception("Community Not Found!!");
+            Community community = _communityRepository.GetCommunity(communityId);
             community.Name = name;
             community.Description = description;
-            CommunityData.SaveChanges();
+            _communityRepository.Update(community);
+            _communityRepository.SaveChanges();
 
         }
         public void DeleteCommunity(int communityId)
         {
-            Community community = CommunityData.communities.FirstOrDefault(c => c.Id == communityId);
-            if (community == null)
-                throw new Exception("Community Not Found!!");
+            Community community = _communityRepository.GetCommunity(communityId);
 
-            CommunityData.communities.Remove(community);
-            CommunityData.SaveChanges();
-
-
-
+            _communityRepository.Delete(community);
+            _communityRepository.SaveChanges();
         }
         public void JoinCommunity(int communityId,CommunityMember newMember)
         {
-            Community community = CommunityData.communities.FirstOrDefault(c => c.Id == communityId);
-            if (community == null)
-                throw new Exception("Community Not Found!!");
+            //why get community?
+            Community community = _communityRepository.GetCommunity(communityId);
 
-            CommunityData.communityMembers.Add(newMember);
-            CommunityData.SaveChanges();
+            _communityRepository.JoinCommunity(newMember);
+            _communityRepository.SaveChanges();
 
         }
+
+        //what if I wanna Unjoin?
         public void AssignRole(int communityId,int userId,CommunityRole Role)
         {
-            CommunityMember member = CommunityData.communityMembers.FirstOrDefault(m  => m.CommunityId == communityId && m.UserId == userId);
-       
-            if (member == null)
-                throw new Exception("Member Not Found!!");
+            CommunityMember member = _communityRepository.GetCommunityMember(communityId, userId);
 
             member.Role = Role;
-            CommunityData.SaveChanges();
-
+            _communityRepository.UpdateCommunityMember(member);
+            _communityRepository.SaveChanges();
 
         }
     }

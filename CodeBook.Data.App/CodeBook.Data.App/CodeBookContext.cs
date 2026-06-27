@@ -80,6 +80,7 @@ namespace CodeBook.Data.App
                 postTag.HasKey(pt => new { pt.TagId, pt.PostId });
                 postTag.HasOne(pt => pt.Post).WithMany(p => p.PostTags).HasForeignKey(pt => pt.PostId).OnDelete(DeleteBehavior.Cascade);
                 postTag.HasOne(pt => pt.Tag).WithMany(t => t.PostTags).HasForeignKey(pt => pt.TagId).OnDelete(DeleteBehavior.Restrict);
+  
             });
 
             modelBuilder.Entity<Post>(post =>
@@ -114,6 +115,7 @@ namespace CodeBook.Data.App
                 postremoval.HasOne(pr => pr.Post).WithOne(p => p.Removal).HasForeignKey<PostRemoval>(pr => pr.PostId).OnDelete(DeleteBehavior.Restrict);
                 postremoval.HasOne(pr => pr.Remover).WithMany(u => u.PostRemovals).HasForeignKey(pr => pr.RemoverId).OnDelete(DeleteBehavior.Restrict);
                 postremoval.HasOne(pr => pr.Report).WithMany().HasForeignKey(pr => pr.ReportId).OnDelete(DeleteBehavior.SetNull);
+                postremoval.HasIndex(pr => new { pr.RemoverId, pr.PostId }).IsUnique();
             });
 
             modelBuilder.Entity<Notification>(notification =>

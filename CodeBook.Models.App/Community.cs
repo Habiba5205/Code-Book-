@@ -8,8 +8,9 @@
 		public string? Description {get; set;}
 		public string? IconURL {get; set;}
 		public string Slug {get; set;} = string.Empty;
+        public DateTime DateUpdated { get; set; } = DateTime.UtcNow;
 
-		public User Owner {get; set;} = null!;
+        public User Owner {get; set;} = null!;
 		public ICollection<Post> Posts {get; set;} = new List<Post>();
 		public ICollection<CommunityMember> Members {get; set;} = new List<CommunityMember>();
 

@@ -1,19 +1,19 @@
 ﻿using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
 using AutoMapper;
-using CodeBook.Data.App;
+using CodeBook.Data.App.IRepositories;
 using CodeBook.Models.App;
 using System;
 namespace CodeBook.Business.App.Services
 {
     public class ReportService : IReportService
     {
-        private readonly CodeBookContext context;
+        private readonly IReportRepository _reportRepository;
         private readonly IMapper mapper;
 
-        public ReportService(CodeBookContext context, IMapper mapper)
+        public ReportService(IReportRepository reportRepository, IMapper mapper)
         {
-            this.context = context;
+            this._reportRepository = reportRepository;
             this.mapper = mapper;
         }
         public void SubmitReport(int reporterId, ReportRequest request)
@@ -29,13 +29,13 @@ namespace CodeBook.Business.App.Services
                 DateCreated = DateTime.UtcNow,
                 DateUpdated = DateTime.UtcNow
             };
-            context.reports.Add(report);
-            context.SaveChanges();
+            _reportRepository.Add(report);
+            _reportRepository.SaveChanges();
         }
 
         public List<ReportDTO> GetPendingReports()
         {
-            var report = context.reports.Where(r => r.Status == ReportStatus.Pending);
+            var report = _reportRepository.GetPendingReports();
             return mapper.Map<List<ReportDTO>>(report);
             /* context.reports
                  .Where(r => r.Status == ReportStatus.Pending)
@@ -54,12 +54,13 @@ namespace CodeBook.Business.App.Services
 
         public void UpdateReportStatus(int reportId, string status)
         {
-            var report = context.reports.FirstOrDefault(r => r.Id == reportId);
+            var report = _reportRepository.GetReportbyId(reportId);
             if (report != null)
             {
                 report.Status = Enum.Parse<ReportStatus>(status);
                 report.DateUpdated = DateTime.UtcNow;
-                context.SaveChanges();
+                _reportRepository.Update(report);
+                _reportRepository.SaveChanges();
             }
         }
     }

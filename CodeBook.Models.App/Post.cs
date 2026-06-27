@@ -13,8 +13,9 @@
 		public DateTime? DateRemoved { get; set; } = DateTime.UtcNow;
 		public int AuthorId {get; set;}
 		public int? CommunityId {get; set;}
+        public DateTime DateUpdated { get; set; } = DateTime.UtcNow;
 
-		public User Author {get; set;} = null!;
+        public User Author {get; set;} = null!;
 		public Community? Community {get; set;}
 		public ICollection<Comment> Comments {get; set;} = new List<Comment>();
 		public ICollection<Reaction> Reactions {get; set;} = new List<Reaction>();

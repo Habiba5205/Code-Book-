@@ -9,6 +9,7 @@ namespace CodeBook.Models.App
         public string Reason { get; set; } = string.Empty;
         public string? Description { get; set; }
         public ReportStatus Status { get; set; }
+        public DateTime DateUpdated { get; set; } = DateTime.UtcNow;
 
         public User Reporter { get; set; } = null!;
         public Post? Post { get; set; }

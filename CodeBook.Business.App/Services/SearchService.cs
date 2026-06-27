@@ -1,7 +1,7 @@
 ﻿using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
 using AutoMapper;
-using CodeBook.Data.App;
+using CodeBook.Data.App.IRepositories;
 using CodeBook.Models.App;
 using System;
 
@@ -9,17 +9,17 @@ namespace CodeBook.Business.App.Services
 {
     public class SearchService : ISearchService
     {
-        private readonly CodeBookContext context;
+        private readonly IPostRepository _postRepository;
         private readonly IMapper mapper;
-        public SearchService(CodeBookContext context, IMapper mapper)
+        public SearchService(IPostRepository postRepository, IMapper mapper)
         {
-            this.context = context;
+            _postRepository = postRepository;
             this.mapper = mapper;
         }
 
         public List<PostResponse> SearchPosts(SearchQuery query)
         {
-            var posts = context.posts.Where(p => p.IsRemoved == false);
+            var posts = _postRepository.GetAllUnremoved();
 
             if(!string.IsNullOrEmpty(query.Keyword))
             {
