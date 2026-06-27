@@ -13,6 +13,8 @@ namespace CodeBook.Data.App.IRepositories
         void Add(Notification notification);
         void Update(Notification notification);
         Notification GetbyNotificationId(int notificationId);
+
+        int GetUnreadNotificationCount(int userId);
         bool SaveChanges();
     }
 }
