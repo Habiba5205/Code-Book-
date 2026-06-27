@@ -1,4 +1,5 @@
-﻿usinf System.Text.Json;
+﻿using System.Text.Json;
+using Microsoft.AspNetCore.Http;
 namespace CodeBook.Business.App.Middleware
 { 
 public class GlobalExceptionHandler
@@ -42,7 +43,7 @@ public class GlobalExceptionHandler
                 },
                 Details=ex.Message
             };
-            var json = JsonSeriallizer.Seriallize(errorResponse);
+            var json = JsonSerializer.Serialize(errorResponse);
             await context.Response.WriteAsync(json);
         }
 
