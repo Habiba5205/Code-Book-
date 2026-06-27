@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeBook.Business.App.DTOs;
+
 namespace CodeBook.Business.App.Interfaces
 {
 	public interface IReportService

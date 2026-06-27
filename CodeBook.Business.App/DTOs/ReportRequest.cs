@@ -4,10 +4,10 @@ using System.Text;
 
 namespace CodeBook.Business.App.DTOs
 {
-    internal class ReportRequest
+    public class ReportRequest
     {
-        public int PostId { get; set; }
-        public int CommentId { get; set; }
+        public int? PostId { get; set; }
+        public int? CommentId { get; set; }
         public string Reason { get; set; }
         public string Description { get; set; }
     }

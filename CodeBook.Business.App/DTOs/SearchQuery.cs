@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CodeBook.Business.App.DTOs
 {
-    internal class SearchQuery
+    public class SearchQuery
     {
         public string Keyword { get; set; }
         public string Language { get; set; }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CodeBook.Business.App.DTOs
 {
-    internal class PostResponse
+    public class PostResponse
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -12,7 +12,7 @@ namespace CodeBook.Business.App.DTOs
         public string CodeSnippet { get; set; }
         public string Language { get; set; }
         public string AuthorUsername { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public DateTime DateCreated { get; set; }
         public bool IsPublic { get; set; }
     }
 }

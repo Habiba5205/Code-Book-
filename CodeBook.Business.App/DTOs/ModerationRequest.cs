@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CodeBook.Business.App.DTOs
 {
-    internal class ModerationRequest
+    public class ModerationRequest
     {
         public int PostId { get; set; }
         public int ReportId { get; set; }

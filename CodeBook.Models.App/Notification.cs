@@ -8,7 +8,6 @@ namespace CodeBook.Models.App
         public string Message {get; set;}
         public int ReferenceId {get; set;}
         public bool IsSeen {get; set;}
-
         public User User { get; set; } = null!;
 
     }

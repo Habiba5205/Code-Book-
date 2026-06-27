@@ -1,10 +1,11 @@
-﻿using System;
-using CodeBook.Business.App.DTOs;
+﻿using CodeBook.Business.App.DTOs;
+using CodeBook.Models.App;
+using System;
 namespace CodeBook.Business.App.Interfaces
 {
     public interface INotificationService
     {
-        void CreateNotification(int reciepentId, int? actorId, string type, int? postId, int? commentId, string message, string link);
+        public void CreateNotification(int userId, NotificationType type, int referenceId, string message);
         List<NotificationDTO> GetUserNotification(int userId);
         void MarkAsRead(int notificationId);
     }
