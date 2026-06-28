@@ -128,5 +128,11 @@ namespace CodeBook.Business.App.Services
         public Post GetPost(int postId) { 
                 return  _postRepository.GetPostById(postId);
         }
+        public int GetPostAuthorId(int postId)
+        {
+            var post = _postRepository.GetPostById(postId);
+            return post.AuthorId;
+        }
+
     }
 }

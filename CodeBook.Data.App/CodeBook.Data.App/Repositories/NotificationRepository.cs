@@ -1,4 +1,5 @@
-﻿using CodeBook.Models.App;
+﻿using CodeBook.Data.App.IRepositories;
+using CodeBook.Models.App;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace CodeBook.Data.App.Repositories
             _context.notifications .Update(notification);
         }
 
-        public Notification GetbyNotificationId(int notificationId)
+        public Notification? GetbyNotificationId(int notificationId)
         {
             return _context.notifications.FirstOrDefault(n => n.Id == notificationId);
         }

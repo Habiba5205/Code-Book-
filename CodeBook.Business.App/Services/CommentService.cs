@@ -1,8 +1,15 @@
+
 ﻿using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
 using CodeBook.Data.App.IRepositories;
 using CodeBook.Models.App;
 using System;
+﻿using System;
+using CodeBook.Business.App.DTOs;
+using CodeBook.Business.App.Interfaces;
+using CodeBook.Data.App.IRepositories;
+using CodeBook.Models.App;
+using Microsoft.AspNetCore.SignalR;
 
 namespace CodeBook.Business.App.Services
 {
@@ -10,10 +17,12 @@ namespace CodeBook.Business.App.Services
     public class CommentService : ICommentService
     {
         private readonly ICommentRepository _commentRepository;
+        private readonly INotificationService _notificationService;
 
-        public CommentService(ICommentRepository commentRepository)
+        public CommentService(ICommentRepository commentRepository,INotificationService notificationService)
         {
             _commentRepository = commentRepository;
+            _notificationService = notificationService;
         }
 
         public void AddComment(int authorId,int postId, string CommentBody, int? selfCommentId)
@@ -25,6 +34,16 @@ namespace CodeBook.Business.App.Services
             comment.SelfCommentId = selfCommentId;
            _commentRepository.Add(comment);
            _commentRepository.SaveChanges();
+
+            _notificationService.CreateNotification(authorId, new NotificationDTO
+            {
+                UserId = authorId,
+                Type = "Comment",
+                Message = "You have a new Comment on your post",
+                ReferenceId = postId,
+                IsSeen = false,
+                DateCreated = DateTime.UtcNow
+            });
 
         }
         public void EditComment(int commentId,string CommentBody)

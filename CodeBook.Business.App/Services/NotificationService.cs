@@ -17,14 +17,14 @@ namespace CodeBook.Business.App.Services
             this._notificationRepository = notificationRepository;
             this.mapper = mapper;
         }
-        public void CreateNotification(int userId, NotificationType type, int referenceId, string message)
+        public void CreateNotification(int userId, NotificationDTO notificationDto)
         {
             var notification = new Notification
             {
                 UserId = userId,
-                Type = type,
-                ReferenceId = referenceId,
-                Message = message,
+                Type = Enum.Parse<NotificationType>(notificationDto.Type),
+                ReferenceId = notificationDto.ReferenceId,
+                Message = notificationDto.Message,
                 IsSeen = false,
                 DateCreated = DateTime.UtcNow,
                 DateUpdated = DateTime.UtcNow
@@ -37,23 +37,23 @@ namespace CodeBook.Business.App.Services
             var notifications = _notificationRepository.GetNotificationsbyUserId(userId);
             return mapper.Map<List<NotificationDTO>>(notifications);
 
-          /*  return context.notifications
-                .Where(n => n.UserId == userId)
-                .Select(n => new NotificationDTO
-                {
-                    Id = n.Id,
-                    Type = n.Type.ToString(),
-                    Message = n.Message,
-                    ReferenceId = n.ReferenceId,
-                    IsSeen = n.IsSeen,
-                    DateCreated = n.DateCreated
-                }).ToList();
-          */
+            /*  return context.notifications
+                  .Where(n => n.UserId == userId)
+                  .Select(n => new NotificationDTO
+                  {
+                      Id = n.Id,
+                      Type = n.Type.ToString(),
+                      Message = n.Message,
+                      ReferenceId = n.ReferenceId,
+                      IsSeen = n.IsSeen,
+                      DateCreated = n.DateCreated
+                  }).ToList();
+            */
         }
         public void MarkAsRead(int notificationId)
         {
             var notification = _notificationRepository.GetbyNotificationId(notificationId);
-            
+
             if (notification != null)
             {
                 notification.IsSeen = true;
@@ -62,5 +62,12 @@ namespace CodeBook.Business.App.Services
                 _notificationRepository.SaveChanges();
             }
         }
+        public int GetUnreadNotificationCount(int userId)
+        {
+            var notifications = _notificationRepository.GetNotificationsbyUserId(userId);
+            return notifications.Count(n => n.IsSeen == false);
+
+        }
+
     }
 }

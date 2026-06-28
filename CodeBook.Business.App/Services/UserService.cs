@@ -13,12 +13,14 @@ namespace CodeBook.Business.App.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IFollowRepository _followRepository;
+        private readonly INotificationService _notificationService; 
         private readonly IMapper mapper;
-        public UserService(IUserRepository userRepository, IFollowRepository followRepository, IMapper mapper)
+        public UserService(IUserRepository userRepository, IFollowRepository followRepository, IMapper mapper, INotificationService notificationService)
         {
             _userRepository = userRepository;
             _followRepository = followRepository;
             this.mapper = mapper;
+            _notificationService = notificationService;
         }
         public bool DeleteAccount(int userId) 
         {
@@ -59,7 +61,18 @@ namespace CodeBook.Business.App.Services
             follow.FollowerUserId = followerId;
             follow.FolloweeUserId = followeeId;
             _followRepository.AddFollow(follow);
-           return _followRepository.SaveChanges();
+           bool result =  _followRepository.SaveChanges();
+
+            _notificationService.CreateNotification(followeeId, new NotificationDTO
+            {
+                UserId = followeeId,
+                Type = "follow",
+                Message = "You have a Follow Request",
+                ReferenceId = followerId,
+                IsSeen = false,
+                DateCreated = DateTime.UtcNow
+            });
+            return result;
 
         }
 

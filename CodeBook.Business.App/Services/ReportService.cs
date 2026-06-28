@@ -16,7 +16,7 @@ namespace CodeBook.Business.App.Services
             this._reportRepository = reportRepository;
             this.mapper = mapper;
         }
-        public void SubmitReport(int reporterId, ReportRequest request)
+        public bool SubmitReport(int reporterId, ReportRequest request)
         {
             var report = new Report
             {
@@ -31,6 +31,7 @@ namespace CodeBook.Business.App.Services
             };
             _reportRepository.Add(report);
             _reportRepository.SaveChanges();
+            return true;
         }
 
         public List<ReportDTO> GetPendingReports()

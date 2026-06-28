@@ -5,7 +5,7 @@ namespace CodeBook.Business.App.Interfaces
 {
 	public interface IReportService
     {
-        void SubmitReport(int reporterId, ReportRequest request);
+        bool SubmitReport(int reporterId, ReportRequest request);
         List<ReportDTO> GetPendingReports();
         void UpdateReportStatus(int reportId, UpdateReportStatusDto dto);
     }

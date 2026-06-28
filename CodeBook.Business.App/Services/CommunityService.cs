@@ -1,8 +1,11 @@
+
 ﻿using System;
+﻿using AutoMapper.Execution;
 using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
 using CodeBook.Data.App.IRepositories;
 using CodeBook.Models.App;
+using System;
 
 namespace CodeBook.Business.App.Services
 
@@ -10,10 +13,12 @@ namespace CodeBook.Business.App.Services
     public class CommunityService : ICommunityService
     {
         private readonly ICommunityRepository _communityRepository;
+        private readonly INotificationService _notificationService;
 
-        public CommunityService(ICommunityRepository communityRepository)
+        public CommunityService(ICommunityRepository communityRepository,INotificationService notificationService)
         {
             _communityRepository = communityRepository;
+            _notificationService = notificationService;
         }
         public void CreateCommunity(CreateCommunityDto dto)
         {
@@ -50,6 +55,17 @@ namespace CodeBook.Business.App.Services
             _communityRepository.JoinCommunity(newMember);
             _communityRepository.SaveChanges();
 
+
+            _notificationService.CreateNotification(community.OwnerId, new NotificationDTO
+            {
+                UserId = community.OwnerId,
+                Type = "Join",
+                Message = "You have a new Community Member",
+                ReferenceId = communityId,
+                IsSeen = false,
+                DateCreated = DateTime.UtcNow
+            });
+
         }
 
         //what if I wanna Unjoin?
@@ -67,6 +83,12 @@ namespace CodeBook.Business.App.Services
             Community community = _communityRepository.GetCommunity(CommunityId);
             return community;
         }
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> Stashed changes
         public void UnjoinCommunity(int communityId,UnjoinCommunityDto dto)
         {
             CommunityMember member = _communityRepository.GetCommunityMember(communityId, dto.userId);
@@ -75,5 +97,9 @@ namespace CodeBook.Business.App.Services
             _communityRepository.RemoveMember(member);
             _communityRepository.SaveChanges();
         }
+<<<<<<< Updated upstream
+=======
+>>>>>>> 9d773f7a06e2c4d5987595c38e7d6eb5f9451a6e
+>>>>>>> Stashed changes
     }
 }

@@ -15,6 +15,7 @@ namespace CodeBook.Business.App.Interfaces
         void AddTag(int postId, int tagId);
         void RemoveTag(int postId, int tagId);
         Post GetPost(int postId);
+        int GetPostAuthorId(int postId);
 
 
 

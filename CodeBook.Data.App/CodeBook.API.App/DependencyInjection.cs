@@ -32,17 +32,12 @@ namespace CodeBook.API.App
             services.AddScoped<IModerationService, ModerationService>();
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<ICommentRepository, CommentRepository>();
-            services.AddScoped<ICacheService, CacheService>();
-            services.AddMemoryCache();
-
-
             services.AddScoped<ICommunityService, CommunityService>();
             services.AddScoped<ICommunityRepository, CommunityRepository>();
-
-            services.AddScoped<IModerationService, ModerationService>();
-            services.AddScoped<IReportService, ReportService>();
-            services.AddScoped<IPostRepository, PostRepository>();
-            services.AddScoped<IReportRepository, ReportRepository>();
+            services.AddScoped<IReactionService, ReactionService>();
+            services.AddScoped<IReactionRepository, ReactionRepository>();
+            services.AddScoped<ICacheService, CacheService>();
+            services.AddMemoryCache();
 
             return services;
         }
