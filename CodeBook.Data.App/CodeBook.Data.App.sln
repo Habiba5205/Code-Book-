@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeBook.Models.App", "..\C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeBook.Business.App", "..\CodeBook.Business.App\CodeBook.Business.App.csproj", "{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeBook.API.App", "CodeBook.API.App\CodeBook.API.App.csproj", "{77AEA869-6289-4D9C-82A7-B01623E9FD55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77AEA869-6289-4D9C-82A7-B01623E9FD55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77AEA869-6289-4D9C-82A7-B01623E9FD55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77AEA869-6289-4D9C-82A7-B01623E9FD55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77AEA869-6289-4D9C-82A7-B01623E9FD55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
