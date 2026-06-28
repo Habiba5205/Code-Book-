@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeBook.Data.App.IRepositories;
 
 namespace CodeBook.Data.App.Repositories
 {
-    public class NotificationRepository
+    public class NotificationRepository : INotificationRepository
     {
         private readonly CodeBookContext _context;
         public NotificationRepository(CodeBookContext context) { _context = context; }

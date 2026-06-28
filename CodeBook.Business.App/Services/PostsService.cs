@@ -18,29 +18,47 @@ namespace CodeBook.Business.App.Services
             this._postRepository = postRepository;
             this.mapper = mapper;
         }
-        public void CreatePost(int authorId, string title,string body,bool isPublic,int? communityId,string? CodeSnippet,string? Language) 
+        public void CreatePost(CreatePostRequest request) 
         {
-            Post post = new Post();
-            post.AuthorId = authorId;
-            post.Title = title;
-            post.Body = body;
-            post.IsPublic = isPublic;
-            post.CommunityId = communityId;
-            post.CodeSnippet = CodeSnippet;
-            post.Language = Language;
+            Post post = new Post
+            {
+                AuthorId = request.AuthorId,
+                Title = request.Title,
+                Body = request.Body,
+                IsPublic = request.IsPublic,
+                CommunityId = request.CommunityId,
+                CodeSnippet = request.CodeSnippet,
+                Language = request.Language
+            };
+
             _postRepository.Add(post);
             _postRepository.SaveChanges();
 
+            if(request.TagIds != null && request.TagIds.Any())
+            {
+                foreach(var tagId in request.TagIds)
+                {
+                    PostTag postTag = new PostTag
+                    {
+                        PostId = post.Id,
+                        TagId = tagId
+                    };
+                    _postRepository.AddTag(postTag);
+                }
+                _postRepository.SaveChanges();
+            }
         }
-        public void UpdatePost(int postId, string title, string body, bool isPublic, int? communityId, string? CodeSnippet, string? Language) 
+        public void UpdatePost(int postId, UpdatePostRequest request) 
         {
             Post post = _postRepository.GetPostById(postId);
 
-            post.Title = title;
-            post.Body = body;
-            post.IsPublic = isPublic;
-            post.CommunityId = communityId;
-            post.CodeSnippet = CodeSnippet;
+            post.Title = request.Title;
+            post.Body = request.Body;
+            post.IsPublic = request.IsPublic;
+            post.CommunityId = request.CommunityId;
+            post.CodeSnippet = request.CodeSnippet;
+            post.Language = request.Language;
+            post.DateUpdated = DateTime.UtcNow;
             _postRepository.SaveChanges();
 
         }

@@ -5,8 +5,8 @@ namespace CodeBook.Business.App.Interfaces
 {
     public interface IPostService
     {
-        void CreatePost(int authorId, string title, string body, bool isPublic, int? communityId, string? CodeSnippet, string? Language);
-        void UpdatePost(int postId, string title, string body, bool isPublic, int? communityId, string? CodeSnippet, string? Language);
+        void CreatePost(CreatePostRequest request);
+        void UpdatePost(int postId, UpdatePostRequest request);
         void DeletePost(int postId);
         void PublishPost(int postId);
         List<PostResponse> GetFeed(int postId);

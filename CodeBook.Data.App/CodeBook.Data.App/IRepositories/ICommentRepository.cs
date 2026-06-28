@@ -13,6 +13,7 @@ namespace CodeBook.Data.App.IRepositories
         void Update(Comment comment);
         void Delete(Comment comment);
         Comment GetCommentById(int commentid);
+        List<Comment> GetByPostId(int postId);
         bool SaveChanges();
     }
 }

@@ -6,6 +6,7 @@ using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeBook.Data.App.Repositories
 {
@@ -31,6 +32,11 @@ namespace CodeBook.Data.App.Repositories
         public void Delete(Comment comment)
         {
             _context.comments.Remove(comment);
+        }
+
+        public List<Comment> GetByPostId(int postId)
+        {
+            return _context.comments.Where(c => c.PostId == postId).Include(c => c.Author).Include(c => c.Replies).ToList();
         }
         public bool SaveChanges()
         {
