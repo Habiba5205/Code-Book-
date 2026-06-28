@@ -1,4 +1,5 @@
-﻿using CodeBook.Models.App;
+﻿using CodeBook.Data.App.IRepositories;
+using CodeBook.Models.App;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CodeBook.Data.App.Repositories
 {
-    public class CommunityRepository
+    public class CommunityRepository : ICommunityRepository
     {
         private readonly CodeBookContext _context;
         public CommunityRepository(CodeBookContext context)

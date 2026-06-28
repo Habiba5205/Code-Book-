@@ -2,6 +2,7 @@
 using CodeBook.Models.App;
 using CodeBook.Data.App.IRepositories;
 using System;
+using CodeBook.Business.App.DTOs;
 
 
 namespace CodeBook.Business.App.Services
@@ -17,7 +18,7 @@ namespace CodeBook.Business.App.Services
             _reportRepository = reportRepository;
         }
 
-        public void RemovePost(int removerid, int postId, int? reportId, string reason)
+        public void RemovePost(int postId, RemovePostsDto dto)
         {
             var post = _postRepository.GetPostById(postId);
 
@@ -29,16 +30,16 @@ namespace CodeBook.Business.App.Services
                 var removal = new PostRemoval
                 {
                     PostId = postId,
-                    RemoverId = removerid,
-                    ReportId = reportId,
-                    Reason = reason,
+                    RemoverId = dto.RemoverId,
+                    ReportId = dto.ReportId,
+                    Reason = dto.Reason,
                     DateCreated = DateTime.Now
                 };
                 _postRepository.AddRemovalRecord(removal);
 
-                if (reportId != null)
+                if (dto.ReportId != null)
                 {
-                    var report = _reportRepository.GetReportbyId(reportId);
+                    var report = _reportRepository.GetReportbyId(dto.ReportId);
                     if (report != null)
                     {
                         report.Status = ReportStatus.Accepted;

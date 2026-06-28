@@ -52,12 +52,12 @@ namespace CodeBook.Business.App.Services
                  }).ToList();*/
         }
 
-        public void UpdateReportStatus(int reportId, string status)
+        public void UpdateReportStatus(int reportId, UpdateReportStatusDto dto)
         {
             var report = _reportRepository.GetReportbyId(reportId);
             if (report != null)
             {
-                report.Status = Enum.Parse<ReportStatus>(status);
+                report.Status = dto.Status;
                 report.DateUpdated = DateTime.UtcNow;
                 _reportRepository.Update(report);
                 _reportRepository.SaveChanges();

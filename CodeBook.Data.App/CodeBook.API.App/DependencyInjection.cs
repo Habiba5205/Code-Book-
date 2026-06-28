@@ -22,6 +22,14 @@ namespace CodeBook.API.App
             services.AddScoped<AbstractValidator<LoginDto>, LoginValidator>();
             services.AddScoped<AbstractValidator<RegisterDto>, RegisterValidator>();
 
+            services.AddScoped<ICommunityService, CommunityService>();
+            services.AddScoped<ICommunityRepository, CommunityRepository>();
+
+            services.AddScoped<IModerationService, ModerationService>();
+            services.AddScoped<IReportService, ReportService>();
+            services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IReportRepository, ReportRepository>();
+
             return services;
         }
     }

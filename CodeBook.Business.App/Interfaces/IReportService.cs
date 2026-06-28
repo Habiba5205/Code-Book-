@@ -7,6 +7,6 @@ namespace CodeBook.Business.App.Interfaces
     {
         void SubmitReport(int reporterId, ReportRequest request);
         List<ReportDTO> GetPendingReports();
-        void UpdateReportStatus(int reportId, string status);
+        void UpdateReportStatus(int reportId, UpdateReportStatusDto dto);
     }
 }
