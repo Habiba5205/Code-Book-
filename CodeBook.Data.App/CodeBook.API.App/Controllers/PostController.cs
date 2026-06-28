@@ -129,5 +129,13 @@ namespace CodeBook.API.App.Controllers
             _commentService.AddComment(request.AuthorId, id, request.Body, request.SelfCommentId);
             return Ok(new { message = "Comment added successfully" });
         }
+
+        [HttpDelete("{commentid}/delete")]
+        //[Authorize]
+        public IActionResult DeleteComment(int id)
+        {
+            _commentService.DeleteComment(id);
+            return Ok(new { message = "Comment deleted successfully" });
+        }
     }
 }
