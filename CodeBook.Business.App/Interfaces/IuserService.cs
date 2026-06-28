@@ -5,12 +5,12 @@ namespace CodeBook.Business.App.Interfaces
 {
     public interface IuserService
     {
-        void DeleteAccount(int userId);
+        bool DeleteAccount(int userId);
         UserProfileResponse GetProfile(int userId);
-        void UpdateProfile(int userId, UpdateProfileDto data);
+        bool UpdateProfile(int userId, UpdateProfileDto data);
         bool VerifyPassword(string password, int userId);
-        void Follow(int followerId, int followeeId);
-        void Unfollow(int followerId, int followeeId);
+        bool Follow(int followerId, int followeeId);
+        bool Unfollow(int followerId, int followeeId);
 
     }
 }

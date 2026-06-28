@@ -1,4 +1,5 @@
-﻿using CodeBook.Models.App;
+﻿using CodeBook.Data.App.IRepositories;
+using CodeBook.Models.App;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,16 +8,13 @@ using System.Threading.Tasks;
 
 namespace CodeBook.Data.App.Repositories
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly CodeBookContext _context;
         public UserRepository(CodeBookContext context) { _context = context; }
         public User GetProfileById(int userid)
         {
-            User user = _context.users.FirstOrDefault(u => u.Id == userid);
-            if (user == null)
-                throw new Exception("User Not Found");
-            return user;
+            return _context.users.FirstOrDefault(u => u.Id == userid);
         }
         public User GetProfileByEmail(string email)
         { 
@@ -24,7 +22,7 @@ namespace CodeBook.Data.App.Repositories
         }
         public void Add(User user)
         {
-            _context.users.Add(user);
+           _context.users.Add(user);
         }
 
         public void Remove(User user)

@@ -19,6 +19,9 @@ namespace CodeBook.Data.App
         public DbSet<Community> communities { get; set; }
         public DbSet<Comment> comments { get; set; }
 
+        public CodeBookContext(DbContextOptions<CodeBookContext> options) : base(options)
+        {
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=.;Database=CodeBook_DB;Trusted_Connection=true;TrustServerCertificate=true");
@@ -43,7 +46,6 @@ namespace CodeBook.Data.App
 
             modelBuilder.Entity<Tag>(Tag =>
             {
-                Tag.ToTable("Tags");
                 Tag.HasKey(t => t.Id);
                 Tag.Property(t => t.Id).HasColumnName("Tag_ID").ValueGeneratedOnAdd();
                 Tag.Property(t => t.Name).HasMaxLength(50);

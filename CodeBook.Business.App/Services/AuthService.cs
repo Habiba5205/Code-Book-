@@ -4,6 +4,7 @@ using CodeBook.Data.App.IRepositories;
 using CodeBook.Models.App;
 using CodeBook.Business.App.Interfaces;
 using BCrypt.Net;
+using CodeBook.Business.App.DTOs;
 
 namespace CodeBook.Business.App.Methods
 
@@ -17,33 +18,30 @@ namespace CodeBook.Business.App.Methods
 		{
 			_userRepository = userRepository;
 		}
-		public bool Login(string email, string password)
+		public bool Login(LoginDto login)
 		{
-            User existinguser = _userRepository.GetProfileByEmail(email);
-            if (existinguser != null)
-                throw new Exception("Email Not Found!!");
+            User existinguser = _userRepository.GetProfileByEmail(login.Email);
+			if (existinguser == null)
+				return false;
 
-            return BCrypt.Net.BCrypt.Verify(password,existinguser.PasswordHash);
+            return BCrypt.Net.BCrypt.Verify(login.Password,existinguser.PasswordHash);
 
 
         }
-        public bool Register(string email, string password,string userName, string bio, string AvatarUrl, UserRole role)
+        public bool Register(RegisterDto register)
 		{
-			User existinguser = _userRepository.GetProfileByEmail(email);
+			User existinguser = _userRepository.GetProfileByEmail(register.Email);
 			if (existinguser != null)
-				throw new Exception("Email Already Exists!!Just Login");
+				return false;
             
             User user = new User();
-            user.Email = email;
-            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
-			user.UserName = userName;
-			user.Bio = bio;
+            user.Email = register.Email;
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(register.Password);
+			user.UserName = register.UserName;
 			user.Role = UserRole.NormalUser;
-			user.AvatarUrl = AvatarUrl;
 
 			_userRepository.Add(user);
-			_userRepository.SaveChanges();
-			return true;
+			return _userRepository.SaveChanges();
         }
 	
 	}
