@@ -135,5 +135,27 @@ namespace CodeBook.Business.App.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+        [HttpDelete("{id}/unjoin")]
+        public IActionResult UnjoinCommunity(int id, [FromBody] UnjoinCommunityDto dto)
+        {
+            try
+            {
+                _communityService.UnjoinCommunity(id, dto);
+                return Ok("Unjoined Community Successfully");
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
     }
 }

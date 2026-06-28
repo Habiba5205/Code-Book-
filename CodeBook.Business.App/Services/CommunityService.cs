@@ -67,5 +67,13 @@ namespace CodeBook.Business.App.Services
             Community community = _communityRepository.GetCommunity(CommunityId);
             return community;
         }
+        public void UnjoinCommunity(int communityId,UnjoinCommunityDto dto)
+        {
+            CommunityMember member = _communityRepository.GetCommunityMember(communityId, dto.userId);
+            if(member == null)
+                throw new KeyNotFoundException("Member Not Found!!");
+            _communityRepository.RemoveMember(member);
+            _communityRepository.SaveChanges();
+        }
     }
 }

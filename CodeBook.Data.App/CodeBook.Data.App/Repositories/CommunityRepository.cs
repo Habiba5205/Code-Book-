@@ -48,7 +48,7 @@ namespace CodeBook.Data.App.Repositories
             CommunityMember member = _context.communityMembers.FirstOrDefault(m => m.CommunityId == communityid && m.UserId == userid);
 
             if (member == null)
-                throw new Exception("Member Not Found!!");
+                throw new KeyNotFoundException("Member Not Found!!");
             return member;
         }
 
@@ -59,6 +59,10 @@ namespace CodeBook.Data.App.Repositories
         public bool SaveChanges()
         {
             return _context.SaveChanges() >= 0;
+        }
+        public void RemoveMember(CommunityMember member)
+        {
+            _context.communityMembers.Remove(member);
         }
     }
 }
