@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
+using CodeBook.Data.App;
 using CodeBook.Data.App.IRepositories;
 using CodeBook.Models.App;
+using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace CodeBook.Business.App.Services
@@ -11,12 +13,14 @@ namespace CodeBook.Business.App.Services
     {
         private readonly IPostRepository _postRepository;
         private readonly IMapper mapper;
+        private readonly CodeBookContext _context;
 
 
-        public PostsService(IPostRepository postRepository, IMapper mapper)
+        public PostsService(IPostRepository postRepository, IMapper mapper, CodeBookContext context)
         {
             this._postRepository = postRepository;
             this.mapper = mapper;
+            _context = context;
         }
         public void CreatePost(CreatePostRequest request) 
         {
@@ -38,12 +42,17 @@ namespace CodeBook.Business.App.Services
             {
                 foreach(var tagId in request.TagIds)
                 {
-                    PostTag postTag = new PostTag
+                    bool tagExists = _context.tags.Any(t => t.Id == tagId);
+                    if (tagExists)
                     {
-                        PostId = post.Id,
-                        TagId = tagId
-                    };
-                    _postRepository.AddTag(postTag);
+                        PostTag postTag = new PostTag
+                        {
+                            PostId = post.Id,
+                            TagId = tagId
+                        };
+                        _postRepository.AddTag(postTag);
+                    }
+                
                 }
                 _postRepository.SaveChanges();
             }
@@ -116,6 +125,8 @@ namespace CodeBook.Business.App.Services
             _postRepository.RemoveTag(postTag);
             _postRepository.SaveChanges();
         }
-
+        public Post GetPost(int postId) { 
+                return  _postRepository.GetPostById(postId);
+        }
     }
 }

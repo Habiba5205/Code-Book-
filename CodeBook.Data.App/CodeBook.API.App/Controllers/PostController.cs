@@ -34,7 +34,7 @@ namespace CodeBook.API.App.Controllers
         [AllowAnonymous]
         public IActionResult GetPost(int id)
         {
-            var post = _postService.GetFeed(id);
+            var post = _postService.GetPost(id);
             if (post == null)
             {
                 return NotFound(new { message = "Post not found" });
@@ -43,19 +43,20 @@ namespace CodeBook.API.App.Controllers
         }
 
         [HttpPost("create")]
-        [Authorize]
+        //[Authorize]
         public IActionResult CreatePost([FromBody] CreatePostRequest request)
         {
             if (request == null)
-            {
+            {    
                 return BadRequest(new { message = "Invalid request" });
             }
+            request.TagIds ??= new List<int>();
             _postService.CreatePost(request);
             return Ok(new { message = "Post created successfully" });
         }
 
         [HttpPut("{id}/update")]
-        [Authorize]
+        //[Authorize]
         public IActionResult UpdatePost(int id, [FromBody] UpdatePostRequest request)
         {
             if (request == null)
@@ -67,7 +68,7 @@ namespace CodeBook.API.App.Controllers
         }
 
         [HttpDelete("{id}/delete")]
-        [Authorize]
+        //[Authorize]
         public IActionResult DeletePost(int id)
         {
             _postService.DeletePost(id);
@@ -75,7 +76,7 @@ namespace CodeBook.API.App.Controllers
         }
 
         [HttpPost("{id}/save")]
-        [Authorize]
+       // [Authorize]
         public IActionResult SavePost(int id, [FromQuery] int userId)
         {
             _postService.SavePost(userId, id);
@@ -118,7 +119,7 @@ namespace CodeBook.API.App.Controllers
         }
 
         [HttpPost("{postId}/comments")]
-        [Authorize]
+       // [Authorize]
         public IActionResult AddComment(int id, [FromBody] AddCommentRequest request)
         {
             if(request == null)

@@ -15,6 +15,6 @@ namespace CodeBook.Business.App.DTOs
         public int? CommunityId { get; set; }
         public string? CodeSnippet { get; set; }
         public string? Language { get; set; }
-        public List<int> TagIds { get; set; } = new List<int>();
+        public List<int>? TagIds { get; set; }
     }
 }
