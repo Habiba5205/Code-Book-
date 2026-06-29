@@ -7,6 +7,7 @@ using CodeBook.Data.App.IRepositories;
 using CodeBook.Data.App.Repositories;
 using Microsoft.Extensions.Caching.Memory;
 using FluentValidation;
+using CodeBook.Business.App.Validators;
 
 namespace CodeBook.API.App
 {
@@ -22,6 +23,7 @@ namespace CodeBook.API.App
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<AbstractValidator<LoginDto>, LoginValidator>();
             services.AddScoped<AbstractValidator<RegisterDto>, RegisterValidator>();
+            services.AddScoped<AbstractValidator<ResetPasswordDto>,ResetPasswordValidator>();
             services.AddScoped<IPostService, PostsService>();
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<ISearchService, SearchService>();

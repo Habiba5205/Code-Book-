@@ -26,7 +26,7 @@ namespace CodeBook.API.App.Controllers
             throw new UnauthorizedAccessException();
         }
 
-        [HttpGet("{userId}/viewprofile")]
+        [HttpGet("viewprofile")]
         [AllowAnonymous]
         public IActionResult GetProfile(int userId)
         {
@@ -38,7 +38,20 @@ namespace CodeBook.API.App.Controllers
             return Ok(userProfile);
         }
 
-        [HttpDelete("{userId}/deleteprofile")]
+        [HttpGet("viewmyprofile")]
+        [Authorize]
+        public IActionResult GetMyProfile()
+        {
+            int userId = GetCurrentUserId();
+            UserProfileResponse userProfile = _userService.GetProfile(userId);
+            if (userProfile == null)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+            return Ok(userProfile);
+        }
+
+        [HttpDelete("deleteprofile")]
         [Authorize]
         public IActionResult DeleteProfile(int userId)
         {
@@ -54,7 +67,7 @@ namespace CodeBook.API.App.Controllers
             return BadRequest(new { message = "Couldn't be deleted!" });
         }
 
-        [HttpPatch("{userid}/updateprofile")]
+        [HttpPatch("updateprofile")]
         [Authorize]
         public IActionResult UpdateProfile(UpdateProfileDto updateProfile)
         {

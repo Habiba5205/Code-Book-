@@ -6,6 +6,7 @@ using CodeBook.Business.App.Validator;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 namespace CodeBook.API.App.Controllers
 {
     [ApiController]
@@ -16,10 +17,23 @@ namespace CodeBook.API.App.Controllers
         private readonly IAuthService _authService;
         private readonly AbstractValidator<LoginDto> _loginValidator;
         private readonly AbstractValidator<RegisterDto> _registerValidator;
-        public AuthController(IAuthService authService, AbstractValidator<LoginDto> loginvalidator, AbstractValidator<RegisterDto> registervalidator)
-        {   _authService = authService;
+        private readonly AbstractValidator<ResetPasswordDto> _resetPasswordValidator;
+        public AuthController(IAuthService authService, AbstractValidator<LoginDto> loginvalidator, AbstractValidator<RegisterDto> registervalidator, AbstractValidator<ResetPasswordDto> resetpasswordvalidator)
+        {
+            _authService = authService;
             _loginValidator = loginvalidator;
             _registerValidator = registervalidator;
+            _resetPasswordValidator = resetpasswordvalidator;
+        }
+
+        private int GetCurrentUserId()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (int.TryParse(userId, out int currentid))
+            {
+                return currentid;
+            }
+            throw new UnauthorizedAccessException();
         }
 
         [HttpPost("login")]
@@ -31,9 +45,10 @@ namespace CodeBook.API.App.Controllers
             {
                 return BadRequest(validationResult.Errors);
             }
-            if (_authService.Login(logininfo))
+            var token = _authService.Login(logininfo);
+            if (token != null)
             {
-                return Ok(new { message = "Login Successful." });
+                return Ok(new { message = "Login Successful." ,token = token});
             }
             return Unauthorized(new { message = "Invalid Email or Password" });
 
@@ -43,15 +58,52 @@ namespace CodeBook.API.App.Controllers
         public IActionResult Register([FromBody] RegisterDto registerinfo)
         {
             var validationResult = _registerValidator.Validate(registerinfo);
-            if(!validationResult.IsValid)
+            if (!validationResult.IsValid)
             {
                 return BadRequest(validationResult.Errors);
             }
-            if(_authService.Register(registerinfo))
+            if (_authService.Register(registerinfo))
             {
-                return Created( "Email Already Registered!" , registerinfo);
+                return Created("Registeration Success! ", registerinfo);
             }
             return Conflict(new { message = "Email Already Registered!" });
+        }
+
+        [HttpDelete("logout")]
+        [Authorize]
+
+        public IActionResult Logout()
+        {
+            return Ok(new { message = "Logout Successful! Please clear the token from your client storage." });
+        }
+
+        [HttpPatch("resetPassword")]
+        [Authorize]
+        public IActionResult ResetPassword(ResetPasswordDto resetPassword)
+        {
+            var currentId = GetCurrentUserId();
+            resetPassword.userId = currentId;
+
+            bool verifyold = _authService.VerifyPassword(resetPassword.password,resetPassword.userId);
+            if (!verifyold)
+            {
+                return BadRequest(new { message = "Incorrect Old Password" });
+            }
+
+            var validationResult = _resetPasswordValidator.Validate(resetPassword);
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
+
+            if (_authService.ResetPassword(resetPassword))
+            {
+                return Ok(new { message = "Password Reset! Please Login Again!" });
+            }
+
+            return BadRequest();
+
+
         }
     }
 }

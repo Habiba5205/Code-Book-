@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.WebUtilities;
 namespace CodeBook.API.App.Controllers
 {
     [ApiController]
-    [Route("api/admin")]
+    [Route("[controller]")]
     public class AdminController : ControllerBase
     {
         private readonly IModerationService _moderationService;

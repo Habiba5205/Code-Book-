@@ -1,10 +1,17 @@
-﻿using System;
+﻿using BCrypt.Net;
+using CodeBook.Business.App.DTOs;
+using CodeBook.Business.App.Interfaces;
 using CodeBook.Business.App.Services;
 using CodeBook.Data.App.IRepositories;
 using CodeBook.Models.App;
-using CodeBook.Business.App.Interfaces;
-using BCrypt.Net;
-using CodeBook.Business.App.DTOs;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.Win32;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace CodeBook.Business.App.Methods
 
@@ -12,23 +19,45 @@ namespace CodeBook.Business.App.Methods
 	public class AuthService : IAuthService
 	{
 		private readonly IUserRepository _userRepository;
+        private readonly IConfiguration _configuration;
 
 
-        public AuthService(IUserRepository userRepository)
+        public AuthService(IUserRepository userRepository,IConfiguration configuration)
 		{
 			_userRepository = userRepository;
+            _configuration = configuration;
 		}
-		public bool Login(LoginDto login)
+
+        private string GenerateJwtToken(User user)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtKey = _configuration["Jwt:Key"];
+            var key = Encoding.ASCII.GetBytes(jwtKey);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[] {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Role, user.Role.ToString()),
+                new Claim("password_version", user.PasswordHash.Substring(0, 10))
+        }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
+        public string Login(LoginDto login)
 		{
             User existinguser = _userRepository.GetProfileByEmail(login.Email);
 			if (existinguser == null)
-				return false;
+				return null;
 
-            return BCrypt.Net.BCrypt.Verify(login.Password,existinguser.PasswordHash);
+            bool found = BCrypt.Net.BCrypt.Verify(login.Password,existinguser.PasswordHash);
+			if(!found) return null;
+			return GenerateJwtToken(existinguser);
 
-
-        }
-        public bool Register(RegisterDto register)
+		}
+		public bool Register(RegisterDto register)
 		{
 			User existinguser = _userRepository.GetProfileByEmail(register.Email);
 			if (existinguser != null)
@@ -43,6 +72,23 @@ namespace CodeBook.Business.App.Methods
 			_userRepository.Add(user);
 			return _userRepository.SaveChanges();
         }
-	
-	}
+
+		public bool ResetPassword(ResetPasswordDto resetPassword)
+		{
+			if (resetPassword == null) return false;
+			User user = _userRepository.GetProfileById(resetPassword.userId);
+			if (user == null) return false;
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(resetPassword.newPassword);
+            _userRepository.Update(user);
+			return _userRepository.SaveChanges();
+		}
+
+        public bool VerifyPassword(string password, int userId)
+        {
+            User user = _userRepository.GetProfileById(userId);
+
+            return BCrypt.Net.BCrypt.Verify(password, user.PasswordHash);
+        }
+
+    }
 }

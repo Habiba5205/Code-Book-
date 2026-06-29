@@ -3,6 +3,7 @@ using CodeBook.Business.App.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.AccessControl;
+using System.Security.Claims;
 
 
 namespace CodeBook.API.App.Controllers
@@ -20,6 +21,15 @@ namespace CodeBook.API.App.Controllers
             _postService = postService;
             _searchService = searchService;
             _commentService = commentService;
+        }
+        private int GetCurrentUserId()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (int.TryParse(userId, out int currentid))
+            {
+                return currentid;
+            }
+            throw new UnauthorizedAccessException();
         }
 
         [HttpGet("feed")]
@@ -43,7 +53,7 @@ namespace CodeBook.API.App.Controllers
         }
 
         [HttpPost("create")]
-        //[Authorize]
+        [Authorize]
         public IActionResult CreatePost([FromBody] CreatePostRequest request)
         {
             if (request == null)
@@ -51,24 +61,26 @@ namespace CodeBook.API.App.Controllers
                 return BadRequest(new { message = "Invalid request" });
             }
             request.TagIds ??= new List<int>();
+            request.AuthorId = GetCurrentUserId();
             _postService.CreatePost(request);
             return Ok(new { message = "Post created successfully" });
         }
 
         [HttpPut("{id}/update")]
-        //[Authorize]
+        [Authorize]
         public IActionResult UpdatePost(int id, [FromBody] UpdatePostRequest request)
         {
             if (request == null)
             {
                 return BadRequest(new { message = "Invalid request" });
             }
+            id = GetCurrentUserId();
             _postService.UpdatePost(id, request);
             return Ok(new { message = "Post updated successfully" });
         }
 
         [HttpDelete("{id}/delete")]
-        //[Authorize]
+        [Authorize]
         public IActionResult DeletePost(int id)
         {
             _postService.DeletePost(id);
@@ -76,7 +88,7 @@ namespace CodeBook.API.App.Controllers
         }
 
         [HttpPost("{id}/save")]
-       // [Authorize]
+        [Authorize]
         public IActionResult SavePost(int id, [FromQuery] int userId)
         {
             _postService.SavePost(userId, id);
@@ -119,7 +131,7 @@ namespace CodeBook.API.App.Controllers
         }
 
         [HttpPost("{postId}/comments")]
-       // [Authorize]
+       [Authorize]
         public IActionResult AddComment(int id, [FromBody] AddCommentRequest request)
         {
             if(request == null)
@@ -131,7 +143,7 @@ namespace CodeBook.API.App.Controllers
         }
 
         [HttpDelete("{commentid}/delete")]
-        //[Authorize]
+        [Authorize]
         public IActionResult DeleteComment(int id)
         {
             _commentService.DeleteComment(id);

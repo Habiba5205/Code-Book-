@@ -8,7 +8,6 @@ namespace CodeBook.Business.App.Interfaces
         bool DeleteAccount(int userId);
         UserProfileResponse GetProfile(int userId);
         bool UpdateProfile(int userId, UpdateProfileDto data);
-        bool VerifyPassword(string password, int userId);
         bool Follow(int followerId, int followeeId);
         bool Unfollow(int followerId, int followeeId);
 

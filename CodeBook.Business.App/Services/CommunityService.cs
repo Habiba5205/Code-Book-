@@ -83,12 +83,6 @@ namespace CodeBook.Business.App.Services
             Community community = _communityRepository.GetCommunity(CommunityId);
             return community;
         }
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> Stashed changes
         public void UnjoinCommunity(int communityId,UnjoinCommunityDto dto)
         {
             CommunityMember member = _communityRepository.GetCommunityMember(communityId, dto.userId);
@@ -97,9 +91,5 @@ namespace CodeBook.Business.App.Services
             _communityRepository.RemoveMember(member);
             _communityRepository.SaveChanges();
         }
-<<<<<<< Updated upstream
-=======
->>>>>>> 9d773f7a06e2c4d5987595c38e7d6eb5f9451a6e
->>>>>>> Stashed changes
     }
 }

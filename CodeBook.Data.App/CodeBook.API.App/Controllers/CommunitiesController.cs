@@ -7,7 +7,7 @@ using System;
 namespace CodeBook.Business.App.Controllers
 {
     [ApiController]
-    [Route("api/Communities")]
+    [Route("[controller]")]
     public class CommunitiesController : ControllerBase
     {
         private readonly ICommunityService _communityService;

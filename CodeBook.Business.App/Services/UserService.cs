@@ -47,12 +47,6 @@ namespace CodeBook.Business.App.Services
             return _userRepository.SaveChanges();
 
         }
-        public bool VerifyPassword(string password,int userId)
-        {
-            User user = _userRepository.GetProfileById(userId);
-
-            return BCrypt.Net.BCrypt.Verify(password, user.PasswordHash);
-        }
         public bool Follow(int followerId, int followeeId)
         {
             Follow followedalready = _followRepository.GetFollow(followerId, followeeId);
