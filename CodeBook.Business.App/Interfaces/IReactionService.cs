@@ -6,8 +6,12 @@ namespace CodeBook.Business.App.Interfaces
 {
     public interface IReactionService
     {
-        ErrorResponse AddReaction(int userId,ReactionDto reavtionDto);
-        ErrorResponse RemoveReaction(int postId, int userId);
+        ErrorResponse AddPostReaction(int userId,ReactionDto reavtionDto);
+        ErrorResponse AddCommentReaction(int userId, ReactionDto reavtionDto, int commentId);
+
+        ErrorResponse RemovePostReaction(int postId, int userId);
+        ErrorResponse RemoveCommentReaction(int postId, int userId,int commentId);
+
         ErrorResponse UpdateReaction(ReactionDto reactionDto, Reaction reaction);
 
     }

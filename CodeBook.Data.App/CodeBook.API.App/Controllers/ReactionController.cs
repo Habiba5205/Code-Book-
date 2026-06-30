@@ -25,24 +25,47 @@ namespace CodeBook.API.App.Controllers
         }
 
 
-        [HttpPost("addreaction")]
+        [HttpPost("addPostreaction")]
         [Authorize]
-        public ActionResult AddReaction([FromBody] ReactionDto reactionDto)
+        public ActionResult AddPostReaction([FromBody] ReactionDto reactionDto)
         {
             var currentId = _currentUserInfo.GetCurrentUserId();
-            ErrorResponse result = _reactionService.AddReaction(currentId, reactionDto);
+            ErrorResponse result = _reactionService.AddPostReaction(currentId, reactionDto);
             if (result.Success)
                 return Ok(new { message = result.Message});
 
             return BadRequest(new { message = result.Message });
         }
-
-        [HttpDelete("removereaction")]
+        [HttpPost("addCommentreaction")]
         [Authorize]
-        public ActionResult RemoveReaction(int postId)
+        public ActionResult AddCommentReaction([FromBody] ReactionDto reactionDto,int commentId)
         {
             var currentId = _currentUserInfo.GetCurrentUserId();
-            ErrorResponse result = _reactionService.RemoveReaction(postId, currentId);
+            ErrorResponse result = _reactionService.AddCommentReaction(currentId, reactionDto,commentId);
+            if (result.Success)
+                return Ok(new { message = result.Message });
+
+            return BadRequest(new { message = result.Message });
+        }
+
+        [HttpDelete("removePostreaction")]
+        [Authorize]
+        public ActionResult RemovePostReaction(int postId)
+        {
+            var currentId = _currentUserInfo.GetCurrentUserId();
+            ErrorResponse result = _reactionService.RemovePostReaction(postId, currentId);
+            if (result.Success)
+                return Ok(new { message = result.Message });
+
+            return BadRequest(new { message = result.Message });
+        }
+
+        [HttpDelete("removeCommentreaction")]
+        [Authorize]
+        public ActionResult RemoveCommentReaction(int postId,int commentId)
+        {
+            var currentId = _currentUserInfo.GetCurrentUserId();
+            ErrorResponse result = _reactionService.RemoveCommentReaction(postId, currentId,commentId);
             if (result.Success)
                 return Ok(new { message = result.Message });
 

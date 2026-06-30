@@ -20,7 +20,10 @@ namespace CodeBook.Data.App.Repositories
         {
             return _context.reactions.FirstOrDefault(r => r.PostId == postId && r.UserId == userId);
         }
-
+        public Reaction GetCommentReaction(int postId, int userId,int commentId)
+        {
+            return _context.reactions.FirstOrDefault(r => r.PostId == postId && r.UserId == userId && r.CommentId == commentId);
+        }
         public void Add(Reaction reaction)
         {
             _context.reactions.Add(reaction);

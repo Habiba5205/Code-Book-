@@ -8,5 +8,6 @@ namespace CodeBook.Business.App.Interfaces
         void DeleteComment(int commentId);
         void EditComment(int commentId, string CommentBody);
         List<CommentDto> GetPostComments(int postId);
+        int GetCommentAuthorId(int commentId);
     }
 }

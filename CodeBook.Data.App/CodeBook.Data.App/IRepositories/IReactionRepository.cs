@@ -10,6 +10,7 @@ namespace CodeBook.Data.App.IRepositories
     public interface IReactionRepository
     {
         Reaction GetReaction(int postId, int userId);
+        Reaction GetCommentReaction(int postId, int userId,int commentId);
         void Add(Reaction reaction);
         void Remove(Reaction reaction);
         void Update(Reaction reaction);

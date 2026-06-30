@@ -1,15 +1,16 @@
 
 ﻿using CodeBook.Business.App.DTOs;
-using CodeBook.Business.App.Interfaces;
-using CodeBook.Data.App.IRepositories;
-using CodeBook.Models.App;
-using System;
-﻿using System;
 using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
+using CodeBook.Business.App.Interfaces;
 using CodeBook.Data.App.IRepositories;
+using CodeBook.Data.App.IRepositories;
+using CodeBook.Data.App.Repositories;
+using CodeBook.Models.App;
 using CodeBook.Models.App;
 using Microsoft.AspNetCore.SignalR;
+using System;
+﻿using System;
 
 namespace CodeBook.Business.App.Services
 {
@@ -75,6 +76,11 @@ namespace CodeBook.Business.App.Services
                 SelfCommentId = c.SelfCommentId,
                 DateCreated = c.DateCreated
             }).ToList();
+        }
+        public int GetCommentAuthorId(int commentId)
+        {
+            var comment = _commentRepository.GetCommentById(commentId);
+            return comment.AuthorId;
         }
     }
 }
