@@ -17,11 +17,12 @@ namespace CodeBook.API.App.Controllers
     public class ReactionController : ControllerBase
     {
         private readonly IReactionService _reactionService;
-        private readonly CurrentUserInfo _currentUserInfo = new CurrentUserInfo();
+        private readonly CurrentUserInfo _currentUserInfo;
 
-        public ReactionController(IReactionService reactionService) 
-        { 
-            _reactionService = reactionService; 
+        public ReactionController(IReactionService reactionService, CurrentUserInfo currentUserInfo)
+        {
+            _reactionService = reactionService;
+            _currentUserInfo = currentUserInfo;
         }
 
 

@@ -4,11 +4,21 @@ using System.Security.Claims;
 
 namespace CodeBook.API.App.Controllers
 {
-    public class CurrentUserInfo : ControllerBase
+    public class CurrentUserInfo
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public CurrentUserInfo(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
         public int GetCurrentUserId()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if(_httpContextAccessor.HttpContext == null || _httpContextAccessor.HttpContext.User == null)
+            {
+                throw new UnauthorizedAccessException();
+            }
+            var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (int.TryParse(userId, out int currentid))
             {
                 return currentid;

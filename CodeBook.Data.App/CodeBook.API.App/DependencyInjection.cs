@@ -8,6 +8,7 @@ using CodeBook.Data.App.Repositories;
 using Microsoft.Extensions.Caching.Memory;
 using FluentValidation;
 using CodeBook.Business.App.Validators;
+using CodeBook.API.App.Controllers;
 
 namespace CodeBook.API.App
 {
@@ -39,6 +40,7 @@ namespace CodeBook.API.App
             services.AddScoped<ICommunityRepository, CommunityRepository>();
             services.AddScoped<IReactionService, ReactionService>();
             services.AddScoped<IReactionRepository, ReactionRepository>();
+            services.AddScoped<CurrentUserInfo>();
             services.AddScoped<ICacheService, CacheService>();
             services.AddMemoryCache();
 

@@ -17,11 +17,12 @@ namespace CodeBook.API.App.Controllers
     {
         private readonly IReportService _reportService;
         private readonly AbstractValidator<ReportRequest> _reportValidator;
-        private readonly CurrentUserInfo _currentUserInfo = new CurrentUserInfo();
-        public ReportController(IReportService reportService, AbstractValidator<ReportRequest> reportValidator)
+        private readonly CurrentUserInfo _currentUserInfo;
+        public ReportController(IReportService reportService, AbstractValidator<ReportRequest> reportValidator, CurrentUserInfo currentUserInfo)
         {
             _reportService = reportService;
             _reportValidator = reportValidator;
+            _currentUserInfo = currentUserInfo;
         }
 
         [HttpPost("submitreport")]
