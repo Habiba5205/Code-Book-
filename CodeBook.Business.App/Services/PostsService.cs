@@ -22,11 +22,11 @@ namespace CodeBook.Business.App.Services
             this.mapper = mapper;
             _context = context;
         }
-        public void CreatePost(CreatePostRequest request) 
+        public void CreatePost(int userId,CreatePostRequest request) 
         {
             Post post = new Post
             {
-                AuthorId = request.AuthorId,
+                AuthorId = userId,
                 Title = request.Title,
                 Body = request.Body,
                 IsPublic = request.IsPublic,
@@ -57,9 +57,11 @@ namespace CodeBook.Business.App.Services
                 _postRepository.SaveChanges();
             }
         }
-        public void UpdatePost(int postId, UpdatePostRequest request) 
+        public void UpdatePost(int postId, UpdatePostRequest request,int userId) 
         {
             Post post = _postRepository.GetPostById(postId);
+            if (post.AuthorId != userId)
+                throw new UnauthorizedAccessException();
 
             post.Title = request.Title;
             post.Body = request.Body;
@@ -71,9 +73,11 @@ namespace CodeBook.Business.App.Services
             _postRepository.SaveChanges();
 
         }
-        public void DeletePost(int postId) 
+        public void DeletePost(int postId,int userId) 
         {
             Post post = _postRepository.GetPostById(postId);
+            if (post.AuthorId != userId)
+                throw new UnauthorizedAccessException();
 
             _postRepository.Delete(post);
             _postRepository.SaveChanges();

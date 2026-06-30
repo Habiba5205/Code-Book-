@@ -25,13 +25,13 @@ namespace CodeBook.Business.App.Services
             _notificationService = notificationService;
         }
 
-        public void AddComment(int authorId,int postId, string CommentBody, int? selfCommentId)
+        public void AddComment(int authorId,int postId,AddCommentRequest dto)
         {
             Comment comment = new Comment();
             comment.AuthorId = authorId;
             comment.PostId = postId;
-            comment.Body = CommentBody;
-            comment.SelfCommentId = selfCommentId;
+            comment.Body = dto.Body;
+            comment.SelfCommentId = dto.SelfCommentId;
            _commentRepository.Add(comment);
            _commentRepository.SaveChanges();
 

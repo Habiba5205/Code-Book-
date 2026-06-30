@@ -29,7 +29,7 @@ namespace CodeBook.API.App.Controllers
             throw new UnauthorizedAccessException();
         }
         [HttpGet]
-       // [Authorize]
+        [Authorize]
         public ActionResult GetNotification()
         {
             var notification = _notificationService.GetUserNotification(GetCurrentUserById());
@@ -37,14 +37,14 @@ namespace CodeBook.API.App.Controllers
         }
 
         [HttpPatch("{id}/read")]
-       // [Authorize]
+        [Authorize]
         public ActionResult MarkAsRead(int id)
         {
             _notificationService.MarkAsRead(id);
             return Ok(new { message = "Marked As Read!!" });
         }
         [HttpGet("unread-count")]
-       // [Authorize]
+        [Authorize]
         public ActionResult GetUnreadCount()
         {
             var count = _notificationService.GetUnreadNotificationCount(GetCurrentUserById());

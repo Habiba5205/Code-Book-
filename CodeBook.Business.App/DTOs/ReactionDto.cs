@@ -8,7 +8,6 @@ namespace CodeBook.Business.App.DTOs
 {
     public class ReactionDto
     {
-        public int UserId { get; set; }
         public int PostId { get; set; }
         public string ReactionType { get; set; }
     }

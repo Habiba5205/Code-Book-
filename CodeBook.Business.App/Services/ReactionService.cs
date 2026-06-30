@@ -4,6 +4,7 @@ using CodeBook.Data.App;
 using CodeBook.Models.App;
 using CodeBook.Data.App.IRepositories;
 using CodeBook.Business.App.DTOs;
+using CodeBook.Business.App.Middleware;
 
 
 namespace CodeBook.Business.App.Services
@@ -20,7 +21,7 @@ namespace CodeBook.Business.App.Services
             _notificationService = notificationService;
             _postService = postService;
         }
-        public bool AddReaction(int userId,ReactionDto reactionDto)
+        public ErrorResponse AddReaction(int userId,ReactionDto reactionDto)
         {
             Reaction reaction = new Reaction();
             reaction.UserId = userId;
@@ -38,14 +39,16 @@ namespace CodeBook.Business.App.Services
                 IsSeen = false,
                 DateCreated = DateTime.UtcNow
             });
-            return result;
+            if( result) return new ErrorResponse { Success = true, Message = "Reacted" };
+            else return new ErrorResponse { Success = false, Message = "Failed to react" };
         }
-        public bool RemoveReaction(int postId,int userId)
+        public ErrorResponse RemoveReaction(int postId,int userId)
         {
             Reaction reaction = _reactionRepository.GetReaction(postId,userId);
             _reactionRepository.Remove(reaction);
            bool result = _reactionRepository.SaveChanges();
-            return result;
+            if(!result) return new ErrorResponse { Success = false, Message = "Failed to remove reaction" };
+            else return new ErrorResponse { Success = true, Message = "Reaction removed" };
 
         }
     }

@@ -8,7 +8,7 @@ namespace CodeBook.Business.App.DTOs
 {
     public class CreatePostRequest
     {
-        public int AuthorId { get; set; }
+ 
         public string Title { get; set; }
         public string Body { get; set; }
         public bool IsPublic { get; set; }

@@ -29,11 +29,12 @@ namespace CodeBook.API.App.Controllers
             throw new UnauthorizedAccessException();
         }
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public ActionResult SubmitReport([FromBody] ReportRequest request)
         {
-            if(_reportService.SubmitReport(GetCurrentUserById(), request))
-               return Ok(new { message = "Report Submitted Successfully!" });
+            var response = _reportService.SubmitReport(GetCurrentUserById(), request);
+            if(response != null && response.Success)
+                return Ok(new { message = "Report Submitted Successfully!" });
 
             return BadRequest(new { message = "Couldn't Submit Report!" });
 

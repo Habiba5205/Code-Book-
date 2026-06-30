@@ -4,6 +4,7 @@ using AutoMapper;
 using CodeBook.Data.App.IRepositories;
 using CodeBook.Models.App;
 using System;
+using CodeBook.Business.App.Middleware;
 namespace CodeBook.Business.App.Services
 {
     public class ReportService : IReportService
@@ -16,7 +17,7 @@ namespace CodeBook.Business.App.Services
             this._reportRepository = reportRepository;
             this.mapper = mapper;
         }
-        public bool SubmitReport(int reporterId, ReportRequest request)
+        public ErrorResponse SubmitReport(int reporterId, ReportRequest request)
         {
             var report = new Report
             {
@@ -30,8 +31,8 @@ namespace CodeBook.Business.App.Services
                 DateUpdated = DateTime.UtcNow
             };
             _reportRepository.Add(report);
-            _reportRepository.SaveChanges();
-            return true;
+           if( _reportRepository.SaveChanges()) return new ErrorResponse { Success = true, Message = "Report Submitted Successfully!" };
+           else return new ErrorResponse { Success = false, Message = "Couldn't Submit Report!" };
         }
 
         public List<ReportDTO> GetPendingReports()

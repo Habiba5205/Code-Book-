@@ -5,9 +5,9 @@ namespace CodeBook.Business.App.Interfaces
 {
     public interface IPostService
     {
-        void CreatePost(CreatePostRequest request);
-        void UpdatePost(int postId, UpdatePostRequest request);
-        void DeletePost(int postId);
+        void CreatePost(int userId,CreatePostRequest request);
+        void UpdatePost(int postId, UpdatePostRequest request,int userId);
+        void DeletePost(int postId, int userId);
         void PublishPost(int postId);
         List<PostResponse> GetFeed(int postId);
         void SavePost(int userid, int postId);

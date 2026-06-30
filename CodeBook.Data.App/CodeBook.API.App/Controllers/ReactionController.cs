@@ -33,22 +33,22 @@ namespace CodeBook.API.App.Controllers
         }
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public ActionResult AddReaction([FromBody] ReactionDto reactionDto)
         {
             var currentId = GetCurrentUserById();
-            if(_reactionService.AddReaction(currentId,reactionDto))
+            if(_reactionService.AddReaction(currentId,reactionDto).Success)
                 return Ok(new { message = "Reaction Added Successfully!" });
 
             return BadRequest(new { message = "Couldn't Add Reaction!" });
         }
 
         [HttpDelete("{postId}")]
-        //[Authorize]
+        [Authorize]
         public ActionResult RemoveReaction(int postId)
         {
             var currentId = GetCurrentUserById();
-            if (_reactionService.RemoveReaction(postId,currentId))
+            if (_reactionService.RemoveReaction(postId,currentId).Success)
                 return Ok(new { message = "Reaction Removed!" });
 
             return BadRequest(new { message = "Couldn't Remove Reaction!" });

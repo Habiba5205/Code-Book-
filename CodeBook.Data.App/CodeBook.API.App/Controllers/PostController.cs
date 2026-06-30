@@ -61,8 +61,8 @@ namespace CodeBook.API.App.Controllers
                 return BadRequest(new { message = "Invalid request" });
             }
             request.TagIds ??= new List<int>();
-            request.AuthorId = GetCurrentUserId();
-            _postService.CreatePost(request);
+            var userId= GetCurrentUserId();
+            _postService.CreatePost(userId,request);
             return Ok(new { message = "Post created successfully" });
         }
 
@@ -74,24 +74,25 @@ namespace CodeBook.API.App.Controllers
             {
                 return BadRequest(new { message = "Invalid request" });
             }
-            id = GetCurrentUserId();
-            _postService.UpdatePost(id, request);
+            var userId = GetCurrentUserId();
+            _postService.UpdatePost(id, request,userId);
             return Ok(new { message = "Post updated successfully" });
         }
 
-        [HttpDelete("{id}/delete")]
+        [HttpDelete("{id}/deletePost")]
         [Authorize]
         public IActionResult DeletePost(int id)
         {
-            _postService.DeletePost(id);
+            var userId = GetCurrentUserId();
+            _postService.DeletePost(id,userId);
             return Ok(new { message = "Post deleted successfully" });
         }
 
         [HttpPost("{id}/save")]
         [Authorize]
-        public IActionResult SavePost(int id, [FromQuery] int userId)
+        public IActionResult SavePost(int id)
         {
-            _postService.SavePost(userId, id);
+            _postService.SavePost(GetCurrentUserId(), id);
             return Ok(new { message = "Post saved successfully" });
         }
 
@@ -107,7 +108,7 @@ namespace CodeBook.API.App.Controllers
             return Ok(tags);
         }
 
-        [HttpGet("/search")]
+        [HttpGet("search")]
         [AllowAnonymous]
         public IActionResult SearchPosts([FromQuery] string? key, [FromQuery] string? tag, [FromQuery] string? language)
         {
@@ -130,7 +131,7 @@ namespace CodeBook.API.App.Controllers
             return Ok(comments);
         }
 
-        [HttpPost("{postId}/comments")]
+        [HttpPost("{id}/comments")]
        [Authorize]
         public IActionResult AddComment(int id, [FromBody] AddCommentRequest request)
         {
@@ -138,11 +139,12 @@ namespace CodeBook.API.App.Controllers
             {
                 return BadRequest(new {message = "Invalid request" });
             }
-            _commentService.AddComment(request.AuthorId, id, request.Body, request.SelfCommentId);
+            var userId = GetCurrentUserId();
+            _commentService.AddComment(userId, id, request);
             return Ok(new { message = "Comment added successfully" });
         }
 
-        [HttpDelete("{commentid}/delete")]
+        [HttpDelete("{id}/deleteComment")]
         [Authorize]
         public IActionResult DeleteComment(int id)
         {
