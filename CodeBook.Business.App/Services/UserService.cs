@@ -6,6 +6,7 @@ using CodeBook.Data.App.IRepositories;
 using CodeBook.Models.App;
 using CodeBook.Business.App.Mapping;
 using System;
+using CodeBook.Business.App.Middleware;
 
 namespace CodeBook.Business.App.Services
 {
@@ -22,12 +23,13 @@ namespace CodeBook.Business.App.Services
             this.mapper = mapper;
             _notificationService = notificationService;
         }
-        public bool DeleteAccount(int userId) 
+        public ErrorResponse DeleteAccount(int userId) 
         {
             User user = _userRepository.GetProfileById(userId);
-            
+            if(user == null) return new ErrorResponse { Success = false, Message = "User Not Found!" };
             _userRepository.Remove(user);
-           return _userRepository.SaveChanges();
+           if(_userRepository.SaveChanges()) return new ErrorResponse { Success = true, Message = "Profile Deleted!" };
+            return new ErrorResponse { Success = false, Message = "Couldn't Delete!" };
 
         }
         public UserProfileResponse GetProfile(int userId)
@@ -36,46 +38,63 @@ namespace CodeBook.Business.App.Services
             if (user == null) return null;
             return mapper.Map<UserProfileResponse>(user);     
         }
-        public bool UpdateProfile(int userId,UpdateProfileDto data) 
+        public ErrorResponse UpdateProfile(int userId,UpdateProfileDto data) 
         {
             User user = _userRepository.GetProfileById(userId);
+            if(user == null) return new ErrorResponse { Success = false, Message = "User Not Found!" } ;
 
             user.Bio = data.Bio;
             user.UserName = data.UserName;
             user.AvatarUrl = data.AvatarUrl;
             _userRepository.Update(user);
-            return _userRepository.SaveChanges();
+            if(_userRepository.SaveChanges()) return new ErrorResponse { Success = true, Message = "Profile Updated!" };
+            return new ErrorResponse { Success = false, Message = "Couldn't Update!" };
 
         }
-        public bool Follow(int followerId, int followeeId)
+        public ErrorResponse Follow(int followerId, int followeeId)
         {
+            User user = _userRepository.GetProfileById(followeeId);
+            if (user == null) return new ErrorResponse { Success = false, Message = "User Not Found!" };
+
             Follow followedalready = _followRepository.GetFollow(followerId, followeeId);
-            if (followedalready != null) return false;
+            if (followedalready != null) return new ErrorResponse { Success = false, Message = "Already Followed!" };
+
             Follow follow = new Follow();
             follow.FollowerUserId = followerId;
             follow.FolloweeUserId = followeeId;
             _followRepository.AddFollow(follow);
            bool result =  _followRepository.SaveChanges();
-
-            _notificationService.CreateNotification(followeeId, new NotificationDTO
+            if (result)
             {
-                UserId = followeeId,
-                Type = "follow",
-                Message = "You have a Follow Request",
-                ReferenceId = followerId,
-                IsSeen = false,
-                DateCreated = DateTime.UtcNow
-            });
-            return result;
+                 _notificationService.CreateNotification(followeeId, new NotificationDTO
+                {
+                    UserId = followeeId,
+                    Type = "Follow",
+                    Message = "You have a Follow Request",
+                    ReferenceId = followerId,
+                    IsSeen = false,
+                    DateCreated = DateTime.UtcNow
+                });
+                return new ErrorResponse { Success = true, Message = "Followed!" };
+
+            }
+            return new ErrorResponse { Success = false, Message = "Couldn't Follow!" };
 
         }
 
-        public bool Unfollow(int followerId, int followeeId)
+        public ErrorResponse Unfollow(int followerId, int followeeId)
         {
+            User user = _userRepository.GetProfileById(followeeId);
+            if (user == null) return new ErrorResponse { Success = false, Message = "User Not Found!" };
+
             Follow follow = _followRepository.GetFollow(followerId, followeeId);
-            if(follow == null) return false;
+            if (follow == null) return new ErrorResponse { Success = false, Message = "You don't Follow him already!" };
+
             _followRepository.RemoveFollow(follow);
-            return _followRepository.SaveChanges();
+            bool result = _followRepository.SaveChanges();
+
+            if (result) { return new ErrorResponse { Success = true, Message = "Unfollowed!" }; }
+            return new ErrorResponse { Success = false, Message = "Couldn't Unfollow!" };
 
         }
     }

@@ -1,4 +1,5 @@
 ﻿using CodeBook.Business.App.DTOs;
+using CodeBook.Business.App.Middleware;
 using CodeBook.Models.App;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -9,9 +10,9 @@ namespace CodeBook.Business.App.Interfaces
 {
     public interface IAuthService
     {
-        bool Register(RegisterDto register);
+        ErrorResponse Register(RegisterDto register);
         string Login(LoginDto login);
-        bool ResetPassword(ResetPasswordDto resetPassword);
+        ErrorResponse ResetPassword(ResetPasswordDto resetPassword);
         bool VerifyPassword(string password, int userId);
 
     }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using CodeBook.Business.App.DTOs;
 using System.Security.Claims;
 using CodeBook.Models.App;
+using CodeBook.Business.App.Middleware;
 
 namespace CodeBook.API.App.Controllers
 {
@@ -60,11 +61,12 @@ namespace CodeBook.API.App.Controllers
             {
                 return Forbid();
             }
-            if (_userService.DeleteAccount(userId))
+            ErrorResponse result = _userService.DeleteAccount(userId);
+            if (result.Success)
             {
-                return NoContent();
+                return Ok(new {message = result.Message});
             }
-            return BadRequest(new { message = "Couldn't be deleted!" });
+            return BadRequest(new { message = result.Message });
         }
 
         [HttpPatch("updateprofile")]
@@ -72,12 +74,13 @@ namespace CodeBook.API.App.Controllers
         public IActionResult UpdateProfile(UpdateProfileDto updateProfile)
         {
             var currentid = GetCurrentUserId();
-            if (_userService.UpdateProfile(currentid, updateProfile))
+            ErrorResponse result = _userService.UpdateProfile(currentid, updateProfile);
+            if (result.Success)
             {
-                return Ok(new { message = "Profile Updated!" });
+                return Ok(new { message = result.Message });
 
             }
-            return BadRequest(new { message = "Couldn't Update!" });
+            return BadRequest(new { message = result.Message });
 
         }
 
@@ -90,12 +93,14 @@ namespace CodeBook.API.App.Controllers
             {
                 return BadRequest(new { message = "You cannot follow yourself!" });
             }
-            
-            if (_userService.Follow(currentid, userid))
+            ErrorResponse result = _userService.Follow(currentid, userid);
+
+
+            if (result.Success)
             {
-                return Ok(new { message = "Followed!" });
+                return Ok(new { message = result.Message});
             }
-            return BadRequest(new { message = "Couldn't follow" });
+            return BadRequest(new { message = result.Message });
         }
 
         [HttpDelete("unfollow")]
@@ -107,11 +112,12 @@ namespace CodeBook.API.App.Controllers
             {
                 return BadRequest(new { message = "You cannot unfollow yourself!" });
             }
-            if (_userService.Unfollow(currentid, userid))
+            ErrorResponse result = _userService.Unfollow(currentid, userid);
+            if (result.Success)
             {
-                return Ok(new { message = "Unfollowed!" });
+                return Ok(new { message = result.Message });
             }
-            return BadRequest(new { message = "Couldn't follow" });
+            return BadRequest(new { message = result.Message });
 
         }
     }

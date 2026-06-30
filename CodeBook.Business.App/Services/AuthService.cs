@@ -1,6 +1,7 @@
 ﻿using BCrypt.Net;
 using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
+using CodeBook.Business.App.Middleware;
 using CodeBook.Business.App.Services;
 using CodeBook.Data.App.IRepositories;
 using CodeBook.Models.App;
@@ -57,11 +58,10 @@ namespace CodeBook.Business.App.Methods
 			return GenerateJwtToken(existinguser);
 
 		}
-		public bool Register(RegisterDto register)
+		public ErrorResponse Register(RegisterDto register)
 		{
 			User existinguser = _userRepository.GetProfileByEmail(register.Email);
-			if (existinguser != null)
-				return false;
+            if (existinguser != null) return new ErrorResponse { Success = false, Message = "Aleady Registerd, Just login!" };
             
             User user = new User();
             user.Email = register.Email;
@@ -70,18 +70,20 @@ namespace CodeBook.Business.App.Methods
 			user.Role = UserRole.NormalUser;
 
 			_userRepository.Add(user);
-			return _userRepository.SaveChanges();
+			if(_userRepository.SaveChanges()) return new ErrorResponse { Success = true, Message = "Registeration Success!" };
+            return new ErrorResponse { Success = false, Message = "Couldn't Register!" };
         }
 
-		public bool ResetPassword(ResetPasswordDto resetPassword)
+		public ErrorResponse ResetPassword(ResetPasswordDto resetPassword)
 		{
-			if (resetPassword == null) return false;
+			if (resetPassword == null) return new ErrorResponse { Success = false, Message = "Please fill the required fields!" };
 			User user = _userRepository.GetProfileById(resetPassword.userId);
-			if (user == null) return false;
+			if (user == null) return new ErrorResponse { Success = false, Message = "User Not Found!" };
             user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(resetPassword.newPassword);
             _userRepository.Update(user);
-			return _userRepository.SaveChanges();
-		}
+			if(_userRepository.SaveChanges()) return new ErrorResponse { Success = true, Message = "Password Reset Successfully!" };
+            return new ErrorResponse { Success = false, Message = "Couldn't Reset Password!" };
+        }
 
         public bool VerifyPassword(string password, int userId)
         {

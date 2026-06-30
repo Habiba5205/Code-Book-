@@ -1,6 +1,7 @@
 ﻿using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
 using CodeBook.Business.App.Methods;
+using CodeBook.Business.App.Middleware;
 using CodeBook.Business.App.Services;
 using CodeBook.Business.App.Validator;
 using FluentValidation;
@@ -62,11 +63,12 @@ namespace CodeBook.API.App.Controllers
             {
                 return BadRequest(validationResult.Errors);
             }
-            if (_authService.Register(registerinfo))
+            ErrorResponse result = _authService.Register(registerinfo);
+            if (result.Success)
             {
-                return Created("Registeration Success! ", registerinfo);
+                return Created(result.Message, registerinfo);
             }
-            return Conflict(new { message = "Email Already Registered!" });
+            return Conflict(new { message = result.Message });
         }
 
         [HttpDelete("logout")]
@@ -95,13 +97,14 @@ namespace CodeBook.API.App.Controllers
             {
                 return BadRequest(validationResult.Errors);
             }
+            ErrorResponse result = _authService.ResetPassword(resetPassword);
 
-            if (_authService.ResetPassword(resetPassword))
+            if (result.Success)
             {
-                return Ok(new { message = "Password Reset! Please Login Again!" });
+                return Ok(new { message = result.Message });
             }
 
-            return BadRequest();
+            return BadRequest(result.Message);
 
 
         }

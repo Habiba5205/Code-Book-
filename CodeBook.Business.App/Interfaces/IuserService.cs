@@ -1,15 +1,16 @@
 ﻿using System;
 using CodeBook.Models.App;
 using CodeBook.Business.App.DTOs;
+using CodeBook.Business.App.Middleware;
 namespace CodeBook.Business.App.Interfaces
 {
     public interface IuserService
     {
-        bool DeleteAccount(int userId);
+        ErrorResponse DeleteAccount(int userId);
         UserProfileResponse GetProfile(int userId);
-        bool UpdateProfile(int userId, UpdateProfileDto data);
-        bool Follow(int followerId, int followeeId);
-        bool Unfollow(int followerId, int followeeId);
+        ErrorResponse UpdateProfile(int userId, UpdateProfileDto data);
+        ErrorResponse Follow(int followerId, int followeeId);
+        ErrorResponse Unfollow(int followerId, int followeeId);
 
     }
 }

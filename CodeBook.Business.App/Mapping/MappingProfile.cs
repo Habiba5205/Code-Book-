@@ -30,7 +30,11 @@ namespace CodeBook.Business.App.Mapping
                 .ForMember(dest => dest.UserName,
                            opt => opt.MapFrom(src => src.UserName))
                 .ForMember(dest => dest.Bio,
-                           opt => opt.MapFrom(src => src.Bio));
+                           opt => opt.MapFrom(src => src.Bio))
+                .ForMember(dest => dest.AvatarUrl,
+                            opt => opt.MapFrom(src => src.AvatarUrl))
+                .ForMember(dest => dest.JoinedAt,
+                            opt => opt.MapFrom(src => src.DateCreated));
 
             CreateMap<UpdateProfileDto, User>()
                 .ForMember(dest => dest.Bio,

@@ -4,7 +4,7 @@ namespace CodeBook.Business.App.Middleware
 { 
 public class GlobalExceptionHandler
  {
-        private readonly RequestDelegate request;
+        /*private readonly RequestDelegate request;
         public GlobalExceptionHandler(RequestDelegate next) {
             request = next;
         }
@@ -45,7 +45,7 @@ public class GlobalExceptionHandler
             };
             var json = JsonSerializer.Serialize(errorResponse);
             await context.Response.WriteAsync(json);
-        }
+        }*/
 
 
 

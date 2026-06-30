@@ -23,11 +23,9 @@ namespace CodeBook.Data.App.Repositories
 
         public Follow GetFollow(int followerId, int followeeId)
         {
-            Follow follow = _context.follows.FirstOrDefault(f => f.FollowerUserId == followerId && f.FolloweeUserId == followeeId);
-            if (follow == null)
-                throw new Exception("Follow Record Not Found");
-            return follow;
+            return _context.follows.FirstOrDefault(f => f.FollowerUserId == followerId && f.FolloweeUserId == followeeId);
         }
+
         public bool SaveChanges()
         {
             return _context.SaveChanges() >= 0;
