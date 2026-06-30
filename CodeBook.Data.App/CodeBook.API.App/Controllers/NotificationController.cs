@@ -15,10 +15,11 @@ namespace CodeBook.API.App.Controllers
     public class NotificationController : ControllerBase
     {
         private readonly INotificationService _notificationService;
-        private readonly CurrentUserInfo _currentUserInfo = new CurrentUserInfo();
-        public NotificationController(INotificationService notificationService)
+        private readonly CurrentUserInfo _currentUserInfo;
+        public NotificationController(INotificationService notificationService, CurrentUserInfo currentUserInfo)
         {
             _notificationService = notificationService;
+            _currentUserInfo = currentUserInfo;
         }
 
         [HttpGet("getnotification")]

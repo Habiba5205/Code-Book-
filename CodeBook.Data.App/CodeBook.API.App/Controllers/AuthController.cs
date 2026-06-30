@@ -19,13 +19,14 @@ namespace CodeBook.API.App.Controllers
         private readonly AbstractValidator<LoginDto> _loginValidator;
         private readonly AbstractValidator<RegisterDto> _registerValidator;
         private readonly AbstractValidator<ResetPasswordDto> _resetPasswordValidator;
-        private readonly CurrentUserInfo _currentUserInfo = new CurrentUserInfo();
-        public AuthController(IAuthService authService, AbstractValidator<LoginDto> loginvalidator, AbstractValidator<RegisterDto> registervalidator, AbstractValidator<ResetPasswordDto> resetpasswordvalidator)
+        private readonly CurrentUserInfo _currentUserInfo;
+        public AuthController(IAuthService authService, AbstractValidator<LoginDto> loginvalidator, AbstractValidator<RegisterDto> registervalidator, AbstractValidator<ResetPasswordDto> resetpasswordvalidator, CurrentUserInfo currentUserInfo)
         {
             _authService = authService;
             _loginValidator = loginvalidator;
             _registerValidator = registervalidator;
             _resetPasswordValidator = resetpasswordvalidator;
+            _currentUserInfo = currentUserInfo;
         }
 
 

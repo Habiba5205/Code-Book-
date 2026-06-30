@@ -15,8 +15,12 @@ namespace CodeBook.API.App.Controllers
     {
 
         private readonly IuserService _userService;
-        private readonly CurrentUserInfo _currentUserInfo = new CurrentUserInfo();
-        public UserController(IuserService userService) { _userService = userService; }
+        private readonly CurrentUserInfo _currentUserInfo;
+        public UserController(IuserService userService, CurrentUserInfo currentUserInfo)
+        {
+            _userService = userService;
+            _currentUserInfo = currentUserInfo;
+        }
 
 
         [HttpGet("viewprofile")]

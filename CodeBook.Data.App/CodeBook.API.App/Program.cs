@@ -4,6 +4,7 @@ using CodeBook.Business.App.Mapping;
 using CodeBook.Data.App;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -63,7 +64,7 @@ builder.Services.AddAuthorization(options => {
 });
 
 builder.Services.AddServices();
-
+builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

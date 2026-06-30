@@ -24,7 +24,11 @@ namespace CodeBook.Data.App
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=.;Database=CodeBook_DB;Trusted_Connection=true;TrustServerCertificate=true");
+            if(!optionsBuilder.IsConfigured)
+            {
+                // Configure the database connection string here
+                optionsBuilder.UseSqlServer("Server=.;Database=CodeBook_DB;Trusted_Connection=true;TrustServerCertificate=true");
+            }
             base.OnConfiguring(optionsBuilder);
         }
 

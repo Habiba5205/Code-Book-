@@ -15,12 +15,12 @@ namespace CodeBook.Business.App.Controllers
     public class CommunitiesController : ControllerBase
     {
         private readonly ICommunityService _communityService;
-        private readonly CurrentUserInfo _currentUserInfo = new CurrentUserInfo();
+        private readonly CurrentUserInfo _currentUserInfo;
 
-
-        public CommunitiesController(ICommunityService communityService)
+        public CommunitiesController(ICommunityService communityService, CurrentUserInfo currentUserInfo)
         {
             _communityService = communityService;
+            _currentUserInfo = currentUserInfo;
         }
         [HttpPost]
         public IActionResult CreateCommunity([FromBody] CreateCommunityDto dto) {
