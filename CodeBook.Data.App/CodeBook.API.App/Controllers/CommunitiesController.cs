@@ -1,16 +1,29 @@
 ﻿using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
 using CodeBook.Models.App;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Security.Claims;
 
 namespace CodeBook.Business.App.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class CommunitiesController : ControllerBase
     {
         private readonly ICommunityService _communityService;
+
+        private int GetCurrentUserById()
+        {
+            var userId = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
+            if (int.TryParse(userId, out int currentid))
+            {
+                return currentid;
+            }
+            throw new UnauthorizedAccessException();
+        }
 
         public CommunitiesController(ICommunityService communityService)
         {
@@ -20,10 +33,11 @@ namespace CodeBook.Business.App.Controllers
         public IActionResult CreateCommunity([FromBody] CreateCommunityDto dto) {
             try
             {
+                var userId = GetCurrentUserById();
                 if (string.IsNullOrEmpty(dto.Name))
                     return BadRequest("Community name cannot be empty.");
 
-                _communityService.CreateCommunity(dto);
+                _communityService.CreateCommunity(dto,userId);
                 return Ok("Community Created Successfully");
             }
             catch (ArgumentException ex)
@@ -77,7 +91,7 @@ namespace CodeBook.Business.App.Controllers
                 var member = new CommunityMember
                 {
                     CommunityId = id,
-                    UserId = dto.UserId,
+                    UserId = GetCurrentUserById(),
                     Role = dto.Role,
                     JoinedAt = DateTime.UtcNow
                 };
@@ -136,11 +150,12 @@ namespace CodeBook.Business.App.Controllers
             }
         }
         [HttpDelete("{id}/unjoin")]
-        public IActionResult UnjoinCommunity(int id, [FromBody] UnjoinCommunityDto dto)
+        public IActionResult UnjoinCommunity(int id)
         {
             try
             {
-                _communityService.UnjoinCommunity(id, dto);
+                var userId = GetCurrentUserById();
+                _communityService.UnjoinCommunity(id, userId);
                 return Ok("Unjoined Community Successfully");
             }
             catch (KeyNotFoundException ex)

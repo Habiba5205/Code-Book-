@@ -18,7 +18,7 @@ namespace CodeBook.Business.App.Services
             _reportRepository = reportRepository;
         }
 
-        public void RemovePost(int postId, RemovePostsDto dto)
+        public void RemovePost(int postId, RemovePostsDto dto,int removerId)
         {
             var post = _postRepository.GetPostById(postId);
 
@@ -30,7 +30,7 @@ namespace CodeBook.Business.App.Services
                 var removal = new PostRemoval
                 {
                     PostId = postId,
-                    RemoverId = dto.RemoverId,
+                    RemoverId = removerId,
                     ReportId = dto.ReportId,
                     Reason = dto.Reason,
                     DateCreated = DateTime.Now

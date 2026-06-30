@@ -1,18 +1,30 @@
 ﻿using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
 using CodeBook.Business.App.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
+using System.Security.Claims;
 
 namespace CodeBook.API.App.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(Policy ="AdminOnly")]
     public class AdminController : ControllerBase
     {
         private readonly IModerationService _moderationService;
         private readonly IReportService _reportService;
 
+
+        private int GetCurrentUserById() { 
+          var userId = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
+            if (int.TryParse(userId, out int currentid))
+            {
+                return currentid;
+            }
+            throw new UnauthorizedAccessException();
+        }
         public AdminController(IModerationService moderationService, IReportService reportService)
         {
             _moderationService = moderationService;
@@ -24,9 +36,10 @@ namespace CodeBook.API.App.Controllers
         {
             try
             {
+                var removerId = GetCurrentUserById();
                 if (string.IsNullOrEmpty(dto.Reason))
                     return BadRequest("Reason is required");
-                _moderationService.RemovePost(id, dto);
+                _moderationService.RemovePost(id, dto,removerId);
                 return Ok("Post removed successfully");
             }
             catch (KeyNotFoundException ex)

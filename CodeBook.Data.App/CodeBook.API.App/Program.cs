@@ -57,7 +57,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateIssuer = false,
         ValidateAudience = false
     });
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options => { 
+ options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+
+});
 
 builder.Services.AddServices();
 
