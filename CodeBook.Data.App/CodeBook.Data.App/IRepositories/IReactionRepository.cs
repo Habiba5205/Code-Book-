@@ -12,6 +12,7 @@ namespace CodeBook.Data.App.IRepositories
         Reaction GetReaction(int postId, int userId);
         void Add(Reaction reaction);
         void Remove(Reaction reaction);
+        void Update(Reaction reaction);
         bool SaveChanges();
     }
 }

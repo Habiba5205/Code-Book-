@@ -8,6 +8,7 @@ namespace CodeBook.Business.App.Interfaces
     {
         ErrorResponse AddReaction(int userId,ReactionDto reavtionDto);
         ErrorResponse RemoveReaction(int postId, int userId);
+        ErrorResponse UpdateReaction(ReactionDto reactionDto, Reaction reaction);
 
     }
 }

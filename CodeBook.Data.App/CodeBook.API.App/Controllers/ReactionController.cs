@@ -1,6 +1,7 @@
 ﻿using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
 using CodeBook.Business.App.Methods;
+using CodeBook.Business.App.Middleware;
 using CodeBook.Business.App.Services;
 using CodeBook.Business.App.Validator;
 using CodeBook.Models.App;
@@ -16,42 +17,36 @@ namespace CodeBook.API.App.Controllers
     public class ReactionController : ControllerBase
     {
         private readonly IReactionService _reactionService;
+        private readonly CurrentUserInfo _currentUserInfo = new CurrentUserInfo();
 
         public ReactionController(IReactionService reactionService) 
         { 
             _reactionService = reactionService; 
         }
 
-        private int GetCurrentUserById()
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (int.TryParse(userId, out int currentid))
-            {
-                return currentid;
-            }
-            throw new UnauthorizedAccessException();
-        }
 
-        [HttpPost]
+        [HttpPost("addreaction")]
         [Authorize]
         public ActionResult AddReaction([FromBody] ReactionDto reactionDto)
         {
-            var currentId = GetCurrentUserById();
-            if(_reactionService.AddReaction(currentId,reactionDto).Success)
-                return Ok(new { message = "Reaction Added Successfully!" });
+            var currentId = _currentUserInfo.GetCurrentUserId();
+            ErrorResponse result = _reactionService.AddReaction(currentId, reactionDto);
+            if (result.Success)
+                return Ok(new { message = result.Message});
 
-            return BadRequest(new { message = "Couldn't Add Reaction!" });
+            return BadRequest(new { message = result.Message });
         }
 
-        [HttpDelete("{postId}")]
+        [HttpDelete("removereaction")]
         [Authorize]
         public ActionResult RemoveReaction(int postId)
         {
-            var currentId = GetCurrentUserById();
-            if (_reactionService.RemoveReaction(postId,currentId).Success)
-                return Ok(new { message = "Reaction Removed!" });
+            var currentId = _currentUserInfo.GetCurrentUserId();
+            ErrorResponse result = _reactionService.RemoveReaction(postId, currentId);
+            if (result.Success)
+                return Ok(new { message = result.Message });
 
-            return BadRequest(new { message = "Couldn't Remove Reaction!" });
+            return BadRequest(new { message = result.Message });
         }
     }
 }

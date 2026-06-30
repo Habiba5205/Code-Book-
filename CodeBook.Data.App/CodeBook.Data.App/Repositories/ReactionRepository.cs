@@ -18,10 +18,7 @@ namespace CodeBook.Data.App.Repositories
         }
         public Reaction GetReaction(int postId, int userId)
         {
-            Reaction reaction = _context.reactions.FirstOrDefault(r => r.PostId == postId && r.UserId == userId);
-            if (reaction == null)
-                throw new Exception("Reaction Not Found!!");
-            return reaction;
+            return _context.reactions.FirstOrDefault(r => r.PostId == postId && r.UserId == userId);
         }
 
         public void Add(Reaction reaction)
@@ -32,6 +29,11 @@ namespace CodeBook.Data.App.Repositories
         public void Remove(Reaction reaction)
         {
             _context.reactions.Remove(reaction);
+        }
+
+        public void Update(Reaction reaction)
+        {
+            _context.reactions.Update(reaction);
         }
         public bool SaveChanges()
         {

@@ -2,6 +2,7 @@
 using CodeBook.Models.App;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +39,17 @@ namespace CodeBook.Data.App.Repositories
             return _context.reports.FirstOrDefault(r => r.Id == reportId);
         }
 
+        public Report GetCommentReportbyReporter(int reporterId, int? CommentId)
+        {
+            if (CommentId == null) return null;
+            return _context.reports.FirstOrDefault(r => r.ReporterId == reporterId && r.CommentId == CommentId);
+        }
+
+        public Report GetPostReportbyReporter(int reporterId, int? postId)
+        {
+            if (postId == null) return null;
+            return _context.reports.FirstOrDefault(r => r.ReporterId == reporterId && r.PostId == postId);
+        }
         public bool SaveChanges()
         {
             return _context.SaveChanges() >= 0;

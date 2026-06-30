@@ -15,17 +15,9 @@ namespace CodeBook.API.App.Controllers
     {
 
         private readonly IuserService _userService;
+        private readonly CurrentUserInfo _currentUserInfo = new CurrentUserInfo();
         public UserController(IuserService userService) { _userService = userService; }
 
-        private int GetCurrentUserId()
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (int.TryParse(userId, out int currentid))
-            {
-                return currentid;
-            }
-            throw new UnauthorizedAccessException();
-        }
 
         [HttpGet("viewprofile")]
         [AllowAnonymous]
@@ -43,7 +35,7 @@ namespace CodeBook.API.App.Controllers
         [Authorize]
         public IActionResult GetMyProfile()
         {
-            int userId = GetCurrentUserId();
+            int userId = _currentUserInfo.GetCurrentUserId();
             UserProfileResponse userProfile = _userService.GetProfile(userId);
             if (userProfile == null)
             {
@@ -52,16 +44,12 @@ namespace CodeBook.API.App.Controllers
             return Ok(userProfile);
         }
 
-        [HttpDelete("deleteprofile")]
+        [HttpDelete("deletemyprofile")]
         [Authorize]
-        public IActionResult DeleteProfile(int userId)
+        public IActionResult DeleteProfile()
         {
-            var currentid = GetCurrentUserId();
-            if (userId != currentid)
-            {
-                return Forbid();
-            }
-            ErrorResponse result = _userService.DeleteAccount(userId);
+            var currentid = _currentUserInfo.GetCurrentUserId();
+            ErrorResponse result = _userService.DeleteAccount(currentid);
             if (result.Success)
             {
                 return Ok(new {message = result.Message});
@@ -69,11 +57,11 @@ namespace CodeBook.API.App.Controllers
             return BadRequest(new { message = result.Message });
         }
 
-        [HttpPatch("updateprofile")]
+        [HttpPatch("updatemyprofile")]
         [Authorize]
         public IActionResult UpdateProfile(UpdateProfileDto updateProfile)
         {
-            var currentid = GetCurrentUserId();
+            var currentid = _currentUserInfo.GetCurrentUserId();
             ErrorResponse result = _userService.UpdateProfile(currentid, updateProfile);
             if (result.Success)
             {
@@ -88,7 +76,7 @@ namespace CodeBook.API.App.Controllers
         [Authorize]
         public IActionResult Follow(int userid)
         {
-            var currentid = GetCurrentUserId();
+            var currentid = _currentUserInfo.GetCurrentUserId();
             if (currentid == userid)
             {
                 return BadRequest(new { message = "You cannot follow yourself!" });
@@ -107,7 +95,7 @@ namespace CodeBook.API.App.Controllers
         [Authorize]
         public IActionResult Unfollow(int userid)
         {
-            var currentid = GetCurrentUserId();
+            var currentid = _currentUserInfo.GetCurrentUserId();
             if (currentid == userid)
             {
                 return BadRequest(new { message = "You cannot unfollow yourself!" });

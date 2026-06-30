@@ -13,6 +13,8 @@ namespace CodeBook.Data.App.IRepositories
         void Add(Report report);
         void Update(Report report);
         Report GetReportbyId(int? reportId);
+        Report GetCommentReportbyReporter(int reporterId, int? CommentId);
+        Report GetPostReportbyReporter(int reporterId, int? postId);
         bool SaveChanges();
 
     }

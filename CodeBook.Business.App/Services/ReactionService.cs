@@ -23,7 +23,13 @@ namespace CodeBook.Business.App.Services
         }
         public ErrorResponse AddReaction(int userId,ReactionDto reactionDto)
         {
-            Reaction reaction = new Reaction();
+            Reaction reaction = _reactionRepository.GetReaction(reactionDto.PostId,userId);
+            if(reaction != null )
+            {
+                return UpdateReaction(reactionDto, reaction);
+            }
+
+            reaction = new Reaction();
             reaction.UserId = userId;
             reaction.PostId = reactionDto.PostId;
             reaction.Type = Enum.Parse<ReactionType>(reactionDto.ReactionType);
@@ -39,17 +45,31 @@ namespace CodeBook.Business.App.Services
                 IsSeen = false,
                 DateCreated = DateTime.UtcNow
             });
-            if( result) return new ErrorResponse { Success = true, Message = "Reacted" };
+            if(result) return new ErrorResponse { Success = true, Message = "Reacted" };
             else return new ErrorResponse { Success = false, Message = "Failed to react" };
         }
         public ErrorResponse RemoveReaction(int postId,int userId)
         {
             Reaction reaction = _reactionRepository.GetReaction(postId,userId);
+            if (reaction == null) return new ErrorResponse { Success = false, Message = "You didn't react to this post before!" };
             _reactionRepository.Remove(reaction);
            bool result = _reactionRepository.SaveChanges();
             if(!result) return new ErrorResponse { Success = false, Message = "Failed to remove reaction" };
             else return new ErrorResponse { Success = true, Message = "Reaction removed" };
 
+        }
+
+        public ErrorResponse UpdateReaction(ReactionDto reactionDto, Reaction reaction)
+        {
+            reaction.Type = Enum.Parse<ReactionType>(reactionDto.ReactionType);
+            reaction.DateCreated = DateTime.UtcNow;
+            _reactionRepository.Update(reaction);
+            bool result = _reactionRepository.SaveChanges();
+            if (result)
+            {
+                return new ErrorResponse { Success = true, Message = "Reaction Updated!" };
+            }
+            else return new ErrorResponse { Success = false, Message = "Couldn't Update" };
         }
     }
 }

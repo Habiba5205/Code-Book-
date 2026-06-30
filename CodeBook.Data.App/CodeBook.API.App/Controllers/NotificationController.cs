@@ -15,39 +15,33 @@ namespace CodeBook.API.App.Controllers
     public class NotificationController : ControllerBase
     {
         private readonly INotificationService _notificationService;
+        private readonly CurrentUserInfo _currentUserInfo = new CurrentUserInfo();
         public NotificationController(INotificationService notificationService)
         {
             _notificationService = notificationService;
         }
-        private int GetCurrentUserById()
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (int.TryParse(userId, out int currentid))
-            {
-                return currentid;
-            }
-            throw new UnauthorizedAccessException();
-        }
-        [HttpGet]
+
+        [HttpGet("getnotification")]
         [Authorize]
         public ActionResult GetNotification()
         {
-            var notification = _notificationService.GetUserNotification(GetCurrentUserById());
+            var notification = _notificationService.GetUserNotification(_currentUserInfo.GetCurrentUserId());
             return Ok(notification);
         }
 
-        [HttpPatch("{id}/read")]
+        [HttpPatch("readNotification")]
         [Authorize]
         public ActionResult MarkAsRead(int id)
         {
             _notificationService.MarkAsRead(id);
             return Ok(new { message = "Marked As Read!!" });
         }
-        [HttpGet("unread-count")]
+
+        [HttpGet("GetUnreadCount")]
         [Authorize]
         public ActionResult GetUnreadCount()
         {
-            var count = _notificationService.GetUnreadNotificationCount(GetCurrentUserById());
+            var count = _notificationService.GetUnreadNotificationCount(_currentUserInfo.GetCurrentUserId());
             return Ok(new {unreadCount = count});
         }
 

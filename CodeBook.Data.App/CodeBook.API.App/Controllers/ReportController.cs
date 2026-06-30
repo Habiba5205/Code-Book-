@@ -1,6 +1,7 @@
 ﻿using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
 using CodeBook.Business.App.Methods;
+using CodeBook.Business.App.Middleware;
 using CodeBook.Business.App.Services;
 using CodeBook.Business.App.Validator;
 using FluentValidation;
@@ -15,29 +16,48 @@ namespace CodeBook.API.App.Controllers
     public class ReportController : ControllerBase
     {
         private readonly IReportService _reportService;
-        public ReportController(IReportService reportService)
+        private readonly AbstractValidator<ReportRequest> _reportValidator;
+        private readonly CurrentUserInfo _currentUserInfo = new CurrentUserInfo();
+        public ReportController(IReportService reportService, AbstractValidator<ReportRequest> reportValidator)
         {
             _reportService = reportService;
+            _reportValidator = reportValidator;
         }
-        private int GetCurrentUserById()
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (int.TryParse(userId, out int currentid))
-            {
-                return currentid;
-            }
-            throw new UnauthorizedAccessException();
-        }
-        [HttpPost]
+
+        [HttpPost("submitreport")]
         [Authorize]
-        public ActionResult SubmitReport([FromBody] ReportRequest request)
+        public IActionResult SubmitReport([FromBody] ReportRequest request)
         {
-            var response = _reportService.SubmitReport(GetCurrentUserById(), request);
-            if(response != null && response.Success)
-                return Ok(new { message = "Report Submitted Successfully!" });
+            var validationResult = _reportValidator.Validate(request);
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
 
-            return BadRequest(new { message = "Couldn't Submit Report!" });
+            var result = _reportService.SubmitReport(_currentUserInfo.GetCurrentUserId(), request);
+            if(result != null && result.Success)
+                return Ok(new { message = result.Message });
 
+            return BadRequest(new { message = result.Message });
+
+        }
+
+        [HttpPatch("updatereport")]
+        [Authorize]
+        public IActionResult UpdateReport([FromBody] ReportRequest request)
+        {
+            var validationResult = _reportValidator.Validate(request);
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
+
+            ErrorResponse result = _reportService.UpdateReport(_currentUserInfo.GetCurrentUserId(), request);
+            if(result != null && result.Success)
+            {
+                return Ok(new { message = result.Message });
+            }
+            return BadRequest(new { message = result.Message });
         }
     }
 }

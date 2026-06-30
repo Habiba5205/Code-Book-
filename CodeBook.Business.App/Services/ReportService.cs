@@ -35,23 +35,41 @@ namespace CodeBook.Business.App.Services
            else return new ErrorResponse { Success = false, Message = "Couldn't Submit Report!" };
         }
 
+        public ErrorResponse UpdateReport (int repoterId, ReportRequest request)
+        {
+            Report report = null;
+
+            if(request.CommentId != null)
+            {
+                report = _reportRepository.GetCommentReportbyReporter(repoterId,request.CommentId);
+                if (report == null) return new ErrorResponse { Success = false, Message = "You didn't report this comment!" };
+            }
+            else if (request.PostId != null)
+            {
+                report = _reportRepository.GetPostReportbyReporter(repoterId, request.PostId);
+                if (report == null) return new ErrorResponse { Success = false, Message = "You didn't report this Post!" };
+            }
+            //if not PostId nor CommentId present so no report exists.
+            if (report == null) return new ErrorResponse { Success = false, Message = "No Report Found" };
+
+            //if there is a report so
+            report.DateUpdated = DateTime.UtcNow;
+            report.Status = ReportStatus.Pending;
+            report.Reason = request.Reason;
+            report.Description = request.Description;
+            _reportRepository.Update(report);
+            if (_reportRepository.SaveChanges())
+            {
+                return new ErrorResponse { Success = true, Message = "Report Updated" };
+            }
+            return new ErrorResponse { Success = false, Message = "Couldn't Update" };
+        }
+
+
         public List<ReportDTO> GetPendingReports()
         {
             var report = _reportRepository.GetPendingReports();
             return mapper.Map<List<ReportDTO>>(report);
-            /* context.reports
-                 .Where(r => r.Status == ReportStatus.Pending)
-                 .Select(r => new ReportDTO
-                 {
-                     Id = r.Id,
-                     ReporterId = r.ReporterId,
-                     PostId = r.PostId,
-                     CommentId = r.CommentId,
-                     Reason = r.Reason,
-                     Description = r.Description,
-                     Status = r.Status.ToString(),
-                     DateCreated = r.DateCreated
-                 }).ToList();*/
         }
 
         public void UpdateReportStatus(int reportId, UpdateReportStatusDto dto)

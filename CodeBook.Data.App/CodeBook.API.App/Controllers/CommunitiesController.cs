@@ -1,4 +1,5 @@
-﻿using CodeBook.Business.App.DTOs;
+﻿using CodeBook.API.App.Controllers;
+using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
 using CodeBook.Models.App;
 using Microsoft.AspNetCore.Authorization;
@@ -14,16 +15,8 @@ namespace CodeBook.Business.App.Controllers
     public class CommunitiesController : ControllerBase
     {
         private readonly ICommunityService _communityService;
+        private readonly CurrentUserInfo _currentUserInfo = new CurrentUserInfo();
 
-        private int GetCurrentUserById()
-        {
-            var userId = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
-            if (int.TryParse(userId, out int currentid))
-            {
-                return currentid;
-            }
-            throw new UnauthorizedAccessException();
-        }
 
         public CommunitiesController(ICommunityService communityService)
         {
@@ -33,7 +26,7 @@ namespace CodeBook.Business.App.Controllers
         public IActionResult CreateCommunity([FromBody] CreateCommunityDto dto) {
             try
             {
-                var userId = GetCurrentUserById();
+                var userId = _currentUserInfo.GetCurrentUserId();
                 if (string.IsNullOrEmpty(dto.Name))
                     return BadRequest("Community name cannot be empty.");
 
@@ -91,7 +84,7 @@ namespace CodeBook.Business.App.Controllers
                 var member = new CommunityMember
                 {
                     CommunityId = id,
-                    UserId = GetCurrentUserById(),
+                    UserId = _currentUserInfo.GetCurrentUserId(),
                     Role = dto.Role,
                     JoinedAt = DateTime.UtcNow
                 };
@@ -154,7 +147,7 @@ namespace CodeBook.Business.App.Controllers
         {
             try
             {
-                var userId = GetCurrentUserById();
+                var userId = _currentUserInfo.GetCurrentUserId();
                 _communityService.UnjoinCommunity(id, userId);
                 return Ok("Unjoined Community Successfully");
             }

@@ -19,6 +19,7 @@ namespace CodeBook.API.App.Controllers
         private readonly AbstractValidator<LoginDto> _loginValidator;
         private readonly AbstractValidator<RegisterDto> _registerValidator;
         private readonly AbstractValidator<ResetPasswordDto> _resetPasswordValidator;
+        private readonly CurrentUserInfo _currentUserInfo = new CurrentUserInfo();
         public AuthController(IAuthService authService, AbstractValidator<LoginDto> loginvalidator, AbstractValidator<RegisterDto> registervalidator, AbstractValidator<ResetPasswordDto> resetpasswordvalidator)
         {
             _authService = authService;
@@ -27,15 +28,6 @@ namespace CodeBook.API.App.Controllers
             _resetPasswordValidator = resetpasswordvalidator;
         }
 
-        private int GetCurrentUserId()
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (int.TryParse(userId, out int currentid))
-            {
-                return currentid;
-            }
-            throw new UnauthorizedAccessException();
-        }
 
         [HttpPost("login")]
         public IActionResult Login(LoginDto logininfo)
@@ -83,7 +75,7 @@ namespace CodeBook.API.App.Controllers
         [Authorize]
         public IActionResult ResetPassword(ResetPasswordDto resetPassword)
         {
-            var currentId = GetCurrentUserId();
+            var currentId = _currentUserInfo.GetCurrentUserId();
             resetPassword.userId = currentId;
 
             bool verifyold = _authService.VerifyPassword(resetPassword.password,resetPassword.userId);

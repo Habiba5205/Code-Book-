@@ -15,6 +15,7 @@ namespace CodeBook.API.App.Controllers
         private readonly IPostService _postService;
         private readonly ISearchService _searchService;
         private readonly ICommentService _commentService;
+        private readonly CurrentUserInfo _currentUserInfo = new CurrentUserInfo();
 
         public PostController(IPostService postService, ISearchService searchService, ICommentService commentService)
         {
@@ -22,16 +23,6 @@ namespace CodeBook.API.App.Controllers
             _searchService = searchService;
             _commentService = commentService;
         }
-        private int GetCurrentUserId()
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (int.TryParse(userId, out int currentid))
-            {
-                return currentid;
-            }
-            throw new UnauthorizedAccessException();
-        }
-
         [HttpGet("feed")]
         [AllowAnonymous]
         public IActionResult GetFeed([FromQuery] int page = 1)
@@ -61,7 +52,7 @@ namespace CodeBook.API.App.Controllers
                 return BadRequest(new { message = "Invalid request" });
             }
             request.TagIds ??= new List<int>();
-            var userId= GetCurrentUserId();
+            var userId= _currentUserInfo.GetCurrentUserId();
             _postService.CreatePost(userId,request);
             return Ok(new { message = "Post created successfully" });
         }
@@ -74,7 +65,7 @@ namespace CodeBook.API.App.Controllers
             {
                 return BadRequest(new { message = "Invalid request" });
             }
-            var userId = GetCurrentUserId();
+            var userId = _currentUserInfo.GetCurrentUserId() ;
             _postService.UpdatePost(id, request,userId);
             return Ok(new { message = "Post updated successfully" });
         }
@@ -83,7 +74,7 @@ namespace CodeBook.API.App.Controllers
         [Authorize]
         public IActionResult DeletePost(int id)
         {
-            var userId = GetCurrentUserId();
+            var userId = _currentUserInfo.GetCurrentUserId();
             _postService.DeletePost(id,userId);
             return Ok(new { message = "Post deleted successfully" });
         }
@@ -92,7 +83,7 @@ namespace CodeBook.API.App.Controllers
         [Authorize]
         public IActionResult SavePost(int id)
         {
-            _postService.SavePost(GetCurrentUserId(), id);
+            _postService.SavePost(_currentUserInfo.GetCurrentUserId(), id);
             return Ok(new { message = "Post saved successfully" });
         }
 
@@ -139,7 +130,7 @@ namespace CodeBook.API.App.Controllers
             {
                 return BadRequest(new {message = "Invalid request" });
             }
-            var userId = GetCurrentUserId();
+            var userId = _currentUserInfo.GetCurrentUserId();
             _commentService.AddComment(userId, id, request);
             return Ok(new { message = "Comment added successfully" });
         }
