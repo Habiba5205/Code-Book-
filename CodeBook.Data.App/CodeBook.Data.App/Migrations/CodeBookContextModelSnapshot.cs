@@ -42,6 +42,9 @@ namespace CodeBook.Data.App.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("LikeCount")
                         .HasColumnType("int");
 
@@ -50,6 +53,9 @@ namespace CodeBook.Data.App.Migrations
 
                     b.Property<int?>("SelfCommentId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("isRemoved")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -60,6 +66,46 @@ namespace CodeBook.Data.App.Migrations
                     b.HasIndex("SelfCommentId");
 
                     b.ToTable("comments");
+                });
+
+            modelBuilder.Entity("CodeBook.Models.App.CommentRemoval", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Removal_ID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CommentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("Date_Removed");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<int>("RemoverId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ReportId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommentId")
+                        .IsUnique();
+
+                    b.HasIndex("ReportId");
+
+                    b.HasIndex("RemoverId", "CommentId")
+                        .IsUnique();
+
+                    b.ToTable("Comment_Removal", (string)null);
                 });
 
             modelBuilder.Entity("CodeBook.Models.App.Community", b =>
@@ -400,6 +446,8 @@ namespace CodeBook.Data.App.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CommentId");
+
                     b.HasIndex("PostId");
 
                     b.HasIndex("ReporterId");
@@ -431,7 +479,7 @@ namespace CodeBook.Data.App.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags", (string)null);
+                    b.ToTable("tags");
                 });
 
             modelBuilder.Entity("CodeBook.Models.App.User", b =>
@@ -508,6 +556,32 @@ namespace CodeBook.Data.App.Migrations
                     b.Navigation("Post");
 
                     b.Navigation("selfComment");
+                });
+
+            modelBuilder.Entity("CodeBook.Models.App.CommentRemoval", b =>
+                {
+                    b.HasOne("CodeBook.Models.App.Comment", "Comment")
+                        .WithOne("Removal")
+                        .HasForeignKey("CodeBook.Models.App.CommentRemoval", "CommentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("CodeBook.Models.App.User", "Remover")
+                        .WithMany("CommentRemovals")
+                        .HasForeignKey("RemoverId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("CodeBook.Models.App.Report", "Report")
+                        .WithMany()
+                        .HasForeignKey("ReportId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Comment");
+
+                    b.Navigation("Remover");
+
+                    b.Navigation("Report");
                 });
 
             modelBuilder.Entity("CodeBook.Models.App.Community", b =>
@@ -679,6 +753,10 @@ namespace CodeBook.Data.App.Migrations
 
             modelBuilder.Entity("CodeBook.Models.App.Report", b =>
                 {
+                    b.HasOne("CodeBook.Models.App.Comment", "Comment")
+                        .WithMany()
+                        .HasForeignKey("CommentId");
+
                     b.HasOne("CodeBook.Models.App.Post", "Post")
                         .WithMany("Reports")
                         .HasForeignKey("PostId")
@@ -690,6 +768,8 @@ namespace CodeBook.Data.App.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Comment");
+
                     b.Navigation("Post");
 
                     b.Navigation("Reporter");
@@ -698,6 +778,9 @@ namespace CodeBook.Data.App.Migrations
             modelBuilder.Entity("CodeBook.Models.App.Comment", b =>
                 {
                     b.Navigation("Reactions");
+
+                    b.Navigation("Removal")
+                        .IsRequired();
 
                     b.Navigation("Replies");
                 });
@@ -732,6 +815,8 @@ namespace CodeBook.Data.App.Migrations
 
             modelBuilder.Entity("CodeBook.Models.App.User", b =>
                 {
+                    b.Navigation("CommentRemovals");
+
                     b.Navigation("Comments");
 
                     b.Navigation("Communities");

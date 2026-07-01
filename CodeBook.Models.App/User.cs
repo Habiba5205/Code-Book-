@@ -21,5 +21,6 @@
         public ICollection<Follow> Following { get; set; } = new List<Follow>();
         public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
         public ICollection<Report> Reports { get; set; } = new List<Report>();
+        public ICollection<CommentRemoval> CommentRemovals { get; set; } = new List<CommentRemoval>();
     }
 }

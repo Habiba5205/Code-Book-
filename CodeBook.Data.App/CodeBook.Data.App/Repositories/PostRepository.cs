@@ -51,7 +51,18 @@ namespace CodeBook.Data.App.Repositories
         {
             _context.postsRemovals.Add(postRemoval);
         }
-
+        public void AddReaction(Reaction reaction)
+        {
+            //_context.reactions.Add(reaction);
+        }
+        public void AddComment(int postId)
+        {
+            var post = GetPostById(postId);
+            if (post != null)
+            {
+                post.CommentCount += 1;
+            }
+        }
         public List<PostTag> GetPostTags(int postId)
         {
             return _context.postTags.Where(p => p.PostId == postId).ToList();

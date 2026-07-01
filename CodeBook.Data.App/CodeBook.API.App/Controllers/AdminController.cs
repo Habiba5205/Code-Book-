@@ -33,15 +33,15 @@ namespace CodeBook.API.App.Controllers
             _reportService = reportService;
         }
 
-        [HttpDelete("posts/{id}")]
-        public IActionResult RemovePost(int id, [FromBody] RemovePostsDto dto)
+        [HttpDelete("posts/{postId}")]
+        public IActionResult RemovePost(int postId, [FromBody] RemovePostsDto dto)
         {
             try
             {
                 var removerId = GetCurrentUserById();
                 if (string.IsNullOrEmpty(dto.Reason))
                     return BadRequest("Reason is required");
-                _moderationService.RemovePost(id, dto,removerId);
+                _moderationService.RemoveComment(postId, dto,removerId);
                 return Ok("Post removed successfully");
             }
             catch (KeyNotFoundException ex)
@@ -51,6 +51,30 @@ namespace CodeBook.API.App.Controllers
             catch (ArgumentException ex) {               
                 return BadRequest(ex.Message);
              }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+        [HttpDelete("comments/{commentId}")]
+        public IActionResult RemoveComment(int commentId, [FromBody] RemovePostsDto dto)
+        {
+            try
+            {
+                var removerId = GetCurrentUserById();
+                if (string.IsNullOrEmpty(dto.Reason))
+                    return BadRequest("Reason is required");
+                _moderationService.RemoveComment(commentId, dto, removerId);
+                return Ok("Comment removed successfully");
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");

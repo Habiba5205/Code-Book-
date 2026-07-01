@@ -13,6 +13,7 @@ namespace CodeBook.Models.App
 
         public User Reporter { get; set; } = null!;
         public Post? Post { get; set; }
+        public Comment? Comment { get; set; }
 
-        }
+    }
 }

@@ -73,19 +73,18 @@ namespace CodeBook.Business.App.Services
         public ErrorResponse UpdatePost(int postId, UpdatePostRequest request,int userId) 
         {
             Post post = _postRepository.GetPostById(postId);
-            if (post != null)
+            if (post == null)
             {
                 return new ErrorResponse { Success = false, Message = "Post not found" };
             }    
             if (post.AuthorId != userId)
                 return new ErrorResponse { Success = false, Message = "You can only edit your own posts" };
 
-            post.Title = request.Title;
-            post.Body = request.Body;
+            post.Title = request.Title == "string" ? post.Title : request.Title;
+            post.Body = request.Body == "string" ? post.Body : request.Body;
             post.IsPublic = request.IsPublic;
-            post.CommunityId = request.CommunityId;
-            post.CodeSnippet = request.CodeSnippet;
-            post.Language = request.Language;
+            post.CodeSnippet = request.CodeSnippet == "string" ? post.CodeSnippet : request.CodeSnippet;
+            post.Language = request.Language == "string" ? post.Language : request.Language;
             post.DateUpdated = DateTime.UtcNow;
             if (_postRepository.SaveChanges())
                 return new ErrorResponse { Success = true, Message = "Post updated successfully" };

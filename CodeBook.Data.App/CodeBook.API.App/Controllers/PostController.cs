@@ -37,16 +37,16 @@ namespace CodeBook.API.App.Controllers
             return Ok(feed);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{postId}")]
         [AllowAnonymous]
-        public IActionResult GetPost(int id)
+        public IActionResult GetPost(int postId)
         {
             int? userId = null;
             if (User.Identity.IsAuthenticated)
             {
                 userId = _currentUserInfo.GetCurrentUserId();
             }
-            var post = _postService.GetPost(id, userId);
+            var post = _postService.GetPost(postId, userId);
             if (post == null)
             {
                 return NotFound(new { message = "Post not found or access denied" });
@@ -76,16 +76,16 @@ namespace CodeBook.API.App.Controllers
             return BadRequest(new { message = result.Message });
         }
 
-        [HttpPut("{id}/update")]
+        [HttpPut("{postId}/update")]
         [Authorize]
-        public IActionResult UpdatePost(int id, [FromBody] UpdatePostRequest request)
+        public IActionResult UpdatePost(int postId, [FromBody] UpdatePostRequest request)
         {
             if (request == null)
             {
                 return BadRequest(new { message = "Invalid request" });
             }
             var userId = _currentUserInfo.GetCurrentUserId() ;
-            var result = _postService.UpdatePost(id, request,userId);
+            var result = _postService.UpdatePost(postId, request, userId);
             if (result.Success)
             {
                 return Ok(new { message = result.Message });
@@ -93,12 +93,12 @@ namespace CodeBook.API.App.Controllers
             return BadRequest(new { message = result.Message });
         }
 
-        [HttpDelete("{id}/deletePost")]
+        [HttpDelete("{postId}/deletePost")]
         [Authorize]
-        public IActionResult DeletePost(int id)
+        public IActionResult DeletePost(int postId)
         {
             var userId = _currentUserInfo.GetCurrentUserId();
-            var result = _postService.DeletePost(id, userId);
+            var result = _postService.DeletePost(postId, userId);
             if (result.Success)
             {
                 return Ok(new { message = result.Message });
@@ -106,12 +106,12 @@ namespace CodeBook.API.App.Controllers
             return BadRequest(new { message = result.Message });
         }
 
-        [HttpPost("{id}/save")]
+        [HttpPost("{postId}/save")]
         [Authorize]
-        public IActionResult SavePost(int id)
+        public IActionResult SavePost(int postId)
         {
             var userId = _currentUserInfo.GetCurrentUserId();
-            var result = _postService.SavePost(userId, id);
+            var result = _postService.SavePost(userId, postId);
             if (result.Success)
             {
                 return Ok(new { message = result.Message });
@@ -119,11 +119,11 @@ namespace CodeBook.API.App.Controllers
             return BadRequest(new { message = result.Message });
         }
 
-        [HttpGet("{id}/tags")]
+        [HttpGet("{postId}/tags")]
         [AllowAnonymous]
-        public IActionResult GetPostTag(int id)
+        public IActionResult GetPostTag(int postId)
         {
-            var tags = _postService.GetPostTags(id);
+            var tags = _postService.GetPostTags(postId);
             if (tags == null || !tags.Any())
             {
                 return NotFound(new { message = "No tags found for this post" });

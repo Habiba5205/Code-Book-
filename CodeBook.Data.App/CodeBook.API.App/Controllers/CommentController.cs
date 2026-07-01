@@ -40,41 +40,41 @@ namespace CodeBook.API.App.Controllers
             return Ok(comments);
         }
 
-        [HttpPost("{id}/comments")]
+        [HttpPost("{postId}/comments")]
         [Authorize]
-        public IActionResult AddComment(int id, [FromBody] AddCommentRequest request)
+        public IActionResult AddComment(int postId, [FromBody] AddCommentRequest request)
         {
             if (request == null)
             {
                 return BadRequest(new { message = "Invalid request" });
             }
             var userId = _currentUserInfo.GetCurrentUserId();
-            var result = _commentService.AddComment(userId, id, request);
+            var result = _commentService.AddComment(userId, postId, request);
             if (result.Success)
                 return Ok(new { message = result.Message });
             return BadRequest(new { message = result.Message });
         }
 
-        [HttpDelete("{id}/deleteComment")]
+        [HttpDelete("{commmentId}/deleteComment")]
         [Authorize]
-        public IActionResult DeleteComment(int id)
+        public IActionResult DeleteComment(int commentId)
         {
             var userId = _currentUserInfo.GetCurrentUserId();
-            var result = _commentService.DeleteComment(id, userId);
+            var result = _commentService.DeleteComment(commentId, userId);
             if (result.Success)
                 return Ok(new { message = result.Message });
             return BadRequest(new { message = result.Message });
         }
 
-        [HttpPut("{id}/editComment")]
+        [HttpPut("{commentId}/editComment")]
         [Authorize]
-        public IActionResult EditComment(int id, [FromBody] EditCommentRequest request)
+        public IActionResult EditComment(int commentId, [FromBody] EditCommentRequest request)
         {
             if (request == null)
                 return BadRequest(new { message = "Invalid request" });
 
             var userId = _currentUserInfo.GetCurrentUserId();
-            var result = _commentService.EditComment(id, request.Body, userId);
+            var result = _commentService.EditComment(commentId, request.Body, userId);
             if (result.Success)
                 return Ok(new { message = result.Message });
             return BadRequest(new { message = result.Message });

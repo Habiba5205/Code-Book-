@@ -1,4 +1,5 @@
-﻿using CodeBook.Models.App;
+﻿
+using CodeBook.Models.App;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,8 @@ namespace CodeBook.Data.App.IRepositories
         void Update(Post post);
         void Delete(Post post);
         IQueryable<Post> GetAllUnremoved();
-
+        void AddReaction(Reaction reaction);
+        void AddComment(int postId);
         List<Post> Getfeed();
         void SavePost(PostSaved saved);
         void AddRemovalRecord(PostRemoval postRemoval);
@@ -24,8 +26,7 @@ namespace CodeBook.Data.App.IRepositories
         PostTag GetPostTagbyId(int postId, int tagId);
         bool IsPostSavedByUser(int userId, int postId);
         bool SaveChanges();
-
-
+       
     }
 
 }

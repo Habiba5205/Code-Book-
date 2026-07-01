@@ -42,7 +42,10 @@ namespace CodeBook.Data.App.Repositories
         {
             return _context.SaveChanges() >= 0;
         }
-
+        public void AddRemovalRecord(CommentRemoval removal)
+        {
+            _context.commentsRemovals.Add(removal);
+        }
 
     }
 }
