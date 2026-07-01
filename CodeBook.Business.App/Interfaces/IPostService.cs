@@ -1,20 +1,21 @@
 ﻿using CodeBook.Business.App.DTOs;
 using CodeBook.Models.App;
+using CodeBook.Business.App.Middleware;
 using System;
 namespace CodeBook.Business.App.Interfaces
 {
     public interface IPostService
     {
-        void CreatePost(int userId,CreatePostRequest request);
-        void UpdatePost(int postId, UpdatePostRequest request,int userId);
-        void DeletePost(int postId, int userId);
-        void PublishPost(int postId);
-        List<PostResponse> GetFeed(int postId);
-        void SavePost(int userid, int postId);
+        ErrorResponse CreatePost(int userId,CreatePostRequest request);
+        ErrorResponse UpdatePost(int postId, UpdatePostRequest request,int userId);
+        ErrorResponse DeletePost(int postId, int userId);
+        ErrorResponse PublishPost(int postId);
+        List<PostResponse> GetFeed(int page,int? userId = null);
+        ErrorResponse SavePost(int userid, int postId);
         List<PostTagDto> GetPostTags(int postId);
         void AddTag(int postId, int tagId);
         void RemoveTag(int postId, int tagId);
-        Post GetPost(int postId);
+        PostResponse GetPost(int postId, int? userId = null);
         int GetPostAuthorId(int postId);
 
 

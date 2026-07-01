@@ -28,7 +28,12 @@ namespace CodeBook.API.App.Controllers
         [AllowAnonymous]
         public IActionResult GetFeed([FromQuery] int page = 1)
         {
-            var feed = _postService.GetFeed(page);
+            int? userId = null;
+            if (User.Identity.IsAuthenticated)
+            { 
+                userId = _currentUserInfo.GetCurrentUserId();
+            }
+            var feed = _postService.GetFeed(page, userId);
             return Ok(feed);
         }
 
@@ -36,10 +41,15 @@ namespace CodeBook.API.App.Controllers
         [AllowAnonymous]
         public IActionResult GetPost(int id)
         {
-            var post = _postService.GetPost(id);
+            int? userId = null;
+            if (User.Identity.IsAuthenticated)
+            {
+                userId = _currentUserInfo.GetCurrentUserId();
+            }
+            var post = _postService.GetPost(id, userId);
             if (post == null)
             {
-                return NotFound(new { message = "Post not found" });
+                return NotFound(new { message = "Post not found or access denied" });
             }
             return Ok(post);
         }
@@ -54,8 +64,12 @@ namespace CodeBook.API.App.Controllers
             }
             request.TagIds ??= new List<int>();
             var userId= _currentUserInfo.GetCurrentUserId();
-            _postService.CreatePost(userId,request);
-            return Ok(new { message = "Post created successfully" });
+            var result = _postService.CreatePost(userId,request);
+            if (result.Success)
+            {
+                return Ok(new { message = result.Message });
+            }
+            return BadRequest(new { message = result.Message });
         }
 
         [HttpPut("{id}/update")]
@@ -67,8 +81,12 @@ namespace CodeBook.API.App.Controllers
                 return BadRequest(new { message = "Invalid request" });
             }
             var userId = _currentUserInfo.GetCurrentUserId() ;
-            _postService.UpdatePost(id, request,userId);
-            return Ok(new { message = "Post updated successfully" });
+            var result = _postService.UpdatePost(id, request,userId);
+            if (result.Success)
+            {
+                return Ok(new { message = result.Message });
+            }
+            return BadRequest(new { message = result.Message });
         }
 
         [HttpDelete("{id}/deletePost")]
@@ -76,16 +94,25 @@ namespace CodeBook.API.App.Controllers
         public IActionResult DeletePost(int id)
         {
             var userId = _currentUserInfo.GetCurrentUserId();
-            _postService.DeletePost(id,userId);
-            return Ok(new { message = "Post deleted successfully" });
+            var result = _postService.DeletePost(id, userId);
+            if (result.Success)
+            {
+                return Ok(new { message = result.Message });
+            }
+            return BadRequest(new { message = result.Message });
         }
 
         [HttpPost("{id}/save")]
         [Authorize]
         public IActionResult SavePost(int id)
         {
-            _postService.SavePost(_currentUserInfo.GetCurrentUserId(), id);
-            return Ok(new { message = "Post saved successfully" });
+            var userId = _currentUserInfo.GetCurrentUserId();
+            var result = _postService.SavePost(userId, id);
+            if (result.Success)
+            {
+                return Ok(new { message = result.Message });
+            }
+            return BadRequest(new { message = result.Message });
         }
 
         [HttpGet("{id}/tags")]

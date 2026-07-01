@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
+using CodeBook.Business.App.Middleware;
 using CodeBook.Data.App;
 using CodeBook.Data.App.IRepositories;
 using CodeBook.Models.App;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration.UserSecrets;
 using System;
 
 namespace CodeBook.Business.App.Services
@@ -22,8 +24,16 @@ namespace CodeBook.Business.App.Services
             this.mapper = mapper;
             _context = context;
         }
-        public void CreatePost(int userId,CreatePostRequest request) 
+        public ErrorResponse CreatePost(int userId,CreatePostRequest request) 
         {
+            if(request.CommunityId != 0)
+            {
+                bool isMember = _context.communityMembers.Any(m => m.CommunityId == request.CommunityId && m.UserId == userId);
+                if (!isMember)
+                {
+                    return new ErrorResponse { Success = false, Message = "You are not a member of this community" };
+                }
+            }
             Post post = new Post
             {
                 AuthorId = userId,
@@ -32,7 +42,9 @@ namespace CodeBook.Business.App.Services
                 IsPublic = request.IsPublic,
                 CommunityId = request.CommunityId,
                 CodeSnippet = request.CodeSnippet,
-                Language = request.Language
+                Language = request.Language,
+                DateCreated = DateTime.UtcNow,
+                DateUpdated = DateTime.UtcNow
             };
 
             _postRepository.Add(post);
@@ -56,12 +68,17 @@ namespace CodeBook.Business.App.Services
                 }
                 _postRepository.SaveChanges();
             }
+            return new ErrorResponse { Success = true, Message = "Post created successfully" };
         }
-        public void UpdatePost(int postId, UpdatePostRequest request,int userId) 
+        public ErrorResponse UpdatePost(int postId, UpdatePostRequest request,int userId) 
         {
             Post post = _postRepository.GetPostById(postId);
+            if (post != null)
+            {
+                return new ErrorResponse { Success = false, Message = "Post not found" };
+            }    
             if (post.AuthorId != userId)
-                throw new UnauthorizedAccessException();
+                return new ErrorResponse { Success = false, Message = "You can only edit your own posts" };
 
             post.Title = request.Title;
             post.Body = request.Body;
@@ -70,42 +87,81 @@ namespace CodeBook.Business.App.Services
             post.CodeSnippet = request.CodeSnippet;
             post.Language = request.Language;
             post.DateUpdated = DateTime.UtcNow;
-            _postRepository.SaveChanges();
+            if (_postRepository.SaveChanges())
+                return new ErrorResponse { Success = true, Message = "Post updated successfully" };
+
+            return new ErrorResponse { Success = false, Message = "Could not update post" };
 
         }
-        public void DeletePost(int postId,int userId) 
+        public ErrorResponse DeletePost(int postId,int userId) 
         {
             Post post = _postRepository.GetPostById(postId);
+            if(post == null)
+            {
+                return new ErrorResponse { Success = false, Message = "Post not found" };
+            }
             if (post.AuthorId != userId)
-                throw new UnauthorizedAccessException();
+                return new ErrorResponse { Success = false, Message = "You can only delete your own posts" };
 
             _postRepository.Delete(post);
-            _postRepository.SaveChanges();
+            if (_postRepository.SaveChanges())
+                return new ErrorResponse { Success = true, Message = "Post deleted successfully" };
+
+            return new ErrorResponse { Success = false, Message = "Could not delete post" };
         }
-        public void PublishPost(int postId) 
+        public ErrorResponse PublishPost(int postId) 
         {
             Post post = _postRepository.GetPostById(postId);
 
             post.IsPublic = true;
-            _postRepository.SaveChanges();
+            if (_postRepository.SaveChanges())
+                return new ErrorResponse { Success = true, Message = "Post published successfully" };
+
+            return new ErrorResponse { Success = false, Message = "Could not publish post" };
 
         }
 
-        public List<PostResponse> GetFeed(int postId) 
+        public List<PostResponse> GetFeed(int page, int? userId = null) 
         {
-
-            var feed = _postRepository.Getfeed();
+            int pageSize = 10;
+            var feed = _postRepository.GetAllUnremoved()
+                .Where(p => p.IsPublic == true ||
+                (userId != null && p.CommunityId != null && p.Community != null && p.Community.Members.Any(m => m.UserId == userId)))
+                .OrderByDescending(p => p.DateCreated)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
             return mapper.Map<List<PostResponse>>(feed);
 
         }
    
-         public void SavePost(int userId, int postId) 
+         public ErrorResponse SavePost(int userId, int postId) 
         {
-            PostSaved saved = new PostSaved();
-            saved.UserId = userId;
-            saved.PostId = postId;
+            var post = _postRepository.GetPostById(postId);
+            if(post == null)
+            {
+                return new ErrorResponse { Success = false, Message = "Post not found" };
+            }
+            if(post.AuthorId == userId)
+            {
+                return new ErrorResponse { Success = false, Message = "You cannot save your own post" };
+            }
+            bool alreadySaved = _postRepository.IsPostSavedByUser(userId, postId);
+            if (alreadySaved)
+            {
+                return new ErrorResponse { Success = false, Message = "Post already saved" };
+            }
+
+            PostSaved saved = new PostSaved
+            {
+                UserId = userId,
+                PostId = postId
+            };
             _postRepository.SavePost(saved);
-            _postRepository.SaveChanges();
+            if (_postRepository.SaveChanges())
+                return new ErrorResponse { Success = true, Message = "Post saved successfully" };
+
+            return new ErrorResponse { Success = false, Message = "Could not save post" };
         }
         public List<PostTagDto> GetPostTags(int postId)
         {
@@ -129,9 +185,27 @@ namespace CodeBook.Business.App.Services
             _postRepository.RemoveTag(postTag);
             _postRepository.SaveChanges();
         }
-        public Post GetPost(int postId) { 
-                return  _postRepository.GetPostById(postId);
+        public PostResponse GetPost(int postId, int? userId = null)
+        {
+            var post = _postRepository.GetPostById(postId);
+            if (post == null || post.IsRemoved)
+            {
+                return null;
+            }
+            if(post.CommunityId != null && !post.IsPublic)
+            {
+                if(userId == null)
+                    return null;
+
+                bool isMember = _context.communityMembers.Any(m => m.CommunityId == post.CommunityId && m.UserId == userId);
+                if (!isMember)
+                {
+                    return null;
+                }   
+            }
+            return mapper.Map<PostResponse>(post);
         }
+        
         public int GetPostAuthorId(int postId)
         {
             var post = _postRepository.GetPostById(postId);

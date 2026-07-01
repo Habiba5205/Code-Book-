@@ -22,6 +22,7 @@ namespace CodeBook.Data.App.IRepositories
         void AddTag(PostTag tag);
         void RemoveTag(PostTag tag);
         PostTag GetPostTagbyId(int postId, int tagId);
+        bool IsPostSavedByUser(int userId, int postId);
         bool SaveChanges();
 
 
