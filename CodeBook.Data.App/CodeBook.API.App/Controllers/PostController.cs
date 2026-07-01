@@ -63,8 +63,12 @@ namespace CodeBook.API.App.Controllers
                 return BadRequest(new { message = "Invalid request" });
             }
             request.TagIds ??= new List<int>();
-            var userId= _currentUserInfo.GetCurrentUserId();
-            var result = _postService.CreatePost(userId,request);
+            var userId = _currentUserInfo.GetCurrentUserId();
+
+            var result = request.CommunityId == 0
+                ? _postService.CreatePost(userId, request, null)                    
+                : _postService.CreatePost(userId, request, request.CommunityId);
+
             if (result.Success)
             {
                 return Ok(new { message = result.Message });

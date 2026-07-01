@@ -24,9 +24,9 @@ namespace CodeBook.Business.App.Services
             this.mapper = mapper;
             _context = context;
         }
-        public ErrorResponse CreatePost(int userId,CreatePostRequest request) 
+        public ErrorResponse CreatePost(int userId,CreatePostRequest request, int? communityId) 
         {
-            if(request.CommunityId != 0)
+            if(communityId != null)
             {
                 bool isMember = _context.communityMembers.Any(m => m.CommunityId == request.CommunityId && m.UserId == userId);
                 if (!isMember)
@@ -40,7 +40,7 @@ namespace CodeBook.Business.App.Services
                 Title = request.Title,
                 Body = request.Body,
                 IsPublic = request.IsPublic,
-                CommunityId = request.CommunityId,
+                CommunityId = communityId,
                 CodeSnippet = request.CodeSnippet,
                 Language = request.Language,
                 DateCreated = DateTime.UtcNow,

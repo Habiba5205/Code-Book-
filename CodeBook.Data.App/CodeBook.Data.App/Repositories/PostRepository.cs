@@ -83,10 +83,10 @@ namespace CodeBook.Data.App.Repositories
             return _context.SaveChanges() >= 0;
         }
 
-
-
-
-
+        public bool IsPostSavedByUser(int userId, int postId)
+        {
+            return _context.postsSaved.Any(s => s.UserId == userId && s.PostId == postId);
+        }
 
     } 
 }

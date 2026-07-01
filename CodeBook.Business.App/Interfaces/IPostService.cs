@@ -6,7 +6,7 @@ namespace CodeBook.Business.App.Interfaces
 {
     public interface IPostService
     {
-        ErrorResponse CreatePost(int userId,CreatePostRequest request);
+        ErrorResponse CreatePost(int userId,CreatePostRequest request, int? communityId);
         ErrorResponse UpdatePost(int postId, UpdatePostRequest request,int userId);
         ErrorResponse DeletePost(int postId, int userId);
         ErrorResponse PublishPost(int postId);
