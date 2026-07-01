@@ -1,4 +1,5 @@
-﻿using CodeBook.Models.App;
+﻿
+using CodeBook.Models.App;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +26,7 @@ namespace CodeBook.Data.App.IRepositories
         PostTag GetPostTagbyId(int postId, int tagId);
         bool IsPostSavedByUser(int userId, int postId);
         bool SaveChanges();
-
-
+       
     }
 
 }

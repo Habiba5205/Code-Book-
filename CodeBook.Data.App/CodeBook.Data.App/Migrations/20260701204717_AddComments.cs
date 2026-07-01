@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CodeBook.Data.App.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstVersion : Migration
+    public partial class AddComments : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Tags",
+                name: "tags",
                 columns: table => new
                 {
                     Tag_ID = table.Column<int>(type: "int", nullable: false)
@@ -23,7 +23,7 @@ namespace CodeBook.Data.App.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tags", x => x.Tag_ID);
+                    table.PrimaryKey("PK_tags", x => x.Tag_ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -193,6 +193,8 @@ namespace CodeBook.Data.App.Migrations
                     LikeCount = table.Column<int>(type: "int", nullable: false),
                     AuthorId = table.Column<int>(type: "int", nullable: false),
                     PostId = table.Column<int>(type: "int", nullable: false),
+                    isRemoved = table.Column<bool>(type: "bit", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     SelfCommentId = table.Column<int>(type: "int", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -236,9 +238,9 @@ namespace CodeBook.Data.App.Migrations
                         principalColumn: "Post_ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Post_Tags_Tags_TagId",
+                        name: "FK_Post_Tags_tags_TagId",
                         column: x => x.TagId,
-                        principalTable: "Tags",
+                        principalTable: "tags",
                         principalColumn: "Tag_ID",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -263,38 +265,6 @@ namespace CodeBook.Data.App.Migrations
                     table.ForeignKey(
                         name: "FK_Posts_Saved_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "User_ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Reports",
-                columns: table => new
-                {
-                    Report_ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ReporterId = table.Column<int>(type: "int", nullable: false),
-                    PostId = table.Column<int>(type: "int", nullable: true),
-                    CommentId = table.Column<int>(type: "int", nullable: true),
-                    Reason = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
-                    Status = table.Column<int>(type: "int", maxLength: 50, nullable: false),
-                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Reports", x => x.Report_ID);
-                    table.ForeignKey(
-                        name: "FK_Reports_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Posts",
-                        principalColumn: "Post_ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Reports_Users_ReporterId",
-                        column: x => x.ReporterId,
                         principalTable: "Users",
                         principalColumn: "User_ID",
                         onDelete: ReferentialAction.Cascade);
@@ -336,6 +306,78 @@ namespace CodeBook.Data.App.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Reports",
+                columns: table => new
+                {
+                    Report_ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ReporterId = table.Column<int>(type: "int", nullable: false),
+                    PostId = table.Column<int>(type: "int", nullable: true),
+                    CommentId = table.Column<int>(type: "int", nullable: true),
+                    Reason = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    Status = table.Column<int>(type: "int", maxLength: 50, nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reports", x => x.Report_ID);
+                    table.ForeignKey(
+                        name: "FK_Reports_Posts_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Posts",
+                        principalColumn: "Post_ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Reports_Users_ReporterId",
+                        column: x => x.ReporterId,
+                        principalTable: "Users",
+                        principalColumn: "User_ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Reports_comments_CommentId",
+                        column: x => x.CommentId,
+                        principalTable: "comments",
+                        principalColumn: "Comment_ID");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comment_Removal",
+                columns: table => new
+                {
+                    Removal_ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CommentId = table.Column<int>(type: "int", nullable: false),
+                    RemoverId = table.Column<int>(type: "int", nullable: false),
+                    ReportId = table.Column<int>(type: "int", nullable: true),
+                    Reason = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    Date_Removed = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comment_Removal", x => x.Removal_ID);
+                    table.ForeignKey(
+                        name: "FK_Comment_Removal_Reports_ReportId",
+                        column: x => x.ReportId,
+                        principalTable: "Reports",
+                        principalColumn: "Report_ID",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Comment_Removal_Users_RemoverId",
+                        column: x => x.RemoverId,
+                        principalTable: "Users",
+                        principalColumn: "User_ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comment_Removal_comments_CommentId",
+                        column: x => x.CommentId,
+                        principalTable: "comments",
+                        principalColumn: "Comment_ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Post_Removal",
                 columns: table => new
                 {
@@ -369,6 +411,23 @@ namespace CodeBook.Data.App.Migrations
                         principalColumn: "User_ID",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comment_Removal_CommentId",
+                table: "Comment_Removal",
+                column: "CommentId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comment_Removal_RemoverId_CommentId",
+                table: "Comment_Removal",
+                columns: new[] { "RemoverId", "CommentId" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comment_Removal_ReportId",
+                table: "Comment_Removal",
+                column: "ReportId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_comments_AuthorId",
@@ -458,6 +517,11 @@ namespace CodeBook.Data.App.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Reports_CommentId",
+                table: "Reports",
+                column: "CommentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Reports_PostId",
                 table: "Reports",
                 column: "PostId");
@@ -477,6 +541,9 @@ namespace CodeBook.Data.App.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Comment_Removal");
+
             migrationBuilder.DropTable(
                 name: "communityMembers");
 
@@ -502,7 +569,7 @@ namespace CodeBook.Data.App.Migrations
                 name: "Reports");
 
             migrationBuilder.DropTable(
-                name: "Tags");
+                name: "tags");
 
             migrationBuilder.DropTable(
                 name: "comments");

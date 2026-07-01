@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using CodeBook.Models.App;
 
+
 namespace CodeBook.Data.App
 {
     public class CodeBookContext : DbContext
@@ -12,6 +13,7 @@ namespace CodeBook.Data.App
         public DbSet<PostTag> postTags { get; set; }
         public DbSet<PostSaved> postsSaved { get; set; }
         public DbSet<PostRemoval> postsRemovals { get; set; }
+        public DbSet<CommentRemoval> commentsRemovals { get; set; }
         public DbSet<Post> posts { get; set; }
         public DbSet<Notification> notifications { get; set; }
         public DbSet<Follow> follows { get; set; }
@@ -122,6 +124,17 @@ namespace CodeBook.Data.App
                 postremoval.HasOne(pr => pr.Remover).WithMany(u => u.PostRemovals).HasForeignKey(pr => pr.RemoverId).OnDelete(DeleteBehavior.Restrict);
                 postremoval.HasOne(pr => pr.Report).WithMany().HasForeignKey(pr => pr.ReportId).OnDelete(DeleteBehavior.SetNull);
                 postremoval.HasIndex(pr => new { pr.RemoverId, pr.PostId }).IsUnique();
+            });
+            modelBuilder.Entity<CommentRemoval>(postremoval =>
+            {
+                postremoval.ToTable("Comment_Removal");
+                postremoval.Property(cr => cr.Id).HasColumnName("Removal_ID").ValueGeneratedOnAdd();
+                postremoval.Property(cr => cr.Reason).HasMaxLength(1000);
+                postremoval.Property(cr => cr.DateCreated).HasColumnName("Date_Removed");
+                postremoval.HasOne(cr => cr.Comment).WithOne(c => c.Removal).HasForeignKey<CommentRemoval>(cr => cr.CommentId).OnDelete(DeleteBehavior.Restrict);
+                postremoval.HasOne(cr => cr.Remover).WithMany(u => u.CommentRemovals).HasForeignKey(cr => cr.RemoverId).OnDelete(DeleteBehavior.Restrict);
+                postremoval.HasOne(cr => cr.Report).WithMany().HasForeignKey(cr => cr.ReportId).OnDelete(DeleteBehavior.SetNull);
+                postremoval.HasIndex(cr => new { cr.RemoverId, cr.CommentId }).IsUnique();
             });
 
             modelBuilder.Entity<Notification>(notification =>
