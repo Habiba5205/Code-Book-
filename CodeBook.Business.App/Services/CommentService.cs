@@ -46,12 +46,14 @@ namespace CodeBook.Business.App.Services
                 AuthorId = authorId,
                 PostId = postId,
                 Body = dto.Body,
-                SelfCommentId = dto.SelfCommentId,
+                SelfCommentId = dto.SelfCommentId == 0 ? null: dto.SelfCommentId,
                 DateCreated = DateTime.UtcNow,
             };
-
+            _commentRepository.Add(comment);
+            _postRepository.AddComment(postId);
             if (!_commentRepository.SaveChanges())
                 return new ErrorResponse { Success = false, Message = "Could not add comment" };
+
 
             _notificationService.CreateNotification(authorId, new NotificationDTO
             {
@@ -74,10 +76,10 @@ namespace CodeBook.Business.App.Services
             }
             if(comment.AuthorId != userId)
             {
-                return new ErrorResponse { Success = false, Message = "You can only edit yoy own comments" };
+                return new ErrorResponse { Success = false, Message = "You can only edit your own comments" };
             }
 
-            comment.Body = commentBody;
+            comment.Body = commentBody == "string" ? comment.Body : commentBody;
             
             _commentRepository.Update(comment);
             if (_commentRepository.SaveChanges())
