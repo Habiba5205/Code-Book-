@@ -31,7 +31,7 @@ namespace CodeBook.API.App.Controllers
 
 
         [HttpPost("login")]
-        public IActionResult Login(LoginDto logininfo)
+        public IActionResult Login([FromBody] LoginDto logininfo)
         {
             var validationResult = _loginValidator.Validate(logininfo);
 
@@ -42,7 +42,17 @@ namespace CodeBook.API.App.Controllers
             var token = _authService.Login(logininfo);
             if (token != null)
             {
-                return Ok(new { message = "Login Successful." ,token = token});
+                var cookieOptions = new CookieOptions
+                {
+                    HttpOnly = true, //so JavaScript cannot access it
+                    Secure = true, //secure it to https access
+                    SameSite = SameSiteMode.Strict, //protection to not be accessed through header
+                    Expires = DateTime.UtcNow.AddDays(7)
+
+                };
+                Response.Cookies.Append("jwt_token",token,cookieOptions);
+
+                return Ok(new { message = "Login Successful."});
             }
             return Unauthorized(new { message = "Invalid Email or Password" });
 
@@ -69,12 +79,13 @@ namespace CodeBook.API.App.Controllers
 
         public IActionResult Logout()
         {
+            Response.Cookies.Delete("jwt_token");
             return Ok(new { message = "Logout Successful! Please clear the token from your client storage." });
         }
 
         [HttpPatch("resetPassword")]
         [Authorize]
-        public IActionResult ResetPassword(ResetPasswordDto resetPassword)
+        public IActionResult ResetPassword([FromBody]ResetPasswordDto resetPassword)
         {
             var currentId = _currentUserInfo.GetCurrentUserId();
             resetPassword.userId = currentId;

@@ -3,67 +3,66 @@
   "WorkspaceRootPath": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\interfaces\\ireportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{77AEA869-6289-4D9C-82A7-B01623E9FD55}|CodeBook.API.App\\CodeBook.API.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.api.app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77AEA869-6289-4D9C-82A7-B01623E9FD55}|CodeBook.API.App\\CodeBook.API.App.csproj|solutionrelative:codebook.api.app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\interfaces\\ireactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{77AEA869-6289-4D9C-82A7-B01623E9FD55}|CodeBook.API.App\\CodeBook.API.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.api.app\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77AEA869-6289-4D9C-82A7-B01623E9FD55}|CodeBook.API.App\\CodeBook.API.App.csproj|solutionrelative:codebook.api.app\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\interfaces\\inotificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{77AEA869-6289-4D9C-82A7-B01623E9FD55}|CodeBook.API.App\\CodeBook.API.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.api.app\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{77AEA869-6289-4D9C-82A7-B01623E9FD55}|CodeBook.API.App\\CodeBook.API.App.csproj|solutionrelative:codebook.api.app\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\interfaces\\icommunityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{77AEA869-6289-4D9C-82A7-B01623E9FD55}|CodeBook.API.App\\CodeBook.API.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.api.app\\controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77AEA869-6289-4D9C-82A7-B01623E9FD55}|CodeBook.API.App\\CodeBook.API.App.csproj|solutionrelative:codebook.api.app\\controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.data.app\\codebookcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|solutionrelative:codebook.data.app\\codebookcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.data.app\\irepositories\\icommentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|solutionrelative:codebook.data.app\\irepositories\\icommentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{77AEA869-6289-4D9C-82A7-B01623E9FD55}|CodeBook.API.App\\CodeBook.API.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.api.app\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77AEA869-6289-4D9C-82A7-B01623E9FD55}|CodeBook.API.App\\CodeBook.API.App.csproj|solutionrelative:codebook.api.app\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.data.app\\irepositories\\icommunityrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|solutionrelative:codebook.data.app\\irepositories\\icommunityrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.data.app\\irepositories\\ifollowrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|solutionrelative:codebook.data.app\\irepositories\\ifollowrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\dotnet\\sdk\\9.0.302\\Sdks\\Microsoft.NET.Sdk.StaticWebAssets\\targets\\Microsoft.NET.Sdk.StaticWebAssets.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.data.app\\irepositories\\inotificationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|solutionrelative:codebook.data.app\\irepositories\\inotificationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{77AEA869-6289-4D9C-82A7-B01623E9FD55}|CodeBook.API.App\\CodeBook.API.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.api.app\\codebook.api.app.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{77AEA869-6289-4D9C-82A7-B01623E9FD55}|CodeBook.API.App\\CodeBook.API.App.csproj|solutionrelative:codebook.api.app\\codebook.api.app.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.data.app\\irepositories\\ipostrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|solutionrelative:codebook.data.app\\irepositories\\ipostrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.data.app\\irepositories\\ireactionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|solutionrelative:codebook.data.app\\irepositories\\ireactionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F1C07794-037E-4501-89CD-4FACEA94B996}|..\\CodeBook.Models.App\\CodeBook.Models.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.models.app\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.data.app\\irepositories\\ireportrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|solutionrelative:codebook.data.app\\irepositories\\ireportrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\dtos\\updatereportstatusdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.data.app\\irepositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|solutionrelative:codebook.data.app\\irepositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\dtos\\removecommentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.data.app\\repositories\\commentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|solutionrelative:codebook.data.app\\repositories\\commentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\dtos\\reportdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.data.app\\repositories\\postrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|solutionrelative:codebook.data.app\\repositories\\postrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\dtos\\removepostsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.data.app\\repositories\\reportrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|solutionrelative:codebook.data.app\\repositories\\reportrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\services\\moderationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.data.app\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5589366D-26A0-4896-A9A0-D74C4803B4D9}|CodeBook.Data.App\\CodeBook.Data.App.csproj|solutionrelative:codebook.data.app\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C8268E9-40CB-4E4C-8514-2D4551DD3A52}|..\\CodeBook.Business.App\\CodeBook.Business.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.business.app\\services\\reportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77AEA869-6289-4D9C-82A7-B01623E9FD55}|CodeBook.API.App\\CodeBook.API.App.csproj|c:\\users\\roaab\\downloads\\engineering\\depi\\code-book-\\codebook.data.app\\codebook.api.app\\controllers\\currentuserinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77AEA869-6289-4D9C-82A7-B01623E9FD55}|CodeBook.API.App\\CodeBook.API.App.csproj|solutionrelative:codebook.api.app\\controllers\\currentuserinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -73,228 +72,225 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 13,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "IReportService.cs",
-              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Interfaces\\IReportService.cs",
-              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\Interfaces\\IReportService.cs",
-              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Interfaces\\IReportService.cs",
-              "RelativeToolTip": "..\\CodeBook.Business.App\\Interfaces\\IReportService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-27T15:04:01.002Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IReactionService.cs",
-              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Interfaces\\IReactionService.cs",
-              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\Interfaces\\IReactionService.cs",
-              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Interfaces\\IReactionService.cs",
-              "RelativeToolTip": "..\\CodeBook.Business.App\\Interfaces\\IReactionService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-27T15:03:59.586Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "INotificationService.cs",
-              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Interfaces\\INotificationService.cs",
-              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\Interfaces\\INotificationService.cs",
-              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Interfaces\\INotificationService.cs",
-              "RelativeToolTip": "..\\CodeBook.Business.App\\Interfaces\\INotificationService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-27T15:03:58.753Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ICommunityService.cs",
-              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Interfaces\\ICommunityService.cs",
-              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\Interfaces\\ICommunityService.cs",
-              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Interfaces\\ICommunityService.cs",
-              "RelativeToolTip": "..\\CodeBook.Business.App\\Interfaces\\ICommunityService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "ReportController.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.API.App\\Controllers\\ReportController.cs",
+              "RelativeDocumentMoniker": "CodeBook.API.App\\Controllers\\ReportController.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.API.App\\Controllers\\ReportController.cs",
+              "RelativeToolTip": "CodeBook.API.App\\Controllers\\ReportController.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAQwCgAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-27T15:03:57.955Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-02T16:06:50.923Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "IAuthService.cs",
-              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Interfaces\\IAuthService.cs",
-              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\Interfaces\\IAuthService.cs",
-              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Interfaces\\IAuthService.cs",
-              "RelativeToolTip": "..\\CodeBook.Business.App\\Interfaces\\IAuthService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "CodeBookContext.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\CodeBookContext.cs",
+              "RelativeDocumentMoniker": "CodeBook.Data.App\\CodeBookContext.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\CodeBookContext.cs",
+              "RelativeToolTip": "CodeBook.Data.App\\CodeBookContext.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAuwB8AAAB+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-27T15:03:53.718Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-02T15:54:47.777Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ICommentRepository.cs",
-              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\IRepositories\\ICommentRepository.cs",
-              "RelativeDocumentMoniker": "CodeBook.Data.App\\IRepositories\\ICommentRepository.cs",
-              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\IRepositories\\ICommentRepository.cs",
-              "RelativeToolTip": "CodeBook.Data.App\\IRepositories\\ICommentRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-27T15:03:39.885Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ICommunityRepository.cs",
-              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\IRepositories\\ICommunityRepository.cs",
-              "RelativeDocumentMoniker": "CodeBook.Data.App\\IRepositories\\ICommunityRepository.cs",
-              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\IRepositories\\ICommunityRepository.cs",
-              "RelativeToolTip": "CodeBook.Data.App\\IRepositories\\ICommunityRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-27T15:03:39.061Z",
-              "EditorCaption": ""
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.API.App\\appsettings.json",
+              "RelativeDocumentMoniker": "CodeBook.API.App\\appsettings.json",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.API.App\\appsettings.json",
+              "RelativeToolTip": "CodeBook.API.App\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-07-02T15:54:19.495Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "IFollowRepository.cs",
-              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\IRepositories\\IFollowRepository.cs",
-              "RelativeDocumentMoniker": "CodeBook.Data.App\\IRepositories\\IFollowRepository.cs",
-              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\IRepositories\\IFollowRepository.cs",
-              "RelativeToolTip": "CodeBook.Data.App\\IRepositories\\IFollowRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-27T15:03:37.695Z",
-              "EditorCaption": ""
+              "Title": "Microsoft.NET.Sdk.StaticWebAssets.targets",
+              "DocumentMoniker": "C:\\Program Files\\dotnet\\sdk\\9.0.302\\Sdks\\Microsoft.NET.Sdk.StaticWebAssets\\targets\\Microsoft.NET.Sdk.StaticWebAssets.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\Program Files\\dotnet\\sdk\\9.0.302\\Sdks\\Microsoft.NET.Sdk.StaticWebAssets\\targets\\Microsoft.NET.Sdk.StaticWebAssets.targets",
+              "ToolTip": "C:\\Program Files\\dotnet\\sdk\\9.0.302\\Sdks\\Microsoft.NET.Sdk.StaticWebAssets\\targets\\Microsoft.NET.Sdk.StaticWebAssets.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\Program Files\\dotnet\\sdk\\9.0.302\\Sdks\\Microsoft.NET.Sdk.StaticWebAssets\\targets\\Microsoft.NET.Sdk.StaticWebAssets.targets",
+              "ViewState": "AgIAAMMCAAAAAAAAAAAlwNYCAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2026-07-02T15:49:30.914Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "INotificationRepository.cs",
-              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\IRepositories\\INotificationRepository.cs",
-              "RelativeDocumentMoniker": "CodeBook.Data.App\\IRepositories\\INotificationRepository.cs",
-              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\IRepositories\\INotificationRepository.cs",
-              "RelativeToolTip": "CodeBook.Data.App\\IRepositories\\INotificationRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-27T15:03:36.695Z",
-              "EditorCaption": ""
+              "Title": "CodeBook.API.App.http",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.API.App\\CodeBook.API.App.http",
+              "RelativeDocumentMoniker": "CodeBook.API.App\\CodeBook.API.App.http",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.API.App\\CodeBook.API.App.http",
+              "RelativeToolTip": "CodeBook.API.App\\CodeBook.API.App.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2026-07-02T15:47:21.168Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "IPostRepository.cs",
-              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\IRepositories\\IPostRepository.cs",
-              "RelativeDocumentMoniker": "CodeBook.Data.App\\IRepositories\\IPostRepository.cs",
-              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\IRepositories\\IPostRepository.cs",
-              "RelativeToolTip": "CodeBook.Data.App\\IRepositories\\IPostRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "LoginDto.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\DTOs\\LoginDto.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\DTOs\\LoginDto.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\DTOs\\LoginDto.cs",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\DTOs\\LoginDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-27T15:03:35.68Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-02T15:44:30.453Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "IReactionRepository.cs",
-              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\IRepositories\\IReactionRepository.cs",
-              "RelativeDocumentMoniker": "CodeBook.Data.App\\IRepositories\\IReactionRepository.cs",
-              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\IRepositories\\IReactionRepository.cs",
-              "RelativeToolTip": "CodeBook.Data.App\\IRepositories\\IReactionRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "Enums.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Models.App\\Enums.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Models.App\\Enums.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Models.App\\Enums.cs",
+              "RelativeToolTip": "..\\CodeBook.Models.App\\Enums.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-27T15:03:34.51Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-02T15:33:18.36Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
-              "Title": "IReportRepository.cs",
-              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\IRepositories\\IReportRepository.cs",
-              "RelativeDocumentMoniker": "CodeBook.Data.App\\IRepositories\\IReportRepository.cs",
-              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\IRepositories\\IReportRepository.cs",
-              "RelativeToolTip": "CodeBook.Data.App\\IRepositories\\IReportRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "UpdateReportStatusDto.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\DTOs\\UpdateReportStatusDto.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\DTOs\\UpdateReportStatusDto.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\DTOs\\UpdateReportStatusDto.cs",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\DTOs\\UpdateReportStatusDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBJwA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-27T15:03:33.385Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-02T15:31:18.185Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 12,
-              "Title": "IUserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\IRepositories\\IUserRepository.cs",
-              "RelativeDocumentMoniker": "CodeBook.Data.App\\IRepositories\\IUserRepository.cs",
-              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\IRepositories\\IUserRepository.cs",
-              "RelativeToolTip": "CodeBook.Data.App\\IRepositories\\IUserRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "RemoveCommentDto.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\DTOs\\RemoveCommentDto.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\DTOs\\RemoveCommentDto.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\DTOs\\RemoveCommentDto.cs",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\DTOs\\RemoveCommentDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-27T15:03:31.994Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "CommentRepository.cs",
-              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\Repositories\\CommentRepository.cs",
-              "RelativeDocumentMoniker": "CodeBook.Data.App\\Repositories\\CommentRepository.cs",
-              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\Repositories\\CommentRepository.cs",
-              "RelativeToolTip": "CodeBook.Data.App\\Repositories\\CommentRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-27T15:03:29.453Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-02T15:09:39.916Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 14,
-              "Title": "PostRepository.cs",
-              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\Repositories\\PostRepository.cs",
-              "RelativeDocumentMoniker": "CodeBook.Data.App\\Repositories\\PostRepository.cs",
-              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\Repositories\\PostRepository.cs",
-              "RelativeToolTip": "CodeBook.Data.App\\Repositories\\PostRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "RemovePostsDto.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\DTOs\\RemovePostsDto.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\DTOs\\RemovePostsDto.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\DTOs\\RemovePostsDto.cs",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\DTOs\\RemovePostsDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBJwAkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-27T15:03:11.686Z",
+              "WhenOpened": "2026-07-02T15:09:01.808Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ReportDTO.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\DTOs\\ReportDTO.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\DTOs\\ReportDTO.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\DTOs\\ReportDTO.cs",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\DTOs\\ReportDTO.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAIBJwAsAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-02T14:40:38.751Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ReportService.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Services\\ReportService.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\Services\\ReportService.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Services\\ReportService.cs",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\Services\\ReportService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-02T14:40:21.08Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "CurrentUserInfo.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.API.App\\Controllers\\CurrentUserInfo.cs",
+              "RelativeDocumentMoniker": "CodeBook.API.App\\Controllers\\CurrentUserInfo.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.API.App\\Controllers\\CurrentUserInfo.cs",
+              "RelativeToolTip": "CodeBook.API.App\\Controllers\\CurrentUserInfo.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBUAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-02T13:14:31.218Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.API.App\\Program.cs",
+              "RelativeDocumentMoniker": "CodeBook.API.App\\Program.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.API.App\\Program.cs",
+              "RelativeToolTip": "CodeBook.API.App\\Program.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAEYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-02T12:57:11.05Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 15,
-              "Title": "ReportRepository.cs",
-              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\Repositories\\ReportRepository.cs",
-              "RelativeDocumentMoniker": "CodeBook.Data.App\\Repositories\\ReportRepository.cs",
-              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\Repositories\\ReportRepository.cs",
-              "RelativeToolTip": "CodeBook.Data.App\\Repositories\\ReportRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAKAAAAAAAAAA==",
+              "Title": "ModerationService.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Services\\ModerationService.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\Services\\ModerationService.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Services\\ModerationService.cs",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\Services\\ModerationService.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAYwDYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-27T15:02:59.314Z",
+              "WhenOpened": "2026-07-02T12:56:17.975Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "..\\CodeBook.Business.App\\Services\\AuthService.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\Services\\AuthService.cs",
+              "RelativeToolTip": "..\\CodeBook.Business.App\\Services\\AuthService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-02T12:54:00.887Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.API.App\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "CodeBook.API.App\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.API.App\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "CodeBook.API.App\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAADwvxkAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-02T12:45:18.299Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "UserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\Repositories\\UserRepository.cs",
-              "RelativeDocumentMoniker": "CodeBook.Data.App\\Repositories\\UserRepository.cs",
-              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\Repositories\\UserRepository.cs",
-              "RelativeToolTip": "CodeBook.Data.App\\Repositories\\UserRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAlAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.API.App\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "CodeBook.API.App\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.API.App\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "CodeBook.API.App\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAIA3wEYAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-27T14:59:43.583Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-02T12:45:17.247Z"
             }
           ]
         }

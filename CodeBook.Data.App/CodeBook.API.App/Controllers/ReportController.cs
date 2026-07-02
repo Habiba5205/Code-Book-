@@ -34,7 +34,8 @@ namespace CodeBook.API.App.Controllers
             {
                 return BadRequest(validationResult.Errors);
             }
-
+            if (request.CommentId == 0) request.CommentId = null;
+            if (request.PostId == 0) request.PostId = null;
             var result = _reportService.SubmitReport(_currentUserInfo.GetCurrentUserId(), request);
             if(result != null && result.Success)
                 return Ok(new { message = result.Message });
