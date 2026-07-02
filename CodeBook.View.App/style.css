@@ -1,0 +1,118 @@
+
+       body{
+        background-color: #0d1117;
+        color: white;
+        font-family:Arial,Helvetica,sans-serif;
+       }
+       .navbar{
+        background-color: #161b22;
+        border-bottom: 2px solid #7c3aed;
+       }
+       .navbar-brand{
+        color: #bca1ec;
+         font-weight: 700;
+        font-size:1.5rem;
+         text-decoration: none;
+       }
+       .navbar-brand:hover{
+        color:#d6bcfa;
+       }
+       .card{
+        background-color: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 12px;
+        color:white;
+        transition:0.3s;
+       }
+       .list-group{
+        gap:10px;
+       }
+       .list-group button{
+        background-color:transparent;
+        color : white;
+        border : 1px solid #30363d;
+        border-radius: 8px;
+        padding :12px;
+        text-align :left;
+        transition :all 0.3s ease;
+       }
+       .list-group button:hover{
+        background-color: #7c3aed;
+        border-color:#7c3aed;
+        color:white;
+       }
+       .list-group button i{
+        margin-right:10px;
+        width:22px;
+       }
+       .profile-img{
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 4px solid #7c3aed;
+        object-fit: cover;
+        max-width:100%;
+       }
+       .bio-text{
+        color:#d1d5db;
+        font-size:16px;
+        margin-top:10px;
+       }
+       #username{
+        font-weight:bold;
+        margin-bottom:10px;
+       }
+       #followersCount,
+       #followingCount{
+        color:#bca1ec;
+        font-size:20px;
+       }
+        .btn-purple{
+        background-color: #7c3aed;
+        color: white;
+        border:none;
+    }
+        .btn-purple:hover{
+        background-color: #6d28d9;
+        color: white;
+    }
+    .form-control{
+        background-color: #0d1117;
+        border:1px solid #30363d;
+        color:white;
+    }
+    .form-control::placeholder{
+    color:#8b949e;
+}
+        .form-control:focus{
+        background-color: #0d1117;
+        border-color:#7c3aed;
+        color:white;
+        box-shadow:none
+    }
+    textarea{
+        resize:none;
+    }
+    #content{
+        min-height:600px;
+    }
+    .active-menu{
+        background-color: #7c3aed;
+        border-color:#7c3aed;
+        color:white;
+
+    }
+    @media(max-width:768px){
+        .profile-img{
+            width:120px;
+            height:120px;
+            margin-bottom:20px;
+        }
+        .list-group{
+            margin-bottom:20px;
+        }
+        #content{
+            margin-top:20px;
+        }
+    }
+
