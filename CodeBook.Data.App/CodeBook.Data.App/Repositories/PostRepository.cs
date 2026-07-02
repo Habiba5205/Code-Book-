@@ -51,9 +51,13 @@ namespace CodeBook.Data.App.Repositories
         {
             _context.postsRemovals.Add(postRemoval);
         }
-        public void AddReaction(Reaction reaction)
+        public void AddReaction(int postId, ReactionType type)
         {
-            //_context.reactions.Add(reaction);
+            var post = GetPostById(postId);
+            if(post != null)
+            {
+                post.Reactions.Add(new Reaction { PostId = postId, Type = type });
+            }
         }
         public void AddComment(int postId)
         {

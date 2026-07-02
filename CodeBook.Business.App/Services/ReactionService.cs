@@ -15,15 +15,17 @@ namespace CodeBook.Business.App.Services
         private readonly INotificationService _notificationService;
         private readonly IPostService _postService;
         private readonly ICommentService _commentService;
+        private readonly IPostRepository _postRepository;
 
 
 
-        public ReactionService(IReactionRepository reactionRepository, INotificationService notificationService, IPostService postService,ICommentService commentService) 
+        public ReactionService(IReactionRepository reactionRepository, INotificationService notificationService, IPostService postService,ICommentService commentService, IPostRepository postRepository) 
         {
             this._reactionRepository = reactionRepository;
             _notificationService = notificationService;
             _postService = postService;
             _commentService = commentService;
+            _postRepository = postRepository;
         }
         public ErrorResponse AddPostReaction(int userId,ReactionDto reactionDto)
         {
@@ -38,6 +40,7 @@ namespace CodeBook.Business.App.Services
             reaction.PostId = reactionDto.PostId;
             reaction.Type = Enum.Parse<ReactionType>(reactionDto.ReactionType);
             _reactionRepository.Add(reaction);
+            _postRepository.AddReaction(reactionDto.PostId, reaction.Type);
             bool result = _reactionRepository.SaveChanges();
 
             _notificationService.CreateNotification(_postService.GetPostAuthorId(reactionDto.PostId), new NotificationDTO

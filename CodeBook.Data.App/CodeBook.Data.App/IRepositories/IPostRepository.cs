@@ -15,7 +15,7 @@ namespace CodeBook.Data.App.IRepositories
         void Update(Post post);
         void Delete(Post post);
         IQueryable<Post> GetAllUnremoved();
-        void AddReaction(Reaction reaction);
+        void AddReaction(int postId, ReactionType type);
         void AddComment(int postId);
         List<Post> Getfeed();
         void SavePost(PostSaved saved);
