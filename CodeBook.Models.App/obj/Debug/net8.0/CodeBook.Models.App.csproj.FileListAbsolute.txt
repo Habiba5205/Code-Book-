@@ -15,3 +15,10 @@ C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Models.App\obj\Debug\net8.0\Cod
 C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Models.App\obj\Debug\net8.0\refint\CodeBook.Models.App.dll
 C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Models.App\obj\Debug\net8.0\CodeBook.Models.App.pdb
 C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Models.App\obj\Debug\net8.0\ref\CodeBook.Models.App.dll
+C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Models.App\bin\Debug\net8.0\CodeBook.Models.App.deps.json
+C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Models.App\bin\Debug\net8.0\CodeBook.Models.App.dll
+C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Models.App\bin\Debug\net8.0\CodeBook.Models.App.pdb
+C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Models.App\obj\Debug\net8.0\CodeBook.Models.App.dll
+C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Models.App\obj\Debug\net8.0\refint\CodeBook.Models.App.dll
+C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Models.App\obj\Debug\net8.0\CodeBook.Models.App.pdb
+C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Models.App\obj\Debug\net8.0\ref\CodeBook.Models.App.dll

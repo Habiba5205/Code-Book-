@@ -51,16 +51,38 @@ builder.Services.AddAutoMapper(config => {
 });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            context.Token = context.Request.Cookies["jwt_token"];
+            return Task.CompletedTask; //this will be returned to JS (On message received)
+        }
+    };
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key),
         ValidateIssuer = false,
         ValidateAudience = false
-    });
+    };
+});
+
 builder.Services.AddAuthorization(options => { 
  options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
 
+});
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalHost", builder =>
+    {
+        builder.WithOrigins("http://127.0.0.1:5500")
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials();
+    });
 });
 
 builder.Services.AddServices();
@@ -79,6 +101,8 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseCors("AllowLocalHost");
 
 app.MapControllers();
 

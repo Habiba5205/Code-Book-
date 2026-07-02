@@ -17,20 +17,14 @@ namespace CodeBook.API.App.Controllers
     {
         private readonly IModerationService _moderationService;
         private readonly IReportService _reportService;
+        private readonly CurrentUserInfo _currentUserInfo;
 
 
-        private int GetCurrentUserById() { 
-          var userId = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
-            if (int.TryParse(userId, out int currentid))
-            {
-                return currentid;
-            }
-            throw new UnauthorizedAccessException();
-        }
-        public AdminController(IModerationService moderationService, IReportService reportService)
+        public AdminController(IModerationService moderationService, IReportService reportService, CurrentUserInfo currentUserInfo)
         {
             _moderationService = moderationService;
             _reportService = reportService;
+            _currentUserInfo = currentUserInfo;
         }
 
         [HttpDelete("posts/{postId}")]
@@ -38,7 +32,7 @@ namespace CodeBook.API.App.Controllers
         {
             try
             {
-                var removerId = GetCurrentUserById();
+                var removerId = _currentUserInfo.GetCurrentUserId();
                 if (string.IsNullOrEmpty(dto.Reason))
                     return BadRequest("Reason is required");
                 _moderationService.RemoveComment(postId, dto,removerId);
@@ -61,7 +55,7 @@ namespace CodeBook.API.App.Controllers
         {
             try
             {
-                var removerId = GetCurrentUserById();
+                var removerId = _currentUserInfo.GetCurrentUserId();
                 if (string.IsNullOrEmpty(dto.Reason))
                     return BadRequest("Reason is required");
                 _moderationService.RemoveComment(commentId, dto, removerId);
@@ -109,7 +103,6 @@ namespace CodeBook.API.App.Controllers
             {
                 return StatusCode(500, ex.Message);
             }
-
 
 
         }
