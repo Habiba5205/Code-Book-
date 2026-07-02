@@ -50,13 +50,21 @@ builder.Services.AddAutoMapper(config => {
     config.AddProfile<MappingProfile>();
 });
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}
+    ).AddJwtBearer(options =>
 {
     options.Events = new JwtBearerEvents
     {
         OnMessageReceived = context =>
         {
-            context.Token = context.Request.Cookies["jwt_token"];
+            if (context.Request.Cookies.ContainsKey("jwt_token"))
+            {
+                context.Token = context.Request.Cookies["jwt_token"];
+            }
             return Task.CompletedTask; //this will be returned to JS (On message received)
         }
     };
@@ -78,7 +86,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalHost", builder =>
     {
-        builder.WithOrigins("http://127.0.0.1:5500")
+        builder.WithOrigins("http://localhost:5500")
         .AllowAnyMethod()
         .AllowAnyHeader()
         .AllowCredentials();
@@ -95,14 +103,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseRouting();
+
+app.UseCors("AllowLocalHost");
 
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
 
 app.UseAuthorization();
-
-app.UseCors("AllowLocalHost");
 
 app.MapControllers();
 

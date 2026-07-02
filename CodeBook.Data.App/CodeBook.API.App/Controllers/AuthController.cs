@@ -46,7 +46,7 @@ namespace CodeBook.API.App.Controllers
                 {
                     HttpOnly = true, //so JavaScript cannot access it
                     Secure = true, //secure it to https access
-                    SameSite = SameSiteMode.Strict, //protection to not be accessed through header
+                    SameSite = SameSiteMode.None, //protection to not be accessed through header
                     Expires = DateTime.UtcNow.AddDays(7)
 
                 };

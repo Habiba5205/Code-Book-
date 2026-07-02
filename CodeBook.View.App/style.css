@@ -1,5 +1,12 @@
 
        body{
+        margin: 10px;
+        background-color: #0d1117;
+        color: white;
+        font-family:Arial,Helvetica,sans-serif;
+       }
+       h2{
+        margin-top: 20px;
         background-color: #0d1117;
         color: white;
         font-family:Arial,Helvetica,sans-serif;
@@ -180,7 +187,7 @@
     color:white;
     tansform:translateY(-1px)
 }
-}
+
 .notification-card{
     background-color:#1a1a2e;
     border:none;
@@ -216,4 +223,19 @@
 .btn-purple:hover {
     background-color: #7c3aed;
     color: #ffffff;
+}
+
+#report-page{
+    margin: 20px;
+}
+.report-body{
+    display:flex;
+    justify-content: space-between;
+    background-color: #21262d;
+}
+
+.report-header {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
 }
