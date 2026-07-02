@@ -83,7 +83,7 @@
     }
     .form-control::placeholder{
     color:#8b949e;
-}
+    }
         .form-control:focus{
         background-color: #0d1117;
         border-color:#7c3aed;
@@ -115,4 +115,105 @@
             margin-top:20px;
         }
     }
+    .form-check-input{
+    cursor:pointer;
+}
 
+.modal-content{
+    background:#1c2128;
+    color:#f0f6fc;
+    border:1px solid #30363d;
+    border-radius:18px;
+    box-shadow: 0 18px 45px rgba(0,0,0,.45);
+}
+.report-icon{
+    color:#7c3aed;
+}
+.modal-body p{
+    font-size:.95rem;
+    line-height:1.7;
+    color:#8b949e;
+    padding:1.5rem;
+}
+.modal-header{
+    padding:1.5rem 2rem;
+}
+
+.modal-footer{
+    display:flex;
+    justify-content:flex-end;
+    padding: 1.5em 2rem;
+    gap:.75rem;
+    border-top:1px solid #30363d
+}
+.list-group-item{
+    display:flex;
+    align-items:flex-start;
+    gap:.75rem;
+    min-height:52px;
+    white-space:nowrap;
+    background:#21262d;
+    color:#f0f6fc;
+    border:1px solid #30363d;
+    border-radius:10px;
+    margin-bottom:10px;
+    transition:
+     background .2s,
+     border-color .2s,
+     transform .15s
+}
+
+
+.list-group-item:hover{
+    background:#2d333b;
+    border-color:#7c3aed;
+}
+.report-btn{
+    background:#7c3aed;
+    color:white;
+    border:none;
+    transition: .2s;
+}
+
+.report-btn:hover{
+    background:#6d28d9;
+    color:white;
+    tansform:translateY(-1px)
+}
+}
+.notification-card{
+    background-color:#1a1a2e;
+    border:none;
+    border-radius:12px;
+   transition: all 0.2s ease;
+   cursor:pointer;
+}
+.notification-card:hover{
+    background-color:#1e1e3a;
+    transform: translateY(-2px);
+}
+.notification-card.unread{
+    border-left: 3px solid #7c3aed
+}
+.badge-new{
+    background-color:#7c3aed;
+    color:#ffffff;
+    font-size:11px;
+    padding:3px 10px;
+    border-radius:999px;
+}
+.btn-purple {
+    border: 1px solid #7c3aed;
+    color: #7c3aed;
+    background: transparent;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-purple:hover {
+    background-color: #7c3aed;
+    color: #ffffff;
+}
