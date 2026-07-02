@@ -45,6 +45,13 @@ namespace CodeBook.API.App.Controllers
             var count = _notificationService.GetUnreadNotificationCount(_currentUserInfo.GetCurrentUserId());
             return Ok(new {unreadCount = count});
         }
+        [HttpPatch("readAllNotifications")]
+        [Authorize]
+        public ActionResult MarkAllAsRead()
+        {
+            _notificationService.MarkAllAsRead(_currentUserInfo.GetCurrentUserId());
+            return Ok(new { message = "Marked All As Read!!" });
+        }
 
     }
 }

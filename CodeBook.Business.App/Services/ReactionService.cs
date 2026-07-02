@@ -16,16 +16,18 @@ namespace CodeBook.Business.App.Services
         private readonly IPostService _postService;
         private readonly ICommentService _commentService;
         private readonly IPostRepository _postRepository;
+        private readonly ICommentRepository _commentRepository;
 
 
 
-        public ReactionService(IReactionRepository reactionRepository, INotificationService notificationService, IPostService postService,ICommentService commentService, IPostRepository postRepository) 
+        public ReactionService(IReactionRepository reactionRepository, INotificationService notificationService, IPostService postService,ICommentService commentService, IPostRepository postRepository,ICommentRepository commentRepository) 
         {
             this._reactionRepository = reactionRepository;
             _notificationService = notificationService;
             _postService = postService;
             _commentService = commentService;
             _postRepository = postRepository;
+            _commentRepository = commentRepository;
         }
         public ErrorResponse AddPostReaction(int userId,ReactionDto reactionDto)
         {
@@ -40,12 +42,13 @@ namespace CodeBook.Business.App.Services
             reaction.PostId = reactionDto.PostId;
             reaction.Type = Enum.Parse<ReactionType>(reactionDto.ReactionType);
             _reactionRepository.Add(reaction);
-            _postRepository.AddReaction(reactionDto.PostId, reaction.Type);
+            _postRepository.AddReaction(reactionDto.PostId, reaction.Type,userId);
+
             bool result = _reactionRepository.SaveChanges();
 
             _notificationService.CreateNotification(_postService.GetPostAuthorId(reactionDto.PostId), new NotificationDTO
             {
-                UserId = _postService.GetPostAuthorId(reactionDto.PostId),
+                userId = _postService.GetPostAuthorId(reactionDto.PostId),
                 Type = "Reaction",
                 Message = "Someone reacted to your post",
                 ReferenceId = reactionDto.PostId,
@@ -60,7 +63,8 @@ namespace CodeBook.Business.App.Services
             Reaction reaction = _reactionRepository.GetReaction(postId,userId);
             if (reaction == null) return new ErrorResponse { Success = false, Message = "You didn't react to this post before!" };
             _reactionRepository.Remove(reaction);
-           bool result = _reactionRepository.SaveChanges();
+            _postRepository.RemoveReaction(postId);
+            bool result = _reactionRepository.SaveChanges();
             if(!result) return new ErrorResponse { Success = false, Message = "Failed to remove reaction" };
             else return new ErrorResponse { Success = true, Message = "Reaction removed" };
 
@@ -79,11 +83,13 @@ namespace CodeBook.Business.App.Services
             reaction.CommentId = commentId;
             reaction.Type = Enum.Parse<ReactionType>(reactionDto.ReactionType);
             _reactionRepository.Add(reaction);
+            _commentRepository.AddReaction(commentId);
+
             bool result = _reactionRepository.SaveChanges();
 
             _notificationService.CreateNotification(_commentService.GetCommentAuthorId(commentId), new NotificationDTO
             {
-                UserId = _commentService.GetCommentAuthorId(commentId),
+                userId = _commentService.GetCommentAuthorId(commentId),
                 Type = "Reaction",
                 Message = "Someone reacted to your Comment",
                 ReferenceId = reactionDto.PostId,
@@ -98,6 +104,8 @@ namespace CodeBook.Business.App.Services
             Reaction reaction = _reactionRepository.GetCommentReaction(postId, userId,commentId);
             if (reaction == null) return new ErrorResponse { Success = false, Message = "You didn't react to this Comment before!" };
             _reactionRepository.Remove(reaction);
+           _commentRepository.RemoveReaction(commentId);
+
             bool result = _reactionRepository.SaveChanges();
             if (!result) return new ErrorResponse { Success = false, Message = "Failed to remove reaction" };
             else return new ErrorResponse { Success = true, Message = "Reaction removed" };

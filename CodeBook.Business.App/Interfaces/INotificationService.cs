@@ -1,4 +1,5 @@
 ﻿using CodeBook.Business.App.DTOs;
+using CodeBook.Business.App.Middleware;
 using CodeBook.Models.App;
 using System;
 namespace CodeBook.Business.App.Interfaces
@@ -9,5 +10,6 @@ namespace CodeBook.Business.App.Interfaces
         List<NotificationDTO> GetUserNotification(int userId);
         void MarkAsRead(int notificationId);
         int GetUnreadNotificationCount(int userId);
+        void MarkAllAsRead(int userId);
     }
 }

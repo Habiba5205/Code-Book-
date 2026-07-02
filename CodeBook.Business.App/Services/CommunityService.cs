@@ -58,7 +58,7 @@ namespace CodeBook.Business.App.Services
 
             _notificationService.CreateNotification(community.OwnerId, new NotificationDTO
             {
-                UserId = community.OwnerId,
+                userId = community.OwnerId,
                 Type = "Join",
                 Message = "You have a new Community Member",
                 ReferenceId = communityId,
@@ -69,9 +69,9 @@ namespace CodeBook.Business.App.Services
         }
 
         //what if I wanna Unjoin?
-        public void AssignRole(int CommunityId,AssignRoleDto dto)
+        public void AssignRole(int CommunityId,int userId,AssignRoleDto dto)
         {
-            CommunityMember member = _communityRepository.GetCommunityMember(CommunityId, dto.UserId);
+            CommunityMember member = _communityRepository.GetCommunityMember(CommunityId, userId);
 
             member.Role = dto.Role;
             _communityRepository.UpdateCommunityMember(member);

@@ -57,7 +57,7 @@ namespace CodeBook.Business.App.Services
 
             _notificationService.CreateNotification(authorId, new NotificationDTO
             {
-                UserId = authorId,
+                userId = authorId,
                 Type = "Comment",
                 Message = "You have a new Comment on your post",
                 ReferenceId = postId,

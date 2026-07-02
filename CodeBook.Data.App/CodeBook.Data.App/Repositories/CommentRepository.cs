@@ -31,6 +31,8 @@ namespace CodeBook.Data.App.Repositories
         }
         public void Delete(Comment comment)
         {
+            var reactions = _context.reactions.Where(r => r.CommentId == comment.Id);
+            _context.reactions.RemoveRange(reactions);
             _context.comments.Remove(comment);
         }
 
@@ -45,6 +47,20 @@ namespace CodeBook.Data.App.Repositories
         public void AddRemovalRecord(CommentRemoval removal)
         {
             _context.commentsRemovals.Add(removal);
+        }
+        public void AddReaction(int commentId) {
+            Comment c = GetCommentById(commentId);
+            if (c != null)
+            {
+                c.LikeCount += 1;
+            }
+        }
+        public void RemoveReaction(int commentId) {
+            Comment c = GetCommentById(commentId);
+            if (c != null)
+            {
+                c.LikeCount -= 1;
+            }
         }
 
     }

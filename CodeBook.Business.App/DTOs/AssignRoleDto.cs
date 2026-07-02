@@ -10,7 +10,6 @@ namespace CodeBook.Business.App.DTOs
     public class AssignRoleDto
     {
         public int CommunityId { get; set; }
-        public int UserId { get; set; }
         public CommunityRole Role { get; set; }
     }
 }

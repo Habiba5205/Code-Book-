@@ -7,7 +7,7 @@ namespace CodeBook.Business.App.Interfaces
     {
         void CreateCommunity(CreateCommunityDto dto,int userId);
         void JoinCommunity(int communityId, CommunityMember newMember);
-        void AssignRole(int CommunityId, AssignRoleDto dto);
+        void AssignRole(int CommunityId,int userId, AssignRoleDto dto);
         void UpdateCommunity(int CommunityId,UpdateCommunityDto dto);
         void DeleteCommunity(int CommunityId);
         Community GetCommunity(int CommunityId);
