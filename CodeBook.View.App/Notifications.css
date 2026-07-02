@@ -1,0 +1,41 @@
+body{
+    background-color:#0d0d1a;
+    color:#ffffff;
+    font-family:'Segoe UI', sans-serif;
+}
+.notification-card{
+    background-color:#1a1a2e;
+    border:none;
+    border-radius:12px;
+   transition: all 0.2s ease;
+   cursor:pointer;
+}
+.notification-card:hover{
+    background-color:#1e1e3a;
+    transform: translateY(-2px);
+}
+.notification-card.unread{
+    border-left: 3px solid #7c3aed
+}
+.badge-new{
+    background-color:#7c3aed;
+    color:#ffffff;
+    font-size:11px;
+    padding:3px 10px;
+    border-radius:999px;
+}
+.btn-purple {
+    border: 1px solid #7c3aed;
+    color: #7c3aed;
+    background: transparent;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-purple:hover {
+    background-color: #7c3aed;
+    color: #ffffff;
+}
