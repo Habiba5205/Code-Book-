@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "targets": {
     "net8.0": {
       "AutoMapper/16.1.1": {
@@ -2657,23 +2657,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\roaab\\.nuget\\packages\\": {},
+    "C:\\Users\\Habiba Ahmed\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\CodeBook.Business.App.csproj",
+      "projectUniqueName": "C:\\Users\\Habiba Ahmed\\Desktop\\Code-Book-\\CodeBook.Business.App\\CodeBook.Business.App.csproj",
       "projectName": "CodeBook.Business.App",
-      "projectPath": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\CodeBook.Business.App.csproj",
-      "packagesPath": "C:\\Users\\roaab\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Business.App\\obj\\",
+      "projectPath": "C:\\Users\\Habiba Ahmed\\Desktop\\Code-Book-\\CodeBook.Business.App\\CodeBook.Business.App.csproj",
+      "packagesPath": "C:\\Users\\Habiba Ahmed\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Habiba Ahmed\\Desktop\\Code-Book-\\CodeBook.Business.App\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\roaab\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Habiba Ahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2686,13 +2686,14 @@
       },
       "frameworks": {
         "net8.0": {
+          "framework": "net8.0",
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\CodeBook.Data.App.csproj": {
-              "projectPath": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\CodeBook.Data.App.csproj"
+            "C:\\Users\\Habiba Ahmed\\Desktop\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\CodeBook.Data.App.csproj": {
+              "projectPath": "C:\\Users\\Habiba Ahmed\\Desktop\\Code-Book-\\CodeBook.Data.App\\CodeBook.Data.App\\CodeBook.Data.App.csproj"
             },
-            "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Models.App\\CodeBook.Models.App.csproj": {
-              "projectPath": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Models.App\\CodeBook.Models.App.csproj"
+            "C:\\Users\\Habiba Ahmed\\Desktop\\Code-Book-\\CodeBook.Models.App\\CodeBook.Models.App.csproj": {
+              "projectPath": "C:\\Users\\Habiba Ahmed\\Desktop\\Code-Book-\\CodeBook.Models.App\\CodeBook.Models.App.csproj"
             }
           }
         }
@@ -2707,10 +2708,11 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "10.0.300"
     },
     "frameworks": {
       "net8.0": {
+        "framework": "net8.0",
         "targetAlias": "net8.0",
         "dependencies": {
           "BCrypt.Net-Next": {
@@ -2737,12 +2739,26 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.28, 8.0.28]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.28, 8.0.28]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[8.0.28, 8.0.28]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
