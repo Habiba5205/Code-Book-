@@ -1,21 +1,12 @@
-const BASE_URL = "https://localhost:7241/api";
-const token = localStorage.getItem("token");
+import { api } from './api.js';
 
-if (!token) window.location.href = "login.html";
+
 
 async function getNotifications() {
 document.getElementById("loading").classList.remove("d-none");
 try{
-    const response = await fetch(`${BASE_URL}/notifications`, {
-        headers: {
-            "Authorization": "Bearer " + token,
-            "Content-Type": "application/json"
-        }
-    });
-    if (!response.ok) {
-        throw new Error("Failed to fetch notifications");
-    }
-    const notifications = await response.json();
+   
+    const notifications = await api.get("notifications")
     renderNotifications(notifications);
 }
 catch (error) {
@@ -91,16 +82,7 @@ function formatTime(dateString) {
 
 async function markAsRead(notificationId) {
     try {
-        const response = await fetch(`${BASE_URL}/notifications/${notificationId}/read`, {
-            method: "PATCH",
-            headers: {
-                "Authorization": "Bearer " + token,
-                "Content-Type": "application/json"
-            }
-        });
-        if (!response.ok) {
-            throw new Error("Failed to mark notification as read");
-        }
+        await api.patch("notifications/${notificationId}markAsRead");
         getNotifications();
         loadUnreadCount();
     }
@@ -116,16 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function markAllAsRead() {
     try {
-        const response = await fetch(`${BASE_URL}/notifications/read-all`, {
-            method: "PATCH",
-            headers: {
-                "Authorization": "Bearer " + token,
-                "Content-Type": "application/json"
-            }
-        });
-        if (!response.ok) {
-            throw new Error("Failed to mark all notifications as read");
-        }
+       await api.patch("notifications/markAllAsRead")
         getNotifications();
         loadUnreadCount()
     }
@@ -136,16 +109,8 @@ async function markAllAsRead() {
 
 async function loadUnreadCount() {
     try{
-        const response = await fetch(`${BASE_URL}/notifications/unread-count`, {
-            headers: {
-                "Authorization": "Bearer " + token,
-                "Content-Type": "application/json"
-            }
-        });
-        if (!response.ok) {
-            return;
-    }
-    const data = await response.json();
+     
+    const data = await api.get("notifications/unread-count")
     document.getElementById("notification-count").textContent = data.unreadCount;
 }catch (error) {
     console.error("Error fetching unread count:", error);

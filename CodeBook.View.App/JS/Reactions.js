@@ -1,5 +1,5 @@
-const BASE_URL = "https://localhost:7241/api";
-const token = localStorage.getItem("token");
+import { api } from './api.js';
+
 
 function initReactions() {
 const buttons=document.querySelectorAll(".react-btn");
@@ -50,25 +50,11 @@ async function handleReaction(event) {
 }
 async function addReaction(postId) {
     try{
-        const response = await fetch(`${BASE_URL}/reactions`, {
-            method: "POST",
-            headers: {
-                "Authorization": "Bearer " + token,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                postId:postId,
-                type:"Like"
-            })
+       const data = await api.post("reactions", {
+            postId: postId,
+            type: "Like"
         });
-    
-    if (response.ok) {
-        const data = await response.json();
         return data.id;
-    }
-    else {return null;
-
-    }
 }catch (error) {
     console.error("Error adding reaction:", error);
     return null;
@@ -77,15 +63,9 @@ async function addReaction(postId) {
 
 async function removeReaction(reactionId) {
     try{
-        const response = await fetch(`${BASE_URL}/reactions/${reactionId}`, {
-            method: "DELETE",
-            headers: {
-                "Authorization": "Bearer " + token,
-            }
-        });
-        return response.ok;
-    }
-    catch (error) {
+     await api.delete(`reactions/${reactionId}`);
+        return true;
+     } catch (error) {
         console.error("Error removing reaction:", error);
         return false;
     }

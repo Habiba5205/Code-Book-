@@ -1,5 +1,5 @@
-const BASE_URL = "https://localhost:7241/api";
-const token = localStorage.getItem("token");
+import { api } from './api.js';
+
 
 function getPostId(){  //get post id from url 
     const params = new URLSearchParams(window.location.search);
@@ -19,16 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function fetchComments(postId) {
-  try{  const response = await fetch(`${BASE_URL}/posts/${postId}/comments`, {
-        headers: {
-            "Authorization": "Bearer " + token,
-        }
-    });
-    if (!response.ok) {
-        console.error("Failed to fetch comments");
-        return;
-    }
-    const comments = await response.json();
+  try{  
+    const comments =   await api.get(`posts/${postId}/comments`);
     renderComments(comments);
 }catch (error) {
     console.error("Error fetching comments:", error);
@@ -85,11 +77,94 @@ function createCommentCard(comment, getReplies) {
         const replyCard = createCommentCard(reply, getReplies);
         repliesContainer.appendChild(replyCard);
     });
+const replybtn=div.querySelector(".reply-btn");
+const deletebtn=div.querySelector(".delete-comment-btn");
+if (replybtn) {
+    replybtn.addEventListener("click", () => {
+        showReplyForm(comment.id);
+    });
+}
 
+if (deletebtn) {
+    deletebtn.addEventListener("click", () => {
+        deleteComment(comment.id);
+    });
+}
     return div;
 }
-function getCurrentUserId() {
-    if(!token) return null;
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    return parseInt(payload.nameid); 
+async function getCurrentUserId() {
+       try {
+        const user = await api.get("auth/me");
+        return user.id;
+    } catch {
+        return null;
+    }
+}
+async function addComment(postId,body,selfCommentId=null){
+try{
+   
+  await api.post(`posts/${postId}/comments`,{
+    body: body,
+    selfCommentId: selfCommentId
+});
+ await fetchComments(postId);
+}catch(error){
+    console.error("Error adding comment:", error)
+}
+}
+async function deleteComment(commentId){
+try{
+await api.delete(`comments/${commentId}`);
+ await fetchComments(getPostId());
+}catch(error){
+    console.error("Error deleting comment:", error)
+}
+}
+function formatTime(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffInMins = Math.floor((now - date) / 60000);
+    if (diffInMins < 1)    return "Just now";
+    if (diffInMins < 60)   return `${diffInMins} minutes ago`;
+    if (diffInMins < 1440) return `${Math.floor(diffInMins / 60)} hours ago`;
+    return `${Math.floor(diffInMins / 1440)} days ago`;
+}
+function showReplyForm(selfCommentId) {
+    const postId = getPostId();
+
+    const existing = document.getElementById(`reply-form-${selfCommentId}`);
+    if (existing) {
+        existing.remove();
+        return;
+    }
+
+    const form = document.createElement("div");
+    form.id = `reply-form-${selfCommentId}`;
+    form.className = "ms-4 mt-2";
+    form.innerHTML = `
+        <div class="input-group">
+            <input type="text" 
+                   class="form-control form-control-sm" 
+                   id="reply-input-${selfCommentId}"
+                   placeholder="Write a reply...">
+            <button class="btn btn-sm btn-purple" 
+                    onclick="submitReply(${selfCommentId})">
+                Reply
+            </button>
+        </div>
+    `;
+
+    const repliesContainer = document.getElementById(`replies-${selfCommentId}`);
+    if (repliesContainer) {
+        repliesContainer.prepend(form);
+    }
+}
+
+async function submitReply(selfCommentId) {
+    const input = document.getElementById(`reply-input-${selfCommentId}`);
+    const body = input.value.trim();
+    if (!body) return;
+
+    const postId = getPostId();
+    await addComment(postId, body, selfCommentId);
 }
