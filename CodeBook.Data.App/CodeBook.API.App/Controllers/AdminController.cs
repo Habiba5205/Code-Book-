@@ -37,7 +37,7 @@ namespace CodeBook.API.App.Controllers
                 var removerId = _currentUserInfo.GetCurrentUserId();
                 if (removerId == 0) throw new KeyNotFoundException();
                 _moderationService.RemovePost(postId, reportId ,removerId);
-                return Ok("Post removed successfully");
+                return Ok(new { message = "Post removed successfully" });
             }
             catch (KeyNotFoundException ex)
             {
@@ -59,7 +59,7 @@ namespace CodeBook.API.App.Controllers
                 var removerId = _currentUserInfo.GetCurrentUserId();
                 if(removerId == 0) throw new KeyNotFoundException();
                 _moderationService.RemoveComment(commentId, reportId, removerId);
-                return Ok("Comment removed successfully");
+                return Ok(new { message = "Comment removed successfully" });
             }
             catch (KeyNotFoundException ex)
             {
@@ -94,7 +94,7 @@ namespace CodeBook.API.App.Controllers
         {
             try { 
              _reportService.UpdateReportStatus(id, dto);
-                return Ok("Report Status Updated Successfully");
+                return Ok(new { message = "Report Status Updated Successfully" });
             }
             catch (KeyNotFoundException ex)
             {
