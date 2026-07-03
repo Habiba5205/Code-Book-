@@ -1,5 +1,12 @@
 import { api } from './api.js'
-;
+
+function decodeToken(token) {
+    try {
+        return JSON.parse(atob(token.split('.')[1]));
+    } catch { 
+        return null; 
+    }
+}
 window.onload=()=>{
         const button = document.getElementById('loginBtn');
         const emailinput = document.getElementById('email');
@@ -15,15 +22,25 @@ window.onload=()=>{
             try{
                 button.innerText = "Signing in"
                 button.disabled = true;
-                await api.post('auth/login',{
+
+                const response = await api.post('Auth/login',{
                     Password: password,
                     Email: email
                 });
 
-                window.location.href = "../admin/dashboard.html";
-            }
-            catch (error) {
-            alert("Login failed: " + error.message);
+                const payload = decodeToken(response.token);
+
+                localStorage.setItem('token', payload.token);
+                localStorage.setItem('userId', payload.nameid || payload.sub);
+                localStorage.setItem('role', payload.role);
+
+                if (payload.role === 'Admin') {
+                    window.location.href = "../admin/dashboard.html";
+                } else {
+                    window.location.href = "../html/Posts/Feed.html";
+                }
+            } catch (error) {
+                alert("Login failed: " + error.message);
             } finally {
             button.innerText = "Sign In";
             button.disabled = false;

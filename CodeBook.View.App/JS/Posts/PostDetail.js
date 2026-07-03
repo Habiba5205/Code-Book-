@@ -21,6 +21,10 @@ async function loadPost() {
             return;
         }
 
+        const currentUserid = parseInt(localStorage.getItem('userId'));
+console.log('Post authorId:', post.authorId);
+console.log('Current userId:', currentUserid);
+console.log('Match:', post.authorId === currentUserid);
         document.getElementById('postContainer').innerHTML = `
             <div class="post-card">
                 <h2 class="post-title">${post.title}</h2>
@@ -42,12 +46,35 @@ async function loadPost() {
                 ` : ''}
 
                 <div class="post-actions mt-3">
+
+                    <div class="reactions-container d-flex gap-2 mb-3">
+                        <button class="btn-purple reaction-btn" onclick="addReaction('Like')">
+                           👍 <span id="likeCount">0</span>
+                        </button>
+                        <button class="btn-purple reaction-btn" onclick="addReaction('Haha')">
+                            😂 <span id="hahaCount">0</span>
+                        </button>
+                        <button class="btn-purple reaction-btn" onclick="addReaction('Angry')">
+                            😠 <span id="angryCount">0</span>
+                        </button>
+                        <button class="btn-purple reaction-btn" onclick="addReaction('Celebrate')">
+                            🎉 <span id="celebrateCount">0</span>
+                        </button>
+                        <button class="btn-purple reaction-btn" onclick="addReaction('Care')">
+                            🤗 <span id="careCount">0</span>
+                        </button>
+                        <button class="btn-purple reaction-btn" onclick="addReaction('love')">
+                            ❤️ <span id="loveCount">0</span>
+                        </button>
+                    </div>
                     <button class="btn-purple" onclick="savePost()">
                         <i class="fa-solid fa-bookmark"></i> Save Post
                     </button>
-                    <a href="edit-post.html?id=${postId}" class="btn-purple">
+
+                    <a href="EditPosts.html?id=${postId}" class="btn-purple">
                         <i class="fa-solid fa-pen"></i> Edit Post
                     </a>
+                    
                 </div>
 
                 <div id="saveMsg" class="success-msg mt-2"></div>
