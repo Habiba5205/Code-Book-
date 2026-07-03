@@ -27,16 +27,17 @@ namespace CodeBook.API.App.Controllers
             _currentUserInfo = currentUserInfo;
         }
 
-        [HttpDelete("posts/{postId}")]
-        public IActionResult RemovePost(int postId, [FromBody] RemovePostsDto dto)
+     
+
+        [HttpDelete("posts/{postId}/{reportId}")]
+        public IActionResult RemovePost(int postId, int reportId)
         {
             try
             {
                 var removerId = _currentUserInfo.GetCurrentUserId();
-                if (string.IsNullOrEmpty(dto.Reason))
-                    return BadRequest("Reason is required");
-                _moderationService.RemoveComment(postId, dto,removerId);
-                return Ok("Post removed successfully");
+                if (removerId == 0) throw new KeyNotFoundException();
+                _moderationService.RemovePost(postId, reportId ,removerId);
+                return Ok(new { message = "Post removed successfully" });
             }
             catch (KeyNotFoundException ex)
             {
@@ -47,19 +48,18 @@ namespace CodeBook.API.App.Controllers
              }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                return StatusCode(500, $"Internal server error post removal: {ex.Message}, {ex.InnerException?.Message}");
             }
         }
-        [HttpDelete("comments/{commentId}")]
-        public IActionResult RemoveComment(int commentId, [FromBody] RemovePostsDto dto)
+        [HttpDelete("comments/{commentId}/{reportId}")]
+        public IActionResult RemoveComment(int commentId,int reportId)
         {
             try
             {
                 var removerId = _currentUserInfo.GetCurrentUserId();
-                if (string.IsNullOrEmpty(dto.Reason))
-                    return BadRequest("Reason is required");
-                _moderationService.RemoveComment(commentId, dto, removerId);
-                return Ok("Comment removed successfully");
+                if(removerId == 0) throw new KeyNotFoundException();
+                _moderationService.RemoveComment(commentId, reportId, removerId);
+                return Ok(new { message = "Comment removed successfully" });
             }
             catch (KeyNotFoundException ex)
             {
@@ -71,7 +71,7 @@ namespace CodeBook.API.App.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                return StatusCode(500, $"Internal server error comment removal: {ex.Message}");
             }
         }
         [HttpGet("reports")]
@@ -80,20 +80,21 @@ namespace CodeBook.API.App.Controllers
             try
             {
                 var reports = _reportService.GetPendingReports();
-                if (!reports.Any())
-                    return NotFound("No pending reports found.");
+               /* if (!reports.Any())
+                    return NotFound("No pending reports found.");*/
                 return Ok(reports);
             }
             catch (Exception ex) { 
             return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+
         [HttpPatch("reports/{id}/status")]
         public IActionResult UpdateReportStatus(int id, [FromBody] UpdateReportStatusDto dto)
         {
             try { 
              _reportService.UpdateReportStatus(id, dto);
-                return Ok("Report Status Updated Successfully");
+                return Ok(new { message = "Report Status Updated Successfully" });
             }
             catch (KeyNotFoundException ex)
             {

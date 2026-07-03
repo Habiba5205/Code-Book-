@@ -3,6 +3,7 @@ using CodeBook.Models.App;
 using CodeBook.Data.App.IRepositories;
 using System;
 using CodeBook.Business.App.DTOs;
+using Microsoft.AspNetCore.Routing.Constraints;
 
 
 namespace CodeBook.Business.App.Services
@@ -20,7 +21,7 @@ namespace CodeBook.Business.App.Services
             _commentRepository = commentRepository;
         }
 
-        public void RemoveComment(int postId, RemovePostsDto dto,int removerId)
+        public void RemovePost(int postId, int reportId, int removerId)
         {
             var post = _postRepository.GetPostById(postId);
 
@@ -28,32 +29,28 @@ namespace CodeBook.Business.App.Services
             {
                 post.IsRemoved = true;
                 post.DateUpdated = DateTime.Now;
-
-                var removal = new Models.App.PostRemoval
+                var report = _reportRepository.GetReportbyId(reportId);
+                if (report != null)
                 {
-                    PostId = postId,
-                    RemoverId = removerId,
-                    ReportId = dto.ReportId,
-                    Reason = dto.Reason,
-                    DateCreated = DateTime.Now
-                };
-                _postRepository.AddRemovalRecord(removal);
 
-                if (dto.ReportId != null)
-                {
-                    var report = _reportRepository.GetReportbyId(dto.ReportId);
-                    if (report != null)
+                    var removal = new PostRemoval
                     {
-                        report.Status = ReportStatus.Accepted;
-                        report.DateUpdated = DateTime.UtcNow;
-                        _reportRepository.Update(report);
-                    }
+                        PostId = postId,
+                        RemoverId = removerId,
+                        ReportId = reportId,
+                        Reason = report.Reason,
+                        DateCreated = DateTime.Now
+                    };
+                    _postRepository.AddRemovalRecord(removal);
 
+                    report.Status = ReportStatus.Accepted;
+                    report.DateUpdated = DateTime.UtcNow;
+                    _reportRepository.Update(report);
+                    _postRepository.SaveChanges();
                 }
-                _postRepository.SaveChanges();
             }
         }
-        public void RemoveComment(int commentId, RemoveCommentDto dto, int removerId)
+        public void RemoveComment(int commentId, int reportId, int removerId)
         {
             var comment = _commentRepository.GetCommentById(commentId);
 
@@ -61,29 +58,26 @@ namespace CodeBook.Business.App.Services
             {
                 comment.isRemoved = true;
                 comment.DateUpdated = DateTime.Now;
-
-                var removal = new CommentRemoval
+                var report = _reportRepository.GetReportbyId(reportId);
+                if (report != null)
+                {
+                    var removal = new CommentRemoval
                 {
                     CommentId = commentId,
                     RemoverId = removerId,
-                    ReportId = dto.ReportId,
-                    Reason = dto.Reason,
+                    ReportId = reportId,
+                    Reason = report.Reason,
                     DateCreated = DateTime.Now
                 };
                 _commentRepository.AddRemovalRecord(removal);
 
-                if (dto.ReportId != null)
-                {
-                    var report = _reportRepository.GetReportbyId(dto.ReportId);
-                    if (report != null)
-                    {
-                        report.Status = ReportStatus.Accepted;
-                        report.DateUpdated = DateTime.UtcNow;
-                        _reportRepository.Update(report);
-                    }
+                 report.Status = ReportStatus.Accepted;
+                 report.DateUpdated = DateTime.UtcNow;
+                 _reportRepository.Update(report);
+                
 
                 }
-                _postRepository.SaveChanges();
+                _commentRepository.SaveChanges();
             }
         }
     }

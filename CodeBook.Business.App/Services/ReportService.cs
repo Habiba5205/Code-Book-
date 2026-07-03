@@ -77,7 +77,7 @@ namespace CodeBook.Business.App.Services
             var report = _reportRepository.GetReportbyId(reportId);
             if (report != null)
             {
-                report.Status = dto.Status;
+                report.Status = Enum.Parse<ReportStatus>(dto.Status);
                 report.DateUpdated = DateTime.UtcNow;
                 _reportRepository.Update(report);
                 _reportRepository.SaveChanges();
