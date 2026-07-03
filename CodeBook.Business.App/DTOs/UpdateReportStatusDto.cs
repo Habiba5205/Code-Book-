@@ -9,7 +9,7 @@ namespace CodeBook.Business.App.DTOs
 {
     public class UpdateReportStatusDto
     {
-        public ReportStatus Status { get; set; }
+        public string Status { get; set; }
 
     }
 }

@@ -4,18 +4,17 @@ async function apirequest(endpoint,verb,body = null){
     const options = {
         method: verb,
         credentials: 'include',
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        headers: {}
     };
-    if(body){
+    if (body) {
         options.body = JSON.stringify(body);
+        options.headers['Content-Type'] = 'application/json';
     }
 
     try{
         const response = await fetch(`${URL_BASE}${endpoint}`,options);
-
         if (!response.ok) {
+            
         const errorData = await response.json().catch(() => ({ message: response.message }));
         throw new Error(errorData.message);
         }
@@ -23,16 +22,15 @@ async function apirequest(endpoint,verb,body = null){
         return await response.json();
     }
     catch(error){
-        console.error('Failed to connect to API:', error);
+        console.error('Failed to connect to API:', error.message);
         throw error;
     }
 }
 
-
-const api = {
+export const api = {
     get: (endpoint) => apirequest(endpoint,'GET'),
     post: (endpoint,body) => apirequest(endpoint,'POST',body),
     put: (endpoint,body) => apirequest(endpoint,'PUT',body),
-    delete: (endpoint,body=null) => apirequest(endpoint,'DELETE',body),
+    delete: (endpoint) => apirequest(endpoint,'DELETE'),
     patch: (endpoint,body) => apirequest(endpoint,'PATCH',body)
 };

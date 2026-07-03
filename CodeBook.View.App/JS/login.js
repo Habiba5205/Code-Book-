@@ -1,9 +1,10 @@
-import { api } from './api.js';
+import { api } from './api.js'
+;
 window.onload=()=>{
-        const button = document.querySelector('loginBtn');
+        const button = document.getElementById('loginBtn');
         const emailinput = document.getElementById('email');
         const passwordinput = document.getElementById('password');
-        button.addEventListener('click',async () =>
+        button.addEventListener('click', async () =>
         {
             const email = emailinput.value;
             const password = passwordinput.value;
@@ -19,7 +20,7 @@ window.onload=()=>{
                     Email: email
                 });
 
-                window.location.href = "admin/dashboard.html";
+                window.location.href = "../admin/dashboard.html";
             }
             catch (error) {
             alert("Login failed: " + error.message);

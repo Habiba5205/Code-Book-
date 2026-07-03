@@ -5,6 +5,7 @@ namespace CodeBook.Business.App.Interfaces
 {
 	public interface IModerationService
     {
-        void RemoveComment(int PostId, RemovePostsDto dto,int removerId);
+        void RemovePost(int PostId, int reportId,int removerId);
+        void RemoveComment(int PostId, int reportId, int removerId);
     }
 }
