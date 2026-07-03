@@ -16,5 +16,7 @@ namespace CodeBook.Data.App.IRepositories
         List<Comment> GetByPostId(int postId);
         bool SaveChanges();
         void AddRemovalRecord(CommentRemoval removal);
+        void AddReaction(int commentId);
+        void RemoveReaction(int commentId);
     }
 }

@@ -109,7 +109,8 @@ namespace CodeBook.Business.App.Controllers
         public IActionResult AssignRole(int id, [FromBody] AssignRoleDto dto)
         {
             try {
-                _communityService.AssignRole(id, dto);
+                var userId = _currentUserInfo.GetCurrentUserId();
+                _communityService.AssignRole(id, userId,dto);
                 return Ok("Role Assigned Successfully");
             }
             catch (KeyNotFoundException ex)

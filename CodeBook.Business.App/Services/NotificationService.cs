@@ -4,6 +4,7 @@ using AutoMapper;
 using CodeBook.Data.App.IRepositories;
 using CodeBook.Models.App;
 using System;
+using CodeBook.Business.App.Middleware;
 
 
 namespace CodeBook.Business.App.Services
@@ -67,6 +68,18 @@ namespace CodeBook.Business.App.Services
             var notifications = _notificationRepository.GetNotificationsbyUserId(userId);
             return notifications.Count(n => n.IsSeen == false);
 
+        }
+        public void MarkAllAsRead(int userId)
+        {
+            List<Notification> notifications = _notificationRepository.GetNotificationsbyUserId(userId);
+
+            if (notifications != null)
+            {
+                foreach (Notification notification in notifications)
+                {
+                    MarkAsRead(notification.Id);
+                }
+            }
         }
 
     }

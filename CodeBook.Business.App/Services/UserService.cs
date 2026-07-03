@@ -68,7 +68,7 @@ namespace CodeBook.Business.App.Services
             {
                  _notificationService.CreateNotification(followeeId, new NotificationDTO
                 {
-                    UserId = followeeId,
+                    userId = followeeId,
                     Type = "Follow",
                     Message = "You have a Follow Request",
                     ReferenceId = followerId,

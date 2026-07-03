@@ -41,7 +41,7 @@ namespace CodeBook.Data.App.Repositories
 
         public List<Post> Getfeed()
         {
-            return _context.posts.Where(p => p.IsPublic && !p.IsRemoved).ToList();
+            return _context.posts.Include(p=>p.Author).Where(p => p.IsPublic && !p.IsRemoved).ToList();
         }
         public void SavePost(PostSaved saved)
         {
@@ -51,12 +51,21 @@ namespace CodeBook.Data.App.Repositories
         {
             _context.postsRemovals.Add(postRemoval);
         }
-        public void AddReaction(int postId, ReactionType type)
+        public void AddReaction(int postId, ReactionType type,int userId)
         {
             var post = GetPostById(postId);
             if(post != null)
             {
-                post.Reactions.Add(new Reaction { PostId = postId, Type = type });
+                post.Reactions.Add(new Reaction {UserId=userId,PostId = postId, Type = type });
+                post.LikeCount++;
+            }
+        }
+        public void RemoveReaction(int postId)
+        {
+            var post = GetPostById(postId);
+            if (post != null)
+            {
+                post.LikeCount--;
             }
         }
         public void AddComment(int postId)
@@ -91,7 +100,7 @@ namespace CodeBook.Data.App.Repositories
         }
         public IQueryable<Post> GetAllUnremoved()
         {
-            return _context.posts.Where(p => p.IsRemoved == false);
+            return _context.posts.Include(p=>p.Author).Where(p => p.IsRemoved == false);
         }
         public bool SaveChanges()
         {
@@ -102,7 +111,7 @@ namespace CodeBook.Data.App.Repositories
         {
             return _context.postsSaved.Any(s => s.UserId == userId && s.PostId == postId);
         }
-
+       
     } 
 }
 
