@@ -1,5 +1,4 @@
-import { api } from './api.js'
-;
+import { api } from './api.js';
 window.onload=()=>{
         const button = document.getElementById('loginBtn');
         const emailinput = document.getElementById('email');

@@ -14,6 +14,7 @@ namespace CodeBook.Business.App.Interfaces
         string Login(LoginDto login);
         ErrorResponse ResetPassword(ResetPasswordDto resetPassword);
         bool VerifyPassword(string password, int userId);
+        public ErrorResponse ForgotPassword(ForgotPasswordDto forgotPassword);
 
     }
 }

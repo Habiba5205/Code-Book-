@@ -84,6 +84,17 @@ namespace CodeBook.Business.App.Methods
 			if(_userRepository.SaveChanges()) return new ErrorResponse { Success = true, Message = "Password Reset Successfully!" };
             return new ErrorResponse { Success = false, Message = "Couldn't Reset Password!" };
         }
+        public ErrorResponse ForgotPassword(ForgotPasswordDto forgotPassword)
+        {
+            if (forgotPassword == null) return new ErrorResponse { Success = false, Message = "Please fill the required fields!" };
+            User user = _userRepository.GetProfileByEmail(forgotPassword.email);
+            if (user == null) return new ErrorResponse { Success = false, Message = "User Not Found!" };
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(forgotPassword.newPassword);
+            _userRepository.Update(user);
+            if (_userRepository.SaveChanges()) return new ErrorResponse { Success = true, Message = "Password Reset Successfully!" };
+            return new ErrorResponse { Success = false, Message = "Couldn't Reset Password!" };
+        }
+
 
         public bool VerifyPassword(string password, int userId)
         {
