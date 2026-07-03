@@ -97,6 +97,7 @@ builder.Services.AddServices();
 builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -104,10 +105,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseRouting();
+app.UseHttpsRedirection();
 
 app.UseCors("AllowLocalHost");
 
-app.UseHttpsRedirection();
+
 
 app.UseAuthentication();
 
