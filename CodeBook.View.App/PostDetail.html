@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Detail - CodeBook</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg mb-4">
+        <div class="container">
+            <a href="Feed.html" class="navbar-brand">
+                <i class="fa-solid fa-code"></i> CodeBook
+            </a>
+            <div class="d-flex gap-3 align-items-center">
+                <a href="Feed.html" class="btn-purple">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Feed
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <div id="postContainer">
+            <p style="color:white">Loading post...</p>
+        </div>
+
+        <div id="commentsSection" style="margin-top:30px">
+            <h3 style="color:white; margin-bottom:20px">
+                <i class="fa-solid fa-comments"></i> Comments
+            </h3>
+
+
+            <div class="post-card" id="addCommentForm">
+                <textarea id="commentBody" class="form-control" 
+                          rows="3" 
+                          placeholder="Write a comment...">
+                </textarea>
+                <div id="commentError" class="error-msg mt-2"></div>
+                <div id="commentSuccess" class="success-msg mt-2"></div>
+                <button class="btn-purple mt-3" onclick="addComment()">
+                    <i class="fa-solid fa-paper-plane"></i> Post Comment
+                </button>
+            </div>
+
+            <div id="commentsContainer">
+                <p style="color:#8b949e">Loading comments...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="JS/api.js"></script>
+    <script src="JS/PostDetail.js"></script>
+</body>
+</html>
