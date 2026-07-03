@@ -122,10 +122,9 @@
             margin-top:20px;
         }
     }
-<<<<<<< Updated upstream
     .form-check-input{
-    cursor:pointer;
-=======
+        cursor:pointer;
+    }
     .offcanvas{
         background-color:#161b22;
         color:white;
@@ -133,10 +132,9 @@
     .offcanvas .menu-btn{
         color:white;
     }
-
-.offcanvas .menu-btn i{
-    color:white;
-}
+    .offcanvas .menu-btn i{
+        color:white;
+    }
     .offcanvas-header{
         border-bottom: 1px solid #30363d;
     }
@@ -160,7 +158,6 @@
 }
 .btn-close{
     filter:invert(1);
->>>>>>> Stashed changes
 }
 
 .modal-content{
