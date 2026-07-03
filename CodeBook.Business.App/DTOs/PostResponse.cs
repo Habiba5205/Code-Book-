@@ -12,6 +12,7 @@ namespace CodeBook.Business.App.DTOs
         public string CodeSnippet { get; set; }
         public string Language { get; set; }
         public string AuthorUsername { get; set; }
+        public int AuthorId { get; set; }
         public DateTime DateCreated { get; set; }
         public bool IsPublic { get; set; }
     }

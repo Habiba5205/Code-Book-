@@ -38,6 +38,21 @@ async function loadFeed() {
                     ` : ''}
 
                     <div class="post-actions">
+                        <div class="d-flex gap-1">
+                            <button class="btn-purple reaction-btn" 
+                                    onclick="addReaction(${post.id}, 'Like')">
+                                👍
+                            </button>
+                            <button class="btn-purple reaction-btn" 
+                                    onclick="addReaction(${post.id}, 'Haha')">
+                                😂
+                            </button>
+                            <button class="btn-purple reaction-btn" 
+                                    onclick="addReaction(${post.id}, 'love')">
+                                ❤️
+                            </button>
+                        </div>
+
                         <button class="btn-purple" onclick="viewPost(${post.id})">
                             <i class="fa-solid fa-eye"></i> View Post
                         </button>

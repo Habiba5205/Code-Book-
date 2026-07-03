@@ -340,3 +340,19 @@
     border-radius: 8px;
     margin-bottom: 10px;
 }
+
+.reaction-btn {
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 20px;
+    transition: transform 0.1s;
+}
+
+.reaction-btn:hover {
+    transform: scale(1.2);
+}
+
+.reaction-btn.active {
+    background-color: #7c3aed;
+    color: white;
+}
