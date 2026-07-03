@@ -41,7 +41,7 @@ namespace CodeBook.Data.App.Repositories
 
         public List<Post> Getfeed()
         {
-            return _context.posts.Where(p => p.IsPublic && !p.IsRemoved).ToList();
+            return _context.posts.Include(p=>p.Author).Where(p => p.IsPublic && !p.IsRemoved).ToList();
         }
         public void SavePost(PostSaved saved)
         {
@@ -100,7 +100,7 @@ namespace CodeBook.Data.App.Repositories
         }
         public IQueryable<Post> GetAllUnremoved()
         {
-            return _context.posts.Where(p => p.IsRemoved == false);
+            return _context.posts.Include(p=>p.Author).Where(p => p.IsRemoved == false);
         }
         public bool SaveChanges()
         {
@@ -111,7 +111,7 @@ namespace CodeBook.Data.App.Repositories
         {
             return _context.postsSaved.Any(s => s.UserId == userId && s.PostId == postId);
         }
-
+       
     } 
 }
 
