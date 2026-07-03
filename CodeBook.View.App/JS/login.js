@@ -1,6 +1,6 @@
 import { api } from './api.js';
 window.onload=()=>{
-        const button = document.querySelector('button');
+        const button = document.querySelector('loginBtn');
         const emailinput = document.getElementById('email');
         const passwordinput = document.getElementById('password');
         button.addEventListener('click',async () =>
