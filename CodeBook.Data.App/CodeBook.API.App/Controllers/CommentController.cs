@@ -55,7 +55,7 @@ namespace CodeBook.API.App.Controllers
             return BadRequest(new { message = result.Message });
         }
 
-        [HttpDelete("{commmentId}/deleteComment")]
+        [HttpDelete("{commentId}/deleteComment")]
         [Authorize]
         public IActionResult DeleteComment(int commentId)
         {
