@@ -380,3 +380,8 @@
     background-color: #21262d;
     margin-bottom: 20px;
 }
+.reaction-btn.reacted {
+    background-color: #7c3aed;
+    color: white;
+    border-color: #7c3aed;
+}

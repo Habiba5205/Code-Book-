@@ -1,3 +1,4 @@
+import { api } from '../api.js';
 console.log("Feed.js loaded");
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -8,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
     loadFeed();
 });
 async function loadFeed() {
+    console.log("loadFeed called!"); // ← add this
+    console.trace(); 
     try {
         postsContainer.innerHTML = `<p style="color:white">Loading...</p>`;
         const posts = await api.get(`Post/feed?page=${currentPage}`);
@@ -18,8 +21,10 @@ async function loadFeed() {
 
         postsContainer.innerHTML = "";
         posts.forEach(post => {
-            postsContainer.innerHTML += `
-                <div class="post-card">
+            const div=document.createElement("div");
+            div.className="post-card"
+            div.innerHTML = `
+            
                     <h2 class="post-title">${post.title}</h2>
                     <p style="color:#8b949e;font-size:13px">
                         by ${post.authorUsername} • 
@@ -40,16 +45,26 @@ async function loadFeed() {
                     <div class="post-actions">
                         <div class="d-flex gap-1">
                             <button class="btn-purple reaction-btn" 
-                                    onclick="addReaction(${post.id}, 'Like')">
-                                👍
+                            data-post-id="${post.id}"
+                              data-type="Like"
+                              data-liked="false"
+                              onclick="toggleReaction(this, ${post.id}, 'Like')">
+                                👍<span class="like-count">${post.likeCount || 0}</span>
                             </button>
                             <button class="btn-purple reaction-btn" 
-                                    onclick="addReaction(${post.id}, 'Haha')">
-                                😂
+                              data-post-id="${post.id}"
+                              data-type="Like"
+                              data-liked="false"
+                              onclick="toggleReaction(this, ${post.id}, 'Haha')">
+                                😂<span class="like-count">${post.likeCount || 0}</span>
                             </button>
                             <button class="btn-purple reaction-btn" 
-                                    onclick="addReaction(${post.id}, 'love')">
-                                ❤️
+                              data-post-id="${post.id}"
+                              data-type="Like"
+                              data-liked="false"
+                              onclick="toggleReaction(this, ${post.id}, 'love')">
+                                   
+                                ❤️<span class="like-count">${post.likeCount || 0}</span>
                             </button>
                         </div>
 
@@ -57,8 +72,9 @@ async function loadFeed() {
                             <i class="fa-solid fa-eye"></i> View Post
                         </button>
                     </div>
-                </div>
+
             `;
+            postsContainer.appendChild(div);
         });
 
         console.log('Current page:', currentPage);

@@ -56,7 +56,7 @@ namespace CodeBook.Data.App.Repositories
             var post = GetPostById(postId);
             if(post != null)
             {
-                post.Reactions.Add(new Reaction {UserId=userId,PostId = postId, Type = type });
+                //post.Reactions.Add(new Reaction {UserId=userId,PostId = postId, Type = type });
                 post.LikeCount++;
             }
         }

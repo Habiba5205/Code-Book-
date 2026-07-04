@@ -1,75 +1,68 @@
 import { api } from './api.js';
+async function toggleReaction(button, postId, reactionType) {
 
+    const container = button.parentElement;
+    const currentReaction = container.querySelector(".reacted");
+    if (currentReaction === button) {
+        const success = await removeReaction(postId);
+        if (success) {
+            button.classList.remove("reacted");
+            button.dataset.liked = "false";
+            const count = button.querySelector(".like-count");
+            count.textContent = Math.max(0, parseInt(count.textContent) - 1);
+        }
 
-function initReactions() {
-const buttons=document.querySelectorAll(".react-btn");
-buttons.forEach(button=>{
-    button.addEventListener("click", handleReaction)
-});
+        return;
+    }
+
+    if (currentReaction) {
+
+        await removeReaction(postId);
+        currentReaction.classList.remove("reacted");
+        currentReaction.dataset.liked = "false";
+        const oldCount = currentReaction.querySelector(".like-count");
+        oldCount.textContent = Math.max(0, parseInt(oldCount.textContent) - 1);
+    }
+    const success = await addReaction(postId, reactionType);
+    if (success) {
+        button.classList.add("reacted");
+        button.dataset.liked = "true";
+        const count = button.querySelector(".like-count");
+        count.textContent = parseInt(count.textContent) + 1;
+    }
 }
 
-async function handleReaction(event) {
- const button = event.currentTarget;
+let reactionCallCount = 0;
+async function addReaction(postId, reactionType) {
+ console.log(`addReaction call #${reactionCallCount}`, new Date().getTime());
+    console.trace();
 
- const postId = button.dataset.postId;
- const reactionId = button.dataset.reactionId;
- const isLiked = button.dataset.liked === "true";
- const countSpan = button.querySelector(".like-count");
- const originalCount = parseInt(countSpan.textContent);
-
- try{
- if (isLiked) {
-    button.dataset.liked = "false";
-    countSpan.textContent = originalCount - 1;
-   const success= await removeReaction(reactionId);
-   if (!success) {
-    button.dataset.liked = "true";
-    countSpan.textContent = originalCount + 1;
-   }
-   else{
-    button.dataset.reactionId = "";
-   }
- } else {
-    button.dataset.liked = "true";
-    countSpan.textContent = originalCount + 1;
-    const newId = await addReaction(postId);
-    if(!newId){
-        button.dataset.liked = "false";
-        countSpan.textContent = originalCount;
-    }
-    else{
-        button.dataset.reactionId = newId;
-    }
- }}
- catch (error) {
-    console.error("Error handling reaction:", error);
-    button.dataset.liked = isLiked.toString();
-    countSpan.textContent = originalCount;
- }
-
-}
-async function addReaction(postId) {
-    try{
-       const data = await api.post("reactions", {
-            postId: postId,
-            type: "Like"
+    try {
+        const data = await api.post("Reaction/addPostreaction", {
+            postId: Number(postId),
+            reactionType: reactionType
         });
-        return data.id;
-}catch (error) {
-    console.error("Error adding reaction:", error);
-    return null;
-}
+
+        console.log("Reaction added:", data);
+        return true;
+    } catch (error) {
+        console.error("Error adding reaction:", error);
+        return false;
+    }
 }
 
-async function removeReaction(reactionId) {
+
+async function removeReaction(postId) {
     try{
-     await api.delete(`reactions/${reactionId}`);
+     await api.delete(`Reaction/removePostreaction?postId=${postId}`);
         return true;
      } catch (error) {
         console.error("Error removing reaction:", error);
         return false;
     }
 }
-document.addEventListener("DOMContentLoaded", () => {
-    initReactions();
-});
+
+
+window.addReaction = addReaction;
+window.removeReaction=removeReaction;
+window.toggleReaction = toggleReaction;
