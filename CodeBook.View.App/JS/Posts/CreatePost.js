@@ -76,3 +76,4 @@ async function createPost() {
         console.error(error);
     }
 }
+window.createPost=createPost;

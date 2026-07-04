@@ -23,9 +23,9 @@ window.onload = () => {
             button.innerText = "Resetting...";
             button.disabled = true;
 
-            await api.post('Auth/password-reset',{
-                OldPassword : oldPassword,
-                NewPassword : newPassword
+            await api.patch('Auth/resetPassword',{
+                Password : oldPassword,
+                newPassword : newPassword
             });
 
             alert("Password changed successfully!!");

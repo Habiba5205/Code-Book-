@@ -1,0 +1,42 @@
+import { api } from '../api.js';
+
+window.onload = async () => {
+   var followersContainer =   document.getElementById("followers-container");
+   await loadFollowers(followersContainer);
+};
+
+async function loadFollowers(followersContainer) {
+    try{
+        const followers = await api.get('User/followers');
+
+        if(!followers || followers.length===0){
+            followersContainer.innerHTML =  '<span style="color: Red;">No followers found.</span>';
+            return;
+        }
+
+        followersContainer.innerHTML = '';
+        followers.forEach(user => {
+            const follwerCard = document.createElement('div');
+            followerCard.className = 'follower-card';
+            followerCard.innerHTML = `
+                <a href="Profile.html?userId=${user.userId}" class="card p-4 text-decoration-none text-dark shadow-sm hover-card">
+                <div class="row align-items-center">
+                <div class="col-md-3 text-center">
+                <img src="${user.avatarUrl ? user.avatarUrl : 'images/default-avatar.png'}"
+                alt="Profile Avatar"
+                class="profile-img">
+                </div>
+                <div class="col-md-9">
+                <h2 class="text-light mb-1">${user.userName}</h2>
+                <p class="text-white-50">${user.bio || 'No bio yet'}</p>
+                </div>
+                </div>
+                </a>`;
+                followersContainer.appendChild(followerCard);
+         
+        });
+}
+catch(error){
+    alert("Couldn't load Followers: " + error.message);
+}
+};

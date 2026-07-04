@@ -189,11 +189,11 @@ function viewPost(postId) {
 }
 
 function viewProfile(userId) {
-    window.location.href = `../html/User/UserProfile.html?id=${userId}`;
+    window.location.href = `../../html/User/OtherUserProfile.html?userId=${userId}`;
 }
 
 function viewCommunity(communityId) {
-    window.location.href = `../html/Community.html?id=${communityId}`;
+    window.location.href = `../../html/Community.html?id=${communityId}`;
 }
 
 window.switchTab = switchTab;
