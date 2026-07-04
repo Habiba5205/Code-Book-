@@ -1,17 +1,10 @@
 import { api } from '../api.js';
+import { fetchComments,addComment } from "../Interactions/Comments.js";
 
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get('id');
 
-document.addEventListener('DOMContentLoaded', () => {
-    if (!postId) {
-        document.getElementById('postContainer').innerHTML = 
-            '<p style="color:red">Post not found!</p>';
-        return;
-    }
-    loadPost();
-    loadComments();
-});
+
 
 async function loadPost() {
     try {
@@ -49,25 +42,52 @@ console.log('Match:', post.authorId === currentUserid);
 
                 <div class="post-actions mt-3">
 
-                    <div class="reactions-container d-flex gap-2 mb-3">
-                        <button class="btn-purple reaction-btn" onclick="addReaction('Like')">
-                           👍 <span id="likeCount">0</span>
-                        </button>
-                        <button class="btn-purple reaction-btn" onclick="addReaction('Haha')">
-                            😂 <span id="hahaCount">0</span>
-                        </button>
-                        <button class="btn-purple reaction-btn" onclick="addReaction('Angry')">
-                            😠 <span id="angryCount">0</span>
-                        </button>
-                        <button class="btn-purple reaction-btn" onclick="addReaction('Celebrate')">
-                            🎉 <span id="celebrateCount">0</span>
-                        </button>
-                        <button class="btn-purple reaction-btn" onclick="addReaction('Care')">
-                            🤗 <span id="careCount">0</span>
-                        </button>
-                        <button class="btn-purple reaction-btn" onclick="addReaction('love')">
-                            ❤️ <span id="loveCount">0</span>
-                        </button>
+                           <div class="d-flex gap-1">
+                            <button class="btn-purple reaction-btn" 
+                            data-post-id="${post.id}"
+                              data-type="Like"
+                              data-liked="false"
+                              onclick="toggleReaction(this, ${post.id}, 'Like')">
+                                👍<span class="like-count">${post.likeCount || 0}</span>
+                            </button>
+                            <button class="btn-purple reaction-btn" 
+                              data-post-id="${post.id}"
+                              data-type="Haha"
+                              data-liked="false"
+                              onclick="toggleReaction(this, ${post.id}, 'Haha')">
+                                😂<span class="like-count">${post.likeCount || 0}</span>
+                            </button>
+                            <button class="btn-purple reaction-btn" 
+                              data-post-id="${post.id}"
+                              data-type="love"
+                              data-liked="false"
+                              onclick="toggleReaction(this, ${post.id}, 'love')">
+                                   
+                                ❤️<span class="like-count">${post.likeCount || 0}</span>
+                            </button>
+                              <button class="btn-purple reaction-btn" 
+                            data-post-id="${post.id}"
+                              data-type="Angry"
+                              data-liked="false"
+                              onclick="toggleReaction(this, ${post.id}, 'Angry')">
+                                😠<span class="like-count">${post.likeCount || 0}</span>
+                            </button>
+                            <button class="btn-purple reaction-btn" 
+                              data-post-id="${post.id}"
+                              data-type="Care"
+                              data-liked="false"
+                              onclick="toggleReaction(this, ${post.id}, 'Care')">
+                                🤗<span class="like-count">${post.likeCount || 0}</span>
+                            </button>
+                            <button class="btn-purple reaction-btn" 
+                              data-post-id="${post.id}"
+                              data-type="Celebrate"
+                              data-liked="false"
+                              onclick="toggleReaction(this, ${post.id}, 'Celebrate')">
+                                   
+                               🎉 <span class="like-count">${post.likeCount || 0}</span>
+                            </button>
+                      
                     </div>
                     <button class="btn-purple" onclick="savePost()">
                         <i class="fa-solid fa-bookmark"></i> Save Post
@@ -90,7 +110,7 @@ console.log('Match:', post.authorId === currentUserid);
     }
 }
 
-async function loadComments() {
+/*async function loadComments() {
     try {
         const comments = await api.get(`Comment/${postId}/comments`);
         const container = document.getElementById('commentsContainer');
@@ -159,7 +179,7 @@ async function addComment() {
         errorMsg.style.display = 'block';
         console.error(error);
     }
-}
+}*/
 
 async function savePost() {
     try {
@@ -175,3 +195,35 @@ async function savePost() {
         console.error(error);
     }
 }
+document.addEventListener("DOMContentLoaded", async () => {
+
+    if (!postId) {
+        document.getElementById("postContainer").innerHTML =
+            "<p style='color:red'>Post not found!</p>";
+        return;
+    }
+
+    await loadPost();
+    await fetchComments(postId);
+
+    document
+        .getElementById("postCommentBtn")
+        .addEventListener("click", submitComment);
+
+});
+async function submitComment() {
+
+    const body = document
+        .getElementById("commentBody")
+        .value
+        .trim();
+
+    if (!body) return;
+
+    await addComment(postId, body);
+
+    document.getElementById("commentBody").value = "";
+
+    await fetchComments(postId);
+}
+window.savePost = savePost;

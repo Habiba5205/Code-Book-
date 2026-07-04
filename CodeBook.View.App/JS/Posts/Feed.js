@@ -103,3 +103,4 @@ function changePage(direction) {
 function viewPost(postId) {
     window.location.href = `PostDetail.html?id=${postId}`;
 }
+window.viewPost = viewPost;

@@ -22,6 +22,7 @@ namespace CodeBook.Business.App.Controllers
             _communityService = communityService;
             _currentUserInfo = currentUserInfo;
         }
+
         [HttpPost("createcommunity")]
         public IActionResult CreateCommunity([FromBody] CreateCommunityDto dto) {
             try
@@ -41,14 +42,14 @@ namespace CodeBook.Business.App.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
-        [HttpPut("{id}")]
-        public IActionResult UpdateCommunity(int id, [FromBody] UpdateCommunityDto dto)
+        [HttpPatch("{communityId}/updatecommunity")]
+        public IActionResult UpdateCommunity(int communityId, [FromBody] UpdateCommunityDto dto)
         {
             try
             {
                 if (string.IsNullOrEmpty(dto.Name))
                     return BadRequest("Community name cannot be empty.");
-                _communityService.UpdateCommunity(id, dto);
+                _communityService.UpdateCommunity(communityId, dto);
                 return Ok(new { message = "Community Updated Successfully" });
             }
             catch (KeyNotFoundException ex) {
@@ -62,11 +63,11 @@ namespace CodeBook.Business.App.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
-        [HttpDelete("{id}")]
-        public IActionResult DeleteCommunity(int id)
+        [HttpDelete("{communityId}/deletecommunity")]
+        public IActionResult DeleteCommunity(int communityId)
         {
             try {
-                _communityService.DeleteCommunity(id);
+                _communityService.DeleteCommunity(communityId);
                 return Ok(new { message = "Community Deleted Successfully" });
             }
             catch (KeyNotFoundException ex)
@@ -78,17 +79,17 @@ namespace CodeBook.Business.App.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
-        [HttpPost("{id}/join")]
-        public IActionResult JoinCommunity(int id, [FromBody] JoinCommunityDto dto) {
+        [HttpPost("{communityId}/joincommunity")]
+        public IActionResult JoinCommunity(int communityId, [FromBody] JoinCommunityDto dto) {
             try {
                 var member = new CommunityMember
                 {
-                    CommunityId = id,
+                    CommunityId = communityId,
                     UserId = _currentUserInfo.GetCurrentUserId(),
-                    Role = dto.Role,
+                    Role = Enum.Parse<CommunityRole>(dto.Role),
                     JoinedAt = DateTime.UtcNow
                 };
-                _communityService.JoinCommunity(id, member);
+                _communityService.JoinCommunity(communityId, member);
                 return Ok(new { message = "Joined Community Successfully" });
             }
             catch (KeyNotFoundException ex)
@@ -105,12 +106,12 @@ namespace CodeBook.Business.App.Controllers
             }
 
         }
-        [HttpPost("{id}/role")]
-        public IActionResult AssignRole(int id, [FromBody] AssignRoleDto dto)
+        [HttpPost("{communityId}/assignrole")]
+        public IActionResult AssignRole(int communityId, [FromBody] AssignRoleDto dto)
         {
             try {
                 var userId = _currentUserInfo.GetCurrentUserId();
-                _communityService.AssignRole(id, userId, dto);
+                _communityService.AssignRole(communityId, userId, dto);
                 return Ok(new { message = "Role Assigned Successfully" });
             }
             catch (KeyNotFoundException ex)
@@ -140,12 +141,12 @@ namespace CodeBook.Business.App.Controllers
         }
 
 
-        [HttpGet("{id}")]
-        public IActionResult GetCommunity(int id)
+        [HttpGet("{communityId}/getcommunity")]
+        public IActionResult GetCommunity(int communityId)
         {
             try
             {
-                Community community = _communityService.GetCommunity(id);
+                Community community = _communityService.GetCommunity(communityId);
                 return Ok(community);
             }
             catch (KeyNotFoundException ex)
@@ -157,13 +158,13 @@ namespace CodeBook.Business.App.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
-        [HttpDelete("{id}/unjoin")]
-        public IActionResult UnjoinCommunity(int id)
+        [HttpDelete("{communityId}/unjoin")]
+        public IActionResult UnjoinCommunity(int communityId)
         {
             try
             {
                 var userId = _currentUserInfo.GetCurrentUserId();
-                _communityService.UnjoinCommunity(id, userId);
+                _communityService.UnjoinCommunity(communityId, userId);
                 return Ok(new { message = "Unjoined Community Successfully" });
             }
             catch (KeyNotFoundException ex)
@@ -206,6 +207,35 @@ namespace CodeBook.Business.App.Controllers
             catch (Exception e)
             {
                 return BadRequest(new { message = "Couldn't get community feed" });
+            }
+        }
+
+        [HttpGet("getunjoinedcommunities")]
+        public IActionResult GetUnjoinedCommunities()
+        {
+            try
+            {
+                var userId = _currentUserInfo.GetCurrentUserId();
+                var communities = _communityService.GetUnjoinedCommunities(userId);
+                return Ok(communities);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = "Couldn't get communities" });
+            }
+        }
+
+        [HttpGet("getownedcommunities")]
+        public IActionResult GetOwnedCommunities() {
+            try
+            {
+                var userId = _currentUserInfo.GetCurrentUserId();
+                var communities = _communityService.GetOwnedCommunities(userId);
+                return Ok(communities);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = "Couldn't get communities" });
             }
         }
 

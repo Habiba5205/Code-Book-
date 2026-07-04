@@ -54,7 +54,9 @@ namespace CodeBook.Business.App.Mapping
                 .ForMember(dest => dest.Description,
                             opt => opt.MapFrom(src => src.Description))
                 .ForMember(dest => dest.DateCreated,
-                            opt => opt.MapFrom(src => src.DateCreated));
+                            opt => opt.MapFrom(src => src.DateCreated))
+                .ForMember(dest => dest.memberscount,
+                            opt => opt.MapFrom(src => src.Members.Count()));
 
 
         }

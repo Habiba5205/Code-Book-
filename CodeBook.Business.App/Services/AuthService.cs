@@ -47,7 +47,7 @@ namespace CodeBook.Business.App.Methods
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
-        public string Login(LoginDto login)
+        public LoginResponse Login(LoginDto login)
 		{
             User existinguser = _userRepository.GetProfileByEmail(login.Email);
 			if (existinguser == null)
@@ -55,7 +55,10 @@ namespace CodeBook.Business.App.Methods
 
             bool found = BCrypt.Net.BCrypt.Verify(login.Password,existinguser.PasswordHash);
 			if(!found) return null;
-			return GenerateJwtToken(existinguser);
+            var loginrespone = new LoginResponse();
+            loginrespone.Role = existinguser.Role.ToString();
+            loginrespone.Token = GenerateJwtToken(existinguser);
+            return loginrespone;
 
 		}
 		public ErrorResponse Register(RegisterDto register)

@@ -15,6 +15,8 @@ namespace CodeBook.Business.App.Interfaces
         List<CommunityDto> GetCommunities(int userId);
         public List<PostResponse> GetCommunityFeed(int communityId);
         List<CommunityDto> SearchCommunities(string keyword);
+        List<CommunityDto> GetUnjoinedCommunities(int userId);
+        List<CommunityDto> GetOwnedCommunities(int userId);
 
     }
 }
