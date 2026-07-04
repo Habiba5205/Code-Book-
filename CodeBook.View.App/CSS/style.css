@@ -263,8 +263,10 @@
     margin: 20px;
 }
 .report-body{
-    display:flex;
-    justify-content: space-between;
+    padding: 20px;
+    max-width: 50%;
+    display:flow-root;
+    justify-content: center;
     background-color: #21262d;
 }
 
@@ -360,23 +362,27 @@
 
 
 .community-card{
-    max-width: 50%;
-    display:flex;
-    justify-content: space-between;
+    max-width: 70%;
     background-color: #21262d;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    margin: 20px auto;
 }
 
 #communities-container{
-    display:flex ;
+    display: flexbox ;
     justify-content: space-between;
 }
-
-#community-data-holder{
+#explore-communities{
+    display: flexbox ;
     justify-content: space-between;
-    max-width: 80%;
-    align-self: center;
+}
+#community-data-holder{
+    justify-content: center;
+    max-width: 100%;
     align-items: center;
-    padding: 10px;
+    padding: 20px;
     background-color: #21262d;
     margin-bottom: 20px;
 }
@@ -384,4 +390,22 @@
     background-color: #7c3aed;
     color: white;
     border-color: #7c3aed;
+}
+
+.actions{
+    justify-content: center;
+    align-items: center;
+}
+
+.community-card-form{
+    max-width: 70%;
+    background-color: #21262d;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+}
+
+.status-update{
+    align-self: center;
 }

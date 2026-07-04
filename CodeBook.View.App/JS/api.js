@@ -27,7 +27,7 @@ async function apirequest(endpoint,verb,body = null){
     }
 }
 
-const api = {
+export const api = {
     get: (endpoint) => apirequest(endpoint,'GET'),
     post: (endpoint,body) => apirequest(endpoint,'POST',body),
     put: (endpoint,body) => apirequest(endpoint,'PUT',body),

@@ -34,7 +34,16 @@ namespace CodeBook.Business.App.Services
             community.Description = dto.Description;
             _communityRepository.Add(community);
             _communityRepository.SaveChanges();
-
+            community = _communityRepository.GetCommunitybyOwnerandDate(userId,community.DateCreated);
+            var member = new CommunityMember
+            {
+                CommunityId = community.Id,
+                UserId = userId,
+                Role = CommunityRole.Admin,
+                JoinedAt = DateTime.UtcNow
+            };
+            _communityRepository.JoinCommunity(member);
+            _communityRepository.SaveChanges();
 
         }
         public void UpdateCommunity(int CommunityId,UpdateCommunityDto dto)
@@ -120,5 +129,17 @@ namespace CodeBook.Business.App.Services
             var communities = _communityRepository.SearchCommunities(keyword);
             return mapper.Map<List<CommunityDto>>(communities);
         }
+
+        public List<CommunityDto> GetUnjoinedCommunities(int userId)
+        {
+            var unjoined = _communityRepository.GetUnjoinedCommunities(userId);
+            return mapper.Map<List<CommunityDto>>(unjoined);
+        }
+        public List<CommunityDto> GetOwnedCommunities(int userId)
+        {
+            var communities = _communityRepository.GetOwnedCommunities(userId);
+            return mapper.Map<List<CommunityDto>>(communities) ;
+        }
+
     }
 }

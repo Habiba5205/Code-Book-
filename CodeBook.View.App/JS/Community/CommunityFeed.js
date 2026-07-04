@@ -2,37 +2,47 @@ import { api } from '../api.js';
 window.onload=()=>{
     var communitydatacard = document.getElementById("community-data-holder");
     var communityfeed = document.getElementById("community-feed");
+    var createpostbtn = document.getElementById("createpost-btn");
     const params = new URLSearchParams(window.location.search);
     const communityId = params.get("id");
 
+    createpostbtn.addEventListener('click',() => {
+            window.location.href(`../../HTML/Posts/CreatePost.html?communityId=${communityId}`);
+    });
+
     async function CommunityDataView() {
         try{
-            const community = await api.get(`communities/${communityId}`);
+            const community = await api.get(`communities/${communityId}/getcommunity`);
             if(community){
                 communitydatacard.innerHTML = `
                 <div class="row align-items-center">
-      
-                <div class="col-md-3 text-center">
+                <div class="col-md-3 text-center row align-items-center">
                 
                <img src="${community.iconURL ? community.iconURL : ''}" 
                 alt="Community Icon" 
                 class="profile-img">
                 </div>
       
-                <div class="col-md-9">
-                <h2 class="text-light  mb-1">${community.name}</h2>
-                <p class="text-white-50" >${community.description}</p>
+                <div class="col-md-7">
+                <h3 class="text-light  mb-1">
+                <span id="name-display">${community.name}</span>
+                </h3>
+
+                <p class="text-white-50" >
+                <span id="desc-display">${community.description}</span>
+                </p>
         
                 <div class="d-flex gap-4"style="color:#bca1ec;">
-                <small><strong>Creation Date:</strong>${community.dateCreated}</small>
-                <small><strong>Owner Id:</strong>${community.ownerId}</small>
+                <small><strong>Creation Date: </strong>${new Date(community.dateCreated).toLocaleDateString()}</small>
+                <small><strong>Members count: </strong>${community.memberscount}</small>
+                <small><strong>Owner ID: </strong>${community.ownerId}</small>
             </div>
             </div>
-      
-            </div>
-                <div class="actions">
+                <div class="actions m-3 col-12 text-center">
                     <button type="button" class="btn btn-outline-danger unjoin-btn">Unjoin Community</button>
                 </div>
+                     
+            </div>
                 `;
                  communitydatacard.querySelector('.unjoin-btn').addEventListener('click', (e) => {
                         handleAction(communityId, e.target);});
@@ -111,6 +121,7 @@ window.handleAction = async (communityId,buttonElement) => {
             }
         catch(error){
             alert("Error: " + error.message);
+            buttonElement.disabled = false;
         }
 
 }

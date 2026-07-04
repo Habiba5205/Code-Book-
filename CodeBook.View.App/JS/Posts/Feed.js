@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadFeed();
 });
 async function loadFeed() {
-    console.log("loadFeed called!"); // ← add this
+    console.log("loadFeed called!");
     console.trace(); 
     try {
         postsContainer.innerHTML = `<p style="color:white">Loading...</p>`;
@@ -101,6 +101,6 @@ function changePage(direction) {
 }
 
 function viewPost(postId) {
-    window.location.href = `PostDetail.html?id=${postId}`;
+    window.location.href = `../../HTML/Posts/PostDetail.html?id=${postId}`;
 }
 window.viewPost = viewPost;

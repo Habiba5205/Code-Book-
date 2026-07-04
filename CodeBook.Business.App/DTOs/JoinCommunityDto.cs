@@ -9,6 +9,6 @@ namespace CodeBook.Business.App.DTOs
 {
     public class JoinCommunityDto
     {
-        public CommunityRole Role { get; set; } = CommunityRole.Member;
+        public string Role { get; set; } = "Member";
     }
 }

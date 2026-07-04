@@ -120,6 +120,28 @@ namespace CodeBook.API.App.Controllers
             return BadRequest(new { message = result.Message });
         }
 
+        [HttpGet("saved")]
+        [Authorize]
+        public IActionResult GetSavedPosts()
+        {
+            var userId = _currentUserInfo.GetCurrentUserId();
+            var posts = _postService.GetSavedPosts(userId);
+            return Ok(posts);
+        }
+
+        [HttpDelete("{id}/unsave")]
+        [Authorize]
+        public IActionResult UnsavePost(int id)
+        {
+            var userId = _currentUserInfo.GetCurrentUserId();
+            var result = _postService.UnsavePost(userId, id);
+
+            if (result.Success)
+                return Ok(new { message = result.Message });
+
+            return BadRequest(new { message = result.Message });
+        }
+
         [HttpGet("{postId}/tags")]
         [AllowAnonymous]
         public IActionResult GetPostTag(int postId)
