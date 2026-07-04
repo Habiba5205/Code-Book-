@@ -100,10 +100,9 @@ namespace CodeBook.Data.App.Migrations
                     b.HasIndex("CommentId")
                         .IsUnique();
 
-                    b.HasIndex("ReportId");
+                    b.HasIndex("RemoverId");
 
-                    b.HasIndex("RemoverId", "CommentId")
-                        .IsUnique();
+                    b.HasIndex("ReportId");
 
                     b.ToTable("Comment_Removal", (string)null);
                 });
@@ -330,10 +329,9 @@ namespace CodeBook.Data.App.Migrations
                     b.HasIndex("PostId")
                         .IsUnique();
 
-                    b.HasIndex("ReportId");
+                    b.HasIndex("RemoverId");
 
-                    b.HasIndex("RemoverId", "PostId")
-                        .IsUnique();
+                    b.HasIndex("ReportId");
 
                     b.ToTable("Post_Removal", (string)null);
                 });

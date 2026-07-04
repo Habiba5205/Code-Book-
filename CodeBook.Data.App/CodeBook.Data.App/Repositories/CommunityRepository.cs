@@ -24,6 +24,11 @@ namespace CodeBook.Data.App.Repositories
             return community;
         }
 
+        public List<Community> GetCommunities(int userId)
+        {
+            return _context.communityMembers.Where(cm => cm.UserId == userId).Select(cm => cm.Community).ToList();
+        } 
+
         public void Add(Community community)
         {
             _context.communities.Add(community);

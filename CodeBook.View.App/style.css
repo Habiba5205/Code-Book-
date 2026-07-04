@@ -340,3 +340,27 @@
     border-radius: 8px;
     margin-bottom: 10px;
 }
+
+
+
+.community-card{
+    max-width: 50%;
+    display:flex;
+    justify-content: space-between;
+    background-color: #21262d;
+}
+
+#communities-container{
+    display:flex ;
+    justify-content: space-between;
+}
+
+#community-data-holder{
+    justify-content: space-between;
+    max-width: 80%;
+    align-self: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #21262d;
+    margin-bottom: 20px;
+}

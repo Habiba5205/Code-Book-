@@ -1,10 +1,12 @@
 
-﻿using System;
+using AutoMapper;
 ﻿using AutoMapper.Execution;
 using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
 using CodeBook.Data.App.IRepositories;
+using CodeBook.Data.App.Repositories;
 using CodeBook.Models.App;
+﻿using System;
 using System;
 
 namespace CodeBook.Business.App.Services
@@ -14,11 +16,15 @@ namespace CodeBook.Business.App.Services
     {
         private readonly ICommunityRepository _communityRepository;
         private readonly INotificationService _notificationService;
+        private readonly IPostRepository _postRepository;
+        private readonly IMapper mapper;
 
-        public CommunityService(ICommunityRepository communityRepository,INotificationService notificationService)
+        public CommunityService(ICommunityRepository communityRepository,INotificationService notificationService,IMapper mapper,IPostRepository postRepository)
         {
             _communityRepository = communityRepository;
             _notificationService = notificationService;
+            _postRepository = postRepository;
+            this.mapper = mapper;
         }
         public void CreateCommunity(CreateCommunityDto dto,int userId)
         {
@@ -67,8 +73,6 @@ namespace CodeBook.Business.App.Services
             });
 
         }
-
-        //what if I wanna Unjoin?
         public void AssignRole(int CommunityId,int userId,AssignRoleDto dto)
         {
             CommunityMember member = _communityRepository.GetCommunityMember(CommunityId, userId);
@@ -90,6 +94,21 @@ namespace CodeBook.Business.App.Services
                 throw new KeyNotFoundException("Member Not Found!!");
             _communityRepository.RemoveMember(member);
             _communityRepository.SaveChanges();
+        }
+        public List<CommunityDto> GetCommunities(int userId)
+        {
+            List<Community> communities = _communityRepository.GetCommunities(userId);
+            return mapper.Map<List<CommunityDto>>(communities);
+        }
+
+        public List<PostResponse> GetCommunityFeed(int communityId)
+        {
+            var feed = _postRepository.GetAllUnremoved()
+                .Where(p => p.CommunityId == communityId && p.Community != null)
+                .OrderByDescending(p => p.DateCreated)
+                .ToList();
+            return mapper.Map<List<PostResponse>>(feed);
+
         }
     }
 }

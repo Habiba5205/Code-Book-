@@ -24,7 +24,7 @@ namespace CodeBook.Data.App
         public CodeBookContext(DbContextOptions<CodeBookContext> options) : base(options)
         {
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if(!optionsBuilder.IsConfigured)
             {
@@ -32,8 +32,7 @@ namespace CodeBook.Data.App
                 optionsBuilder.UseSqlServer("Server=.;Database=CodeBook_DB;Trusted_Connection=true;TrustServerCertificate=true");
             }
             base.OnConfiguring(optionsBuilder);
-        }
-
+        }*/
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>(user =>
@@ -123,7 +122,6 @@ namespace CodeBook.Data.App
                 postremoval.HasOne(pr => pr.Post).WithOne(p => p.Removal).HasForeignKey<PostRemoval>(pr => pr.PostId).OnDelete(DeleteBehavior.Restrict);
                 postremoval.HasOne(pr => pr.Remover).WithMany(u => u.PostRemovals).HasForeignKey(pr => pr.RemoverId).OnDelete(DeleteBehavior.Restrict);
                 postremoval.HasOne(pr => pr.Report).WithMany().HasForeignKey(pr => pr.ReportId).OnDelete(DeleteBehavior.SetNull);
-                postremoval.HasIndex(pr => new { pr.RemoverId, pr.PostId }).IsUnique();
             });
             modelBuilder.Entity<CommentRemoval>(postremoval =>
             {
@@ -134,7 +132,6 @@ namespace CodeBook.Data.App
                 postremoval.HasOne(cr => cr.Comment).WithOne(c => c.Removal).HasForeignKey<CommentRemoval>(cr => cr.CommentId).OnDelete(DeleteBehavior.Restrict);
                 postremoval.HasOne(cr => cr.Remover).WithMany(u => u.CommentRemovals).HasForeignKey(cr => cr.RemoverId).OnDelete(DeleteBehavior.Restrict);
                 postremoval.HasOne(cr => cr.Report).WithMany().HasForeignKey(cr => cr.ReportId).OnDelete(DeleteBehavior.SetNull);
-                postremoval.HasIndex(cr => new { cr.RemoverId, cr.CommentId }).IsUnique();
             });
 
             modelBuilder.Entity<Notification>(notification =>

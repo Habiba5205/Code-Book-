@@ -22,7 +22,7 @@ namespace CodeBook.Business.App.Controllers
             _communityService = communityService;
             _currentUserInfo = currentUserInfo;
         }
-        [HttpPost]
+        [HttpPost("createcommunity")]
         public IActionResult CreateCommunity([FromBody] CreateCommunityDto dto) {
             try
             {
@@ -30,14 +30,14 @@ namespace CodeBook.Business.App.Controllers
                 if (string.IsNullOrEmpty(dto.Name))
                     return BadRequest("Community name cannot be empty.");
 
-                _communityService.CreateCommunity(dto,userId);
-                return Ok("Community Created Successfully");
+                _communityService.CreateCommunity(dto, userId);
+                return Ok(new { message = "Community Created Successfully" });
             }
             catch (ArgumentException ex)
             {
                 return BadRequest(ex.Message);
             }
-            catch (Exception ex) { 
+            catch (Exception ex) {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
@@ -49,7 +49,7 @@ namespace CodeBook.Business.App.Controllers
                 if (string.IsNullOrEmpty(dto.Name))
                     return BadRequest("Community name cannot be empty.");
                 _communityService.UpdateCommunity(id, dto);
-                return Ok("Community Updated Successfully");
+                return Ok(new { message = "Community Updated Successfully" });
             }
             catch (KeyNotFoundException ex) {
                 return NotFound(ex.Message);
@@ -67,7 +67,7 @@ namespace CodeBook.Business.App.Controllers
         {
             try {
                 _communityService.DeleteCommunity(id);
-                return Ok("Community Deleted Successfully");
+                return Ok(new { message = "Community Deleted Successfully" });
             }
             catch (KeyNotFoundException ex)
             {
@@ -89,7 +89,7 @@ namespace CodeBook.Business.App.Controllers
                     JoinedAt = DateTime.UtcNow
                 };
                 _communityService.JoinCommunity(id, member);
-                return Ok("Joined Community Successfully");
+                return Ok(new { message = "Joined Community Successfully" });
             }
             catch (KeyNotFoundException ex)
             {
@@ -110,8 +110,8 @@ namespace CodeBook.Business.App.Controllers
         {
             try {
                 var userId = _currentUserInfo.GetCurrentUserId();
-                _communityService.AssignRole(id, userId,dto);
-                return Ok("Role Assigned Successfully");
+                _communityService.AssignRole(id, userId, dto);
+                return Ok(new { message = "Role Assigned Successfully" });
             }
             catch (KeyNotFoundException ex)
             {
@@ -150,7 +150,7 @@ namespace CodeBook.Business.App.Controllers
             {
                 var userId = _currentUserInfo.GetCurrentUserId();
                 _communityService.UnjoinCommunity(id, userId);
-                return Ok("Unjoined Community Successfully");
+                return Ok(new { message = "Unjoined Community Successfully" });
             }
             catch (KeyNotFoundException ex)
             {
@@ -163,6 +163,35 @@ namespace CodeBook.Business.App.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpGet("getCommunities")]
+        public IActionResult GetCommunities()
+        {
+            try
+            {
+                var userId = _currentUserInfo.GetCurrentUserId();
+                var communities = _communityService.GetCommunities(userId);
+                return Ok(communities);
+            }
+            catch (Exception e) {
+                return BadRequest(new { message = "Couldn't load Communities" });
+            }
+
+        }
+
+        [HttpGet("{communityId}/getCommunityFeed")]
+        public IActionResult GetCommunityFeed(int communityId)
+        {
+            try
+            {
+                var feed = _communityService.GetCommunityFeed(communityId);
+                return Ok(feed);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = "Couldn't get community feed" });
             }
         }
 

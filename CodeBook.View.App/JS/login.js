@@ -20,7 +20,8 @@ window.onload=()=>{
                     Email: email
                 });
 
-                window.location.href = "../admin/dashboard.html";
+                //window.location.href = "../admin/dashboard.html";
+                window.location.href = "../HTML/Community.html";
             }
             catch (error) {
             alert("Login failed: " + error.message);

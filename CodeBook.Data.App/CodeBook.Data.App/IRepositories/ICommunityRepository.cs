@@ -18,5 +18,6 @@ namespace CodeBook.Data.App.IRepositories
         void UpdateCommunityMember(CommunityMember member);
         bool SaveChanges();
         void RemoveMember(CommunityMember member);
+        List<Community> GetCommunities(int userId);
     }
 }

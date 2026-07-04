@@ -43,6 +43,20 @@ namespace CodeBook.Business.App.Mapping
                            opt => opt.MapFrom(src => src.Bio))
                 .ForMember(dest => dest.AvatarUrl,
                            opt => opt.MapFrom(src => src.AvatarUrl));
+
+            CreateMap<Community, CommunityDto>()
+                .ForMember(dest => dest.communityId,
+                            opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.OwnerId,
+                            opt => opt.MapFrom(src => src.OwnerId))
+                .ForMember(dest => dest.Name,
+                            opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Description,
+                            opt => opt.MapFrom(src => src.Description))
+                .ForMember(dest => dest.DateCreated,
+                            opt => opt.MapFrom(src => src.DateCreated));
+
+
         }
 
     }
