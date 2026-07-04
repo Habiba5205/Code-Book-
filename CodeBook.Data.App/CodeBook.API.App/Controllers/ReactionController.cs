@@ -39,10 +39,10 @@ namespace CodeBook.API.App.Controllers
         }
         [HttpPost("addCommentreaction")]
         [Authorize]
-        public ActionResult AddCommentReaction([FromBody] ReactionDto reactionDto,int commentId)
+        public ActionResult AddCommentReaction([FromBody] ReactionDto reactionDto)
         {
             var currentId = _currentUserInfo.GetCurrentUserId();
-            ErrorResponse result = _reactionService.AddCommentReaction(currentId, reactionDto,commentId);
+            ErrorResponse result = _reactionService.AddCommentReaction(currentId, reactionDto);
             if (result.Success)
                 return Ok(new { message = result.Message });
 
@@ -66,7 +66,7 @@ namespace CodeBook.API.App.Controllers
         public ActionResult RemoveCommentReaction(int postId,int commentId)
         {
             var currentId = _currentUserInfo.GetCurrentUserId();
-            ErrorResponse result = _reactionService.RemoveCommentReaction(postId, currentId,commentId);
+            ErrorResponse result = _reactionService.RemoveCommentReaction(currentId,commentId);
             if (result.Success)
                 return Ok(new { message = result.Message });
 

@@ -55,7 +55,7 @@ console.log('Match:', post.authorId === currentUserid);
                               data-type="Haha"
                               data-liked="false"
                               onclick="toggleReaction(this, ${post.id}, 'Haha')">
-                                😂<span class="like-count">${post.likeCount || 0}</span>
+                                😂
                             </button>
                             <button class="btn-purple reaction-btn" 
                               data-post-id="${post.id}"
@@ -63,21 +63,21 @@ console.log('Match:', post.authorId === currentUserid);
                               data-liked="false"
                               onclick="toggleReaction(this, ${post.id}, 'love')">
                                    
-                                ❤️<span class="like-count">${post.likeCount || 0}</span>
+                                ❤️
                             </button>
                               <button class="btn-purple reaction-btn" 
                             data-post-id="${post.id}"
                               data-type="Angry"
                               data-liked="false"
                               onclick="toggleReaction(this, ${post.id}, 'Angry')">
-                                😠<span class="like-count">${post.likeCount || 0}</span>
+                                😠
                             </button>
                             <button class="btn-purple reaction-btn" 
                               data-post-id="${post.id}"
                               data-type="Care"
                               data-liked="false"
                               onclick="toggleReaction(this, ${post.id}, 'Care')">
-                                🤗<span class="like-count">${post.likeCount || 0}</span>
+                                🤗
                             </button>
                             <button class="btn-purple reaction-btn" 
                               data-post-id="${post.id}"
@@ -85,7 +85,7 @@ console.log('Match:', post.authorId === currentUserid);
                               data-liked="false"
                               onclick="toggleReaction(this, ${post.id}, 'Celebrate')">
                                    
-                               🎉 <span class="like-count">${post.likeCount || 0}</span>
+                               🎉 
                             </button>
                       
                     </div>

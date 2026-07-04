@@ -56,7 +56,7 @@ async function loadFeed() {
                               data-type="Like"
                               data-liked="false"
                               onclick="toggleReaction(this, ${post.id}, 'Haha')">
-                                😂<span class="like-count">${post.likeCount || 0}</span>
+                                😂
                             </button>
                             <button class="btn-purple reaction-btn" 
                               data-post-id="${post.id}"
@@ -64,7 +64,7 @@ async function loadFeed() {
                               data-liked="false"
                               onclick="toggleReaction(this, ${post.id}, 'love')">
                                    
-                                ❤️<span class="like-count">${post.likeCount || 0}</span>
+                                ❤️
                             </button>
                         </div>
 

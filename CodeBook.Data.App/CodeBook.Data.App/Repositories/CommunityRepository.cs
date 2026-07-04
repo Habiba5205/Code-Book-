@@ -1,5 +1,6 @@
 ﻿using CodeBook.Data.App.IRepositories;
 using CodeBook.Models.App;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,13 +27,13 @@ namespace CodeBook.Data.App.Repositories
 
         public List<Community> GetCommunities(int userId)
         {
-            return _context.communityMembers.Where(cm => cm.UserId == userId).Select(cm => cm.Community).ToList();
+            return _context.communities.Where(c => c.Members.Any(m => m.UserId == userId)).Include(c => c.Members).ToList();
         } 
 
         public List<Community> GetUnjoinedCommunities(int userId)
         {
             var joined = _context.communityMembers.Where(cm => cm.UserId == userId).Select(cm => cm.CommunityId);
-            return _context.communities.Where(c => !joined.Contains(c.Id)).ToList();
+            return _context.communities.Include(c => c.Members).Where(c => !joined.Contains(c.Id)).ToList();
         }
 
         public void Add(Community community)
@@ -85,11 +86,13 @@ namespace CodeBook.Data.App.Repositories
 
         public List<Community> GetOwnedCommunities(int userId)
         {
-            return _context.communities.Where(c => c.OwnerId == userId).ToList();
+            return _context.communities.Include(c => c.Members)
+                .Where(c => c.OwnerId == userId).ToList();
         }
         public Community GetCommunitybyOwnerandDate(int userId, DateTime DateCreated)
         {
-            return _context.communities.FirstOrDefault(c => c.OwnerId == userId && c.DateCreated == DateCreated);
+            return _context.communities.Include(c => c.Members)
+                .FirstOrDefault(c => c.OwnerId == userId && c.DateCreated == DateCreated);
         }
     }
 }

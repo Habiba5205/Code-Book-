@@ -7,6 +7,7 @@ namespace CodeBook.Business.App.DTOs
     public class PostResponse
     {
         public int Id { get; set; }
+        public int LikeCount { get; set; }
         public string Title { get; set; }
         public string Body { get; set; }
         public string CodeSnippet { get; set; }

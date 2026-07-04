@@ -69,9 +69,9 @@ namespace CodeBook.Business.App.Services
             else return new ErrorResponse { Success = true, Message = "Reaction removed" };
 
         }
-        public ErrorResponse AddCommentReaction(int userId, ReactionDto reactionDto,int commentId)
+        public ErrorResponse AddCommentReaction(int userId, ReactionDto reactionDto)
         {
-            Reaction reaction = _reactionRepository.GetCommentReaction(reactionDto.PostId, userId,commentId);
+            Reaction reaction = _reactionRepository.GetCommentReaction(reactionDto.PostId, userId,reactionDto.CommentId.Value);
             if (reaction != null)
             {
                 return UpdateReaction(reactionDto, reaction);
@@ -80,16 +80,16 @@ namespace CodeBook.Business.App.Services
             reaction = new Reaction();
             reaction.UserId = userId;
             reaction.PostId = reaction.PostId;
-            reaction.CommentId = commentId;
+            reaction.CommentId = reactionDto.CommentId;
             reaction.Type = Enum.Parse<ReactionType>(reactionDto.ReactionType);
             _reactionRepository.Add(reaction);
-            _commentRepository.AddReaction(commentId);
+            _commentRepository.AddReaction(reactionDto.CommentId.Value);
 
             bool result = _reactionRepository.SaveChanges();
 
-            _notificationService.CreateNotification(_commentService.GetCommentAuthorId(commentId), new NotificationDTO
+            _notificationService.CreateNotification(_commentService.GetCommentAuthorId(reactionDto.CommentId.Value), new NotificationDTO
             {
-                userId = _commentService.GetCommentAuthorId(commentId),
+                userId = _commentService.GetCommentAuthorId(reactionDto.CommentId.Value),
                 Type = "Reaction",
                 Message = "Someone reacted to your Comment",
                 ReferenceId = reactionDto.PostId,
@@ -99,9 +99,11 @@ namespace CodeBook.Business.App.Services
             if (result) return new ErrorResponse { Success = true, Message = "Reacted" };
             else return new ErrorResponse { Success = false, Message = "Failed to react" };
         }
-        public ErrorResponse RemoveCommentReaction(int postId, int userId,int commentId)
+        public ErrorResponse RemoveCommentReaction(int userId,int commentId)
+
         {
-            Reaction reaction = _reactionRepository.GetCommentReaction(postId, userId,commentId);
+            var comment = _commentRepository.GetCommentById(commentId);
+            Reaction reaction = _reactionRepository.GetCommentReaction(comment.PostId,userId,commentId);
             if (reaction == null) return new ErrorResponse { Success = false, Message = "You didn't react to this Comment before!" };
             _reactionRepository.Remove(reaction);
            _commentRepository.RemoveReaction(commentId);
