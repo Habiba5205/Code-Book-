@@ -189,9 +189,15 @@ function viewPost(postId) {
 }
 
 function viewProfile(userId) {
-    window.location.href = `../UserProfile.html?id=${userId}`;
+    window.location.href = `../html/User/UserProfile.html?id=${userId}`;
 }
 
 function viewCommunity(communityId) {
-    window.location.href = `../community-detail.html?id=${communityId}`;
+    window.location.href = `../html/Community.html?id=${communityId}`;
 }
+
+window.switchTab = switchTab;
+window.search = search;
+window.viewPost = viewPost;
+window.viewProfile = viewProfile;
+window.viewCommunity = viewCommunity;
