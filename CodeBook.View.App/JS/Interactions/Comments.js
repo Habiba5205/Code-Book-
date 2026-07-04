@@ -40,72 +40,90 @@ function renderComments(comments) {
 function createCommentCard(comment, getReplies) {
     const div = document.createElement("div");
     div.className = "comment-card mb-2";
+
     div.innerHTML = `
         <div class="d-flex gap-2">
-        <div class="flex-grow-1">
-        <span class="fw-semibold">${comment.authorUsername}</span>
-      <p class="mb-1">${comment.body}</p>
+            <div class="flex-grow-1">
+                <span class="fw-semibold">${comment.authorUsername}</span>
+                <p class="mb-1">${comment.body}</p>
 
-<div class="d-flex gap-1 mt-2">
+                <div class="d-flex gap-1 mt-2">
+                    <button class="btn-purple comment-reaction"
+                        data-reacted="false"
+                        onclick="toggleCommentReaction(this, ${getPostId()}, ${comment.id}, 'Like')">
+                        👍 <span class="reaction-count">${comment.likeCount || 0}</span>
+                    </button>
 
-    <button class="btn-purple comment-reaction"
-     data-reacted="false"
-        onclick="toggleCommentReaction(this, ${getPostId()}, ${comment.id}, 'Like')">
-        👍
-        <span class="reaction-count">${comment.likeCount || 0}</span>
+                    <button class="btn-purple comment-reaction"
+                        data-reacted="false"
+                        onclick="toggleCommentReaction(this, ${getPostId()}, ${comment.id}, 'Haha')">
+                        😂
+                    </button>
 
-    </button>
+                    <button class="btn-purple comment-reaction"
+                        data-reacted="false"
+                        onclick="toggleCommentReaction(this, ${getPostId()}, ${comment.id}, 'love')">
+                        ❤️
+                    </button>
+                </div>
 
-    <button class="btn-purple comment-reaction"
-     data-reacted="false"
-        onclick="toggleCommentReaction(this, ${getPostId()}, ${comment.id}, 'Haha')">
-        😂<span class="reaction-count">${comment.likeCount || 0}</span>
+                <div class="d-flex gap-3 mt-1">
+                    <small class="text-secondary">${formatTime(comment.dateCreated)}</small>
 
-    </button>
-
-    <button class="btn-purple comment-reaction"
-     data-reacted="false"
-        onclick="toggleCommentReaction(this, ${getPostId()}, ${comment.id}, 'love')">
-        ❤️<span class="reaction-count">${comment.likeCount || 0}</span>
-
-    </button>
-
-</div>
-        <div class="d-flex gap-3">
-        <small class="text-secondary">${formatTime(comment.dateCreated)}</small>
-          <button class="reply-btn btn btn-link btn-sm p-0"
-                            data-comment-id="${comment.id}">
+                    <button class="reply-btn btn btn-link btn-sm p-0">
                         Reply
-                      </button>
-                    ${comment.authorId === currentUserId ? 
-                        `<button class="delete-comment-btn btn btn-link btn-sm p-0 text-danger"
-                                 data-comment-id="${comment.id}">
-                            Delete
-                        </button>` : ""}
+                    </button>
+
+                    ${
+                        comment.authorId === currentUserId
+                        ? `<button class="delete-comment-btn btn btn-link btn-sm p-0 text-danger">
+                                Delete
+                           </button>`
+                        : ""
+                    }
+
+                    <button class="toggle-replies btn btn-link btn-sm p-0 text-secondary">
+                        ▶ Replies
+                    </button>
                 </div>
             </div>
         </div>
-        <div class="replies ms-4 mt-2" id="replies-${comment.id}"></div>
-    `;
-        const repliesContainer = div.querySelector(`#replies-${comment.id}`);
-    const replies = getReplies(comment.id);
-    replies.forEach(reply => {
-        const replyCard = createCommentCard(reply, getReplies);
-        repliesContainer.appendChild(replyCard);
-    });
-const replybtn=div.querySelector(".reply-btn");
-const deletebtn=div.querySelector(".delete-comment-btn");
-if (replybtn) {
-    replybtn.addEventListener("click", () => {
-        showReplyForm(comment.id);
-    });
-}
 
-if (deletebtn) {
-    deletebtn.addEventListener("click", () => {
-        deleteComment(comment.id);
+        <div class="replies ms-4 mt-2 d-none" id="replies-${comment.id}"></div>
+    `;
+
+    // Replies
+    const repliesContainer = div.querySelector(`#replies-${comment.id}`);
+    const replies = getReplies(comment.id);
+
+    replies.forEach(reply => {
+        repliesContainer.appendChild(createCommentCard(reply, getReplies));
     });
-}
+
+    // Reply button
+    div.querySelector(".reply-btn")
+        ?.addEventListener("click", () => showReplyForm(comment.id));
+
+    // Delete button
+    div.querySelector(".delete-comment-btn")
+        ?.addEventListener("click", () => deleteComment(comment.id));
+
+    // Toggle replies
+    const toggleBtn = div.querySelector(".toggle-replies");
+
+    if (replies.length === 0) {
+        toggleBtn.style.display = "none";
+    } else {
+        toggleBtn.addEventListener("click", () => {
+            repliesContainer.classList.toggle("d-none");
+
+            toggleBtn.textContent =
+                repliesContainer.classList.contains("d-none")
+                    ? "▶ Replies"
+                    : "▼ Replies";
+        });
+    }
+
     return div;
 }
 async function getCurrentUserId() {
@@ -185,4 +203,5 @@ async function submitReply(selfCommentId) {
     const postId = getPostId();
     await addComment(postId, body, selfCommentId);
 }
-window.submitReply = submitReply;
+
+window.submitReply = submitReply; 

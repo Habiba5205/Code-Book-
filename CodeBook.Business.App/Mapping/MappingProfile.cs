@@ -56,6 +56,10 @@ namespace CodeBook.Business.App.Mapping
                 .ForMember(dest => dest.DateCreated,
                             opt => opt.MapFrom(src => src.DateCreated));
 
+            CreateMap<Post, PostResponse>()
+                .ForMember(dest => dest.LikeCount,
+               opt => opt.MapFrom(src => src.LikeCount));
+
 
         }
 
