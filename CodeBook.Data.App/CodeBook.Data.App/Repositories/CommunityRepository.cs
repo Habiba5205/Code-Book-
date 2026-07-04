@@ -19,7 +19,7 @@ namespace CodeBook.Data.App.Repositories
 
         public Community GetCommunity(int communityId)
         {
-            Community community = _context.communities.FirstOrDefault(c => c.Id == communityId);
+            Community community = _context.communities.Include(c => c.Members).FirstOrDefault(c => c.Id == communityId);
             if (community == null)
                 throw new Exception("Community Not Found!!");
             return community;
