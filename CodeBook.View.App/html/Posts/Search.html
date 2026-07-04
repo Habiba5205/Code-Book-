@@ -28,16 +28,13 @@
             <i class="fa-solid fa-search"></i> Search CodeBook
         </h2>
 
-        <!-- Search Box -->
         <div class="post-card mb-4">
             
-            <!-- Main Search Input -->
             <div class="mb-3">
                 <input type="text" id="searchInput" class="form-control" 
                        placeholder="Search for posts, users, or communities...">
             </div>
 
-            <!-- Filter Type Tabs -->
             <div class="d-flex gap-2 mb-3">
                 <button class="btn-purple active-filter" 
                         id="tab-posts" onclick="switchTab('posts')">
@@ -53,7 +50,6 @@
                 </button>
             </div>
 
-            <!-- Post Filters (shown when Posts tab active) -->
             <div id="postFilters" class="row g-3">
                 <div class="col-md-5">
                     <select id="languageFilter" class="form-control">
@@ -81,7 +77,6 @@
                 </div>
             </div>
 
-            <!-- User/Community Filters (shown when Users or Communities tab active) -->
             <div id="otherFilters" style="display:none">
                 <button class="btn-purple w-100" onclick="search()">
                     <i class="fa-solid fa-search"></i> Search
@@ -89,11 +84,9 @@
             </div>
         </div>
 
-        <!-- Results Count -->
         <div id="resultsCount" style="color:#bca1ec; margin-bottom:15px; display:none">
         </div>
 
-        <!-- Results -->
         <div id="resultsContainer">
             <p style="color:#8b949e">Search for posts, users or communities above...</p>
         </div>
