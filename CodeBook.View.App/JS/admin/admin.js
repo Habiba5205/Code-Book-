@@ -27,21 +27,21 @@ window.onload=()=>{
                             <p><strong>Report ID:</strong> #${report.id}<br />
                             <strong>Reporter ID:</strong> #${report.reporterId}<br />
                             <strong>Description:</strong> ${report.description}<br />
-                            <strong>Status:</strong> ${report.status}<br /></p>
+                            <strong>Status:</strong> ${report.status}</p>
                             ${report.commentId ? `<p><strong>Type:</strong>Comment<br /><strong>Comment ID:</strong>${report.commentId}<br /></p>`:''}
                             ${report.postId ? `<p><strong>Type:</strong>Post<br /><strong>Post ID:</strong>${report.postId}<br /></p>`:''}
+                        </div>
                             <div class="actions">
                                 <button type="button" class="btn btn-success accept-btn">Accept</button>
                                 <button type="button" class="btn btn-danger reject-btn">Reject</button>
                             </div>
-                        </div>
                     </details>`;
 
                     reportitem.querySelector('.accept-btn').addEventListener('click', (e) => {
-                        handleAction(report, "Accepted", e.target);});
+                        handleAction(report, e.target);});
 
                     reportitem.querySelector('.reject-btn').addEventListener('click', (e) => {
-                        handleAction(report, "Rejected", e.target);});
+                        handleAction(report, e.target);});
                 
                 reportList.appendChild(reportitem);
             });
@@ -50,51 +50,51 @@ window.onload=()=>{
             alert("Couldn't load reports: " + error.message);
         }
         
-    }};
-
-  window.handleAction = async (report, status,buttonElement) => {
+    }
+ async function handleAction(report, buttonElement) {
             buttonElement.disabled = true;
+            const actionsContainer = buttonElement.closest('.actions');
     try {
-        if(status === "Accepted"){
+        if(buttonElement.innerText.trim() === 'Accept'){
             if(report.commentId){
                 const result = await api.delete(`admin/comments/${report.commentId}/${report.id}`);
                 if(result.message === 'Comment removed successfully'){
                     alert("Comment removed successfully!");
-                    document.querySelectorAll('.actions').forEach(el =>{el.classList.add('d-none');});
-                    //add accepted
                     const text = document.createElement('p');
                     text.className = 'status-update'
                     text.innerHTML = '<i class="bi bi-check-lg"></i><span style="color: green;">Accepted</span>';
-                    document.querySelectorAll('.actions').appendChild(text);
+                   actionsContainer.classList.add('d-none');
+                   actionsContainer.parentElement.appendChild(text);
                 }
             }
             else if(report.postId){
                 const result = await api.delete(`admin/posts/${report.postId}/${report.id}`);
                 if(result.message === 'Post removed successfully'){
                     alert("Post removed successfully!");
-                    document.querySelectorAll('.actions').forEach(el =>{el.classList.add('d-none');});
-                    //add accepted
                     const text = document.createElement('p');
                     text.className = 'status-update'
                     text.innerHTML = '<i class="bi bi-check-lg"></i><span style="color: green;">Accepted</span>';
-                    document.querySelectorAll('.actions').appendChild(text);
+                    actionsContainer.classList.add('d-none');
+                   actionsContainer.parentElement.appendChild(text);
                 }
-            }
-            if(status === "Rejected"){
-                const result = await api.patch(`admin/reports/${report.id}/status`, { Status: status });
-                document.querySelectorAll('.actions').forEach(el =>{el.classList.add('d-none');});
-                //add rejected here 
-                const text = document.createElement('p');
+            }}
+
+            if(buttonElement.innerText.trim() === 'Reject'){
+                const result = await api.patch(`admin/reports/${report.id}/status`, { Status : "Rejected" });
+                if(result.message === "Report Status Updated Successfully"){
+                    const text = document.createElement('p');
                     text.className = 'status-update'
                     text.innerHTML = '<i class="bi bi-check-lg"></i><span style="color: red;">Rejected</span>';
-                    document.querySelectorAll('.actions').appendChild(text);
+                    actionsContainer.classList.add('d-none');
+                   actionsContainer.parentElement.appendChild(text);
+                }
+               
             }
-             GetReports();
         }
-    } catch (error) {
+    catch (error) {
         alert("Error: " + error.message);
         buttonElement.disabled = false;
-        document.querySelectorAll('.actions').forEach(el =>{el.classList.remove('d-none');});
+        actionsContainer.classList.add('d-none');
         document.querySelectorAll('.status-update').forEach(msg => {msg.remove()});
     }
-};
+}};

@@ -11,28 +11,27 @@ window.onload=()=>{
         try{
             const communities = await api.get('communities/getownedcommunities');
             if(!communities || communities.length === 0){
-                communitiesContainer.innerHTML = '<span style="color: Red;">No Commmunities found.</span>';
+                communitycontainer.innerHTML = '<span style="color: Red;" class ="mt-2">No Commmunities found.</span>';
                 return; 
             }
             communitycontainer.innerHTML = '';
             communities.forEach(community => {
                 const communityCard = document.createElement('div');
-                communityCard.className = 'community-card';
                 communityCard.innerHTML = `
-                <div class="row align-items-center">
-      
-                <div class="col-md-3 text-center">
+                <div class="row align-items-center community-card">
+                <div class="col-md-3 text-center row align-items-center">
+                
                 
                <img src="${community.iconURL ? community.iconURL : ''}" 
                 alt="Community Icon" 
-                class="profile-img">
+                class="profile-img w-100">
                 </div>
-      
-                <div class="col-md-9">
-                <h2 class="text-light  mb-1">
+
+                <div class="col-md-7">
+                <h3 class="text-light  mb-1">
                 <span id="name-display">${community.name}</span>
                 <input type="text" id="name-input" class="form-control d-none" value="${community.name}">
-                </h2>
+                </h3>
                 <p class="text-white-50" >
                 <span id="desc-display">${community.description}</span>
                  <textarea id="desc-input" class="form-control d-none">${community.description}</textarea>
@@ -43,91 +42,102 @@ window.onload=()=>{
                 <small><strong>Members count: </strong>${community.memberscount}</small>
             </div>
             </div>
-                <div class="actions">
+                <div class="actions m-3 col-12 text-center">
                     <button type="button" class="btn btn-outline-secondary update-btn" id ="update">Update Community</button>
                     <button type="button" class="btn btn-outline-secondary save-btn d-none" id ="save">Save Changes</button>
+                    <button type="button" class="btn btn-outline-danger d-none" id= "cancel-update">Cancel</button>
                     <button type="button" class="btn btn-outline-danger delete-btn" id= "delete">Delete Community</button>
                 </div>
             </div>`;
             communityCard.querySelector('.update-btn').addEventListener('click', (e) => {
                         Update_TextAreas(e.target);});
             communityCard.querySelector('.save-btn').addEventListener('click', (e) => {
-                        UpdateCommunity(communityId, e.target);});
+                        UpdateCommunity(community.communityId, e.target);});
+            communityCard.querySelector('#cancel-update').addEventListener('click', (e) => {
+                    const card = e.target.closest('.community-card');
+
+                    card.querySelector('#desc-input').classList.add('d-none');
+                    card.querySelector('#desc-display').classList.remove('d-none');
+                    card.querySelector('#name-input').classList.add('d-none');
+                    card.querySelector('#name-display').classList.remove('d-none');
+
+                    card.querySelector('.delete-btn').classList.remove('d-none');
+                    card.querySelector('.save-btn').classList.add('d-none');
+                    card.querySelector('.update-btn').classList.remove('d-none');
+                    card.querySelector('#update').disabled = false;
+                    card.querySelector('#cancel-update').classList.add('d-none'); 
+            });
             communityCard.querySelector('.delete-btn').addEventListener('click', (e) => {
-                        DeleteCommunity(communityId, e.target);});
+                        DeleteCommunity(community.communityId, e.target);});
             communitycontainer.appendChild(communityCard);
                 
             });
         }
          catch(error){
-            alert("Couldn't load reports: " + error.message);
+            alert("Couldn't load communities: " + error.message);
         }
         
     }
 
     async function createCommunity(button) {
-        button.disabled = true;
+        button.classList.add('d-none');
         createcontainer.innerHTML =`
-                <div class="row align-items-center">
-      
-                <div class="col-md-3 text-center">
+                <div class="row align-items-center community-card-form">
+                <div class="col-md-3 text-center row align-items-center ">
                 
-               <img src="${community.iconURL ? community.iconURL : ''}" 
+               <img src="" 
                 alt="Community Icon" 
                 class="profile-img">
                 </div>
       
                 <div class="col-md-9">
-                <h2 class="text-light  mb-1">
-                <input type="text" id="newname-input" class="form-control" value="${community.name}">
-                </h2>
+                <span class="text-light mb-1">
+                <input type="text" id="newname-input" class="form-control mb-2" placeholder="Community Name">
+                </span>
                 <p class="text-white-50" >
-                 <textarea id="newdesc-input" class="form-control">${community.description}</textarea>
+                 <textarea id="newdesc-input" class="form-control mb-2" placeholder="Description(Optional)"></textarea>
                  </p>
             </div>
-            </div>
-                <div class="actions">
-                    <button type="button" class="btn btn-outline-success create-btn d-none" id ="create">Create Community</button>
+                <div class="actions m-3 col-12 text-center">
+                    <button type="button" class="btn btn-outline-success create-btn" id ="create">Create Community</button>
                     <button type="button" class="btn btn-outline-danger cancel-btn" id= "cancel">Cancel</button>
                 </div>
+                   </div>
             </div>`;
             createcontainer.querySelector('.create-btn').addEventListener('click', (e) => {
                         create(e.target);});
             createcontainer.querySelector('.cancel-btn').addEventListener('click', (e) => {
                        createcontainer.innerHTML = '';
+                       button.classList.remove('d-none');
             });
     }
 
     GetCommunities();
-};
 
-window.Update_TextAreas= async(buttonElement) => {
+    async function Update_TextAreas(buttonElement) {
+        const card = buttonElement.closest('.community-card');
         buttonElement.disabled = true;
-            var namedisplay = document.getElementById("name-display");
-            var nameinput = document.getElementById("name-input");
-            var descdisplay = document.getElementById("desc-display");
-            var descinput = document.getElementById("desc-input");
 
-            nameDisplay.classList.add('d-none');
-            nameInput.classList.remove('d-none');
-    
-            descDisplay.classList.add('d-none');
-            descInput.classList.remove('d-none');
+            card.querySelector('#desc-input').classList.remove('d-none');
+            card.querySelector('#desc-display').classList.add('d-none');
+            card.querySelector('#name-input').classList.remove('d-none');
+            card.querySelector('#name-display').classList.add('d-none');
 
-            var deletebtn = document.getElementById("delete");
-            deletebtn.classList.add('d-none');
-            var savebtn = document.getElementById("save");
-            savebtn.classList.remove('d-none');
+            card.querySelector('.delete-btn').classList.add('d-none');
+            card.querySelector('.save-btn').classList.remove('d-none');
+            card.querySelector('#cancel-update').classList.remove('d-none');
             buttonElement.classList.add('d-none');
 
-}
+    }
 
-window.UpdateCommunity = async (communityId,buttonElement) => {
+    async function UpdateCommunity(communityId ,buttonElement){
             buttonElement.disabled = true;
-            var namedisplay = document.getElementById("name-display");
-            var nameinput = document.getElementById("name-input");
-            var descdisplay = document.getElementById("desc-display");
-            var descinput = document.getElementById("desc-input");
+            const card = buttonElement.closest('.community-card');
+            
+            var namedisplay = card.querySelector('#name-display');
+            var nameinput = card.querySelector('#name-input');
+            var descdisplay = card.querySelector('#desc-display');
+            var descinput = card.querySelector('#desc-input');
             const namevalue = nameinput.value;
             if(!namevalue){
             alert("Please Fill all the required fields!");
@@ -149,11 +159,10 @@ window.UpdateCommunity = async (communityId,buttonElement) => {
             descdisplay.classList.remove('d-none');
             descinput.classList.add('d-none');
                     
-                var deletebtn = document.getElementById("delete");
-                deletebtn.classList.remove('d-none');
-                var updatebtn = document.getElementById("update");
-                updatebtn.classList.remove('d-none');
-                buttonElement.classList.add('d-none');
+            card.querySelector('.delete-btn').classList.remove('d-none');
+            card.querySelector('.save-btn').classList.add('d-none');
+            card.querySelector('#cancel-update').classList.add('d-none');
+            card.querySelector('.update-btn').classList.remove('d-none');
 
                     alert("Updated community!");
                     GetCommunities();
@@ -164,9 +173,9 @@ window.UpdateCommunity = async (communityId,buttonElement) => {
             buttonElement.disabled = false;
         }
 
-}
+    }
 
-window.DeleteCommunity = async (communityId,buttonElement) => {
+    async function DeleteCommunity(communityId,buttonElement){
             buttonElement.disabled = true;
             try{
                 const result = await api.delete(`communities/${communityId}/deletecommunity`);
@@ -180,9 +189,9 @@ window.DeleteCommunity = async (communityId,buttonElement) => {
             buttonElement.disabled = false;
         }
 
-}
+    }
 
-window.create = async (buttonElement) => {
+    async function create(buttonElement){   
         buttonElement.disabled = true;
         var nameinput = document.getElementById("newname-input");
         var descinput = document.getElementById("newdesc-input");
@@ -201,6 +210,7 @@ window.create = async (buttonElement) => {
                     var createcontainer = document.getElementById("creation-card");
                     createcontainer.innerHTML = '';
                     alert("Community Created!");
+                    createcommunitybtn.classList.remove('d-none');
                     GetCommunities();
                 }
             }
@@ -208,4 +218,5 @@ window.create = async (buttonElement) => {
                 alert("Error: " + error.message);
                 buttonElement.disabled = false;
             }
-}
+    }
+};
