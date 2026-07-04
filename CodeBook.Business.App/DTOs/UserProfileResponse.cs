@@ -9,5 +9,7 @@ namespace CodeBook.Business.App.DTOs
         public string Bio { get; set; }
         public string AvatarUrl { get; set; }
         public DateTime JoinedAt { get; set; }
+        public int FollowersCount { get; set; }
+        public int FollowingCount { get; set; }
     }
 }
