@@ -47,11 +47,16 @@ function createCommentCard(comment, getReplies) {
                 <span class="fw-semibold">${comment.authorUsername}</span>
                 <p class="mb-1">${comment.body}</p>
 
+                 
+
                 <div class="d-flex gap-1 mt-2">
+                    <div class="reaction-total-box " id="reaction-count-${comment.id}">
+                 ${comment.likeCount || 0}
+                  </div>
                     <button class="btn-purple comment-reaction"
                         data-reacted="false"
                         onclick="toggleCommentReaction(this, ${getPostId()}, ${comment.id}, 'Like')">
-                        👍 <span class="reaction-count">${comment.likeCount || 0}</span>
+                        👍 
                     </button>
 
                     <button class="btn-purple comment-reaction"
@@ -65,6 +70,13 @@ function createCommentCard(comment, getReplies) {
                         onclick="toggleCommentReaction(this, ${getPostId()}, ${comment.id}, 'love')">
                         ❤️
                     </button>
+                     <a href="../../html/Report/Report-modal.html" class="btn-purple">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-postage-fill" viewBox="0 0 16 16">
+  <path d="M4.5 3a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5z"/>
+  <path d="M3.5 1a1 1 0 0 0 1-1h1a1 1 0 0 0 2 0h1a1 1 0 0 0 2 0h1a1 1 0 1 0 2 0H15v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1h-1.5a1 1 0 1 0-2 0h-1a1 1 0 1 0-2 0h-1a1 1 0 1 0-2 0h-1a1 1 0 1 0-2 0H1v-1a1 1 0 1 0 0-2v-1a1 1 0 1 0 0-2V9a1 1 0 1 0 0-2V6a1 1 0 0 0 0-2V3a1 1 0 0 0 0-2V0h1.5a1 1 0 0 0 1 1M3 3v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1"/>
+</svg> Report Comment
+                    </a>
+                   
                 </div>
 
                 <div class="d-flex gap-3 mt-1">

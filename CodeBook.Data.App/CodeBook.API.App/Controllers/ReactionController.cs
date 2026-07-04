@@ -42,6 +42,8 @@ namespace CodeBook.API.App.Controllers
         public ActionResult AddCommentReaction([FromBody] ReactionDto reactionDto)
         {
             var currentId = _currentUserInfo.GetCurrentUserId();
+            if (reactionDto.CommentId == null)
+                return BadRequest(new { message = "CommentId is required" });
             ErrorResponse result = _reactionService.AddCommentReaction(currentId, reactionDto);
             if (result.Success)
                 return Ok(new { message = result.Message });

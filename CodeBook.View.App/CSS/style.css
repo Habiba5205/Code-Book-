@@ -409,3 +409,59 @@
 .status-update{
     align-self: center;
 }
+.comment-reaction {
+     background-color: #7c3aed;
+    color: white;
+    border-color: #7c3aed;
+}
+
+
+.comment-reaction.reacted {
+    background-color: #6f42c1;   
+    color: white;
+    border-color: #6f42c1;
+}
+
+.comment-reaction:hover {
+    background-color: #e9ecef;
+}
+
+.comment-reaction.reacted:hover {
+    background-color: #5a32a3;
+}
+.comment-reaction-btn {
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 20px;
+    transition: transform 0.1s;
+}
+
+.comment-reaction-btn:hover {
+    transform: scale(1.2);
+}
+
+.comment-reaction-btn.active {
+    background-color: #7c3aed;
+    color: white;
+}
+.reaction-total-box {
+    background-color: #21262d;
+    color: #ffffff;
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: default;
+}
+.post-reaction-total-box{
+     background-color: #21262d;
+    color: #ffffff;
+    font-weight: 500;
+    cursor: default;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 20px;
+    transition: transform 0.1s;
+}
+
+

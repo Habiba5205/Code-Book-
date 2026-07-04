@@ -77,11 +77,14 @@ namespace CodeBook.Business.App.Services
                 return UpdateReaction(reactionDto, reaction);
             }
 
-            reaction = new Reaction();
-            reaction.UserId = userId;
-            reaction.PostId = reaction.PostId;
-            reaction.CommentId = reactionDto.CommentId;
-            reaction.Type = Enum.Parse<ReactionType>(reactionDto.ReactionType);
+            reaction = new Reaction() {
+                UserId = userId,
+                PostId = reactionDto.PostId,
+                CommentId = reactionDto.CommentId,
+                Type = Enum.Parse<ReactionType>(reactionDto.ReactionType),
+                DateCreated = DateTime.UtcNow,
+          
+            };
             _reactionRepository.Add(reaction);
             _commentRepository.AddReaction(reactionDto.CommentId.Value);
 
@@ -92,7 +95,7 @@ namespace CodeBook.Business.App.Services
                 userId = _commentService.GetCommentAuthorId(reactionDto.CommentId.Value),
                 Type = "Reaction",
                 Message = "Someone reacted to your Comment",
-                ReferenceId = reactionDto.PostId,
+                ReferenceId = reactionDto.CommentId.Value,
                 IsSeen = false,
                 DateCreated = DateTime.UtcNow
             });

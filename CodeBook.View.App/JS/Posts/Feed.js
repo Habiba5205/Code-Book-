@@ -44,12 +44,15 @@ async function loadFeed() {
 
                     <div class="post-actions">
                         <div class="d-flex gap-1">
+                           <div class="post-reaction-total-box " id="reaction-count-${post.id}">
+                 ${post.likeCount || 0}
+                  </div>
                             <button class="btn-purple reaction-btn" 
                             data-post-id="${post.id}"
                               data-type="Like"
                               data-liked="false"
                               onclick="toggleReaction(this, ${post.id}, 'Like')">
-                                👍<span class="like-count">${post.likeCount || 0}</span>
+                                👍
                             </button>
                             <button class="btn-purple reaction-btn" 
                               data-post-id="${post.id}"

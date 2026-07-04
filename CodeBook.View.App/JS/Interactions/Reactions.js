@@ -3,17 +3,16 @@ async function toggleReaction(button, postId, reactionType) {
     const container = button.parentElement;
     const currentReaction = container.querySelector(".reacted");
     
-
-    const likeBtn = container.querySelector("[data-type='Like']");
-    const countSpan = likeBtn ? likeBtn.querySelector(".like-count") : null;
-    const currentCount = parseInt(countSpan?.textContent) || 0;
+   
+    const countBox = document.getElementById(`reaction-count-${postId}`);
+    const currentCount = parseInt(countBox?.textContent) || 0;
 
     if (currentReaction === button) {
         const success = await removeReaction(postId);
         if (success) {
             button.classList.remove("reacted");
             button.dataset.liked = "false";
-            if (countSpan) countSpan.textContent = Math.max(0, currentCount - 1);
+            if (countBox) countBox.textContent = Math.max(0, currentCount - 1);
         }
         return;
     }
@@ -29,8 +28,8 @@ async function toggleReaction(button, postId, reactionType) {
     if (success) {
         button.classList.add("reacted");
         button.dataset.liked = "true";
-        if (!currentReaction && countSpan) {
-            countSpan.textContent = currentCount + 1;  
+        if (!currentReaction && countBox) {
+            countBox.textContent = currentCount + 1;
         }
     }
 }
@@ -66,12 +65,13 @@ async function removeReaction(postId) {
 }
 
 async function addCommentReaction(postId, commentId, reactionType) {
-    try {
+try{
         const data = await api.post("Reaction/addCommentreaction", {
             postId: Number(postId),
             commentId: Number(commentId),
             reactionType: reactionType
         });
+       
         console.log("Comment reaction added:", data);
         return true;
     } catch (error) {
@@ -79,9 +79,6 @@ async function addCommentReaction(postId, commentId, reactionType) {
         return false;
     }
 }
-
-
-
 
 async function removeCommentReaction(postId, commentId) {
     try {
@@ -94,37 +91,39 @@ async function removeCommentReaction(postId, commentId) {
 }
 
 
-async function toggleCommentReaction(button, commentId, reactionType) {
+async function toggleCommentReaction(button, postId, commentId, reactionType) {
     const container = button.parentElement;
-    const selected = container.querySelector(".reacted");
+    const currentReaction = container.querySelector(".reacted");
 
-    if (selected === button) {
-        const success = await removeCommentReaction(commentId);
-        if (!success) return;
+    
+    const countBox = document.getElementById(`reaction-count-${commentId}`);
+    const currentCount = parseInt(countBox?.textContent) || 0;
 
-        button.classList.remove("reacted");
-        const count = button.querySelector(".reaction-count");
-        if (count) count.textContent = Math.max(0, Number(count.textContent) - 1);
+    if (currentReaction === button) {
+        const success = await removeCommentReaction(postId, commentId);
+        if (success) {
+            button.classList.remove("reacted");
+            button.dataset.reacted = "false";
+            if (countBox) countBox.textContent = Math.max(0, currentCount - 1);
+        }
         return;
     }
 
-    if (selected) {
-        const success = await removeCommentReaction(commentId);
-        if (!success) return;
-
-        selected.classList.remove("reacted");
-        const oldCount = selected.querySelector(".reaction-count");
-        if (oldCount) oldCount.textContent = Math.max(0, Number(oldCount.textContent) - 1);
+    if (currentReaction) {
+        await removeCommentReaction(postId, commentId);
+        currentReaction.classList.remove("reacted");
+        currentReaction.dataset.reacted = "false";
     }
 
-    const success = await addCommentReaction(commentId, reactionType);
-    if (!success) return;
-
-    button.classList.add("reacted");
-    const count = button.querySelector(".reaction-count");
-    if (count) count.textContent = Number(count.textContent) + 1;
+    const success = await addCommentReaction(postId, commentId, reactionType);
+    if (success) {
+        button.classList.add("reacted");
+        button.dataset.reacted = "true";
+        if (!currentReaction && countBox) {
+            countBox.textContent = currentCount + 1;
+        }
+    }
 }
-
 
 
 window.addReaction = addReaction;
