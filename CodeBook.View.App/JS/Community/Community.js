@@ -26,6 +26,11 @@ window.onload=()=>{
                 class="profile-img">
                 </div>
       
+                <a href="../Posts/CreatePost.html?communityId=${community.id}" 
+                   class="btn-purple">
+                    <i class="fa-solid fa-plus"></i> Create Post
+                </a>
+
                 <div class="col-md-9">
                 <h2 class="text-light  mb-1">${community.name}</h2>
                 <p class="text-white-50" >${community.description}</p>

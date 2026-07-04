@@ -1,11 +1,26 @@
 import { api } from '../api.js';
 
+const urlParams = new URLSearchParams(window.location.search);
+const communityId = urlParams.get('communityId');
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (communityId) {
+        document.getElementById('communityInfo').style.display = 'block';
+        document.getElementById('communityId').value = communityId;
+        loadCommunityName(communityId);
+
+        document.getElementById('isPublic').checked = true;
+    }
+});
+
 async function createPost() {
     const title = document.getElementById('title').value.trim();
     const body = document.getElementById('body').value.trim();
     const codeSnippet = document.getElementById('codeSnippet').value.trim();
     const language = document.getElementById('language').value;
     const isPublic = document.getElementById('isPublic').checked;
+
+    const communityIdValue = document.getElementById('communityId').value;
 
     const errorMsg = document.getElementById('errorMsg');
     const successMsg = document.getElementById('successMsg');
@@ -33,7 +48,7 @@ async function createPost() {
             codeSnippet: codeSnippet || null,
             language: language || null,
             isPublic: isPublic,
-            communityId: null,
+            communityId: communityIdValue ? parseInt(communityIdValue) : null,
             tagIds: []
         });
 
@@ -43,7 +58,12 @@ async function createPost() {
 
             // redirect to feed after 5 seconds
             setTimeout(() => {
+               if(communutyIdValue){
+                window.location.href = `../html/Community/Community.html?id=${communityIdValue}`;
+               }
+               else{
                 window.location.href = 'Feed.html';
+               }
             }, 5000);
         } else {
             errorMsg.textContent = result.message || 'Failed to create post';
