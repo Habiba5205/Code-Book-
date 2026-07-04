@@ -12,6 +12,7 @@ namespace CodeBook.Business.App.Interfaces
         ErrorResponse Follow(int followerId, int followeeId);
         ErrorResponse Unfollow(int followerId, int followeeId);
         List<UserProfileResponse> SearchUsers(string keyword);
-
+        List<UserProfileResponse> GetFollowers(int userId);
+        List<UserProfileResponse> GetFollowing(int userId);
     }
 }

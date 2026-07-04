@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using AutoMapper;
 using CodeBook.Business.App.DTOs;
 using CodeBook.Models.App;
@@ -56,12 +57,17 @@ namespace CodeBook.Business.App.Mapping
                 .ForMember(dest => dest.DateCreated,
                             opt => opt.MapFrom(src => src.DateCreated))
                 .ForMember(dest => dest.memberscount,
-                            opt => opt.MapFrom(src => src.Members.Count()));
+                            opt => opt.MapFrom(src => src.Members.Count));
 
             CreateMap<Post, PostResponse>()
                 .ForMember(dest => dest.LikeCount,
                opt => opt.MapFrom(src => src.LikeCount));
 
+            CreateMap<Post, PostResponse>()
+                .ForMember(dest => dest.AuthorUsername,
+               opt => opt.MapFrom(src => src.Author.UserName)) 
+                .ForMember(dest => dest.AuthorId,
+               opt => opt.MapFrom(src => src.AuthorId));
 
         }
 

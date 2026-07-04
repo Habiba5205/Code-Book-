@@ -146,7 +146,7 @@ namespace CodeBook.Business.App.Controllers
         {
             try
             {
-                Community community = _communityService.GetCommunity(communityId);
+                CommunityDto community = _communityService.GetCommunity(communityId);
                 return Ok(community);
             }
             catch (KeyNotFoundException ex)

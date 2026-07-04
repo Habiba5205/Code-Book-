@@ -19,10 +19,18 @@ namespace CodeBook.Data.App.Repositories
 
         public Post GetPostById(int postid)
         {
-            Post post = _context.posts.FirstOrDefault(p => p.Id == postid);
+            Post post = _context.posts
+                .Include(p => p.Author) 
+                .FirstOrDefault(p => p.Id == postid);
+
+            if (post == null)
+                throw new Exception("Post Not Found!!");
+
+            return post;
+         /*   Post post = _context.posts.FirstOrDefault(p => p.Id == postid);
             if (post == null) {
                 throw new Exception("Post Not Found!!"); }
-            else return post;
+            else return post;*/
         }
         public void Add(Post post)
         {

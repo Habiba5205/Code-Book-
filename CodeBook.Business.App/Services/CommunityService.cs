@@ -91,10 +91,10 @@ namespace CodeBook.Business.App.Services
             _communityRepository.SaveChanges();
 
         }
-        public Community GetCommunity(int CommunityId)
+        public CommunityDto GetCommunity(int CommunityId)
         {
             Community community = _communityRepository.GetCommunity(CommunityId);
-            return community;
+            return mapper.Map<CommunityDto>(community) ;
         }
         public void UnjoinCommunity(int communityId,int userId)
         {

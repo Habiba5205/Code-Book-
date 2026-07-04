@@ -58,8 +58,8 @@ async function createPost() {
 
             // redirect to feed after 5 seconds
             setTimeout(() => {
-               if(communutyIdValue){
-                window.location.href = `../html/Community/Community.html?id=${communityIdValue}`;
+               if(communityIdValue){
+                window.location.href = `../Community/CommunityFeed.html?id=${communityIdValue}`;
                }
                else{
                 window.location.href = 'Feed.html';
@@ -76,3 +76,17 @@ async function createPost() {
         console.error(error);
     }
 }
+window.createPost=createPost;
+
+async function loadCommunityName(communityId) {
+    try {
+        const community = await api.get(`Communities/${communityId}`);
+        if (community) {
+            document.getElementById('communityName').textContent = community.name;
+        }
+    } catch (error) {
+        console.error('Failed to load community:', error);
+    }
+}
+
+window.createPost = createPost;

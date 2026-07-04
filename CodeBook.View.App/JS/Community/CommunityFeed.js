@@ -7,7 +7,7 @@ window.onload=()=>{
     const communityId = params.get("id");
 
     createpostbtn.addEventListener('click',() => {
-            window.location.href(`../../HTML/Posts/CreatePost.html?communityId=${communityId}`);
+            window.location.href = `../../html/Posts/CreatePost.html?communityId=${communityId}`;
     });
 
     async function CommunityDataView() {

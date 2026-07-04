@@ -112,6 +112,22 @@ namespace CodeBook.API.App.Controllers
             return BadRequest(new { message = result.Message });
 
         }
+        [HttpGet("followers")]
+        [Authorize]
+        public IActionResult GetFollowers()
+        {
+            var userId = _currentUserInfo.GetCurrentUserId();
+            var followers = _userService.GetFollowers(userId);
+            return Ok(followers);
+        }
+        [HttpGet("followings")]
+        [Authorize]
+        public IActionResult GetFollowing()
+        {
+            var userId = _currentUserInfo.GetCurrentUserId();
+            var following = _userService.GetFollowing(userId);
+            return Ok(following);
+        }
 
         [HttpGet("search")]
         [AllowAnonymous]
