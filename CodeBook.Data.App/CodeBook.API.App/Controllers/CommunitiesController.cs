@@ -126,6 +126,20 @@ namespace CodeBook.Business.App.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+
+        [HttpGet("search")]
+        [AllowAnonymous]
+        public IActionResult SearchCommunities([FromQuery] string keyword)
+        {
+            if (string.IsNullOrEmpty(keyword))
+            {
+                return BadRequest(new { message = "keyword is required" });
+            }
+            var communities = _communityService.SearchCommunities(keyword);
+            return Ok(communities);
+        }
+
+
         [HttpGet("{id}")]
         public IActionResult GetCommunity(int id)
         {

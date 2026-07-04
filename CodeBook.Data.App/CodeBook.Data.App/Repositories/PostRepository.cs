@@ -102,6 +102,28 @@ namespace CodeBook.Data.App.Repositories
         {
             return _context.posts.Include(p=>p.Author).Where(p => p.IsRemoved == false);
         }
+
+        public List<Post> SearchPosts(string? keyword, string? language, string? tag)
+        {
+            var query = _context.posts
+                    .Include(p => p.Author)
+                    .Where(p => !p.IsRemoved);
+
+            if (!string.IsNullOrEmpty(keyword))
+                query = query.Where(p => p.Title.Contains(keyword) ||
+                                         p.Body.Contains(keyword));
+
+            if (!string.IsNullOrEmpty(language))
+                query = query.Where(p => p.Language != null &&
+                                         p.Language == language);
+
+            if (!string.IsNullOrEmpty(tag))
+                query = query.Where(p => p.PostTags
+                                          .Any(t => t.Tag.Name == tag));
+
+            return query.ToList();
+        }
+
         public bool SaveChanges()
         {
             return _context.SaveChanges() >= 0;

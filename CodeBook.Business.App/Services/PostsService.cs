@@ -204,7 +204,11 @@ namespace CodeBook.Business.App.Services
             }
             return mapper.Map<PostResponse>(post);
         }
-        
+        public List<PostResponse> SearchPosts(string? keyword, string? language, string? tag)
+        {
+            var posts = _postRepository.SearchPosts(keyword, language, tag);
+            return mapper.Map<List<PostResponse>>(posts);
+        }
         public int GetPostAuthorId(int postId)
         {
             var post = _postRepository.GetPostById(postId);

@@ -69,5 +69,12 @@ namespace CodeBook.Data.App.Repositories
         {
             _context.communityMembers.Remove(member);
         }
+
+        public List<Community> SearchCommunities(string keyword)
+        {
+            return _context.communities
+                .Where(c => c.Name.Contains(keyword) || c.Description.Contains(keyword))
+                .ToList();
+        }
     }
 }

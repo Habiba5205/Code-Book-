@@ -11,10 +11,10 @@ namespace CodeBook.Business.App.Interfaces
         void UpdateCommunity(int CommunityId,UpdateCommunityDto dto);
         void DeleteCommunity(int CommunityId);
         Community GetCommunity(int CommunityId);
-
         void UnjoinCommunity(int communityId, int userId);
         List<CommunityDto> GetCommunities(int userId);
         public List<PostResponse> GetCommunityFeed(int communityId);
+        List<CommunityDto> SearchCommunities(string keyword);
 
     }
 }

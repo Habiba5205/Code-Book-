@@ -33,6 +33,13 @@ namespace CodeBook.Data.App.Repositories
         {
             _context.users.Update(user);
         }
+
+        public List<User> SearchUsers(string keyword)
+        {
+            return _context.users
+                .Where(u => u.UserName.Contains(keyword) || u.Bio.Contains(keyword))
+                .ToList();
+        }
         public bool SaveChanges()
         {
             return _context.SaveChanges() >= 0;

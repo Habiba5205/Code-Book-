@@ -97,5 +97,16 @@ namespace CodeBook.Business.App.Services
             return new ErrorResponse { Success = false, Message = "Couldn't Unfollow!" };
 
         }
+
+        public List<UserProfileResponse> SearchUsers(string keyword)
+        {
+            if (string.IsNullOrEmpty(keyword))
+            {
+                return new List<UserProfileResponse>();
+            }
+
+            var users = _userRepository.SearchUsers(keyword);
+            return mapper.Map<List<UserProfileResponse>>(users);
+        }
     }
 }

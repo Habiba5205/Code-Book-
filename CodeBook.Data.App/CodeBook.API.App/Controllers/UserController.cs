@@ -112,5 +112,18 @@ namespace CodeBook.API.App.Controllers
             return BadRequest(new { message = result.Message });
 
         }
+
+        [HttpGet("search")]
+        [AllowAnonymous]
+        public IActionResult SearchUsers([FromQuery] string keyword)
+        {
+            if (string.IsNullOrEmpty(keyword))
+            {
+                return BadRequest(new { message = "keyword is required" });
+            }
+
+            var users = _userService.SearchUsers(keyword);
+            return Ok(users); 
+        }
     }
 }

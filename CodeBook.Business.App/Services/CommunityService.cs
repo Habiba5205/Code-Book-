@@ -110,5 +110,15 @@ namespace CodeBook.Business.App.Services
             return mapper.Map<List<PostResponse>>(feed);
 
         }
+
+        public List<CommunityDto> SearchCommunities(string keyword)
+        {
+            if (string.IsNullOrEmpty(keyword))
+            {
+                return new List<CommunityDto>();
+            }
+            var communities = _communityRepository.SearchCommunities(keyword);
+            return mapper.Map<List<CommunityDto>>(communities);
+        }
     }
 }

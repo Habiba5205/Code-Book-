@@ -36,14 +36,12 @@
                        placeholder="Enter post title">
             </div>
 
-            <!-- Body -->
             <div class="mb-3">
                 <label style="color:white">Body</label>
                 <textarea id="body" class="form-control" rows="4" 
                           placeholder="What's on your mind?"></textarea>
             </div>
 
-            <!-- Code Snippet -->
             <div class="mb-3">
                 <label style="color:white">Code Snippet (optional)</label>
                 <textarea id="codeSnippet" class="form-control" rows="6" 
@@ -51,7 +49,6 @@
                           style="font-family:monospace"></textarea>
             </div>
 
-            <!-- Language -->
             <div class="mb-3">
                 <label style="color:white">Language</label>
                 <select id="language" class="form-control">
@@ -69,7 +66,6 @@
                 </select>
             </div>
 
-            <!-- Public/Private Toggle -->
             <div class="mb-3 d-flex align-items-center gap-3">
                 <label style="color:white">Public Post</label>
                 <div class="form-check form-switch">
@@ -77,13 +73,10 @@
                 </div>
             </div>
 
-            <!-- Error Message -->
             <div id="errorMsg" class="error-msg"></div>
 
-            <!-- Success Message -->
             <div id="successMsg" class="success-msg"></div>
 
-            <!-- Buttons -->
             <div class="d-flex gap-2 mt-3">
                 <button class="btn-purple" onclick="updatePost()">
                     <i class="fa-solid fa-floppy-disk"></i> Save Changes

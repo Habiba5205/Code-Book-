@@ -15,6 +15,7 @@ namespace CodeBook.Data.App.IRepositories
         void Remove(User user);
         void Update(User user); 
         bool SaveChanges();
+        List<User> SearchUsers(string keyword);
 
     }
 }

@@ -2,6 +2,7 @@
 using CodeBook.Business.App.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using System.Security.AccessControl;
 using System.Security.Claims;
 
@@ -133,16 +134,11 @@ namespace CodeBook.API.App.Controllers
 
         [HttpGet("search")]
         [AllowAnonymous]
-        public IActionResult SearchPosts([FromQuery] string? key, [FromQuery] string? tag, [FromQuery] string? language)
+        public IActionResult SearchPosts([FromQuery] string? keyword,
+                                  [FromQuery] string? language,
+                                  [FromQuery] string? tag)
         {
-            var query = new SearchQuery
-            {
-                Keyword = key ?? string.Empty,
-                Tag = tag ?? string.Empty,
-                Language = language ?? string.Empty
-            };
-
-            var results = _searchService.SearchPosts(query);
+            var results = _postService.SearchPosts(keyword, language, tag);
             return Ok(results);
         }
     }
