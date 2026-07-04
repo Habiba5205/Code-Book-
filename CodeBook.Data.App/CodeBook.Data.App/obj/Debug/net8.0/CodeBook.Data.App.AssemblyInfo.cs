@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CodeBook.Data.App")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+46343d2d1704fb003cc32ad935c04f6395465c89")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a678805a64f9f3654c35d44e747d01fce3ba5b37")]
 [assembly: System.Reflection.AssemblyProductAttribute("CodeBook.Data.App")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CodeBook.Data.App")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

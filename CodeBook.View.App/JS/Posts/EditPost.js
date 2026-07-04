@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     loadPost();
 });
 
-// Load existing post data into form
 async function loadPost() {
     try {
         const post = await api.get(`Post/${postId}`);
@@ -19,13 +18,11 @@ async function loadPost() {
             return;
         }
 
-        // fill form with existing data
         document.getElementById('title').value = post.title || '';
         document.getElementById('body').value = post.body || '';
         document.getElementById('codeSnippet').value = post.codeSnippet || '';
         document.getElementById('isPublic').checked = post.isPublic;
 
-        // select correct language
         const languageSelect = document.getElementById('language');
         for (let option of languageSelect.options) {
             if (option.value === post.language) {
@@ -39,7 +36,6 @@ async function loadPost() {
     }
 }
 
-// Update post
 async function updatePost() {
     const title = document.getElementById('title').value.trim();
     const body = document.getElementById('body').value.trim();
@@ -94,7 +90,6 @@ async function updatePost() {
     }
 }
 
-// Delete post
 async function deletePost() {
     if (!confirm('Are you sure you want to delete this post?'))
         return;

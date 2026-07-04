@@ -11,6 +11,7 @@ namespace CodeBook.Business.App.Interfaces
         ErrorResponse UpdateProfile(int userId, UpdateProfileDto data);
         ErrorResponse Follow(int followerId, int followeeId);
         ErrorResponse Unfollow(int followerId, int followeeId);
+        List<UserProfileResponse> SearchUsers(string keyword);
 
     }
 }
