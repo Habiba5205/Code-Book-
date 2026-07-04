@@ -1,4 +1,4 @@
-import { api } from './api.js';
+import { api } from '../api.js';
 window.onload=()=>{
     var reportPage = document.getElementById("report-page");
     var reportList = document.getElementById("list-group-report");

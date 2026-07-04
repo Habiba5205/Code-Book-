@@ -1,4 +1,4 @@
-import { api } from './api.js';
+import { api } from '../api.js';
 
 window.onload = () => {
     const button = document.getElementById('resetBtn');
@@ -29,7 +29,7 @@ window.onload = () => {
             });
 
             alert("Password changed successfully!!");
-            window.location.href = "Login.html";
+            window.location.href = "../../HTML/Auth/Login.html";
         }
         catch(error){
             alert("Reset failed: " + error.message);

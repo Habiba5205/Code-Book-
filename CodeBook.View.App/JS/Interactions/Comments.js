@@ -1,4 +1,4 @@
-import { api } from './api.js';
+import { api } from '../api.js';
 
 
 function getPostId(){  //get post id from url 

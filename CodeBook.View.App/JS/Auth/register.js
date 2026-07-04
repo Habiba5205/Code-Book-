@@ -1,17 +1,19 @@
-import { api } from './api.js';
+import { api } from '../api.js';
 
 window.onload = () => {
-    const button = document.getElementById('resetBtn');
+    const button = document.getElementById('registerBtn');
+    const usernameInput = document.getElementById('username');
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirmPassword');
 
     button.addEventListener('click',async() =>{
+        const username = usernameInput.value;
         const email = emailInput.value;
         const password = passwordInput.value;
         const confirmPassword = confirmPasswordInput.value;
 
-        if( !email || !password || !confirmPassword){
+        if(!username || !email || !password || !confirmPassword){
             alert("Please fill all required fields!");
         return;
         }
@@ -20,21 +22,22 @@ window.onload = () => {
             return;
         }
         try{
-            button.innerText = "Resetting...";
+            button.innerText = "Creating acount...";
             button.disabled = true;
 
-            await api.post("Auth/forgotPassword",{
+            await api.post('Auth/register',{
+                UserName:username,
                 Email:email,
-                NewPassword:password
+                Password:password
             });
 
-            alert("Password reset successfully!!");
-            window.location.href = "Login.html";
+            alert("Account created successfully!!");
+            window.location.href = "../../HTML/Auth/Login.html";
         }
         catch(error){
-            alert("Reset failed: " + error.message);
+            alert("Registeration failed: " + error.message);
         }finally{
-            button.innerText = "Confirm";
+            button.innerText = "Submit";
             button.disabled = false;
         }
     });

@@ -1,4 +1,4 @@
-import { api } from './api.js';
+import { api } from '../api.js';
 window.onload=()=>{
     var communitydatacard = document.getElementById("community-data-holder");
     var communityfeed = document.getElementById("community-feed");
@@ -92,7 +92,7 @@ window.onload=()=>{
 
 
 function viewPost(postId) {
-    window.location.href = `../HTML/PostDetail.html?id=${postId}`;
+    window.location.href = `../../HTML/Posts/PostDetail.html?id=${postId}`;
 }
 
  CommunityDataView();
@@ -106,7 +106,7 @@ window.handleAction = async (communityId,buttonElement) => {
                 const result = await api.delete(`communities/${communityId}/unjoin`);
                 if(result.message ==="Unjoined Community Successfully"){
                     alert("Unjoined community!");
-                    window.location.href = '../HTML/Feed.html';
+                    window.location.href = '../../HTML/Posts/Feed.html';
                 }
             }
         catch(error){

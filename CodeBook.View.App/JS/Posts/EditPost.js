@@ -1,3 +1,5 @@
+import { api } from '../api.js';
+
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get('id');
 

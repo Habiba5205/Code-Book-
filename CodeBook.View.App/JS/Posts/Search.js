@@ -1,3 +1,5 @@
+import { api } from '../api.js';
+
 let currentTab = 'posts';
 
 document.getElementById('searchInput').addEventListener('keypress', (e) => {

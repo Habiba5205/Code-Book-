@@ -1,4 +1,4 @@
-import { api } from './api.js';
+import { api } from '../api.js';
 
 window.onload=()=>{
         const button = document.getElementById('loginBtn');
@@ -22,9 +22,9 @@ window.onload=()=>{
                 });
 
                 if (response.role === 'Admin') {
-                    window.location.href = "../admin/dashboard.html";
+                    window.location.href = "../../HTML/admin/dashboard.html";
                 } else {
-                    window.location.href = "../html/Posts/Feed.html";
+                    window.location.href = "../../HTML/Posts/Feed.html";
                 }
                    
             } catch (error) {

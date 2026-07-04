@@ -1,4 +1,4 @@
-import { api } from './api.js';
+import { api } from '../api.js';
 window.onload=()=>{
     var communitiesContainer = document.getElementById("communities-container");
     var communitycreation_btn = document.getElementById("createcommunity-btn"); //to be continued!

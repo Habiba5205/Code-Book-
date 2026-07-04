@@ -1,3 +1,5 @@
+import { api } from '../api.js';
+
 async function createPost() {
     const title = document.getElementById('title').value.trim();
     const body = document.getElementById('body').value.trim();
