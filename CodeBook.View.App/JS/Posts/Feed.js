@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadFeed();
 });
 async function loadFeed() {
-    console.log("loadFeed called!"); // ← add this
+    console.log("loadFeed called!");
     console.trace(); 
     try {
         postsContainer.innerHTML = `<p style="color:white">Loading...</p>`;

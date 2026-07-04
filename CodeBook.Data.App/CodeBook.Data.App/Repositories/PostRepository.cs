@@ -133,7 +133,29 @@ namespace CodeBook.Data.App.Repositories
         {
             return _context.postsSaved.Any(s => s.UserId == userId && s.PostId == postId);
         }
-       
+
+        public List<Post> GetSavedPosts(int userId)
+        {
+            return _context.postsSaved
+                .Where(ps => ps.UserId == userId)
+                .Include(ps => ps.Post)
+                    .ThenInclude(p => p.Author)
+                .Select(ps => ps.Post)
+                .Where(p => !p.IsRemoved)
+                .ToList();
+        }
+
+        public PostSaved GetSavedPost(int userId, int postId)
+        {
+            return _context.postsSaved.FirstOrDefault(ps => ps.UserId == userId && ps.PostId == postId);
+        }
+
+        public void UnsavePost(int userId, int postId)
+        {
+            var saved = GetSavedPost(userId, postId);
+            if (saved != null)
+                _context.postsSaved.Remove(saved);
+        }
     } 
 }
 

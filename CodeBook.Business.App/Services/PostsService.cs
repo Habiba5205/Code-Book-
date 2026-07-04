@@ -162,6 +162,27 @@ namespace CodeBook.Business.App.Services
 
             return new ErrorResponse { Success = false, Message = "Could not save post" };
         }
+        public List<PostResponse> GetSavedPosts(int userId)
+        {
+            var posts = _postRepository.GetSavedPosts(userId);
+            return mapper.Map<List<PostResponse>>(posts);
+        }
+
+        public ErrorResponse UnsavePost(int userId, int postId)
+        {
+            bool isSaved = _context.postsSaved
+                .Any(ps => ps.UserId == userId && ps.PostId == postId);
+
+            if (!isSaved)
+                return new ErrorResponse { Success = false, Message = "Post not saved!" };
+
+            _postRepository.UnsavePost(userId, postId);
+
+            if (_postRepository.SaveChanges())
+                return new ErrorResponse { Success = true, Message = "Post unsaved successfully" };
+
+            return new ErrorResponse { Success = false, Message = "Could not unsave post" };
+        }
         public List<PostTagDto> GetPostTags(int postId)
         {
             var tag = _postRepository.GetPostTags(postId);
