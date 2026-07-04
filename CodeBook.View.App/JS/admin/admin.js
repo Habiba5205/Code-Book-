@@ -60,7 +60,7 @@ window.onload=()=>{
                 const result = await api.delete(`admin/comments/${report.commentId}/${report.id}`);
                 if(result.message === 'Comment removed successfully'){
                     alert("Comment removed successfully!");
-                    document.querySelectorAll('.actions').forEach(el =>{el.classList.add('hidden');});
+                    document.querySelectorAll('.actions').forEach(el =>{el.classList.add('d-none');});
                     //add accepted
                     const text = document.createElement('p');
                     text.className = 'status-update'
@@ -72,7 +72,7 @@ window.onload=()=>{
                 const result = await api.delete(`admin/posts/${report.postId}/${report.id}`);
                 if(result.message === 'Post removed successfully'){
                     alert("Post removed successfully!");
-                    document.querySelectorAll('.actions').forEach(el =>{el.classList.add('hidden');});
+                    document.querySelectorAll('.actions').forEach(el =>{el.classList.add('d-none');});
                     //add accepted
                     const text = document.createElement('p');
                     text.className = 'status-update'
@@ -82,7 +82,7 @@ window.onload=()=>{
             }
             if(status === "Rejected"){
                 const result = await api.patch(`admin/reports/${report.id}/status`, { Status: status });
-                document.querySelectorAll('.actions').forEach(el =>{el.classList.add('hidden');});
+                document.querySelectorAll('.actions').forEach(el =>{el.classList.add('d-none');});
                 //add rejected here 
                 const text = document.createElement('p');
                     text.className = 'status-update'
@@ -94,7 +94,7 @@ window.onload=()=>{
     } catch (error) {
         alert("Error: " + error.message);
         buttonElement.disabled = false;
-        document.querySelectorAll('.actions').forEach(el =>{el.classList.remove('hidden');});
+        document.querySelectorAll('.actions').forEach(el =>{el.classList.remove('d-none');});
         document.querySelectorAll('.status-update').forEach(msg => {msg.remove()});
     }
 };

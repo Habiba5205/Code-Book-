@@ -2,8 +2,13 @@ import { api } from '../api.js';
 window.onload=()=>{
     var communitydatacard = document.getElementById("community-data-holder");
     var communityfeed = document.getElementById("community-feed");
+    var createpostbtn = document.getElementById("createpost-btn");
     const params = new URLSearchParams(window.location.search);
     const communityId = params.get("id");
+    
+    createpostbtn.addEventListener('click',() => {
+            //The post creation navigate to habiba^^ 
+    });
 
     async function CommunityDataView() {
         try{
@@ -111,6 +116,7 @@ window.handleAction = async (communityId,buttonElement) => {
             }
         catch(error){
             alert("Error: " + error.message);
+            buttonElement.disabled = false;
         }
 
 }

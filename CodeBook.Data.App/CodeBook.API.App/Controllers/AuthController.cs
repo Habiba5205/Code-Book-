@@ -41,8 +41,8 @@ namespace CodeBook.API.App.Controllers
             {
                 return BadRequest(validationResult.Errors);
             }
-            var token = _authService.Login(logininfo);
-            if (token != null)
+            var response = _authService.Login(logininfo);
+            if (response.Token != null)
             {
                 var cookieOptions = new CookieOptions
                 {
@@ -52,9 +52,9 @@ namespace CodeBook.API.App.Controllers
                     Expires = DateTime.UtcNow.AddDays(7)
 
                 };
-                Response.Cookies.Append("jwt_token",token,cookieOptions);
+                Response.Cookies.Append("jwt_token",response.Token,cookieOptions);
 
-                return Ok(new { message = "Login Successful."});
+                return Ok(new { message = "Login Successful.", Role = response.Role});
             }
             return Unauthorized(new { message = "Invalid Email or Password" });
 

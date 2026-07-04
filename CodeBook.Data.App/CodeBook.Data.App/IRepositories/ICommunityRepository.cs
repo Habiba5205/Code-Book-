@@ -20,5 +20,7 @@ namespace CodeBook.Data.App.IRepositories
         void RemoveMember(CommunityMember member);
         List<Community> GetCommunities(int userId);
         List<Community> SearchCommunities(string keyword);
+        List<Community> GetUnjoinedCommunities(int userId);
+        List<Community> GetOwnedCommunities(int userId);
     }
 }

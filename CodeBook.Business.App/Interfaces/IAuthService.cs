@@ -11,7 +11,7 @@ namespace CodeBook.Business.App.Interfaces
     public interface IAuthService
     {
         ErrorResponse Register(RegisterDto register);
-        string Login(LoginDto login);
+        LoginResponse Login(LoginDto login);
         ErrorResponse ResetPassword(ResetPasswordDto resetPassword);
         bool VerifyPassword(string password, int userId);
         public ErrorResponse ForgotPassword(ForgotPasswordDto forgotPassword);

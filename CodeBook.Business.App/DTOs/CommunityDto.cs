@@ -14,5 +14,6 @@ namespace CodeBook.Business.App.DTOs
         public string? IconURL { get; set; }
         public string? Description { get; set; }
         public DateTime DateCreated { get; set; }
+        public int memberscount { get; set; } = 0;
     }
 }
