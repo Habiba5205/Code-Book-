@@ -79,7 +79,7 @@ namespace CodeBook.Business.App.Services
 
             reaction = new Reaction();
             reaction.UserId = userId;
-            reaction.PostId = reactionDto.PostId;
+            reaction.PostId = reaction.PostId;
             reaction.CommentId = commentId;
             reaction.Type = Enum.Parse<ReactionType>(reactionDto.ReactionType);
             _reactionRepository.Add(reaction);
