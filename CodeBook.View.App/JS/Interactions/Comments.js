@@ -1,26 +1,16 @@
 import { api } from '../api.js';
-
+let currentUserId = null;
 
 function getPostId(){  //get post id from url 
     const params = new URLSearchParams(window.location.search);
     return params.get("id");
 }
 
-async function initComments() {
-    const postId = getPostId();
-    if(!postId){
-        console.error("Post ID not found in URL");
-        return;
-    }
-    await fetchComments(postId);
-}
-document.addEventListener("DOMContentLoaded", () => {
-    initComments();
-});
 
-async function fetchComments(postId) {
+export async function fetchComments(postId) {
   try{  
-    const comments =   await api.get(`posts/${postId}/comments`);
+    currentUserId=await getCurrentUserId();
+    const comments =   await api.get(`Comment/${postId}/comments`);
     renderComments(comments);
 }catch (error) {
     console.error("Error fetching comments:", error);
@@ -28,7 +18,7 @@ async function fetchComments(postId) {
 }
 
 function renderComments(comments) {
-    const commentsContainer = document.getElementById("comments-container");
+    const commentsContainer = document.getElementById("commentsContainer");
     commentsContainer.innerHTML = ""; // Clear existing comments
     const topLevel=comments.filter(c=>c.selfCommentId===null);
      
@@ -53,15 +43,41 @@ function createCommentCard(comment, getReplies) {
     div.innerHTML = `
         <div class="d-flex gap-2">
         <div class="flex-grow-1">
-        <span class="fw-semibold">${comment.authorName}</span>
-        <p class="mb-1">${comment.body}</p>
+        <span class="fw-semibold">${comment.authorUsername}</span>
+      <p class="mb-1">${comment.body}</p>
+
+<div class="d-flex gap-1 mt-2">
+
+    <button class="btn-purple comment-reaction"
+     data-reacted="false"
+        onclick="toggleCommentReaction(this, ${getPostId()}, ${comment.id}, 'Like')">
+        👍
+        <span class="reaction-count">${comment.likeCount || 0}</span>
+
+    </button>
+
+    <button class="btn-purple comment-reaction"
+     data-reacted="false"
+        onclick="toggleCommentReaction(this, ${getPostId()}, ${comment.id}, 'Haha')">
+        😂<span class="reaction-count">${comment.likeCount || 0}</span>
+
+    </button>
+
+    <button class="btn-purple comment-reaction"
+     data-reacted="false"
+        onclick="toggleCommentReaction(this, ${getPostId()}, ${comment.id}, 'love')">
+        ❤️<span class="reaction-count">${comment.likeCount || 0}</span>
+
+    </button>
+
+</div>
         <div class="d-flex gap-3">
         <small class="text-secondary">${formatTime(comment.dateCreated)}</small>
           <button class="reply-btn btn btn-link btn-sm p-0"
                             data-comment-id="${comment.id}">
                         Reply
                       </button>
-                    ${comment.authorId === getCurrentUserId() ? 
+                    ${comment.authorId === currentUserId ? 
                         `<button class="delete-comment-btn btn btn-link btn-sm p-0 text-danger"
                                  data-comment-id="${comment.id}">
                             Delete
@@ -93,17 +109,13 @@ if (deletebtn) {
     return div;
 }
 async function getCurrentUserId() {
-       try {
-        const user = await api.get("auth/me");
-        return user.id;
-    } catch {
-        return null;
-    }
+    
+    return Number(localStorage.getItem("userId"));
 }
-async function addComment(postId,body,selfCommentId=null){
+export async function addComment(postId,body,selfCommentId=null){
 try{
    
-  await api.post(`posts/${postId}/comments`,{
+  await api.post(`Comment/${postId}/comments`,{
     body: body,
     selfCommentId: selfCommentId
 });
@@ -112,22 +124,27 @@ try{
     console.error("Error adding comment:", error)
 }
 }
-async function deleteComment(commentId){
+export async function deleteComment(commentId){
 try{
-await api.delete(`comments/${commentId}`);
- await fetchComments(getPostId());
+await api.delete(`Comment/${commentId}/deleteComment`);
+const postId=getPostId();
+ await fetchComments(postId);
 }catch(error){
     console.error("Error deleting comment:", error)
 }
 }
 function formatTime(dateString) {
-    const date = new Date(dateString);
+    const date = new Date(dateString+"Z");
     const now = new Date();
     const diffInMins = Math.floor((now - date) / 60000);
+
     if (diffInMins < 1)    return "Just now";
     if (diffInMins < 60)   return `${diffInMins} minutes ago`;
     if (diffInMins < 1440) return `${Math.floor(diffInMins / 60)} hours ago`;
+    
     return `${Math.floor(diffInMins / 1440)} days ago`;
+   
+    
 }
 function showReplyForm(selfCommentId) {
     const postId = getPostId();
@@ -168,3 +185,4 @@ async function submitReply(selfCommentId) {
     const postId = getPostId();
     await addComment(postId, body, selfCommentId);
 }
+window.submitReply = submitReply;
