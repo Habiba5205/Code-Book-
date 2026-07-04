@@ -118,7 +118,7 @@ window.handleAction = async (communityId ,buttonElement) => {
                 const result = await api.post(`communities/${communityId}/joincommunity`,{Role : role});
                 if(result.message ==="Joined Community Successfully"){
                     alert("Joined community!");
-                    window.location.href = '../../HTML/Community/Communityfeed.html?id=${communityId}';
+                    window.location.href = `../../HTML/Community/Communityfeed.html?id=${communityId}`;
                 }
             }
         catch(error){
