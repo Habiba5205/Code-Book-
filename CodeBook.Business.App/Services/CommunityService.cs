@@ -33,6 +33,8 @@ namespace CodeBook.Business.App.Services
             community.Name = dto.Name;
             community.Description = dto.Description;
             _communityRepository.Add(community);
+            _communityRepository.SaveChanges();
+            community = _communityRepository.GetCommunitybyOwnerandDate(userId,community.DateCreated);
             var member = new CommunityMember
             {
                 CommunityId = community.Id,
