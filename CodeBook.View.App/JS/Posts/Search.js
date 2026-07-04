@@ -100,7 +100,7 @@ async function searchUsers(keyword) {
 
 async function searchCommunities(keyword) {
     if (!keyword) return [];
-    return await api.get(`Community/search?keyword=${encodeURIComponent(keyword)}`);
+    return await api.get(`Communities/search?keyword=${encodeURIComponent(keyword)}`);
 }
 
 
@@ -189,11 +189,11 @@ function viewPost(postId) {
 }
 
 function viewProfile(userId) {
-    window.location.href = `../html/User/UserProfile.html?id=${userId}`;
+    window.location.href = `../../html/User/OtherUserProfile.html?id=${userId}`;
 }
 
 function viewCommunity(communityId) {
-    window.location.href = `../html/Community.html?id=${communityId}`;
+    window.location.href = `../../html/Community/Community.html?id=${communityId}`;
 }
 
 window.switchTab = switchTab;

@@ -24,7 +24,7 @@ console.log('Match:', post.authorId === currentUserid);
             <div class="post-card">
                 <h2 class="post-title">${post.title}</h2>
                 <p style="color:#8b949e; font-size:13px">
-                    by ${post.authorUsername || 'Unknown'} • 
+                    by ${post.authorUsername} • 
                     ${new Date(post.dateCreated).toLocaleDateString()}
                 </p>
 
