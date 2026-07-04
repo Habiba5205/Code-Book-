@@ -7,6 +7,7 @@ using CodeBook.Models.App;
 using CodeBook.Business.App.Mapping;
 using System;
 using CodeBook.Business.App.Middleware;
+using Azure;
 
 namespace CodeBook.Business.App.Services
 {
@@ -36,7 +37,10 @@ namespace CodeBook.Business.App.Services
         {
             User user = _userRepository.GetProfileById(userId);
             if (user == null) return null;
-            return mapper.Map<UserProfileResponse>(user);     
+           var response = mapper.Map<UserProfileResponse>(user);     
+            response.FollowersCount = _followRepository.GetFollowersCount(userId);
+            response.FollowingCount = _followRepository.GetFollowingCount(userId);
+            return response;
         }
         public ErrorResponse UpdateProfile(int userId,UpdateProfileDto data) 
         {
@@ -97,7 +101,6 @@ namespace CodeBook.Business.App.Services
             return new ErrorResponse { Success = false, Message = "Couldn't Unfollow!" };
 
         }
-
         public List<UserProfileResponse> SearchUsers(string keyword)
         {
             if (string.IsNullOrEmpty(keyword))
@@ -107,6 +110,16 @@ namespace CodeBook.Business.App.Services
 
             var users = _userRepository.SearchUsers(keyword);
             return mapper.Map<List<UserProfileResponse>>(users);
+        }
+        public List<UserProfileResponse> GetFollowers(int userId)
+        {
+            var followers = _followRepository.GetFollowers(userId);
+            return mapper.Map<List<UserProfileResponse>>(followers);
+        }
+        public List<UserProfileResponse> GetFollowing(int userId)
+        {
+            var following = _followRepository.GetFollowing(userId);
+            return mapper.Map<List<UserProfileResponse>>(following);
         }
     }
 }

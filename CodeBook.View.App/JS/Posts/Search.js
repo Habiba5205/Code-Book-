@@ -189,7 +189,7 @@ function viewPost(postId) {
 }
 
 function viewProfile(userId) {
-    window.location.href = `../../html/User/OtherUserProfile.html?id=${userId}`;
+    window.location.href = `../../../html/User/OtherOtherUserProfile.html?userId=${userId}`;
 }
 
 function viewCommunity(communityId) {

@@ -1,4 +1,4 @@
-import { api } from './api.js';
+import { api } from '../api.js';
 
 let currentUser = null;
 
@@ -15,13 +15,14 @@ async function loadProfile(){
         document.getElementById('followersCount').innerText = data.followersCount;
         document.getElementById('followingCount').innerText = data.followingCount;
 
+        const avatar = document.getElementById('avatar');
+         avatar.src = data.avatarUrl || 'images/default-avatar.png';
 
-        if(data.avatarUrl){
-            document.getElementById('profileImage').src = data.avatarUrl;
-        }
+     
     }
     catch(error){
         console.error('Failed to load Profile:',error);
+        
     }
 }
 
@@ -32,7 +33,7 @@ document.getElementById('content').innerHTML = `
             <hr style="border-color:#30363d">
             <p><strong>Username:</strong> ${currentUser?.userName || ''}</p>
             <p><strong>Bio:</strong> ${currentUser?.bio || 'No bio yet'}</p>
-            <p><strong>Joined:</strong> ${new Date(currentUser?.joinedAt).toLocaleDateString()}</p>
+    
         </div>
     `;
 }
@@ -97,7 +98,7 @@ async function showPosts() {
         const data = await api.get('Post/feed?page=1');
         const posts = data.filter (p=>p.authorUsername === currentUser.userName);
 
-        if (postsosts.length === 0) {
+        if (posts.length === 0) {
             document.getElementById('postsList').innerHTML = `
                 <p style="color:#8b949e">No posts yet!</p>
             `;
@@ -126,11 +127,13 @@ async function showPosts() {
 window.showPosts = showPosts;
 
 function showPassword() {
-    window.location.href = 'ResetPassword.html';
+    window.location.href = '../Auth/ResetPassword.html';
 }
 window.showPassword = showPassword;
 
-
+function showSaved() {
+    window.location.href = '../Posts/SavedPosts.html';
+}
 async function showDelete() {
     const confirmed = confirm("Are you sure you want to delete your account? This cannot be undone!");
     
@@ -138,7 +141,7 @@ async function showDelete() {
         try {
             await api.delete('User/deletemyprofile');
             alert("Account deleted successfully!");
-            window.location.href = "Login.html";
+            window.location.href = "../Auth/Login.html";
         } catch (error) {
             alert("Failed to delete: " + error.message);
         }
@@ -154,7 +157,7 @@ function showNotification() {
 window.showNotification = showNotification;
 
 function showCommunity() {
-    window.location.href = 'Community.html';
+    window.location.href = '../Community/Community.html';
 }
 
 function showFollowers() {
@@ -162,9 +165,10 @@ function showFollowers() {
 }
 
 function showFollowing() {
-    window.location.href = 'Following.html';
+    window.location.href = 'Followings.html';
 }
 
 window.showCommunity = showCommunity;
 window.showFollowers = showFollowers;
 window.showFollowing = showFollowing;
+window.showSaved = showSaved;

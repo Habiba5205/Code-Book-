@@ -76,6 +76,7 @@ async function createPost() {
         console.error(error);
     }
 }
+window.createPost=createPost;
 
 async function loadCommunityName(communityId) {
     try {
