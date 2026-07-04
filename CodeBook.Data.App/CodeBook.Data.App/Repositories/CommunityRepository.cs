@@ -31,8 +31,8 @@ namespace CodeBook.Data.App.Repositories
 
         public List<Community> GetUnjoinedCommunities(int userId)
         {
-            var joined = GetCommunities(userId);
-            return _context.communities.Except(joined).ToList();
+            var joined = _context.communityMembers.Where(cm => cm.UserId == userId).Select(cm => cm.CommunityId);
+            return _context.communities.Where(c => !joined.Contains(c.Id)).ToList();
         }
 
         public void Add(Community community)
@@ -87,6 +87,9 @@ namespace CodeBook.Data.App.Repositories
         {
             return _context.communities.Where(c => c.OwnerId == userId).ToList();
         }
-
+        public Community GetCommunitybyOwnerandDate(int userId, DateTime DateCreated)
+        {
+            return _context.communities.FirstOrDefault(c => c.OwnerId == userId && c.DateCreated == DateCreated);
+        }
     }
 }

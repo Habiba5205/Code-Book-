@@ -22,5 +22,6 @@ namespace CodeBook.Data.App.IRepositories
         List<Community> SearchCommunities(string keyword);
         List<Community> GetUnjoinedCommunities(int userId);
         List<Community> GetOwnedCommunities(int userId);
+        Community GetCommunitybyOwnerandDate(int userId, DateTime DateCreated);
     }
 }
