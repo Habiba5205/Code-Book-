@@ -23,7 +23,7 @@ window.onload = () => {
             button.innerText = "Resetting...";
             button.disabled = true;
 
-            await api.post('Auth/password-reset/confirm',{
+            await api.post("Auth/forgotPassword",{
                 Email:email,
                 NewPassword:password
             });

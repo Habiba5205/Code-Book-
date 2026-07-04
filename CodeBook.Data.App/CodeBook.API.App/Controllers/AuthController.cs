@@ -19,13 +19,15 @@ namespace CodeBook.API.App.Controllers
         private readonly AbstractValidator<LoginDto> _loginValidator;
         private readonly AbstractValidator<RegisterDto> _registerValidator;
         private readonly AbstractValidator<ResetPasswordDto> _resetPasswordValidator;
+        private readonly AbstractValidator<ForgotPasswordDto> _forgotPasswordValidator;
         private readonly CurrentUserInfo _currentUserInfo;
-        public AuthController(IAuthService authService, AbstractValidator<LoginDto> loginvalidator, AbstractValidator<RegisterDto> registervalidator, AbstractValidator<ResetPasswordDto> resetpasswordvalidator, CurrentUserInfo currentUserInfo)
+        public AuthController(IAuthService authService, AbstractValidator<LoginDto> loginvalidator, AbstractValidator<RegisterDto> registervalidator, AbstractValidator<ResetPasswordDto> resetpasswordvalidator, AbstractValidator<ForgotPasswordDto> forgotpasswordvalidator, CurrentUserInfo currentUserInfo)
         {
             _authService = authService;
             _loginValidator = loginvalidator;
             _registerValidator = registervalidator;
             _resetPasswordValidator = resetpasswordvalidator;
+            _forgotPasswordValidator = forgotpasswordvalidator;
             _currentUserInfo = currentUserInfo;
         }
 
@@ -102,6 +104,25 @@ namespace CodeBook.API.App.Controllers
                 return BadRequest(validationResult.Errors);
             }
             ErrorResponse result = _authService.ResetPassword(resetPassword);
+
+            if (result.Success)
+            {
+                return Ok(new { message = result.Message });
+            }
+
+            return BadRequest(result.Message);
+
+
+        }
+        [HttpPost("forgotPassword")]
+        public IActionResult ForgotPassword([FromBody] ForgotPasswordDto forgotPassword)
+        {
+            var validationResult = _forgotPasswordValidator.Validate(forgotPassword);
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
+            ErrorResponse result = _authService.ForgotPassword(forgotPassword);
 
             if (result.Success)
             {

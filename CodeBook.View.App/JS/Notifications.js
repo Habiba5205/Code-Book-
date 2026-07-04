@@ -1,12 +1,11 @@
 import { api } from './api.js';
 
 
-
 async function getNotifications() {
 document.getElementById("loading").classList.remove("d-none");
 try{
    
-    const notifications = await api.get("notifications")
+    const notifications = await api.get("Notification/getnotification")
     renderNotifications(notifications);
 }
 catch (error) {
@@ -43,7 +42,7 @@ function createNotificationCard(notification) {
 
         <div class="flex-grow-1">
             <div class="fw-semibold text-white">${notification.message}</div>
-            <small class="text-secondary">${formatTime(notification.createdAt)}</small>
+            <small class="text-secondary">${formatTime(notification.dateCreated)}</small>
         </div>
 
         ${!notification.isSeen 
@@ -82,7 +81,7 @@ function formatTime(dateString) {
 
 async function markAsRead(notificationId) {
     try {
-        await api.patch("notifications/${notificationId}markAsRead");
+        await api.patch(`Notification/readNotification?id=${notificationId}`);
         getNotifications();
         loadUnreadCount();
     }
@@ -98,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function markAllAsRead() {
     try {
-       await api.patch("notifications/markAllAsRead")
+       await api.patch("Notification/readAllNotifications")
         getNotifications();
         loadUnreadCount()
     }
@@ -110,8 +109,12 @@ async function markAllAsRead() {
 async function loadUnreadCount() {
     try{
      
-    const data = await api.get("notifications/unread-count")
-    document.getElementById("notification-count").textContent = data.unreadCount;
+    const data = await api.get("Notification/GetUnreadCount");
+    const badge=document.getElementById("notification-count");
+    if(badge){
+        badge.textContent=data.unreadCount;
+    }
+
 }catch (error) {
     console.error("Error fetching unread count:", error);
 }   
