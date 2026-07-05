@@ -16,6 +16,10 @@ finally {
 }
 }
 function renderNotifications(notifications) {
+      notifications.sort(
+        (a, b) => new Date(b.dateCreated) - new Date(a.dateCreated)
+    );
+
   const list=document.getElementById("notifications-list");
   list.innerHTML = "";
 
@@ -41,8 +45,14 @@ function createNotificationCard(notification) {
         </div>
 
         <div class="flex-grow-1">
-            <div class="fw-semibold text-white">${notification.message}</div>
-            <small class="text-secondary">${formatTime(notification.dateCreated)}</small>
+   <div class="fw-semibold text-white">
+    ${notification.message}
+</div>
+           <small
+            title="${new Date(notification.dateCreated).toLocaleString()}"
+              class="text-secondary">
+             ${formatTime(notification.dateCreated)}
+            </small>
         </div>
 
         ${!notification.isSeen 
@@ -50,27 +60,60 @@ function createNotificationCard(notification) {
             : ''}
     `;
 
-    card.onclick = () => markAsRead(notification.id);
+   card.onclick = () => openNotification(notification);
     return card;
 }
 
+async function openNotification(notification) {
+    try {
+        if (!notification.isSeen) {
+            await api.patch(`Notification/readNotification?id=${notification.id}`);
+            await loadUnreadCount();
+        }
+
+        switch (notification.type) {
+            case "Comment":
+            case "Reaction":
+            case "Mention":
+                window.location.href = `../Posts/PostDetail.html?id=${notification.referenceId}`;
+                break;
+
+            case "Follow":
+                window.location.href = `../User/OtherUserProfile.html?userId=${notification.senderId}`;
+                break;
+
+            default:
+                getNotifications();
+               
+        }
+
+    } catch (error) {
+        console.error(error);
+    }
+}
 function getIcon(type) {
-    switch (type) {
-        case "Like":
+    switch(type){
+        case "Reaction":
             return "❤️";
+
         case "Comment":
             return "💬";
+
         case "Follow":
             return "👤";
+
         case "Mention":
-            return "📢";
+            return "@";
+
+        case "Report":
+            return "🚩";
+
         default:
             return "🔔";
     }
 }
-
 function formatTime(dateString) {
-    const date = new Date(dateString);
+    const date = new Date(dateString + "Z");
     const now = new Date();
     const diffInMins= Math.floor((now - date) / 60000);
     if (diffInMins < 1) return "Just now";
@@ -83,7 +126,7 @@ async function markAsRead(notificationId) {
     try {
         await api.patch(`Notification/readNotification?id=${notificationId}`);
         getNotifications();
-        loadUnreadCount();
+       
     }
     catch (error) {
         console.error("Error marking notification as read:", error);
@@ -91,6 +134,7 @@ async function markAsRead(notificationId) {
 }
 document.addEventListener("DOMContentLoaded", () => {
     getNotifications();
+   
     loadUnreadCount();
     document.getElementById("clear-notifications").addEventListener("click", markAllAsRead);
 });
@@ -99,6 +143,7 @@ async function markAllAsRead() {
     try {
        await api.patch("Notification/readAllNotifications")
         getNotifications();
+
         loadUnreadCount()
     }
     catch (error) {
@@ -111,9 +156,14 @@ async function loadUnreadCount() {
      
     const data = await api.get("Notification/GetUnreadCount");
     const badge=document.getElementById("notification-count");
-    if(badge){
-        badge.textContent=data.unreadCount;
+    if (badge) {
+    if (data.unreadCount > 0) {
+        badge.textContent = data.unreadCount;
+        badge.style.display = "inline-block";
+    } else {
+        badge.style.display = "none";
     }
+}
 
 }catch (error) {
     console.error("Error fetching unread count:", error);

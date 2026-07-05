@@ -223,18 +223,17 @@
 }
 
 .notification-card{
-    background-color:#1a1a2e;
-    border:none;
-    border-radius:12px;
-   transition: all 0.2s ease;
-   cursor:pointer;
+    transition:.2s;
+    cursor:pointer;
 }
+
 .notification-card:hover{
-    background-color:#1e1e3a;
-    transform: translateY(-2px);
+    transform:translateY(-2px);
+    background:#2e2e4d;
 }
 .notification-card.unread{
-    border-left: 3px solid #7C3AED;
+    border-left:4px solid #7c3aed;
+    background:#24203b;
 }
 .badge-new{
     background-color:#7C3AED ;

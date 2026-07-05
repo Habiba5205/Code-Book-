@@ -20,13 +20,15 @@ namespace CodeBook.Business.App.Services
     {
         private readonly ICommentRepository _commentRepository;
         private readonly INotificationService _notificationService;
-        private readonly IPostRepository _postRepository;   
+        private readonly IPostRepository _postRepository;  
+        private readonly IUserRepository _userRepository;
 
-        public CommentService(ICommentRepository commentRepository,INotificationService notificationService, IPostRepository postRepository)
+        public CommentService(ICommentRepository commentRepository,INotificationService notificationService, IPostRepository postRepository, IUserRepository userRepository)
         {
             _commentRepository = commentRepository;
             _notificationService = notificationService;
             _postRepository = postRepository;
+            _userRepository = userRepository;
         }
 
         public ErrorResponse AddComment(int authorId, int postId, AddCommentRequest dto)
@@ -54,12 +56,12 @@ namespace CodeBook.Business.App.Services
             if (!_commentRepository.SaveChanges())
                 return new ErrorResponse { Success = false, Message = "Could not add comment" };
 
-
+            var user = _userRepository.GetProfileById(authorId);
             _notificationService.CreateNotification(authorId, new NotificationDTO
             {
                 userId = authorId,
                 Type = "Comment",
-                Message = "You have a new Comment on your post",
+                Message = $"{user.UserName} commented on your post",
                 ReferenceId = postId,
                 IsSeen = false,
                 DateCreated = DateTime.UtcNow

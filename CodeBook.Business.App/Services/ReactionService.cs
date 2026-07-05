@@ -17,10 +17,12 @@ namespace CodeBook.Business.App.Services
         private readonly ICommentService _commentService;
         private readonly IPostRepository _postRepository;
         private readonly ICommentRepository _commentRepository;
+        private readonly IUserRepository _userRepository;
 
 
 
-        public ReactionService(IReactionRepository reactionRepository, INotificationService notificationService, IPostService postService,ICommentService commentService, IPostRepository postRepository,ICommentRepository commentRepository) 
+
+        public ReactionService(IReactionRepository reactionRepository, INotificationService notificationService, IPostService postService,ICommentService commentService, IPostRepository postRepository,ICommentRepository commentRepository, IUserRepository userRepository) 
         {
             this._reactionRepository = reactionRepository;
             _notificationService = notificationService;
@@ -28,6 +30,7 @@ namespace CodeBook.Business.App.Services
             _commentService = commentService;
             _postRepository = postRepository;
             _commentRepository = commentRepository;
+            _userRepository = userRepository;
         }
         public ErrorResponse AddPostReaction(int userId,ReactionDto reactionDto)
         {
@@ -45,12 +48,13 @@ namespace CodeBook.Business.App.Services
             _postRepository.AddReaction(reactionDto.PostId, reaction.Type,userId);
 
             bool result = _reactionRepository.SaveChanges();
+            var user = _userRepository.GetProfileById(userId);
 
             _notificationService.CreateNotification(_postService.GetPostAuthorId(reactionDto.PostId), new NotificationDTO
             {
                 userId = _postService.GetPostAuthorId(reactionDto.PostId),
                 Type = "Reaction",
-                Message = "Someone reacted to your post",
+                Message = $"{user.UserName} reacted to your post",
                 ReferenceId = reactionDto.PostId,
                 IsSeen = false,
                 DateCreated = DateTime.UtcNow
@@ -89,12 +93,13 @@ namespace CodeBook.Business.App.Services
             _commentRepository.AddReaction(reactionDto.CommentId.Value);
 
             bool result = _reactionRepository.SaveChanges();
+            var user = _userRepository.GetProfileById(userId);
 
             _notificationService.CreateNotification(_commentService.GetCommentAuthorId(reactionDto.CommentId.Value), new NotificationDTO
             {
                 userId = _commentService.GetCommentAuthorId(reactionDto.CommentId.Value),
                 Type = "Reaction",
-                Message = "Someone reacted to your Comment",
+                Message = $"{user.UserName} reacted to your post",
                 ReferenceId = reactionDto.CommentId.Value,
                 IsSeen = false,
                 DateCreated = DateTime.UtcNow
