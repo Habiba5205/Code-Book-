@@ -17,7 +17,7 @@ window.onload=()=>{
             if(community){
                 communitydatacard.innerHTML = `
                 <div class="row align-items-center  justify-content-center">
-                <div class="col-md-3 text-center row align-items-center">
+                <div class="col-md-3 text-center align-items-center">
                 
                <img src="${community.iconURL ? community.iconURL : 'https://via.placeholder.com/50'}" 
                 alt="Community Icon" 

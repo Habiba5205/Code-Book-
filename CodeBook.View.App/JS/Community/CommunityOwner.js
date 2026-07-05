@@ -19,8 +19,7 @@ window.onload=()=>{
                 const communityCard = document.createElement('div');
                 communityCard.innerHTML = `
                 <div class="row align-items-center justify-content-evenly community-card">
-                <div class="col-md-3 text-center align-items-center mt-3">
-                
+                <div class="col-md-3 text-center align-items-center mt-4">
                 
                <img src="${community.iconURL ? community.iconURL : 'https://via.placeholder.com/50'}" 
                 alt="Community Icon" 
