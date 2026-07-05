@@ -3,7 +3,7 @@
         margin: 10px;
         background-color: #0d1117;
         color: white;
-        font-family:Space Grotesk;
+        font-family:"Space Grotesk", sans-serif;
        }
        h2{
         margin-top: 20px;
@@ -11,10 +11,13 @@
         color: white;
         font-family:Arial,Helvetica,sans-serif;
        }
-       .navbar{
-        background-color: #161b22;
-        border-bottom: 2px solid #7C3AED ;
-       }
+.navbar {
+    width: 100%;
+    margin: 0;
+    padding: 15px 20px;
+    background-color: #161b22;
+    border-bottom: 2px solid #7c3aed;
+}
        .navbar-brand{
         color: #7C3AED ;
          font-weight: 700;
@@ -518,9 +521,6 @@
     color: #7C3AED ;
     text-decoration: underline;
 }
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 
 .hero {
     position: relative;
@@ -565,6 +565,7 @@
     z-index: 1;
     max-width: 560px;
     text-align: left;
+     padding-top: 100px;
 }
 
 .eyebrow {
@@ -594,6 +595,7 @@
     font-size: 1.05rem;
     line-height: 1.6;
     margin-bottom: 0;
+    
 }
 
 .nav-actions {
@@ -731,7 +733,9 @@
             padding-bottom: 15px;
             border-bottom: 1px solid #30363d;
         }
-
+        #sideMenuLabel {
+        color: #7c3aed;
+        }
         .sidebar-item {
             display: flex;
             align-items: center;
@@ -772,8 +776,6 @@
         .sidebar-logout i {
             color: #f85149 ;
         }
-=======
->>>>>>> Stashed changes
 .profile-img-2{
         width: 250px;
         height: 250px;
@@ -782,7 +784,4 @@
         object-fit: cover;
         max-width:100%;
        }
-<<<<<<< Updated upstream
-=======
->>>>>>> c71d642686c9b908acaa3a96f40adc81a93427a7
->>>>>>> Stashed changes
+

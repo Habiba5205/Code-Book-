@@ -17,7 +17,7 @@ window.onload=()=>{
                 communityCard.innerHTML = `
                 <a href="Communityfeed.html?id=${community.communityId}" class="text-decoration-none text-dark">
                 <div class="row align-items-center community-card p-3 ">
-                <div class="col-md-3 text-center row align-items-center">
+                <div class="col-md-3 text-center align-items-center">
                 
                <img src="${community.iconURL ? community.iconURL : ''}" 
                 alt="Community Icon" 
@@ -63,7 +63,7 @@ window.onload=()=>{
                 const communityCard = document.createElement('div');
                 communityCard.innerHTML = `
                 <div class="row align-items-center community-card pt-4">
-                <div class="col-md-3 text-center row align-items-center">
+                <div class="col-md-3 text-center align-items-center">
                 
                <img src="${community.iconURL ? community.iconURL : 'https://via.placeholder.com/50'}" 
                 alt="Community Icon" 
