@@ -186,6 +186,11 @@ function showReplyForm(selfCommentId) {
         return;
     }
 
+    const repliesContainer = document.getElementById(`replies-${selfCommentId}`);
+    if (repliesContainer) {
+        repliesContainer.classList.remove('d-none');
+    }
+
     const form = document.createElement("div");
     form.id = `reply-form-${selfCommentId}`;
     form.className = "ms-4 mt-2";
@@ -202,7 +207,6 @@ function showReplyForm(selfCommentId) {
         </div>
     `;
 
-    const repliesContainer = document.getElementById(`replies-${selfCommentId}`);
     if (repliesContainer) {
         repliesContainer.prepend(form);
     }
@@ -210,11 +214,17 @@ function showReplyForm(selfCommentId) {
 
 async function submitReply(selfCommentId) {
     const input = document.getElementById(`reply-input-${selfCommentId}`);
+    if(!input) return;
+
     const body = input.value.trim();
     if (!body) return;
 
     const postId = getPostId();
     await addComment(postId, body, selfCommentId);
+    const repliesContainer = document.getElementById(`replies-${selfCommentId}`);
+    if (repliesContainer) {
+        repliesContainer.classList.remove('d-none');
+    }
 }
 
 window.submitReply = submitReply; 
