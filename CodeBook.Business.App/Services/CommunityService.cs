@@ -32,6 +32,7 @@ namespace CodeBook.Business.App.Services
             community.OwnerId = userId;
             community.Name = dto.Name;
             community.Description = dto.Description;
+            community.IconURL = dto.IconURL;
             _communityRepository.Add(community);
             _communityRepository.SaveChanges();
             community = _communityRepository.GetCommunitybyOwnerandDate(userId,community.DateCreated);
@@ -51,6 +52,7 @@ namespace CodeBook.Business.App.Services
             Community community = _communityRepository.GetCommunity(CommunityId);
             community.Name = dto.Name;
             community.Description = dto.Description;
+            community.IconURL = dto.IconURL;
             _communityRepository.Update(community);
             _communityRepository.SaveChanges();
 
@@ -101,6 +103,9 @@ namespace CodeBook.Business.App.Services
             CommunityMember member = _communityRepository.GetCommunityMember(communityId, userId);
             if(member == null)
                 throw new KeyNotFoundException("Member Not Found!!");
+            Community community = _communityRepository.GetCommunity(communityId);
+            if (community.OwnerId == userId)
+                throw new UnauthorizedAccessException("Owner cannot unjoin his community!");
             _communityRepository.RemoveMember(member);
             _communityRepository.SaveChanges();
         }
@@ -138,7 +143,12 @@ namespace CodeBook.Business.App.Services
         public List<CommunityDto> GetOwnedCommunities(int userId)
         {
             var communities = _communityRepository.GetOwnedCommunities(userId);
-            return mapper.Map<List<CommunityDto>>(communities) ;
+            var communitiesresponse = mapper.Map<List<CommunityDto>>(communities);
+            foreach (var community in communitiesresponse)
+            {
+                community.isOwner = true;
+            }
+            return communitiesresponse;
         }
 
     }

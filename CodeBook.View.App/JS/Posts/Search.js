@@ -138,7 +138,7 @@ function renderUsers(users) {
     users.forEach(user => {
         container.innerHTML += `
             <div class="post-card d-flex align-items-center gap-3">
-                <img src="${user.profilePicURL || 'https://via.placeholder.com/50'}" 
+                <img src="${user.avatarUrl? user.avatarUrl :'https://via.placeholder.com/50'}" 
                      style="width:50px; height:50px; border-radius:50%; 
                             border:2px solid #7c3aed; object-fit:cover">
                 <div>
@@ -164,7 +164,7 @@ function renderCommunities(communities) {
     communities.forEach(community => {
         container.innerHTML += `
             <div class="post-card d-flex align-items-center gap-3">
-                <img src="${community.iconURL || 'https://via.placeholder.com/50'}" 
+                <img src="${community.iconURL? community.iconURL : 'https://via.placeholder.com/50'}" 
                      style="width:50px; height:50px; border-radius:50%; 
                             border:2px solid #7c3aed; object-fit:cover">
                 <div>

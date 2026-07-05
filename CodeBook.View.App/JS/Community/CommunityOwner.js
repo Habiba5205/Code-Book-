@@ -11,23 +11,23 @@ window.onload=()=>{
         try{
             const communities = await api.get('communities/getownedcommunities');
             if(!communities || communities.length === 0){
-                communitycontainer.innerHTML = '<span style="color: Red;" class ="mt-2">No Commmunities found.</span>';
+                communitycontainer.innerHTML = '<span style="color: Red;" class ="mt-2">No Created Communities.</span>';
                 return; 
             }
             communitycontainer.innerHTML = '';
             communities.forEach(community => {
                 const communityCard = document.createElement('div');
                 communityCard.innerHTML = `
-                <div class="row align-items-center community-card">
-                <div class="col-md-3 text-center row align-items-center">
+                <div class="row align-items-center justify-content-evenly community-card">
+                <div class="col-md-3 text-center align-items-center mt-3">
                 
                 
-               <img src="${community.iconURL ? community.iconURL : ''}" 
+               <img src="${community.iconURL ? community.iconURL : 'https://via.placeholder.com/50'}" 
                 alt="Community Icon" 
-                class="profile-img w-100">
+                class="profile-img">
                 </div>
 
-                <div class="col-md-7">
+                <div class="col-md-7 mt-4">
                 <h3 class="text-light  mb-1">
                 <span id="name-display">${community.name}</span>
                 <input type="text" id="name-input" class="form-control d-none" value="${community.name}">
@@ -36,6 +36,9 @@ window.onload=()=>{
                 <span id="desc-display">${community.description}</span>
                  <textarea id="desc-input" class="form-control d-none">${community.description}</textarea>
                  </p>
+                 <p class="text-white-50" >
+                <textarea id="url-input" class="form-control d-none" placeholder ="IconUrl(Optional)">${community.iconURL? community.iconURL: ''}</textarea>
+                </p>
         
                 <div class="d-flex gap-4"style="color:#bca1ec;">
                 <small><strong>Creation Date: </strong>${new Date(community.dateCreated).toLocaleDateString()}</small>
@@ -53,6 +56,7 @@ window.onload=()=>{
                         Update_TextAreas(e.target);});
             communityCard.querySelector('.save-btn').addEventListener('click', (e) => {
                         UpdateCommunity(community.communityId, e.target);});
+
             communityCard.querySelector('#cancel-update').addEventListener('click', (e) => {
                     const card = e.target.closest('.community-card');
 
@@ -60,6 +64,7 @@ window.onload=()=>{
                     card.querySelector('#desc-display').classList.remove('d-none');
                     card.querySelector('#name-input').classList.add('d-none');
                     card.querySelector('#name-display').classList.remove('d-none');
+                    card.querySelector('#url-input').classList.add('d-none');
 
                     card.querySelector('.delete-btn').classList.remove('d-none');
                     card.querySelector('.save-btn').classList.add('d-none');
@@ -83,26 +88,23 @@ window.onload=()=>{
         button.classList.add('d-none');
         createcontainer.innerHTML =`
                 <div class="row align-items-center community-card-form">
-                <div class="col-md-3 text-center row align-items-center ">
-                
-               <img src="" 
-                alt="Community Icon" 
-                class="profile-img">
-                </div>
-      
-                <div class="col-md-9">
+                <div class="col-md-9 text-center row align-items-center mt-4 ">
+        
                 <span class="text-light mb-1">
                 <input type="text" id="newname-input" class="form-control mb-2" placeholder="Community Name">
                 </span>
                 <p class="text-white-50" >
                  <textarea id="newdesc-input" class="form-control mb-2" placeholder="Description(Optional)"></textarea>
                  </p>
+                 <p class="text-white-50" >
+                 <textarea id="newurl-input" class="form-control mb-2" placeholder="Icon URL(Optional)"></textarea>
+                 </p>
             </div>
                 <div class="actions m-3 col-12 text-center">
                     <button type="button" class="btn btn-outline-success create-btn" id ="create">Create Community</button>
                     <button type="button" class="btn btn-outline-danger cancel-btn" id= "cancel">Cancel</button>
                 </div>
-                   </div>
+                  
             </div>`;
             createcontainer.querySelector('.create-btn').addEventListener('click', (e) => {
                         create(e.target);});
@@ -122,6 +124,7 @@ window.onload=()=>{
             card.querySelector('#desc-display').classList.add('d-none');
             card.querySelector('#name-input').classList.remove('d-none');
             card.querySelector('#name-display').classList.add('d-none');
+            card.querySelector('#url-input').classList.remove('d-none');
 
             card.querySelector('.delete-btn').classList.add('d-none');
             card.querySelector('.save-btn').classList.remove('d-none');
@@ -138,6 +141,7 @@ window.onload=()=>{
             var nameinput = card.querySelector('#name-input');
             var descdisplay = card.querySelector('#desc-display');
             var descinput = card.querySelector('#desc-input');
+            var urlinput = card.querySelector('#url-input');
             const namevalue = nameinput.value;
             if(!namevalue){
             alert("Please Fill all the required fields!");
@@ -147,14 +151,18 @@ window.onload=()=>{
             try{
                 const result = await api.patch(`communities/${communityId}/updatecommunity`,{
                     description : descinput.value,
-                    name : namevalue
+                    name : namevalue,
+                    iconURL : urlinput.value
+
                 });
                 if(result.message ==="Community Updated Successfully"){
 
             namedisplay.textContent = nameinput.value;
             descdisplay.textContent = descinput.value;
+            card.querySelector('.profile-img').src = urlinput.value? urlinput.value : 'https://via.placeholder.com/50';
             namedisplay.classList.remove('d-none');
             nameinput.classList.add('d-none');
+            urlinput.classList.add('d-none');
     
             descdisplay.classList.remove('d-none');
             descinput.classList.add('d-none');
@@ -195,6 +203,7 @@ window.onload=()=>{
         buttonElement.disabled = true;
         var nameinput = document.getElementById("newname-input");
         var descinput = document.getElementById("newdesc-input");
+        var urlinput = document.getElementById("newurl-input");
         const namevalue = nameinput.value;
         if(!namevalue){
             alert("Please Fill all the required fields!");
@@ -204,7 +213,8 @@ window.onload=()=>{
         try{
                 const result = await api.post(`communities/createcommunity`,{
                     description : descinput.value,
-                    name : namevalue
+                    name : namevalue,
+                    iconURL : urlinput.value
                 });
                 if(result.message === "Community Created Successfully"){
                     var createcontainer = document.getElementById("creation-card");

@@ -1,7 +1,8 @@
 import { api } from '../api.js';
 
 window.onload = async () => {
-   var followersContainer =   document.getElementById("followers-container");
+    var followersContainer = document.getElementById("followers-container");
+
    await loadFollowers(followersContainer);
 };
 
@@ -16,10 +17,10 @@ async function loadFollowers(followersContainer) {
 
         followersContainer.innerHTML = '';
         followers.forEach(user => {
-            const follwerCard = document.createElement('div');
+            const followerCard = document.createElement('div');
             followerCard.className = 'follower-card';
             followerCard.innerHTML = `
-                <a href="Profile.html?userId=${user.userId}" class="card p-4 text-decoration-none text-dark shadow-sm hover-card">
+                <a href="OtherUserProfile.html?userId=${user.id}" class="card p-4 text-decoration-none text-dark shadow-sm hover-card">
                 <div class="row align-items-center">
                 <div class="col-md-3 text-center">
                 <img src="${user.avatarUrl ? user.avatarUrl : 'images/default-avatar.png'}"

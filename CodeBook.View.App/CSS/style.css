@@ -363,9 +363,10 @@
 
 .community-card{
     max-width: 70%;
+    max-height: fit-content;
     background-color: #21262d;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     border-radius: 20px;
     margin: 20px auto;
 }
@@ -518,3 +519,11 @@
     color: #bca1ec;
     text-decoration: underline;
 }
+.profile-img-2{
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        border: 4px solid #7c3aed;
+        object-fit: cover;
+        max-width:100%;
+       }

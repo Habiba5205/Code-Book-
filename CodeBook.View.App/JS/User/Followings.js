@@ -19,7 +19,7 @@ async function loadFollowings(followingsContainer) {
             const followingCard = document.createElement('div');
             followingCard.className = 'following-card';
             followingCard.innerHTML = `
-                <a href="Profile.html?userId=${user.userId}" class="card p-4 text-decoration-none text-dark shadow-sm hover-card">
+                <a href="OtherUserProfile.html?userId=${user.id}" class="card p-4 text-decoration-none text-dark shadow-sm hover-card">
                 <div class="row align-items-center">
                 <div class="col-md-3 text-center">
                 <img src="${user.avatarUrl ? user.avatarUrl : 'images/default-avatar.png'}"

@@ -5,13 +5,14 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>CodeBook - MY Profile</title>
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
    <link rel="stylesheet" href="../../CSS/style.css">
 </head>
 
 <body>
   
-   <nav class="navbar px-4 py-3">
+      <nav class="navbar px-4 py-3">
 
        <div class="d-flex align-items-center">
         <button
@@ -26,9 +27,11 @@
             CodeBook
         </a>  
          </div>
+         <div class="d-flex gap-3 align-items-center ms-auto">
          <a href="../Posts/Feed.html" class="btn-purple ms-auto">
-            <i class="fa-solid fa-arrow-left"></i> Back to Feed
+            <i class="fa-solid fa-arrow-left"></i>Back to Feed
         </a>
+         </div>
     </nav>
 
     <div
@@ -54,7 +57,7 @@
     <div class="d-grid gap-2">
     <button class="menu-btn"
          onclick="showProfile()">
-     <i class="bi bi-person"></i>
+     <i class="bi bi-person-square"></i>
              Profile
     </button>
     <button class="menu-btn"
@@ -96,15 +99,22 @@
          onclick="showCommunity()">
      <i class="bi bi-people-fill"></i>
              My Communities
-    </button>       
+    </button>     
+    <button class="menu-btn"
+         onclick="showMyCommunities()">
+     <i class="bi bi-chat-left-quote"></i>
+            Owned Communities
+    </button>    
     <button class="menu-btn"
          onclick="showDelete()">
      <i class="bi bi-trash"></i>
            Delete Account
     </button>
+
     </div>
     </div>
     </div>
+
     <div class="container mt-4">
      <div id="content" class="mx-auto" style="max-width:900px;">
     <div class="card p-4">

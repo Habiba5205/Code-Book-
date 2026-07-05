@@ -37,7 +37,9 @@ namespace CodeBook.Business.App.Mapping
                 .ForMember(dest => dest.JoinedAt,
                             opt => opt.MapFrom(src => src.DateCreated))
                 .ForMember(dest => dest.Id,
-                            opt => opt.MapFrom(src => src.Id));
+                            opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Role,
+                            opt => opt.MapFrom(src => src.Role));
 
             CreateMap<UpdateProfileDto, User>()
                 .ForMember(dest => dest.Bio,
@@ -57,7 +59,9 @@ namespace CodeBook.Business.App.Mapping
                 .ForMember(dest => dest.DateCreated,
                             opt => opt.MapFrom(src => src.DateCreated))
                 .ForMember(dest => dest.memberscount,
-                            opt => opt.MapFrom(src => src.Members.Count));
+                            opt => opt.MapFrom(src => src.Members.Count))
+                .ForMember(dest => dest.IconURL,
+                            opt => opt.MapFrom(src => src.IconURL));
 
             CreateMap<Post, PostResponse>()
                 .ForMember(dest => dest.LikeCount,

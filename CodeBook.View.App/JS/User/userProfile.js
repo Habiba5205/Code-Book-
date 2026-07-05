@@ -73,7 +73,7 @@ async function saveProfile(){
         });
 
          alert('Profile updated successfully!!');
-         await loadProfile();
+         window.location.reload();
     }
     catch(error){
         alert('Failed to update: '+error.message);
@@ -159,6 +159,9 @@ window.showNotification = showNotification;
 function showCommunity() {
     window.location.href = '../Community/Community.html';
 }
+function showMyCommunities(){
+    window.location.href = '../Community/CommunityOwner.html';
+}
 
 function showFollowers() {
     window.location.href = 'Followers.html';
@@ -171,4 +174,5 @@ function showFollowing() {
 window.showCommunity = showCommunity;
 window.showFollowers = showFollowers;
 window.showFollowing = showFollowing;
+window.showMyCommunities = showMyCommunities;
 window.showSaved = showSaved;

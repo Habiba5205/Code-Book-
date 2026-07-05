@@ -15,13 +15,13 @@ window.onload=()=>{
             communities.forEach(community => {
                 const communityCard = document.createElement('div');
                 communityCard.innerHTML = `
-                <a href="Communityfeed.html?id=${community.communityId}" class="card p-4 text-decoration-none text-dark shadow-sm hover-card">
-                <div class="row align-items-center community-card">
+                <a href="Communityfeed.html?id=${community.communityId}" class="text-decoration-none text-dark">
+                <div class="row align-items-center community-card p-3 ">
                 <div class="col-md-3 text-center row align-items-center">
                 
                <img src="${community.iconURL ? community.iconURL : ''}" 
                 alt="Community Icon" 
-                class="profile-img w-100">
+                class="profile-img">
                 </div>
 
                 <div class="col-md-7">
@@ -62,12 +62,12 @@ window.onload=()=>{
             communities.forEach(community => {
                 const communityCard = document.createElement('div');
                 communityCard.innerHTML = `
-                <div class="row align-items-center community-card">
+                <div class="row align-items-center community-card pt-4">
                 <div class="col-md-3 text-center row align-items-center">
                 
-               <img src="${community.iconURL ? community.iconURL : ''}" 
+               <img src="${community.iconURL ? community.iconURL : 'https://via.placeholder.com/50'}" 
                 alt="Community Icon" 
-                class="profile-img w-100">
+                class="profile-img">
                 </div>
 
                 <div class="col-md-7">
@@ -86,10 +86,8 @@ window.onload=()=>{
                 <small><strong>Members count: </strong>${community.memberscount}</small>
             </div>
             </div>
-             <div class="actions">
-                    <button class="btn w-100 mt-2 mb-3 join-btn"
-                    style="background-color:#7c3aed;
-                    color:white;">
+             <div class="actions m-3 col-12 text-center">
+                    <button class="btn-purple mb-3 w-50 join-btn">
                     Join Community
                     </button>
                 </div>

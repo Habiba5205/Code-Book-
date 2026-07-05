@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeBook.Models.App;
+using System;
 
 namespace CodeBook.Business.App.DTOs
 {
@@ -11,5 +12,6 @@ namespace CodeBook.Business.App.DTOs
         public DateTime JoinedAt { get; set; }
         public int FollowersCount { get; set; }
         public int FollowingCount { get; set; }
+        public UserRole Role { get; set; }
     }
 }

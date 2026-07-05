@@ -16,12 +16,12 @@ window.onload=()=>{
             const community = await api.get(`communities/${communityId}/getcommunity`);
             if(community){
                 communitydatacard.innerHTML = `
-                <div class="row align-items-center">
+                <div class="row align-items-center  justify-content-center">
                 <div class="col-md-3 text-center row align-items-center">
                 
-               <img src="${community.iconURL ? community.iconURL : ''}" 
+               <img src="${community.iconURL ? community.iconURL : 'https://via.placeholder.com/50'}" 
                 alt="Community Icon" 
-                class="profile-img">
+                class="profile-img-2">
                 </div>
       
                 <div class="col-md-7">

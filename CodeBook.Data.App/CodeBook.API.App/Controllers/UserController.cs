@@ -138,7 +138,7 @@ namespace CodeBook.API.App.Controllers
                 return BadRequest(new { message = "keyword is required" });
             }
 
-            var users = _userService.SearchUsers(keyword);
+            var users = _userService.SearchUsers(keyword).Where(u => u.Role != UserRole.Admin);
             return Ok(users); 
         }
 
