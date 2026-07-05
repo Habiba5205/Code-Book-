@@ -82,7 +82,7 @@ namespace CodeBook.API.App.Controllers
         public IActionResult Logout()
         {
             Response.Cookies.Delete("jwt_token");
-            return Ok(new { message = "Logout Successful! Please clear the token from your client storage." });
+            return Ok(new { message = "Logout Successful!" });
         }
 
         [HttpPatch("resetPassword")]

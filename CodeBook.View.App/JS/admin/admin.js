@@ -3,6 +3,11 @@ window.onload=()=>{
     var reportPage = document.getElementById("report-page");
     var reportList = document.getElementById("list-group-report");
     var show_button = document.getElementById("ShowReportBtn");
+    const logoutbtn = document.querySelector(".logout");
+
+    logoutbtn.addEventListener('click',() =>{
+    logout();
+})
 
     show_button.addEventListener('click',GetReports);
 
@@ -97,4 +102,14 @@ window.onload=()=>{
         actionsContainer.classList.add('d-none');
         document.querySelectorAll('.status-update').forEach(msg => {msg.remove()});
     }
-}};
+}
+ async function logout() {
+        localStorage.clear();
+        const result = await api.delete('Auth/logout');
+        if(result.message === "Logout Successful!"){
+            alert("Logout Successful!");
+        }
+        window.location.href = '../Auth/Login.html';
+    }
+
+};

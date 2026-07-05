@@ -6,6 +6,11 @@ const urlParams = new URLSearchParams(window.location.search);
 let currentPage = parseInt(urlParams.get('page')) || 1;
 const postsContainer = document.getElementById("postsContainer");
 const badge = document.querySelector(".badge");
+const logoutbtn = document.querySelector(".sidebar-logout");
+
+logoutbtn.addEventListener('click',() =>{
+    logout();
+})
 
 document.addEventListener("DOMContentLoaded", () => {
     getnotificationcount();
@@ -131,3 +136,12 @@ async function getnotificationcount() {
     }
     
 }
+
+ async function logout() {
+        localStorage.clear();
+        const result = await api.delete('Auth/logout');
+        if(result.message === "Logout Successful!"){
+            alert("Logout Successful!");
+        }
+        window.location.href = '../Auth/Login.html';
+    }
