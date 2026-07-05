@@ -130,7 +130,7 @@
 
         <hr class="sidebar-divider">
 
-        <button class="sidebar-item sidebar-logout" onclick="logout()">
+        <button class="sidebar-item sidebar-logout">
             <i class="fa-solid fa-right-from-bracket"></i>
             Logout
         </button>
@@ -198,10 +198,6 @@
         document.getElementById('sidebarOverlay').classList.remove('open');
     }
 
-    function logout() {
-        localStorage.clear();
-        window.location.href = '../Auth/Login.html';
-    }
     </script>
 
     <script type="module" src="../../JS/Posts/Feed.js" type="module"></script>
