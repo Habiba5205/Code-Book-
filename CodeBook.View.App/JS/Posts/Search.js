@@ -78,7 +78,6 @@ async function search() {
     }
 }
 
-
 async function searchPosts(keyword) {
     const language = document.getElementById('languageFilter').value;
     const tag = document.getElementById('tagFilter').value.trim();
@@ -189,13 +188,36 @@ function viewPost(postId) {
 }
 
 function viewProfile(userId) {
-    window.location.href = `../../../html/User/OtherOtherUserProfile.html?userId=${userId}`;
+    window.location.href = `../../../html/User/OtherUserProfile.html?userId=${userId}`;
 }
 
 function viewCommunity(communityId) {
     window.location.href = `../../html/Community/Community.html?id=${communityId}`;
 }
+document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const tag = params.get("tag");
+    const mention= params.get("mention");
 
+     const searchInput = document.getElementById("searchInput");
+     const tagFilter = document.getElementById("tagFilter");
+
+    if (tag) {
+        if (tagFilter) tagFilter.value = tag;
+        if (searchInput) searchInput.value = tag;
+        search();
+    }
+    else if(mention){
+
+    switchTab("users");
+
+    if (searchInput){
+        searchInput.value = mention;
+
+    search();
+}
+    }
+});
 window.switchTab = switchTab;
 window.search = search;
 window.viewPost = viewPost;

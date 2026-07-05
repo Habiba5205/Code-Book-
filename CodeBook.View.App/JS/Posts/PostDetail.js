@@ -1,5 +1,6 @@
 import { api } from '../api.js';
 import { fetchComments,addComment } from "../Interactions/Comments.js";
+import { parseText } from '../Interactions/HashTags.js';
 
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get('id');
@@ -28,7 +29,8 @@ console.log('Match:', post.authorId === currentUserid);
                     ${new Date(post.dateCreated).toLocaleDateString()}
                 </p>
 
-                <p class="post-body">${post.body}</p>
+                <p class="post-body">${parseText(post.body)}</p>
+                
 
                 ${post.codeSnippet ? `
                 <pre class="code-snippet"><code>${post.codeSnippet}</code></pre>

@@ -1,4 +1,5 @@
 import { api } from '../api.js';
+import { parseText } from '../Interactions/HashTags.js';
 console.log("Feed.js loaded");
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -30,7 +31,7 @@ async function loadFeed() {
                         by ${post.authorUsername} • 
                         ${new Date(post.dateCreated).toLocaleDateString()}
                     </p>
-                    <p class="post-body">${post.body}</p>
+                   <p class="post-body">${parseText(post.body)}</p>
 
                     ${post.codeSnippet ? `
                     <pre class="code-snippet"><code>${post.codeSnippet}</code></pre>

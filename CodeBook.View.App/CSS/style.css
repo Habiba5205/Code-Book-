@@ -463,5 +463,21 @@
     border-radius: 20px;
     transition: transform 0.1s;
 }
-
+.hasgtag{
+    color: #7c3aed;
+    text-decoration: none;
+    font-weight: 500;
+}
+.hashtag:hover{
+    text-decoration: underline;
+    color: #9f77dd;
+}
+.mention {
+    color: #60a5fa;
+    text-decoration: none;
+    font-weight: 500;
+}
+.mention:hover {
+    text-decoration: underline;
+}
 

@@ -1,4 +1,5 @@
 import { api } from '../api.js';
+import { parseText } from '../Interactions/HashTags.js';
 let currentUserId = null;
 
 function getPostId(){  //get post id from url 
@@ -45,7 +46,7 @@ function createCommentCard(comment, getReplies) {
         <div class="d-flex gap-2">
             <div class="flex-grow-1">
                 <span class="fw-semibold">${comment.authorUsername}</span>
-                <p class="mb-1">${comment.body}</p>
+               <p class="mb-1">${parseText(comment.body)}</p>
 
                  
 
