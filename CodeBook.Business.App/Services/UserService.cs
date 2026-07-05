@@ -121,5 +121,12 @@ namespace CodeBook.Business.App.Services
             var following = _followRepository.GetFollowing(userId);
             return mapper.Map<List<UserProfileResponse>>(following);
         }
+
+        public UserProfileResponse FindByUsername(string username)
+        {
+            var user = _userRepository.FindByUsername(username);
+            if (user == null) return null;
+            return mapper.Map<UserProfileResponse>(user);
+        }
     }
 }

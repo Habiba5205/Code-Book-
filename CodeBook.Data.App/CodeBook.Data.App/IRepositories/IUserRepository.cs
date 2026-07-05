@@ -16,6 +16,6 @@ namespace CodeBook.Data.App.IRepositories
         void Update(User user); 
         bool SaveChanges();
         List<User> SearchUsers(string keyword);
-
+        User FindByUsername(string username);
     }
 }

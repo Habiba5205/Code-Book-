@@ -14,5 +14,6 @@ namespace CodeBook.Business.App.Interfaces
         List<UserProfileResponse> SearchUsers(string keyword);
         List<UserProfileResponse> GetFollowers(int userId);
         List<UserProfileResponse> GetFollowing(int userId);
+        UserProfileResponse FindByUsername(string username);
     }
 }

@@ -141,5 +141,15 @@ namespace CodeBook.API.App.Controllers
             var users = _userService.SearchUsers(keyword);
             return Ok(users); 
         }
+
+        [HttpGet("findByUsername")]
+        [AllowAnonymous]
+        public IActionResult FindByUsername([FromQuery] string username)
+        {
+            var user = _userService.FindByUsername(username);
+            if (user == null)
+                return NotFound(new { message = "User not found" });
+            return Ok(user);
+        }
     }
 }

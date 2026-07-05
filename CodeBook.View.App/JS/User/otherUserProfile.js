@@ -5,8 +5,15 @@ let viewedUserId = null;
 window.onload = async() =>{
     const params = new URLSearchParams(window.location.search);
     viewedUserId = params.get('userId');
+    const username = params.get('username');
+
+    if (!viewedUserId && username) {
+        const user = await api.get(`User/findByUsername?username=${username}`);
+        if (user) viewedUserId = user.id;
+    }
     await loadProfile();
 }
+
 async function loadProfile(){
     try{
         const data = await api.get(`User/viewprofile?userId=${viewedUserId}`);
@@ -46,5 +53,10 @@ async function unfollow(){
         alert('Failed to unfollow: '+error.message);
     }
 }
+
+function goBack() {
+    window.history.back();
+}
+window.goBack = goBack;
 window.follow = follow;
 window.unfollow = unfollow;

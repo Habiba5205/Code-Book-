@@ -40,6 +40,12 @@ namespace CodeBook.Data.App.Repositories
                 .Where(u => u.UserName.Contains(keyword) || u.Bio.Contains(keyword))
                 .ToList();
         }
+
+        public User FindByUsername(string username)
+        {
+            return _context.users
+                .FirstOrDefault(u => u.UserName == username);
+        }
         public bool SaveChanges()
         {
             return _context.SaveChanges() >= 0;

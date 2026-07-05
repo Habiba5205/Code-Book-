@@ -9,8 +9,8 @@ export function parseHashtags(text){
 export function parseMentions(text) {
     return text.replace(/@(\w+)/g, (match, username) => {
         return `
-            <a href="../../html/User/OtherUserProfile.html?username=${encodeURIComponent(username)}"
-               class="mention">
+            <a href="../../html/User/OtherUserProfile.html?username=${username}"
+               class="mention" style="color:#7c3aed; text-decoration:none">
                 @${username}
             </a>
         `;

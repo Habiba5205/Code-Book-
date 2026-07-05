@@ -187,10 +187,12 @@ function showReplyForm(selfCommentId) {
     }
 
     const repliesContainer = document.getElementById(`replies-${selfCommentId}`);
-    if (repliesContainer) {
-        repliesContainer.classList.remove('d-none');
+    if (!repliesContainer) {
+        console.log('replies container not found!', selfCommentId);
+        return;
     }
-
+    repliesContainer.classList.remove('d-none');
+    
     const form = document.createElement("div");
     form.id = `reply-form-${selfCommentId}`;
     form.className = "ms-4 mt-2";
@@ -207,9 +209,9 @@ function showReplyForm(selfCommentId) {
         </div>
     `;
 
-    if (repliesContainer) {
-        repliesContainer.prepend(form);
-    }
+   
+    repliesContainer.prepend(form);
+    
 }
 
 async function submitReply(selfCommentId) {
@@ -228,3 +230,4 @@ async function submitReply(selfCommentId) {
 }
 
 window.submitReply = submitReply; 
+window.showReplyForm = showReplyForm;
