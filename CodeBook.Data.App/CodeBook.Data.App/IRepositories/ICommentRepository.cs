@@ -11,7 +11,7 @@ namespace CodeBook.Data.App.IRepositories
     {
         void Add(Comment comment);
         void Update(Comment comment);
-        void Delete(Comment comment);
+        int Delete(Comment comment);
         Comment GetCommentById(int commentid);
         List<Comment> GetByPostId(int postId);
         bool SaveChanges();

@@ -29,11 +29,28 @@ namespace CodeBook.Data.App.Repositories
         {
             _context.comments.Update(comment);
         }
-        public void Delete(Comment comment)
+        public int Delete(Comment comment)
         {
+            int deletedCount = DeleteRepliesRecursively(comment.Id);
+
             var reactions = _context.reactions.Where(r => r.CommentId == comment.Id);
             _context.reactions.RemoveRange(reactions);
             _context.comments.Remove(comment);
+            return deletedCount + 1;
+        }
+        private int DeleteRepliesRecursively(int commentId) {
+            int count = 0; ;
+            var replies = _context.comments.Where(c => c.SelfCommentId == commentId).ToList();
+
+            foreach (var reply in replies) {
+                count+=DeleteRepliesRecursively(reply.Id);
+                var replyReactions = _context.reactions
+                   .Where(r => r.CommentId == reply.Id);
+                _context.reactions.RemoveRange(replyReactions);
+                _context.comments.Remove(reply);
+                count++;
+            }
+            return count;
         }
 
         public List<Comment> GetByPostId(int postId)

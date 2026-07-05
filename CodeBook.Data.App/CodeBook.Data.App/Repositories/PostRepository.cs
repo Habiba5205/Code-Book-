@@ -84,6 +84,14 @@ namespace CodeBook.Data.App.Repositories
                 post.CommentCount += 1;
             }
         }
+        public void RemoveComment(int postId,int count)
+        {
+            var post = GetPostById(postId);
+            if (post != null)
+            {
+                post.CommentCount = Math.Max(0, post.CommentCount - count);
+            }
+        }
         public List<PostTag> GetPostTags(int postId)
         {
             return _context.postTags.Where(p => p.PostId == postId).ToList();

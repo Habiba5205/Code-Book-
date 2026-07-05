@@ -99,7 +99,8 @@ namespace CodeBook.Business.App.Services
             {
                 return new ErrorResponse { Success = false, Message = "You can only delete your own comments" };
             }
-            _commentRepository.Delete(comment);
+            int deletedComments=_commentRepository.Delete(comment);
+            _postRepository.RemoveComment(comment.PostId,deletedComments);
             if (_commentRepository.SaveChanges())
                 return new ErrorResponse { Success = true, Message = "Comment deleted successfully" };
 

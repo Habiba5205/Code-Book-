@@ -18,6 +18,7 @@ namespace CodeBook.Data.App.IRepositories
         void AddReaction(int postId, ReactionType type,int userId);
         void RemoveReaction(int postId);
         void AddComment(int postId);
+        void RemoveComment(int postId,int count);
         List<Post> Getfeed();
         void SavePost(PostSaved saved);
         void AddRemovalRecord(PostRemoval postRemoval);

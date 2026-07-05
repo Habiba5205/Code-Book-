@@ -1,6 +1,6 @@
 import { api } from '../api.js';
 import { parseText } from '../Interactions/HashTags.js';
-let currentUserId = null;
+
 
 function getPostId(){  //get post id from url 
     const params = new URLSearchParams(window.location.search);
@@ -10,7 +10,7 @@ function getPostId(){  //get post id from url
 
 export async function fetchComments(postId) {
   try{  
-    currentUserId=await getCurrentUserId();
+    
     const comments =   await api.get(`Comment/${postId}/comments`);
     renderComments(comments);
 }catch (error) {
@@ -46,7 +46,9 @@ function createCommentCard(comment, getReplies) {
         <div class="d-flex gap-2">
             <div class="flex-grow-1">
                 <span class="fw-semibold">${comment.authorUsername}</span>
-               <p class="mb-1">${parseText(comment.body)}</p>
+            <p class="mb-1 comment-body" id="comment-body-${comment.id}">
+             ${parseText(comment.body)}
+              </p>
 
                  
 
@@ -80,25 +82,27 @@ function createCommentCard(comment, getReplies) {
                    
                 </div>
 
-                <div class="d-flex gap-3 mt-1">
-                    <small class="text-secondary">${formatTime(comment.dateCreated)}</small>
+   <div class="d-flex gap-3 mt-1">
+    <small class="text-secondary">${formatTime(comment.dateCreated)}</small>
 
-                    <button class="reply-btn btn btn-link btn-sm p-0">
-                        Reply
-                    </button>
+    <button class="reply-btn btn btn-link btn-sm p-0">
+        Reply
+    </button>
 
-                    ${
-                        comment.authorId === currentUserId
-                        ? `<button class="delete-comment-btn btn btn-link btn-sm p-0 text-danger">
-                                Delete
-                           </button>`
-                        : ""
-                    }
+   ${comment.isOwner ? `
+    <button class="edit-comment-btn btn btn-link btn-sm p-0">
+    Edit
+</button>
 
-                    <button class="toggle-replies btn btn-link btn-sm p-0 text-secondary">
-                        ▶ Replies
-                    </button>
-                </div>
+    <button class="delete-comment-btn btn btn-link btn-sm p-0 text-danger">
+        Delete
+    </button>
+` : ""}
+
+    <button class="toggle-replies btn btn-link btn-sm p-0 text-secondary">
+        ▶ Replies
+    </button>
+</div>
             </div>
         </div>
 
@@ -120,6 +124,9 @@ function createCommentCard(comment, getReplies) {
     // Delete button
     div.querySelector(".delete-comment-btn")
         ?.addEventListener("click", () => deleteComment(comment.id));
+    //edit button
+        div.querySelector(".edit-comment-btn")
+    ?.addEventListener("click", () => editComment(comment));
 
     // Toggle replies
     const toggleBtn = div.querySelector(".toggle-replies");
@@ -139,10 +146,7 @@ function createCommentCard(comment, getReplies) {
 
     return div;
 }
-async function getCurrentUserId() {
-    
-    return Number(localStorage.getItem("userId"));
-}
+
 export async function addComment(postId,body,selfCommentId=null){
 try{
    
@@ -155,14 +159,16 @@ try{
     console.error("Error adding comment:", error)
 }
 }
-export async function deleteComment(commentId){
-try{
-await api.delete(`Comment/${commentId}/deleteComment`);
-const postId=getPostId();
- await fetchComments(postId);
-}catch(error){
-    console.error("Error deleting comment:", error)
-}
+export async function deleteComment(commentId) {
+    console.log("Deleting comment:", commentId);
+    try {
+        const result = await api.delete(`Comment/${commentId}/deleteComment`);
+        console.log("Delete result:", result);
+        const postId = getPostId();
+        await fetchComments(postId);
+    } catch(error) {
+        console.error("Error deleting comment:", error);
+    }
 }
 function formatTime(dateString) {
     const date = new Date(dateString+"Z");
@@ -228,6 +234,56 @@ async function submitReply(selfCommentId) {
         repliesContainer.classList.remove('d-none');
     }
 }
+function editComment(comment) {
+
+    const body = document.getElementById(`comment-body-${comment.id}`);
+
+    body.innerHTML = `
+        <textarea
+            id="edit-comment-${comment.id}"
+            class="form-control mb-2"
+            rows="3">${comment.body}</textarea>
+
+        <button class="btn btn-purple btn-sm"
+            onclick="saveComment(${comment.id})">
+            Save
+        </button>
+
+        <button class="btn btn-secondary btn-sm ms-2"
+            onclick="cancelEdit(${comment.id}, \`${comment.body.replace(/`/g,"\\`")}\`)">
+            Cancel
+        </button>
+    `;
+}
+function cancelEdit(commentId, originalBody) {
+
+    const body = document.getElementById(`comment-body-${commentId}`);
+
+    body.innerHTML = parseText(originalBody);
+}
+async function saveComment(commentId) {
+
+    const newBody =
+        document.getElementById(`edit-comment-${commentId}`).value.trim();
+
+    if (!newBody) return;
+
+    try {
+
+        await api.put(`Comment/${commentId}/editComment`, {
+            body: newBody
+        });
+
+        await fetchComments(getPostId());
+
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+window.saveComment = saveComment;
+
+window.cancelEdit = cancelEdit;
 
 window.submitReply = submitReply; 
 window.showReplyForm = showReplyForm;
