@@ -19,8 +19,10 @@ async function createPost() {
     const codeSnippet = document.getElementById('codeSnippet').value.trim();
     const language = document.getElementById('language').value;
     const isPublic = document.getElementById('isPublic').checked;
-
     const communityIdValue = document.getElementById('communityId').value;
+
+    const hashtagMatches = body.match(/#(\w+)/g) || [];
+    const hashtags = hashtagMatches.map(tag => tag.slice(1));
 
     const errorMsg = document.getElementById('errorMsg');
     const successMsg = document.getElementById('successMsg');
@@ -42,6 +44,8 @@ async function createPost() {
     }
 
     try {
+        const tagIds = await resolveTagIds(hashtags);
+
         const result = await api.post('Post/create', {
             title: title,
             body: body,
@@ -49,14 +53,14 @@ async function createPost() {
             language: language || null,
             isPublic: isPublic,
             communityId: communityIdValue ? parseInt(communityIdValue) : null,
-            tagIds: []
+            tagIds: tagIds
         });
 
         if (result.message === 'Post created successfully') {
             successMsg.textContent = 'Post created successfully!';
             successMsg.style.display = 'block';
 
-            // redirect to feed after 5 seconds
+            // redirect to feed after 3 seconds
             setTimeout(() => {
                if(communityIdValue){
                 window.location.href = `../Community/CommunityFeed.html?id=${communityIdValue}`;
@@ -64,7 +68,7 @@ async function createPost() {
                else{
                 window.location.href = 'Feed.html';
                }
-            }, 5000);
+            }, 3000);
         } else {
             errorMsg.textContent = result.message || 'Failed to create post';
             errorMsg.style.display = 'block';
@@ -77,6 +81,18 @@ async function createPost() {
     }
 }
 window.createPost=createPost;
+
+async function resolveTagIds(hashtags) {
+    if (!hashtags.length) return [];
+
+    try {
+        const result = await api.post('Tag/resolve', { tags: hashtags });
+        return result.tagIds || [];
+    } catch (error) {
+        console.error('Failed to resolve tags:', error);
+        return [];
+    }
+}
 
 async function loadCommunityName(communityId) {
     try {

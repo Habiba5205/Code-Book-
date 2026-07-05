@@ -10,6 +10,7 @@ document.getElementById('languageFilter').addEventListener('change', () => {
     search();
 });
 
+
 function switchTab(tab) {
     currentTab = tab;
 
@@ -205,7 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (tag) {
         if (tagFilter) tagFilter.value = tag;
         if (searchInput) searchInput.value = tag;
-        search();
+        setTimeout(() => search(), 100);
     }
     else if(mention){
 
@@ -213,8 +214,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (searchInput){
         searchInput.value = mention;
-
-    search();
+        
+    setTimeout(() => search(), 100);
 }
     }
 });

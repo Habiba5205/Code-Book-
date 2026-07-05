@@ -111,3 +111,6 @@ async function deletePost() {
         console.error(error);
     }
 }
+
+window.updatePost = updatePost;
+window.deletePost = deletePost;
