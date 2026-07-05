@@ -136,7 +136,12 @@ namespace CodeBook.Business.App.Controllers
             {
                 return BadRequest(new { message = "keyword is required" });
             }
+            var userId = _currentUserInfo.GetCurrentUserId();
             var communities = _communityService.SearchCommunities(keyword);
+            foreach (var community in communities)
+            {
+                if (community.OwnerId == userId) community.isOwner = true;
+            }
             return Ok(communities);
         }
 
@@ -146,7 +151,9 @@ namespace CodeBook.Business.App.Controllers
         {
             try
             {
+                var userId = _currentUserInfo.GetCurrentUserId();
                 CommunityDto community = _communityService.GetCommunity(communityId);
+                if(community.OwnerId == userId) community.isOwner = true;
                 return Ok(community);
             }
             catch (KeyNotFoundException ex)
@@ -171,6 +178,10 @@ namespace CodeBook.Business.App.Controllers
             {
                 return NotFound(ex.Message);
             }
+            catch (UnauthorizedAccessException ex)
+            {
+                return BadRequest(ex.Message);
+            }
             catch (ArgumentException ex)
             {
                 return BadRequest(ex.Message);
@@ -188,6 +199,11 @@ namespace CodeBook.Business.App.Controllers
             {
                 var userId = _currentUserInfo.GetCurrentUserId();
                 var communities = _communityService.GetCommunities(userId);
+                foreach(var community in communities)
+                {
+                    if(community.OwnerId == userId) community.isOwner = true;
+                }
+
                 return Ok(communities);
             }
             catch (Exception e) {

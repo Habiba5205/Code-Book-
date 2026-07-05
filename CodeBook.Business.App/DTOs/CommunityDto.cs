@@ -15,5 +15,6 @@ namespace CodeBook.Business.App.DTOs
         public string? Description { get; set; }
         public DateTime DateCreated { get; set; }
         public int memberscount { get; set; } = 0;
+        public bool isOwner { get; set; } = false;
     }
 }

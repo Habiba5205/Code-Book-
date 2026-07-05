@@ -35,6 +35,7 @@ namespace CodeBook.API.App.Controllers
                 userId = _currentUserInfo.GetCurrentUserId();
             }
             var feed = _postService.GetFeed(page, userId);
+
             return Ok(feed);
         }
 
@@ -52,6 +53,7 @@ namespace CodeBook.API.App.Controllers
             {
                 return NotFound(new { message = "Post not found or access denied" });
             }
+            if (userId != null && post.AuthorId == userId) { post.isOwner = true; }
             return Ok(post);
         }
 

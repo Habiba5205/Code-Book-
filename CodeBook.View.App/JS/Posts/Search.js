@@ -175,7 +175,7 @@ function renderCommunities(communities) {
                     </p>
                 </div>
                 <button class="btn-purple ms-auto" 
-                        onclick="viewCommunity(${community.id})">
+                        onclick="viewCommunity(${community.communityId})">
                     <i class="fa-solid fa-people-group"></i> View Community
                 </button>
             </div>
@@ -192,7 +192,7 @@ function viewProfile(userId) {
 }
 
 function viewCommunity(communityId) {
-    window.location.href = `../../html/Community/Community.html?id=${communityId}`;
+    window.location.href = `../../HTML/Community/CommunityFeed.html?id=${communityId}`;
 }
 document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);

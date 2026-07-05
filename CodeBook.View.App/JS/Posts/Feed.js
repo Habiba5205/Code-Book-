@@ -5,8 +5,10 @@ console.log("Feed.js loaded");
 const urlParams = new URLSearchParams(window.location.search);
 let currentPage = parseInt(urlParams.get('page')) || 1;
 const postsContainer = document.getElementById("postsContainer");
+const badge = document.querySelector(".badge");
 
 document.addEventListener("DOMContentLoaded", () => {
+    getnotificationcount();
     loadFeed();
 });
 async function loadFeed() {
@@ -108,3 +110,24 @@ function viewPost(postId) {
     window.location.href = `../../HTML/Posts/PostDetail.html?id=${postId}`;
 }
 window.viewPost = viewPost;
+
+async function getnotificationcount() {
+    try{
+        const countResponse = await api.get("notification/getunreadcount");
+        console.log(`${countResponse.unreadcount}`);
+        if(countResponse.unreadCount > 0){
+            badge.classList.remove('d-none');
+            badge.textContent = countResponse.unreadCount;
+            if(countResponse.unreadCount > 99) badge.textContent = "+99";
+        }
+        else{
+            badge.classList.add('d-none');
+        }
+
+    }
+    catch(error){
+        badge.classList.add('d-none');
+        console.log(error);
+    }
+    
+}

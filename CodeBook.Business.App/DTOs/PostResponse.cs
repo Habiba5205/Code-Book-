@@ -16,5 +16,6 @@ namespace CodeBook.Business.App.DTOs
         public int AuthorId { get; set; }
         public DateTime DateCreated { get; set; }
         public bool IsPublic { get; set; }
+        public bool isOwner { get; set; } = false;
     }
 }

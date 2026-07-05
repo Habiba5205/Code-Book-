@@ -54,7 +54,7 @@ console.log('Match:', post.authorId === currentUserid);
                               data-type="Like"
                               data-liked="false"
                               onclick="toggleReaction(this, ${post.id}, 'Like')">
-                                👍<span class="like-count">${post.likeCount || 0}</span>
+                                👍<span class="like-count"></span>
                             </button>
                             <button class="btn-purple reaction-btn" 
                               data-post-id="${post.id}"
@@ -99,7 +99,7 @@ console.log('Match:', post.authorId === currentUserid);
                         <i class="fa-solid fa-bookmark"></i> Save Post
                     </button>
 
-                    <a href="EditPosts.html?id=${postId}" class="btn-purple">
+                    <a href="EditPosts.html?id=${postId}" class="btn-purple d-none" id="edit-post-btn">
                         <i class="fa-solid fa-pen"></i> Edit Post
                     </a>
                      <a href="../../html/Report/Report-modal.html" class="btn-purple">
@@ -114,6 +114,9 @@ console.log('Match:', post.authorId === currentUserid);
                 <div id="saveMsg" class="success-msg mt-2"></div>
             </div>
         `;
+        if(post.isOwner){
+        document.getElementById('postContainer').querySelector("#edit-post-btn").classList.remove('d-none');}
+
 
     } catch (error) {
         document.getElementById('postContainer').innerHTML = 

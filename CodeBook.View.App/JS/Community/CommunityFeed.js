@@ -5,6 +5,7 @@ window.onload=()=>{
     var createpostbtn = document.getElementById("createpost-btn");
     const params = new URLSearchParams(window.location.search);
     const communityId = params.get("id");
+    console.log(communityId);
 
     createpostbtn.addEventListener('click',() => {
             window.location.href = `../../html/Posts/CreatePost.html?communityId=${communityId}`;
@@ -39,11 +40,12 @@ window.onload=()=>{
             </div>
             </div>
                 <div class="actions m-3 col-12 text-center">
-                    <button type="button" class="btn btn-outline-danger unjoin-btn">Unjoin Community</button>
+                    <button type="button" class="btn btn-outline-danger unjoin-btn d-none">Unjoin Community</button>
                 </div>
                      
             </div>
                 `;
+                if(!community.isOwner) communitydatacard.querySelector('.unjoin-btn').classList.remove('d-none');
                  communitydatacard.querySelector('.unjoin-btn').addEventListener('click', (e) => {
                         handleAction(communityId, e.target);});
             }
@@ -122,7 +124,7 @@ window.onload=()=>{
         });
 
     } catch (error) {
-        postsContainer.innerHTML = `
+        communityfeed.innerHTML = `
             <p style="color:red">Failed to load posts. Please try again.</p>
         `;
         console.error(error);

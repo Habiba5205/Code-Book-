@@ -481,3 +481,19 @@
     text-decoration: underline;
 }
 
+#notification-btn {
+
+  position: relative; 
+  display: inline-block;
+
+}
+
+.badge {
+    position: absolute ;
+    top: -8px !important;
+    right: -8px !important;
+    width: 20px !important;
+    height: 20px !important;
+    background-color: red !important; 
+}
+

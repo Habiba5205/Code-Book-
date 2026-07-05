@@ -37,6 +37,14 @@ namespace CodeBook.API.App.Controllers
                 return NotFound(new { message = "Post not found or access denied" });
             }
             var comments = _commentService.GetPostComments(postId);
+            if (userId != null && comments.Any())
+            {
+                foreach (var comment in comments)
+                {
+                    if(comment.AuthorId == userId) comment.isOwner = true;
+                }
+
+            }
             return Ok(comments);
         }
 

@@ -15,5 +15,6 @@ namespace CodeBook.Business.App.DTOs
         public int LikeCount { get; set; }
         public int? SelfCommentId { get; set; }  // for replies
         public DateTime DateCreated { get; set; }
+        public bool isOwner { get; set; } = false;
     }
 }

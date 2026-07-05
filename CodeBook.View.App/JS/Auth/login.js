@@ -24,7 +24,7 @@ window.onload=()=>{
                 if (response.role === 'Admin') {
                     window.location.href = "../../HTML/admin/dashboard.html";
                 } else {
-                    window.location.href = "../../HTML/Posts/Feed.html";
+                   window.location.href = "../../HTML/Posts/Feed.html";
                 }
                    
             } catch (error) {
