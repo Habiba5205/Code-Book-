@@ -84,6 +84,35 @@ window.onload=()=>{
                     ` : ''}
 
                     <div class="post-actions">
+                        <div class="d-flex gap-1">
+
+                           <div class="post-reaction-total-box " id="reaction-count-${post.id}">
+                 ${post.likeCount || 0}
+                  </div>
+                            <button class="btn-purple reaction-btn" 
+                            data-post-id="${post.id}"
+                              data-type="Like"
+                              data-liked="false"
+                              onclick="toggleReaction(this, ${post.id}, 'Like')">
+                                👍
+                            </button>
+                            <button class="btn-purple reaction-btn" 
+                              data-post-id="${post.id}"
+                              data-type="Like"
+                              data-liked="false"
+                              onclick="toggleReaction(this, ${post.id}, 'Haha')">
+                                😂
+                            </button>
+                            <button class="btn-purple reaction-btn" 
+                              data-post-id="${post.id}"
+                              data-type="Like"
+                              data-liked="false"
+                              onclick="toggleReaction(this, ${post.id}, 'love')">
+                                   
+                                ❤️
+                            </button>
+                        </div>
+
                         <button class="btn-purple" onclick="viewPost(${post.id})">
                             <i class="fa-solid fa-eye"></i> View Post
                         </button>
@@ -125,3 +154,8 @@ window.handleAction = async (communityId,buttonElement) => {
         }
 
 }
+
+function viewPost(postId) {
+    window.location.href = `../../HTML/Posts/PostDetail.html?id=${postId}`;
+}
+window.viewPost = viewPost;

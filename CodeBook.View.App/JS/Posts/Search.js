@@ -188,7 +188,7 @@ function viewPost(postId) {
 }
 
 function viewProfile(userId) {
-    window.location.href = `../../../html/User/OtherUserProfile.html?userId=${userId}`;
+    window.location.href = `../../html/User/OtherUserProfile.html?userId=${userId}`;
 }
 
 function viewCommunity(communityId) {
