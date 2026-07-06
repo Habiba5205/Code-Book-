@@ -13,9 +13,17 @@
 <body>
 <nav class="navbar px-4 py-3">
     <a class="navbar-brand">
-        <span style="color:#7c3aed;">&lt;</span><span style="color:#ffffff;">Code</span><span style="color:#7c3aed;">Book</span><span style="color:#7c3aed;">/&gt;</span>
+      <span style="color:var(--accent-purple);">&lt;</span><span style="color:var(--text-color);">Code</span><span style="color:var(--accent-purple);">Book</span><span style="color:var(--accent-purple);">/&gt;</span>
     </a>
         <div class="d-flex gap-3 align-items-center ms-auto">
+                       <label class="theme-switch me-4">
+                <input type ="checkbox"  id="themeToggle"  onclick="toggleTheme()">
+                <span class ="switch-track">
+            <i class="fa-solid fa-sun"></i>
+             <i class="fa-solid fa-moon"></i>
+             <span class ="switch-thumb"></span>
+                </span>
+            </label>
                 <button class="btn-purple ms-auto" onclick="goBack()">
                     <i class="fa-solid fa-arrow-left"></i> Back
                 </button>
@@ -54,4 +62,6 @@
     <div id="community-feed"></div>
 
     </div>
+    <script src="../../JS/theme.js"></script>
+</body>
 </html>

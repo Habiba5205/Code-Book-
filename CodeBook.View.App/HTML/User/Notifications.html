@@ -10,10 +10,27 @@
    <link rel="stylesheet" href="../../CSS/style.css">
     </head>
 <body>
+    <nav class="navbar px-4 py-3">
+    <a class="navbar-brand">
+        <span style="color:var(--accent-purple);">&lt;</span><span style="color:var(--text-color);">Code</span><span style="color:var(--accent-purple);">Book</span><span style="color:var(--accent-purple);">/&gt;</span>
+    </a>
+
+            <div class="nav-actions">
+            <label class="theme-switch">
+                <input type ="checkbox"  id="themeToggle"  onclick="toggleTheme()">
+                <span class ="switch-track">
+            <i class="fa-solid fa-sun"></i>
+             <i class="fa-solid fa-moon"></i>
+             <span class ="switch-thumb"></span>
+                </span>
+            </label>
+           
+             </div>
+                </nav>
     <div id ="navbar-placeholder"></div>
     <div class="container mt-4" style="max-width: 700px;">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h4 class="text-white fw-bold mb-0">
+        <h4 class="fw-bold mb-0" style="color: var(--text-color);">
             <i class="bi bi-bell-fill me-2" style="color:#7c3aed"></i>
             Notifications
         </h4>
@@ -58,7 +75,8 @@
             <span class="floating-word" style="left:62%; top:100%; font-size:1.15rem; animation-duration:16s; animation-delay:14s;">CSS</span>
             <span class="floating-word" style="left:94%; top:100%; font-size:0.9rem; animation-duration:19s; animation-delay:15s;">CodeBook</span>
         </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="../../JS/theme.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script  type="module" src="../../JS/Interactions/Notifications.js"></script>
 </body>
 </html>

@@ -11,13 +11,23 @@
 <body>
     <nav class="navbar px-4 py-3">
     <a class="navbar-brand">
-        <span style="color:#7c3aed;">&lt;</span><span style="color:#ffffff;">Code</span><span style="color:#7C3AED ;">Book</span><span style="color:#7c3aed;">/&gt;</span>
+         <span style="color:var(--accent-purple);">&lt;</span><span style="color:var(--text-color);">Code</span><span style="color:var(--accent-purple);">Book</span><span style="color:var(--accent-purple);">/&gt;</span>
     </a>
-        <div class="container">
-            <a href="Feed.html" class="navbar-brand">
-            
-            </a>
-        </div>
+       <div class="ms-auto d-flex align-items-center gap-3"></div>
+        <label class="theme-switch me-4">
+            <input type="checkbox" id="themeToggle" onclick="toggleTheme()">
+            <span class="switch-track">
+                <i class="fa-solid fa-sun"></i>
+                <i class="fa-solid fa-moon"></i>
+                <span class="switch-thumb"></span>
+            </span>
+        </label>
+
+        <a href="Feed.html" class="btn-purple">
+            <i class="fa-solid fa-arrow-left"></i> Back
+        </a>
+
+    </div>
     </nav>
    <div class="bg-decor">
         <div class="floating-words" aria-hidden="true">
@@ -112,6 +122,7 @@
             </a>
         </div>
     </div>
+  <script src="../../JS/theme.js"></script>
     <script src="../../JS/Posts/CreatePost.js" type="module"></script>
 </body>
 </html>

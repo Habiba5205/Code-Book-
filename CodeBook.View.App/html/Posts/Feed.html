@@ -57,10 +57,19 @@
         <div class="container">
 
             <a href="Feed.html" class="navbar-brand">
-                <span style="color:#7c3aed;">&lt;</span><span style="color:#ffffff;">Code</span><span style="color:#7c3aed;">Book</span><span style="color:#7c3aed;">/&gt;</span>
+                <span style="color:var(--accent-purple);">&lt;</span><span style="color:var(--text-color);">Code</span><span style="color:var(--accent-purple);">Book</span><span style="color:var(--accent-purple);">/&gt;</span>
             </a>
+            
 
             <div class="d-flex gap-3 align-items-center">
+                    <label class="theme-switch me-2">
+                <input type ="checkbox"  id="themeToggle"  onclick="toggleTheme()">
+                <span class ="switch-track">
+            <i class="fa-solid fa-sun"></i>
+             <i class="fa-solid fa-moon"></i>
+             <span class ="switch-thumb"></span>
+                </span>
+            </label>
                 <a href="Search.html" class="btn-purple">
                     <i class="fa-solid fa-search"></i> 
                     Search
@@ -134,7 +143,7 @@
     }
 
     </script>
-
+<script src="../../JS/theme.js"></script>
     <script type="module" src="../../JS/Posts/Feed.js" type="module"></script>
     <script type="module" src="../../JS/Interactions/Reactions.js" type="module"></script>
 </body>
