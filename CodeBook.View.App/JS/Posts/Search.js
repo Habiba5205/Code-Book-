@@ -192,8 +192,15 @@ function viewProfile(userId) {
     window.location.href = `../../html/User/OtherUserProfile.html?userId=${userId}`;
 }
 
-function viewCommunity(communityId) {
-    window.location.href = `../../HTML/Community/CommunityFeed.html?id=${communityId}`;
+async function viewCommunity(communityId) {
+    const communities = await api.get("communities/getcommunities");
+    if(communities.includes(communityId)){ window.location.href = `../../HTML/Community/CommunityFeed.html?id=${communityId}`;}
+    else {
+        alert("Join Community to view posts!");
+        window.location.href = `../../HTML/Community/Community.html`;
+    }
+
+   
 }
 document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);

@@ -21,12 +21,20 @@ async function loadFeed() {
     console.trace(); 
     try {
         postsContainer.innerHTML = `<p style="color:white">Loading...</p>`;
-        const posts = await api.get(`Post/feed?page=${currentPage}`);
+        const data = await api.get(`Post/feed?page=${currentPage}`);
+        const communities = await api.get(`communities/getCommunities`);
+        var posts =[];
+        if(communities && communities.length > 0){
+            const validCommunityIds = new Set(communities.map(c => c.communityId));
+             posts = data.filter(p => { return (p.communityId == null) || (validCommunityIds.has(p.communityId))});
+       }
+        else {posts = data;}
+
         if (!posts || posts.length === 0) {
             postsContainer.innerHTML = `<p style="color:white">No posts found.</p>`;
             return;
         }
-
+        
         postsContainer.innerHTML = "";
         posts.forEach(post => {
             const div=document.createElement("div");
