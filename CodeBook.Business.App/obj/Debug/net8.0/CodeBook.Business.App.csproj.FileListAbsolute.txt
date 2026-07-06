@@ -1,30 +1,9 @@
-C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.csproj.AssemblyReference.cache
-C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.AssemblyInfoInputs.cache
-C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.AssemblyInfo.cs
-C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.csproj.CoreCompileInputs.cache
-C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.sourcelink.json
-C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Business.App\bin\Debug\net8.0\CodeBook.Business.App.deps.json
-C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Business.App\bin\Debug\net8.0\CodeBook.Business.App.dll
-C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Business.App\bin\Debug\net8.0\CodeBook.Business.App.pdb
-C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Business.App\bin\Debug\net8.0\CodeBook.Data.App.dll
-C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Business.App\bin\Debug\net8.0\CodeBook.Models.App.dll
-C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Business.App\bin\Debug\net8.0\CodeBook.Data.App.pdb
-C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Business.App\bin\Debug\net8.0\CodeBook.Models.App.pdb
-C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.7575CAD3.Up2Date
-C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.dll
-C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\refint\CodeBook.Business.App.dll
-C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.pdb
-C:\Users\pc\Documents\GitHub\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\ref\CodeBook.Business.App.dll
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.csproj.AssemblyReference.cache
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.AssemblyInfoInputs.cache
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.AssemblyInfo.cs
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.csproj.CoreCompileInputs.cache
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.sourcelink.json
-C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.dll
-C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\refint\CodeBook.Business.App.dll
-C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.pdb
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Business.App\bin\Debug\net8.0\CodeBook.Business.App.deps.json
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Business.App\bin\Debug\net8.0\CodeBook.Business.App.dll
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Business.App\bin\Debug\net8.0\CodeBook.Business.App.pdb
@@ -33,22 +12,7 @@ C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Business.App\bin\D
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Business.App\bin\Debug\net8.0\CodeBook.Data.App.pdb
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Business.App\bin\Debug\net8.0\CodeBook.Models.App.pdb
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.7575CAD3.Up2Date
+C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.dll
+C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\refint\CodeBook.Business.App.dll
+C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.pdb
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\ref\CodeBook.Business.App.dll
-C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.Business.App\bin\Debug\net8.0\CodeBook.Business.App.deps.json
-C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.Business.App\bin\Debug\net8.0\CodeBook.Business.App.dll
-C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.Business.App\bin\Debug\net8.0\CodeBook.Business.App.pdb
-C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.Business.App\bin\Debug\net8.0\CodeBook.Data.App.dll
-C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.Business.App\bin\Debug\net8.0\CodeBook.Models.App.dll
-C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.Business.App\bin\Debug\net8.0\CodeBook.Data.App.pdb
-C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.Business.App\bin\Debug\net8.0\CodeBook.Models.App.pdb
-C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.csproj.AssemblyReference.cache
-C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.AssemblyInfoInputs.cache
-C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.AssemblyInfo.cs
-C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.csproj.CoreCompileInputs.cache
-C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.sourcelink.json
-C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.7575CAD3.Up2Date
-C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.dll
-C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\refint\CodeBook.Business.App.dll
-C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\CodeBook.Business.App.pdb
-C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.Business.App\obj\Debug\net8.0\ref\CodeBook.Business.App.dll

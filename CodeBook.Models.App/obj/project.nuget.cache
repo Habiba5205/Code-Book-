@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pvABl5KNrXs=",
+  "dgSpecHash": "AwEyE6mtXCY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Habiba Ahmed\\Desktop\\Code-Book-\\CodeBook.Models.App\\CodeBook.Models.App.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Habiba Ahmed\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.28\\microsoft.windowsdesktop.app.ref.8.0.28.nupkg.sha512",
-    "C:\\Users\\Habiba Ahmed\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.28\\microsoft.netcore.app.ref.8.0.28.nupkg.sha512",
-    "C:\\Users\\Habiba Ahmed\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.28\\microsoft.aspnetcore.app.ref.8.0.28.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Users\\roaab\\Downloads\\Engineering\\DEPI\\Code-Book-\\CodeBook.Models.App\\CodeBook.Models.App.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }
