@@ -17,5 +17,7 @@ namespace CodeBook.Business.App.DTOs
         public DateTime DateCreated { get; set; }
         public bool IsPublic { get; set; }
         public bool isOwner { get; set; } = false;
+        public int? CommunityId { get; set; }
+        public string? CommunityName { get; set; }
     }
 }
