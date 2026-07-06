@@ -61,6 +61,8 @@ window.onload=()=>{
             const actionsContainer = buttonElement.closest('.actions');
     try {
         if(buttonElement.innerText.trim() === 'Accept'){
+            console.log(report.commentId);
+            console.log(report.postId);
             if(report.commentId){
                 const result = await api.delete(`admin/comments/${report.commentId}/${report.id}`);
                 if(result.message === 'Comment removed successfully'){
