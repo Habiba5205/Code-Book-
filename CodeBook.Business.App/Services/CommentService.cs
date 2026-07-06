@@ -120,7 +120,9 @@ namespace CodeBook.Business.App.Services
                 return new List<CommentDto>();
             }
 
-            return comments.Select(c => new CommentDto
+            return comments
+                .Where(c => !c.isRemoved)
+                .Select(c => new CommentDto
             {
                 Id = c.Id,
                 AuthorId = c.AuthorId,
