@@ -89,15 +89,21 @@ function createCommentCard(comment, getReplies) {
         Reply
     </button>
 
-   ${comment.isOwner ? `
+${comment.isOwner && canEditComment(comment.dateCreated) ? `
     <button class="edit-comment-btn btn btn-link btn-sm p-0">
-    Edit
-</button>
+        Edit
+    </button>
 
     <button class="delete-comment-btn btn btn-link btn-sm p-0 text-danger">
         Delete
     </button>
-` : ""}
+` : `
+    ${comment.isOwner ? `
+        <button class="delete-comment-btn btn btn-link btn-sm p-0 text-danger">
+            Delete
+        </button>
+    ` : ""}
+`}
 
     <button class="toggle-replies btn btn-link btn-sm p-0 text-secondary">
         ▶ Replies
@@ -257,7 +263,7 @@ function editComment(comment) {
 }
 function cancelEdit(commentId, originalBody) {
 
-    const body = document.getElementById(`comment-body-${commentId}`);
+  const body = document.getElementById(`comment-body-${commentId}`);
 
     body.innerHTML = parseText(originalBody);
 }
@@ -279,6 +285,14 @@ async function saveComment(commentId) {
     } catch (err) {
         console.error(err);
     }
+}
+function canEditComment(dateString) {
+    const created = new Date(dateString + "Z");
+    const now = new Date();
+
+    const diffInMinutes = (now - created) / 60000;
+
+    return diffInMinutes <= 5;
 }
 
 window.saveComment = saveComment;
