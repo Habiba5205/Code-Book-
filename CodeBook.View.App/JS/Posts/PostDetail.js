@@ -174,6 +174,7 @@ async function submitComment() {
 window.savePost = savePost;
 
 function escapeHTML(htmlString) {
+    if(!htmlString) return "";
   return htmlString
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
