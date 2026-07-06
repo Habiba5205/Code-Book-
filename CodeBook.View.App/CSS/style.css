@@ -1117,5 +1117,50 @@ body.light-theme .btn-hero-secondary:hover{
     color:#FFFFFF;
 }
 body.light-theme .text-white{
-    color:#1A0A2E !important;
+    color:#1A0A2E ;
+}
+.follower-name{
+    color: white;
+}
+
+.follower-bio{
+    color: #8b949e;
+}
+
+body.light-theme .follower-name{
+    color:#1A0A2E;
+}
+
+body.light-theme .follower-bio{
+    color:#5B4A73;
+}
+.following-name{
+    color:white;
+}
+
+.following-bio{
+    color:#8b949e;
+}
+
+body.light-theme .following-name{
+    color:#1A0A2E;
+}
+
+body.light-theme .following-bio{
+    color:#5B4A73;
+}
+.community-name{
+    color:white;
+}
+
+.community-description{
+    color:#8b949e;
+}
+
+body.light-theme .community-name{
+    color:#1A0A2E;
+}
+
+body.light-theme .community-description{
+    color:#5B4A73;
 }

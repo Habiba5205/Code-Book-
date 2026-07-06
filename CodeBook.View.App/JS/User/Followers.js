@@ -28,8 +28,8 @@ async function loadFollowers(followersContainer) {
                 class="profile-img">
                 </div>
                 <div class="col-md-9">
-                <h2 class="text-light mb-1">${user.userName}</h2>
-                <p class="text-white-50">${user.bio || 'No bio yet'}</p>
+                <h2 class="follower-name mb-1">${user.userName}</h2>
+                <p class="follower-bio-50">${user.bio || 'No bio yet'}</p>
                 </div>
                 </div>
                 </a>`;

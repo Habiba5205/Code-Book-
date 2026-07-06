@@ -25,11 +25,11 @@ window.onload=()=>{
                 </div>
       
                 <div class="col-md-7">
-                <h3 class="text-light  mb-1">
+                <h3 class="community-name  mb-1">
                 <span id="name-display">${community.name}</span>
                 </h3>
 
-                <p class="text-white-50" >
+                <p class="community-description" >
                 <span id="desc-display">${community.description}</span>
                 </p>
         
