@@ -10,6 +10,7 @@ namespace CodeBook.Models.App
         public bool IsSeen {get; set;}
         public DateTime DateUpdated { get; set; } = DateTime.UtcNow;
         public User User { get; set; } = null!;
+        public int? SenderId { get; set; }
 
     }
 

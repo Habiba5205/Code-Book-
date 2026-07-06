@@ -77,8 +77,9 @@ namespace CodeBook.Business.App.Services
                     Message = "You have a new Follower",
                     ReferenceId = followerId,
                     IsSeen = false,
-                    DateCreated = DateTime.UtcNow
-                });
+                    DateCreated = DateTime.UtcNow,
+                    SenderId = followerId
+                 });
                 return new ErrorResponse { Success = true, Message = "Followed!" };
 
             }

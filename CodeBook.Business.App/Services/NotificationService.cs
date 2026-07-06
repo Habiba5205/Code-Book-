@@ -28,7 +28,8 @@ namespace CodeBook.Business.App.Services
                 Message = notificationDto.Message,
                 IsSeen = false,
                 DateCreated = DateTime.UtcNow,
-                DateUpdated = DateTime.UtcNow
+                DateUpdated = DateTime.UtcNow,
+                SenderId = notificationDto.SenderId
             };
             _notificationRepository.Add(notification);
             _notificationRepository.SaveChanges();

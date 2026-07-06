@@ -42,7 +42,7 @@ namespace CodeBook.API.App.Controllers
                 return BadRequest(validationResult.Errors);
             }
             var response = _authService.Login(logininfo);
-            if (response.Token != null)
+            if (response != null && response.Token != null)
             {
                 var cookieOptions = new CookieOptions
                 {
