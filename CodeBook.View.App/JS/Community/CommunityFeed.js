@@ -161,3 +161,8 @@ function viewPost(postId) {
     window.location.href = `../../HTML/Posts/PostDetail.html?id=${postId}`;
 }
 window.viewPost = viewPost;
+
+function goBack() {
+    window.history.back();
+}
+window.goBack = goBack;

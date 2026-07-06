@@ -35,21 +35,8 @@ namespace CodeBook.Business.App.Services
         }
         public List<NotificationDTO> GetUserNotification(int userId)
         {
-            var notifications = _notificationRepository.GetNotificationsbyUserId(userId);
+            var notifications = _notificationRepository.GetNotificationsbyUserId(userId).OrderByDescending(n => n.DateCreated);
             return mapper.Map<List<NotificationDTO>>(notifications);
-
-            /*  return context.notifications
-                  .Where(n => n.UserId == userId)
-                  .Select(n => new NotificationDTO
-                  {
-                      Id = n.Id,
-                      Type = n.Type.ToString(),
-                      Message = n.Message,
-                      ReferenceId = n.ReferenceId,
-                      IsSeen = n.IsSeen,
-                      DateCreated = n.DateCreated
-                  }).ToList();
-            */
         }
         public void MarkAsRead(int notificationId)
         {

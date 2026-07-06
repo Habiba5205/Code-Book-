@@ -13,9 +13,10 @@ async function loadPost() {
 
         if (!post) {
             document.getElementById('postContainer').innerHTML = 
-                '<p style="color:red">Post not found or access denied!</p>';
+                '<p style="color:red">Post not found or access desnied!</p>';
             return;
         }
+        post.codeSnippet = window.escapeHTML(post.codeSnippet);
 
         const currentUserid = parseInt(localStorage.getItem('userId'));
 console.log('Post authorId:', post.authorId);
@@ -171,3 +172,14 @@ async function submitComment() {
     await fetchComments(postId);
 }
 window.savePost = savePost;
+
+function escapeHTML(htmlString) {
+  return htmlString
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+};
+
+window.escapeHTML = escapeHTML;

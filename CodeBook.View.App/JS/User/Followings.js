@@ -40,3 +40,8 @@ catch(error){
     alert("Couldn't load Followings: " + error.message);
 }
 };
+
+function goBack() {
+    window.history.back();
+}
+window.goBack = goBack;

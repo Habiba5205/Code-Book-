@@ -74,7 +74,7 @@ namespace CodeBook.Business.App.Services
                 {
                     userId = followeeId,
                     Type = "Follow",
-                    Message = "You have a Follow Request",
+                    Message = "You have a new Follower",
                     ReferenceId = followerId,
                     IsSeen = false,
                     DateCreated = DateTime.UtcNow

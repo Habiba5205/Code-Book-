@@ -31,7 +31,7 @@ namespace CodeBook.Business.App.Services
             _userRepository = userRepository;
         }
 
-        public ErrorResponse AddComment(int authorId, int postId, AddCommentRequest dto)
+        public ErrorResponse AddComment(int userId, int postId, AddCommentRequest dto)
         {
             var post = _postRepository.GetPostById(postId);
             if(post == null)
@@ -43,9 +43,10 @@ namespace CodeBook.Business.App.Services
                 return new ErrorResponse { Success = false, Message = "Post is no longer available" };
             }
 
+
             Comment comment = new Comment
             {
-                AuthorId = authorId,
+                AuthorId = userId,
                 PostId = postId,
                 Body = dto.Body,
                 SelfCommentId = dto.SelfCommentId == 0 ? null: dto.SelfCommentId,
@@ -56,10 +57,11 @@ namespace CodeBook.Business.App.Services
             if (!_commentRepository.SaveChanges())
                 return new ErrorResponse { Success = false, Message = "Could not add comment" };
 
-            var user = _userRepository.GetProfileById(authorId);
-            _notificationService.CreateNotification(authorId, new NotificationDTO
+            var user = _userRepository.GetProfileById(userId);
+            var postauthor = _postRepository.GetPostById(postId).AuthorId;
+            _notificationService.CreateNotification(postauthor, new NotificationDTO
             {
-                userId = authorId,
+                userId = postauthor,
                 Type = "Comment",
                 Message = $"{user.UserName} commented on your post",
                 ReferenceId = postId,

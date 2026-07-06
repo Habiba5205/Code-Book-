@@ -125,3 +125,8 @@ window.handleAction = async (communityId ,buttonElement) => {
         }
 
 }
+
+function goBack() {
+    window.history.back();
+}
+window.goBack = goBack;

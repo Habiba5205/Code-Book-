@@ -15,10 +15,12 @@ finally {
     document.getElementById("loading").classList.add("d-none");
 }
 }
+
+
 function renderNotifications(notifications) {
-      notifications.sort(
+     /* notifications.sort(
         (a, b) => new Date(b.dateCreated) - new Date(a.dateCreated)
-    );
+    );*/
 
   const list=document.getElementById("notifications-list");
   list.innerHTML = "";
@@ -169,3 +171,8 @@ async function loadUnreadCount() {
     console.error("Error fetching unread count:", error);
 }   
 }
+
+function goBack() {
+    window.history.back();
+}
+window.goBack = goBack;

@@ -41,3 +41,8 @@ catch(error){
     alert("Couldn't load Followers: " + error.message);
 }
 };
+
+function goBack() {
+    window.history.back();
+}
+window.goBack = goBack;

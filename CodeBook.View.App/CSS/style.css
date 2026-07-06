@@ -785,3 +785,7 @@
         max-width:100%;
        }
 
+       #postsList {
+    overflow-y: auto !important;
+    max-height: 80vh;
+}

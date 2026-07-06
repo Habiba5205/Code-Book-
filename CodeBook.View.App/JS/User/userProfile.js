@@ -85,10 +85,12 @@ window.saveProfile = saveProfile;
 
 async function showPosts() {
     document.getElementById('content').innerHTML = `
-        <div class="card p-4">
+        <div class ="container">
+        <div class ="mt-5"> 
             <h4>My Posts</h4>
             <hr style="border-color:#30363d">
-            <div id="postsList">
+            </div>
+            <div id="postsList" class="flex-grow-1">
                 <p style="color:#8b949e">Loading posts...</p>
             </div>
         </div>
@@ -106,16 +108,20 @@ async function showPosts() {
         }
 
         document.getElementById('postsList').innerHTML = posts.map(post => `
-            <div class="post-card">
+            <div class = "mt-3 mb-3 post-card">
+            <a class="text-decoration-none" href= "../Posts/PostDetail?id=${post.id}" >
                 <h5 class="post-title">${post.title}</h5>
                 <p class="post-body">${post.body}</p>
-                ${post.codeSnippet ? `
+                ${ window.escapeHTML(post.codeSnippet)? `
                     <pre class="code-snippet"><code>${post.codeSnippet}</code></pre>
                 ` : ''}
                 <small style="color:#8b949e">
                     ${new Date(post.dateCreated).toLocaleDateString()}
                 </small>
-            </div>
+                ${post.communityId ? `
+                    <a href= "../Community/CommunityFeed.html?id=${post.communityId}" style ="font-size:13px">Community</a>
+                    ` : ''}
+            </a></div>
         `).join('');
 
     } catch (error) {
@@ -176,3 +182,19 @@ window.showFollowers = showFollowers;
 window.showFollowing = showFollowing;
 window.showMyCommunities = showMyCommunities;
 window.showSaved = showSaved;
+
+function escapeHTML(htmlString) {
+  return htmlString
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+};
+
+window.escapeHTML = escapeHTML;
+
+function goBack() {
+    window.history.back();
+}
+window.goBack = goBack;
