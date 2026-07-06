@@ -9,25 +9,20 @@
    <link rel="stylesheet" href="../../CSS/style.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg mb-4">
-        <div class="container">
+     <nav class="navbar d-flex justify-content-between align-items-center px-4 py-3">
             <a href="Feed.html" class="navbar-brand">
-          <span style="color:var(--accent-purple);">&lt;</span><span style="color:var(--text-color);">Code</span><span style="color:var(--accent-purple);">Book</span><span style="color:var(--accent-purple);">/&gt;</span>
-            </a>
-            <div class="d-flex align-items-center gap-3 ms-auto">
-
-    <label class="theme-switch me-4">
-        <input type="checkbox" id="themeToggle" onclick="toggleTheme()">
-        <span class="switch-track">
-            <i class="fa-solid fa-sun"></i>
-            <i class="fa-solid fa-moon"></i>
-            <span class="switch-thumb"></span>
-        </span>
-    </label>
-
-
-</div>
-            <div class="d-flex gap-3 align-items-center">
+             <span style="color:#7c3aed;">&lt;</span><span class="logo-code">Code</span><span style="color:#7c3aed;">Book</span><span style="color:#7c3aed;">/&gt;</span>
+         </a> 
+              <div class="nav-actions ms-auto">
+                           <div class="nav-actions">
+                <label class="theme-switch">
+               <input type="checkbox" id="themeToggle">
+                <span class ="switch-track">
+             <i class="fa-solid fa-sun"></i>
+             <i class="fa-solid fa-moon"></i>
+             <span class ="switch-thumb"></span>
+                </span>
+            </label>
                 <a href="Feed.html" class="btn-purple">
                     <i class="fa-solid fa-arrow-left"></i> Back to Feed
                 </a>
@@ -56,11 +51,11 @@
     <div class="container">
         
         <div id="postContainer">
-            <p style="color:var(--text-color)">Loading post...</p>
+            <p style="color:white">Loading post...</p>
         </div>
 
         <div id="commentsSection" style="margin-top:30px">
-            <h3 style="color:var(--text-color); margin-bottom:20px">
+            <h3 style=" margin-bottom:20px">
                 <i class="fa-solid fa-comments"></i> Comments
             </h3>
 
@@ -83,10 +78,10 @@
             </div>
         </div>
     </div>
-<script src="../../JS/theme.js"></script>
+
     <script src="../../JS/Posts/PostDetail.js" type="module"></script>
     <script src="../../JS/Interactions/Reactions.js" type="module"></script>
-    
+     <script src="../../JS/theme.js"></script>
     
 </body>
 </html>

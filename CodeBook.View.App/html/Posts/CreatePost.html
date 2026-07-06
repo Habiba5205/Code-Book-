@@ -10,24 +10,25 @@
 </head>
 <body>
     <nav class="navbar px-4 py-3">
-    <a class="navbar-brand">
-         <span style="color:var(--accent-purple);">&lt;</span><span style="color:var(--text-color);">Code</span><span style="color:var(--accent-purple);">Book</span><span style="color:var(--accent-purple);">/&gt;</span>
-    </a>
-       <div class="ms-auto d-flex align-items-center gap-3"></div>
-        <label class="theme-switch me-4">
-            <input type="checkbox" id="themeToggle" onclick="toggleTheme()">
-            <span class="switch-track">
-                <i class="fa-solid fa-sun"></i>
-                <i class="fa-solid fa-moon"></i>
-                <span class="switch-thumb"></span>
-            </span>
-        </label>
-
+   <a href="Feed.html" class="navbar-brand">
+       <span style="color:#7c3aed;">&lt;</span><span class="logo-code">Code</span><span style="color:#7c3aed;">Book</span><span style="color:#7c3aed;">/&gt;</span>
+         </a> 
+            <div class="nav-actions ms-auto">
+                     <label class="theme-switch">
+               <input type="checkbox" id="themeToggle">
+                <span class ="switch-track">
+             <i class="fa-solid fa-sun"></i>
+             <i class="fa-solid fa-moon"></i>
+             <span class ="switch-thumb"></span>
+                </span>
+            </label>
         <a href="Feed.html" class="btn-purple">
-            <i class="fa-solid fa-arrow-left"></i> Back
+            <i class="fa-solid fa-arrow-left"></i> Back to Feed
         </a>
+        
+    
+            </div>
 
-    </div>
     </nav>
    <div class="bg-decor">
         <div class="floating-words" aria-hidden="true">
@@ -57,26 +58,26 @@
         <div class="post-card">
             
             <div class="mb-3">
-                <label style="color:white">Title</label>
+                <label >Title</label>
                 <input type="text" id="title" class="form-control" 
                        placeholder="Enter post title">
             </div>
 
             <div class="mb-3">
-                <label style="color:white">Body</label>
+                <label>Body</label>
                 <textarea id="body" class="form-control" rows="4" 
                           placeholder="What's on your mind?"></textarea>
             </div>
 
             <div class="mb-3">
-                <label style="color:white">Code Snippet (optional)</label>
+                <label>Code Snippet (optional)</label>
                 <textarea id="codeSnippet" class="form-control" rows="6" 
                           placeholder="Paste your code here..." 
                           style="font-family:monospace"></textarea>
             </div>
 
             <div class="mb-3">
-                <label style="color:white">Language</label>
+                <label>Language</label>
                 <select id="language" class="form-control">
                     <option value="">Select language</option>
                     <option value="JavaScript">JavaScript</option>
@@ -93,7 +94,7 @@
             </div>
 
             <div class="mb-3 d-flex align-items-center gap-3">
-                <label style="color:white">Public Post</label>
+                <label>Public Post</label>
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" 
                            id="isPublic" checked>
@@ -122,7 +123,7 @@
             </a>
         </div>
     </div>
-  <script src="../../JS/theme.js"></script>
+     <script src="../../JS/theme.js"></script>
     <script src="../../JS/Posts/CreatePost.js" type="module"></script>
 </body>
 </html>

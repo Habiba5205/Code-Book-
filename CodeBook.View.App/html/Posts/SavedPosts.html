@@ -9,27 +9,25 @@
     <link rel="stylesheet" href="../../CSS/style.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg mb-4">
-        <div class="container d-flex justify-content-between align-items-center">
+    <nav class="navbar px-4 py-3 d-flex align-items-center">
             <a href="../Posts/Feed.html" class="navbar-brand">
-                 <span style="color:var(--accent-purple);">&lt;</span><span style="color:var(--text-color);">Code</span><span style="color:var(--accent-purple);">Book</span><span style="color:var(--accent-purple);">/&gt;</span>
-            </a>
-            <div class="d-flex align-items-center gap-3 ms-auto">
-
-    <label class="theme-switch me-4">
-        <input type="checkbox" id="themeToggle" onclick="toggleTheme()">
-        <span class="switch-track">
-            <i class="fa-solid fa-sun"></i>
-            <i class="fa-solid fa-moon"></i>
-            <span class="switch-thumb"></span>
-        </span>
-    </label>
-
-
-</div>
+             <span style="color:#7c3aed;">&lt;</span><span class="logo-code">Code</span><span style="color:#7c3aed;">Book</span><span style="color:#7c3aed;">/&gt;</span>
+         </a> 
+        
+                     <div class="nav-actions ms-auto">
+                <label class="theme-switch">
+               <input type="checkbox" id="themeToggle">
+                <span class ="switch-track">
+             <i class="fa-solid fa-sun"></i>
+             <i class="fa-solid fa-moon"></i>
+             <span class ="switch-thumb"></span>
+                </span>
+            </label>
+            <div class="d-flex align-items-center ms-auto gap-3">
             <a href="../Posts/Feed.html" class="btn-purple">
                 <i class="fa-solid fa-arrow-left"></i> Back to Feed
             </a>
+        </div>
         </div>
     </nav>
    <div class="bg-decor">
@@ -52,7 +50,7 @@
             <span class="floating-word" style="left:94%; top:100%; font-size:0.9rem; animation-duration:19s; animation-delay:15s;">CodeBook</span>
         </div>
     <div class="container">
-        <h2 style="color:var(--text-color); margin-bottom:20px">
+        <h2 style="margin-bottom:20px">
             <i class="fa-solid fa-bookmark" style="color:#7c3aed"></i> Saved Posts
         </h2>
 
@@ -60,7 +58,7 @@
             <p style="color:#8b949e">Loading saved posts...</p>
         </div>
     </div>
-<script src="../../JS/theme.js"></script>
+ <script src="../../JS/theme.js"></script>
     <script type="module" src="../../JS/Posts/SavedPosts.js"></script>
 </body>
 </html>
