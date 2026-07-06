@@ -142,7 +142,7 @@ function renderUsers(users) {
                      style="width:50px; height:50px; border-radius:50%; 
                             border:2px solid #7c3aed; object-fit:cover">
                 <div>
-                    <p style="color:white; font-weight:bold; margin:0">
+                    <p  font-weight:bold; margin:0">
                         ${user.userName}
                     </p>
                     <p style="color:#8b949e; font-size:13px; margin:0">
