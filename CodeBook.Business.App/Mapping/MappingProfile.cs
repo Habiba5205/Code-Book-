@@ -71,7 +71,11 @@ namespace CodeBook.Business.App.Mapping
                 .ForMember(dest => dest.AuthorUsername,
                opt => opt.MapFrom(src => src.Author.UserName)) 
                 .ForMember(dest => dest.AuthorId,
-               opt => opt.MapFrom(src => src.AuthorId));
+               opt => opt.MapFrom(src => src.AuthorId))
+                .ForMember(dest => dest.CommunityName,
+               opt => opt.MapFrom(src => src.Community != null
+                                        ? src.Community.Name
+                                        : null));
 
         }
 

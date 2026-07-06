@@ -37,6 +37,13 @@ async function loadFeed() {
                     <p style="color:#8b949e;font-size:13px">
                         by ${post.authorUsername} • 
                         ${new Date(post.dateCreated).toLocaleDateString()}
+
+                        ${post.communityName ? `
+                        • <a href="../../HTML/Community/CommunityFeed.html?id=${post.communityId}"
+                             style="color:#7c3aed; text-decoration:none">
+                            <i class="fa-solid fa-people-group"></i> ${post.communityName}
+                         </a>
+                        ` : ''}
                     </p>
                    <p class="post-body">${parseText(post.body)}</p>
 
@@ -96,6 +103,9 @@ async function loadFeed() {
         document.getElementById('prevBtn').style.display = 
             currentPage === 1 ? 'none' : 'inline-block';
 
+        document.getElementById('nextBtn').style.display = 
+            posts.length < 20 ? 'none' : 'inline-block';
+
     } catch (error) {
         postsContainer.innerHTML = `
             <p style="color:red">Failed to load posts. Please try again.</p>
@@ -104,10 +114,17 @@ async function loadFeed() {
     }
 }
 
+window.addEventListener('popstate', () => {
+    const params = new URLSearchParams(window.location.search);
+    currentPage = parseInt(params.get('page')) || 1;
+    loadFeed();
+});
+
 function changePage(direction) {
     if (currentPage + direction < 1) return;
     currentPage += direction;
     window.history.pushState({}, '', `Feed.html?page=${currentPage}`);
+    window.scrollTo(0, 0);
     loadFeed();
 }
 
@@ -137,11 +154,13 @@ async function getnotificationcount() {
     
 }
 
- async function logout() {
-        localStorage.clear();
-        const result = await api.delete('Auth/logout');
-        if(result.message === "Logout Successful!"){
-            alert("Logout Successful!");
-        }
-        window.location.href = '../Auth/Login.html';
+async function logout() {
+    localStorage.clear();
+    const result = await api.delete('Auth/logout');
+    if(result.message === "Logout Successful!"){
+        alert("Logout Successful!");
     }
+    window.location.href = '../Auth/Login.html';
+}
+
+window.changePage = changePage;

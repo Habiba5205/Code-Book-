@@ -116,7 +116,7 @@ namespace CodeBook.Data.App.Repositories
         }
         public IQueryable<Post> GetAllUnremoved()
         {
-            return _context.posts.Include(p=>p.Author).Where(p => p.IsRemoved == false);
+            return _context.posts.Include(p=>p.Author).Include(p=>p.Community).Where(p => p.IsRemoved == false);
         }
 
         public List<Post> SearchPosts(string? keyword, string? language, string? tag)

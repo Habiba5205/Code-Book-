@@ -2,6 +2,7 @@ import { api } from '../api.js';
 
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get('id');
+const referrer = document.referrer;
 
 document.addEventListener('DOMContentLoaded', () => {
     if (!postId) {
@@ -78,8 +79,12 @@ async function updatePost() {
             successMsg.style.display = 'block';
 
             setTimeout(() => {
+            if (referrer) {
+                window.location.href = referrer;
+            } else {
                 window.location.href = `PostDetail.html?id=${postId}`;
-            }, 1500);
+            }
+         }, 1500);
         } else {
             errorMsg.textContent = result.message || 'Failed to update post';
             errorMsg.style.display = 'block';
@@ -100,7 +105,12 @@ async function deletePost() {
         const result = await api.delete(`Post/${postId}/deletePost`);
 
         if (result.message === 'Post deleted successfully') {
-            window.location.href = 'Feed.html';
+            if (referrer && referrer.includes('Community')) {
+                window.location.href = referrer;
+            } else {
+                window.location.href = 'Feed.html';
+            }
+
         } else {
             const errorMsg = document.getElementById('errorMsg');
             errorMsg.textContent = result.message || 'Failed to delete post';
