@@ -175,7 +175,7 @@ function renderCommunities(communities) {
                         ${community.description || 'No description'}
                     </p>
                 </div>
-                <button class="btn-purple ms-auto" 
+                <button class="btn-purple ms-auto" id ="view-community-btn" 
                         onclick="viewCommunity(${community.communityId})">
                     <i class="fa-solid fa-people-group"></i> View Community
                 </button>
@@ -192,15 +192,20 @@ function viewProfile(userId) {
     window.location.href = `../../html/User/OtherUserProfile.html?userId=${userId}`;
 }
 
-async function viewCommunity(communityId) {
+async function viewCommunity(communityId,buttonElement) {
     const communities = await api.get("communities/getcommunities");
-    if(communities.includes(communityId)){ window.location.href = `../../HTML/Community/CommunityFeed.html?id=${communityId}`;}
-    else {
+    var joined = false;
+        if(communities && communities.length > 0){
+        const validCommunityIds = new Set(communities.map(c => c.communityId));
+        if(validCommunityIds.has(communityId)){
+            window.location.href = `../../HTML/Community/CommunityFeed.html?id=${communityId}`;
+            joined = true;
+        }
+       }
+       if(!joined){
         alert("Join Community to view posts!");
         window.location.href = `../../HTML/Community/Community.html`;
     }
-
-   
 }
 document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
