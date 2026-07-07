@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeBook.Data.App.Repositories
 {
@@ -14,7 +15,7 @@ namespace CodeBook.Data.App.Repositories
         public UserRepository(CodeBookContext context) { _context = context; }
         public User GetProfileById(int userid)
         {
-            return _context.users.FirstOrDefault(u => u.Id == userid);
+            return _context.users.Include(u => u.Posts).Include(u => u.Comments).Include(u => u.Reactions).FirstOrDefault(u => u.Id == userid);
         }
         public User GetProfileByEmail(string email)
         { 

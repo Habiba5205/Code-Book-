@@ -158,7 +158,7 @@ namespace CodeBook.Data.App
                 community.Property(c => c.Description).HasMaxLength(1000);
                 community.Property(c => c.IconURL).HasMaxLength(2050);
                 community.Property(c => c.Slug).HasMaxLength(255);
-                community.HasOne(c => c.Owner).WithMany(o => o.Communities).HasForeignKey(c => c.OwnerId).OnDelete(DeleteBehavior.NoAction);
+                community.HasOne(c => c.Owner).WithMany(o => o.Communities).HasForeignKey(c => c.OwnerId).OnDelete(DeleteBehavior.SetNull);
             });
 
             modelBuilder.Entity<CommunityMember>(member =>

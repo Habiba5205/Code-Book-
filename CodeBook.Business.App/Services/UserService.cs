@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
+using Azure;
 using BCrypt.Net;
 using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
-using CodeBook.Data.App.IRepositories;
-using CodeBook.Models.App;
 using CodeBook.Business.App.Mapping;
-using System;
 using CodeBook.Business.App.Middleware;
-using Azure;
+using CodeBook.Data.App.IRepositories;
+using CodeBook.Data.App.Repositories;
+using CodeBook.Models.App;
+using System;
 
 namespace CodeBook.Business.App.Services
 {
@@ -15,19 +16,41 @@ namespace CodeBook.Business.App.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IFollowRepository _followRepository;
-        private readonly INotificationService _notificationService; 
+        private readonly INotificationService _notificationService;
+        private readonly IPostRepository _postRepository;
+        private readonly ICommentRepository _commentRepository;
+        private readonly IReactionRepository _reactionRepository;
         private readonly IMapper mapper;
-        public UserService(IUserRepository userRepository, IFollowRepository followRepository, IMapper mapper, INotificationService notificationService)
+        public UserService(IUserRepository userRepository, IFollowRepository followRepository, IMapper mapper, INotificationService notificationService, IPostRepository postRepository, ICommentRepository commentRepository, IReactionRepository reactionRepository)
         {
             _userRepository = userRepository;
             _followRepository = followRepository;
             this.mapper = mapper;
             _notificationService = notificationService;
+            _postRepository = postRepository;
+            _commentRepository = commentRepository;
+            _reactionRepository = reactionRepository;
         }
         public ErrorResponse DeleteAccount(int userId) 
         {
             User user = _userRepository.GetProfileById(userId);
             if(user == null) return new ErrorResponse { Success = false, Message = "User Not Found!" };
+           
+            foreach(var post in user.Posts)
+            {
+                _postRepository.Delete(post);
+            }
+
+            foreach(var comment in user.Comments)
+            {
+                _commentRepository.Delete(comment);
+            }
+
+            foreach(var reaction in user.Reactions)
+            {
+                _reactionRepository.Remove(reaction);
+            }
+
             _userRepository.Remove(user);
            if(_userRepository.SaveChanges()) return new ErrorResponse { Success = true, Message = "Profile Deleted!" };
             return new ErrorResponse { Success = false, Message = "Couldn't Delete!" };
