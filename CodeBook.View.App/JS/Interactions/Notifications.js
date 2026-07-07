@@ -47,7 +47,7 @@ function createNotificationCard(notification) {
         </div>
 
         <div class="flex-grow-1">
-   <div class="fw-semibold text-white">
+   <div class="notification-title fw-semibold">
     ${notification.message}
 </div>
            <small

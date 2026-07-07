@@ -57,10 +57,10 @@ window.onload=()=>{
     }
     async function GetCommunityFeed() {
         try {
-                communityfeed.innerHTML = `<p style="color:white">Loading...</p>`;
+                communityfeed.innerHTML = `<p>Loading...</p>`;
                 const posts = await api.get(`communities/${communityId}/getCommunityFeed`);
                 if (!posts || posts.length === 0) {
-                communityfeed.innerHTML = `<p style="color:white">No posts found.</p>`;
+                communityfeed.innerHTML = `<p>No posts found.</p>`;
                 return;
                 }
 

@@ -1059,12 +1059,12 @@ body.light-theme pre{
 
 .switch-track .fa-sun{
     left:8px;
-    color:#888;
+    color:white;
 }
 
 .switch-track .fa-moon{
     right:8px;
-    color:white;
+    color:#888;
 }
 
 
@@ -1078,11 +1078,11 @@ body.light-theme pre{
 }
 
 .theme-switch input:checked + .switch-track .fa-sun{
-    color:#F4B400;
+    color:#888;
 }
 
 .theme-switch input:checked + .switch-track .fa-moon{
-    color:#888;
+    color:#F4B400;
 }
 body.light-theme .btn-hero-primary{
     color:#7C3AED;
@@ -1163,4 +1163,25 @@ body.light-theme .community-name{
 
 body.light-theme .community-description{
     color:#5B4A73;
+}
+.notification-title{
+    color:white;
+}
+
+body.light-theme .notification-title{
+    color:#1A0A2E;
+}
+.community-name-search{
+    font-weight: bold;
+    margin: 0;
+    color: white;
+}
+
+body.light-theme .community-name-search{
+    color: #1A0A2E;
+}
+body.light-theme #community-data-holder{
+    background-color: #ffffff;
+    border: 1px solid #d0b7ff;
+    border-radius: 20px;
 }
