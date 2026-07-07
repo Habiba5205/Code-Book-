@@ -20,7 +20,9 @@ namespace CodeBook.Data.App.Repositories
         public Post GetPostById(int postid)
         {
             Post post = _context.posts
-                .Include(p => p.Author) 
+                .Include(p => p.Author)
+                .Include(p => p.Comments)
+                .Include(p => p.Reactions)
                 .FirstOrDefault(p => p.Id == postid);
 
             if (post == null)

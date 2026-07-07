@@ -24,11 +24,14 @@ async function loadFeed() {
         const data = await api.get(`Post/feed?page=${currentPage}`);
         const communities = await api.get(`communities/getCommunities`);
         var posts =[];
+        console.log(communities.length);
         if(communities && communities.length > 0){
             const validCommunityIds = new Set(communities.map(c => c.communityId));
              posts = data.filter(p => { return (p.communityId == null) || (validCommunityIds.has(p.communityId))});
        }
-        else {posts = data;}
+        else {
+            posts = data.filter(p => { return (p.communityId == null) || (!p.communityId)});
+        }
 
         if (!posts || posts.length === 0) {
             postsContainer.innerHTML = `<p style="color:white">No posts found.</p>`;

@@ -1,6 +1,7 @@
 ﻿using CodeBook.Business.App.DTOs;
 using CodeBook.Business.App.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.AccessControl;
@@ -101,12 +102,18 @@ namespace CodeBook.API.App.Controllers
         public IActionResult DeletePost(int postId)
         {
             var userId = _currentUserInfo.GetCurrentUserId();
-            var result = _postService.DeletePost(postId, userId);
-            if (result.Success)
+            try
             {
+                var result = _postService.DeletePost(postId, userId);
+
                 return Ok(new { message = result.Message });
             }
-            return BadRequest(new { message = result.Message });
+            catch(Exception ex)
+            {
+                return BadRequest(new { message = ex.InnerException.Message });
+
+            }
+
         }
 
         [HttpPost("{postId}/save")]
@@ -164,6 +171,15 @@ namespace CodeBook.API.App.Controllers
         {
             var results = _postService.SearchPosts(keyword, language, tag);
             return Ok(results);
+        }
+
+        [HttpGet("myposts")]
+        [Authorize]
+        public IActionResult GetMyPosts()
+        {
+            var userId = _currentUserInfo.GetCurrentUserId();
+            var posts = _postService.GetUserPosts(userId);
+            return Ok(posts);
         }
     }
 }

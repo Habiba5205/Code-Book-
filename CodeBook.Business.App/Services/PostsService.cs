@@ -15,14 +15,18 @@ namespace CodeBook.Business.App.Services
     {
         private readonly IPostRepository _postRepository;
         private readonly IMapper mapper;
+        private readonly ICommentRepository _commentRepository;
+        private readonly IReactionRepository _reactionRepository;
         private readonly CodeBookContext _context;
 
 
-        public PostsService(IPostRepository postRepository, IMapper mapper, CodeBookContext context)
+        public PostsService(IPostRepository postRepository, IMapper mapper, CodeBookContext context, ICommentRepository commentRepository, IReactionRepository reactionRepository)
         {
             this._postRepository = postRepository;
             this.mapper = mapper;
             _context = context;
+            _commentRepository = commentRepository;
+            _reactionRepository = reactionRepository;
         }
         public ErrorResponse CreatePost(int userId,CreatePostRequest request, int? communityId) 
         {
@@ -101,6 +105,16 @@ namespace CodeBook.Business.App.Services
             }
             if (post.AuthorId != userId)
                 return new ErrorResponse { Success = false, Message = "You can only delete your own posts" };
+
+            foreach(var comment in post.Comments)
+            {
+                _commentRepository.Delete(comment);
+            }
+
+            foreach(var reaction in post.Reactions)
+            {
+                _reactionRepository.Remove(reaction);
+            }
 
             _postRepository.Delete(post);
             if (_postRepository.SaveChanges())
@@ -236,5 +250,14 @@ namespace CodeBook.Business.App.Services
             return post.AuthorId;
         }
 
+        public List<PostResponse> GetUserPosts(int userId)
+        {
+            var posts = _postRepository.GetAllUnremoved()
+                .Where(p => p.AuthorId == userId)
+                .OrderByDescending(p => p.DateCreated)
+                .ToList();
+
+            return mapper.Map<List<PostResponse>>(posts);
+        }
     }
 }

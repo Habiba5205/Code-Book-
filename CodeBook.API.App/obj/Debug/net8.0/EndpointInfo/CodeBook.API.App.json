@@ -1009,6 +1009,18 @@
         }
       }
     },
+    "/Post/myposts": {
+      "get": {
+        "tags": [
+          "Post"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Reaction/addPostreaction": {
       "post": {
         "tags": [

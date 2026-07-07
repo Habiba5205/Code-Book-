@@ -21,5 +21,6 @@ namespace CodeBook.Business.App.Interfaces
         List<PostResponse> SearchPosts(string? keyword, string? language, string? tag);
         List<PostResponse> GetSavedPosts(int userId);
         ErrorResponse UnsavePost(int userId, int postId);
+        List<PostResponse> GetUserPosts(int userId);
     }
 }

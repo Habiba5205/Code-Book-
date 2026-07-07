@@ -590,6 +590,16 @@
   },
   {
     "ContainingType": "CodeBook.API.App.Controllers.PostController",
+    "Method": "GetMyPosts",
+    "RelativePath": "Post/myposts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CodeBook.API.App.Controllers.PostController",
     "Method": "GetSavedPosts",
     "RelativePath": "Post/saved",
     "HttpMethod": "GET",

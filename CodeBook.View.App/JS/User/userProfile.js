@@ -85,49 +85,78 @@ window.saveProfile = saveProfile;
 
 async function showPosts() {
     document.getElementById('content').innerHTML = `
-        <div class ="container">
-        <div class ="mt-5"> 
-            <h4>My Posts</h4>
-            <hr style="border-color:#30363d">
+        <div class="container">
+            <div class="mt-3 mb-3">
+                <h4 style="color:white">My Posts</h4>
+                <hr style="border-color:#30363d">
             </div>
-            <div id="postsList" class="flex-grow-1">
+            <div id="postsList">
                 <p style="color:#8b949e">Loading posts...</p>
             </div>
         </div>
     `;
 
     try {
-        const data = await api.get('Post/feed?page=1');
-        const posts = data.filter (p=>p.authorUsername === currentUser.userName);
+        const posts = await api.get('Post/myposts');
 
-        if (posts.length === 0) {
+        if (!posts || posts.length === 0) {
             document.getElementById('postsList').innerHTML = `
-                <p style="color:#8b949e">No posts yet!</p>
-            `;
+                <div style="text-align:center; padding:40px">
+                    <i class="fa-solid fa-file-code" 
+                       style="font-size:40px; color:#30363d; margin-bottom:15px"></i>
+                    <p style="color:#8b949e">No posts yet!</p>
+                </div>`;
             return;
         }
 
-        document.getElementById('postsList').innerHTML = posts.map(post => `
-            <div class = "mt-3 mb-3 post-card">
-            <a class="text-decoration-none" href= "../Posts/PostDetail?id=${post.id}" >
-                <h5 class="post-title">${post.title}</h5>
-                <p class="post-body">${post.body}</p>
-                ${ window.escapeHTML(post.codeSnippet)? `
+        const postsList = document.getElementById('postsList');
+        postsList.innerHTML = '';
+
+        posts.forEach(post => {
+            postsList.innerHTML += `
+                <div class="post-card">
+                    <h2 class="post-title">${post.title}</h2>
+
+                    <p style="color:#8b949e; font-size:13px">
+                        ${new Date(post.dateCreated).toLocaleDateString()}
+                        ${post.communityName ? `
+                        • <a href="../Community/CommunityFeed.html?id=${post.communityId}"
+                             style="color:#7c3aed; text-decoration:none">
+                            <i class="fa-solid fa-people-group"></i> ${post.communityName}
+                          </a>
+                        ` : ''}
+                    </p>
+
+                    <p class="post-body">${post.body}</p>
+
+                    ${post.codeSnippet ? `
                     <pre class="code-snippet"><code>${post.codeSnippet}</code></pre>
-                ` : ''}
-                <small style="color:#8b949e">
-                    ${new Date(post.dateCreated).toLocaleDateString()}
-                </small>
-                ${post.communityId ? `
-                    <a href= "../Community/CommunityFeed.html?id=${post.communityId}" style ="font-size:13px">Community</a>
                     ` : ''}
-            </a></div>
-        `).join('');
+
+                    ${post.language ? `
+                    <span style="color:#bca1ec; font-size:13px; display:block; margin-top:8px">
+                        <i class="fa-solid fa-code"></i> ${post.language}
+                    </span>
+                    ` : ''}
+
+                    <div class="post-actions mt-3">
+                        <button class="btn-purple" 
+                                onclick="window.location.href='../Posts/PostDetail.html?id=${post.id}'">
+                            <i class="fa-solid fa-eye"></i> View Post
+                        </button>
+                        <a href="../Posts/EditPosts.html?id=${post.id}" class="btn-purple">
+                            <i class="fa-solid fa-pen"></i> Edit Post
+                        </a>
+                    </div>
+                </div>
+            `;
+        });
 
     } catch (error) {
         document.getElementById('postsList').innerHTML = `
             <p style="color:#f85149">Failed to load posts!</p>
         `;
+        console.error(error);
     }
 }
 window.showPosts = showPosts;

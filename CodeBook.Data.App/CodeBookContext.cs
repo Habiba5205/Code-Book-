@@ -77,8 +77,8 @@ namespace CodeBook.Data.App
                 reaction.HasKey(r => r.Id);
                 reaction.Property(r => r.Id).HasColumnName("Reaction_ID").ValueGeneratedOnAdd();
                 reaction.Property(r => r.Type).HasMaxLength(30);
-                reaction.HasOne(r => r.User).WithMany(u => u.Reactions).HasForeignKey(r => r.UserId).OnDelete(DeleteBehavior.Cascade);
-                reaction.HasOne(r => r.Post).WithMany(p => p.Reactions).HasForeignKey(r => r.PostId).OnDelete(DeleteBehavior.Restrict);
+                reaction.HasOne(r => r.User).WithMany(u => u.Reactions).HasForeignKey(r => r.UserId).OnDelete(DeleteBehavior.NoAction);
+                reaction.HasOne(r => r.Post).WithMany(p => p.Reactions).HasForeignKey(r => r.PostId).OnDelete(DeleteBehavior.Cascade);
                 reaction.HasOne(r => r.Comment).WithMany(c => c.Reactions).HasForeignKey(r => r.CommentId).OnDelete(DeleteBehavior.Restrict);
             });
 
