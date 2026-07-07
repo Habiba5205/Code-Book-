@@ -1,25 +1,22 @@
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const toggle = document.getElementById("themeToggle");
     const match = document.cookie.match(/theme=(light|dark)/);
+    const  isLight = match && match[1] === "light";
 
-    if (match && match[1] === "light") {
-        document.body.classList.add("light-theme");
+        document.body.classList.toggle("light-theme",isLight);
         if (toggle) {
-            toggle.checked = true;
-        }
-    }
-
-    if (toggle) {
+            toggle.checked = isLight;
+        
+    
         toggle.addEventListener("change", () => {
+            const light = toggle.checked;
+                document.body.classList.toggle("light-theme",light);
 
-            if (toggle.checked) {
-                document.body.classList.remove("light-theme");
-                document.cookie = "theme=light; path=/; max-age=31536000";
-            } else {
-                document.body.classList.add("light-theme");
-                document.cookie = "theme=dark; path=/; max-age=31536000";
-            }
+                document.cookie =`theme=${light ? "light" : "dark"}; path=/; max-age=31536000`;
+            
+        
 
         });
     }
