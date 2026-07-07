@@ -66,8 +66,9 @@ namespace CodeBook.Data.App
                 report.Property(r => r.Reason).HasMaxLength(500);
                 report.Property(r => r.Description).HasMaxLength(1000);
                 report.Property(r => r.Status).HasMaxLength(50);
-                report.HasOne(r => r.Reporter).WithMany(u => u.Reports).HasForeignKey(r => r.ReporterId).OnDelete(DeleteBehavior.Cascade);
-                report.HasOne(r => r.Post).WithMany(p => p.Reports).HasForeignKey(r => r.PostId).OnDelete(DeleteBehavior.Restrict);
+                report.HasOne(r => r.Reporter).WithMany(u => u.Reports).HasForeignKey(r => r.ReporterId).OnDelete(DeleteBehavior.NoAction);
+                report.HasOne(r => r.Post).WithMany(p => p.Reports).HasForeignKey(r => r.PostId).OnDelete(DeleteBehavior.SetNull);
+                report.HasOne(r => r.Comment).WithMany().HasForeignKey(r => r.CommentId).OnDelete(DeleteBehavior.NoAction);
             });
 
             modelBuilder.Entity<Reaction>(reaction =>
@@ -86,7 +87,7 @@ namespace CodeBook.Data.App
                 postTag.ToTable("Post_Tags");
                 postTag.HasKey(pt => new { pt.TagId, pt.PostId });
                 postTag.HasOne(pt => pt.Post).WithMany(p => p.PostTags).HasForeignKey(pt => pt.PostId).OnDelete(DeleteBehavior.Cascade);
-                postTag.HasOne(pt => pt.Tag).WithMany(t => t.PostTags).HasForeignKey(pt => pt.TagId).OnDelete(DeleteBehavior.Restrict);
+                postTag.HasOne(pt => pt.Tag).WithMany(t => t.PostTags).HasForeignKey(pt => pt.TagId).OnDelete(DeleteBehavior.NoAction);
   
             });
 
@@ -109,8 +110,8 @@ namespace CodeBook.Data.App
                 postsaved.ToTable("Posts_Saved");
                 //Here Composite primary key
                 postsaved.HasKey(ps => new { ps.UserId, ps.PostId });
-                postsaved.HasOne(ps => ps.User).WithMany(u => u.SavedPosts).HasForeignKey(ps => ps.UserId).OnDelete(DeleteBehavior.Cascade);
-                postsaved.HasOne(ps => ps.Post).WithMany(p => p.SavedByUsers).HasForeignKey(ps => ps.PostId).OnDelete(DeleteBehavior.Restrict);
+                postsaved.HasOne(ps => ps.User).WithMany(u => u.SavedPosts).HasForeignKey(ps => ps.UserId).OnDelete(DeleteBehavior.NoAction);
+                postsaved.HasOne(ps => ps.Post).WithMany(p => p.SavedByUsers).HasForeignKey(ps => ps.PostId).OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<PostRemoval>(postremoval =>
@@ -119,8 +120,8 @@ namespace CodeBook.Data.App
                 postremoval.Property(pr => pr.Id).HasColumnName("Removal_ID").ValueGeneratedOnAdd();
                 postremoval.Property(pr => pr.Reason).HasMaxLength(1000);
                 postremoval.Property(pr => pr.DateCreated).HasColumnName("Date_Removed");
-                postremoval.HasOne(pr => pr.Post).WithOne(p => p.Removal).HasForeignKey<PostRemoval>(pr => pr.PostId).OnDelete(DeleteBehavior.Restrict);
-                postremoval.HasOne(pr => pr.Remover).WithMany(u => u.PostRemovals).HasForeignKey(pr => pr.RemoverId).OnDelete(DeleteBehavior.Restrict);
+                postremoval.HasOne(pr => pr.Post).WithOne(p => p.Removal).HasForeignKey<PostRemoval>(pr => pr.PostId).OnDelete(DeleteBehavior.NoAction);
+                postremoval.HasOne(pr => pr.Remover).WithMany(u => u.PostRemovals).HasForeignKey(pr => pr.RemoverId).OnDelete(DeleteBehavior.NoAction);
                 postremoval.HasOne(pr => pr.Report).WithMany().HasForeignKey(pr => pr.ReportId).OnDelete(DeleteBehavior.SetNull);
             });
             modelBuilder.Entity<CommentRemoval>(postremoval =>
@@ -129,8 +130,8 @@ namespace CodeBook.Data.App
                 postremoval.Property(cr => cr.Id).HasColumnName("Removal_ID").ValueGeneratedOnAdd();
                 postremoval.Property(cr => cr.Reason).HasMaxLength(1000);
                 postremoval.Property(cr => cr.DateCreated).HasColumnName("Date_Removed");
-                postremoval.HasOne(cr => cr.Comment).WithOne(c => c.Removal).HasForeignKey<CommentRemoval>(cr => cr.CommentId).OnDelete(DeleteBehavior.Restrict);
-                postremoval.HasOne(cr => cr.Remover).WithMany(u => u.CommentRemovals).HasForeignKey(cr => cr.RemoverId).OnDelete(DeleteBehavior.Restrict);
+                postremoval.HasOne(cr => cr.Comment).WithOne(c => c.Removal).HasForeignKey<CommentRemoval>(cr => cr.CommentId).OnDelete(DeleteBehavior.NoAction);
+                postremoval.HasOne(cr => cr.Remover).WithMany(u => u.CommentRemovals).HasForeignKey(cr => cr.RemoverId).OnDelete(DeleteBehavior.NoAction);
                 postremoval.HasOne(cr => cr.Report).WithMany().HasForeignKey(cr => cr.ReportId).OnDelete(DeleteBehavior.SetNull);
             });
 
@@ -174,9 +175,9 @@ namespace CodeBook.Data.App
             {
                 comment.Property(c => c.Id).HasColumnName("Comment_ID").ValueGeneratedOnAdd();
                 comment.Property(c => c.Body).HasMaxLength(5000).IsRequired();
-                comment.HasOne(c => c.Author).WithMany(u => u.Comments).HasForeignKey(c => c.AuthorId).OnDelete(DeleteBehavior.Restrict);
+                comment.HasOne(c => c.Author).WithMany(u => u.Comments).HasForeignKey(c => c.AuthorId).OnDelete(DeleteBehavior.NoAction);
                 comment.HasOne(c => c.Post).WithMany(p => p.Comments).HasForeignKey(c => c.PostId).OnDelete(DeleteBehavior.Cascade);
-                comment.HasOne(c => c.selfComment).WithMany(c => c.Replies).HasForeignKey(c => c.SelfCommentId).OnDelete(DeleteBehavior.Restrict);
+                comment.HasOne(c => c.selfComment).WithMany(c => c.Replies).HasForeignKey(c => c.SelfCommentId).OnDelete(DeleteBehavior.NoAction);
 
             });
 

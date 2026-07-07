@@ -15,7 +15,7 @@ namespace CodeBook.Data.App.Repositories
         public UserRepository(CodeBookContext context) { _context = context; }
         public User GetProfileById(int userid)
         {
-            return _context.users.Include(u => u.Posts).Include(u => u.Comments).Include(u => u.Reactions).FirstOrDefault(u => u.Id == userid);
+            return _context.users.Include(u => u.Posts).Include(u => u.Comments).Include(u => u.Reactions).Include(u => u.Followers).Include(u => u.Reports).Include(u => u.SavedPosts).FirstOrDefault(u => u.Id == userid);
         }
         public User GetProfileByEmail(string email)
         { 

@@ -72,16 +72,18 @@ namespace CodeBook.Business.App.Services
             _communityRepository.JoinCommunity(newMember);
             _communityRepository.SaveChanges();
 
-
-            _notificationService.CreateNotification(community.OwnerId, new NotificationDTO
+            if (community.OwnerId != null)
             {
-                userId = community.OwnerId,
-                Type = "Join",
-                Message = "You have a new Community Member",
-                ReferenceId = communityId,
-                IsSeen = false,
-                DateCreated = DateTime.UtcNow
-            });
+                _notificationService.CreateNotification((int)community.OwnerId, new NotificationDTO
+                {
+                    userId = (int)community.OwnerId,
+                    Type = "Join",
+                    Message = "You have a new Community Member",
+                    ReferenceId = communityId,
+                    IsSeen = false,
+                    DateCreated = DateTime.UtcNow
+                });
+            }
 
         }
         public void AssignRole(int CommunityId,int userId,AssignRoleDto dto)

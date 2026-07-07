@@ -6,7 +6,6 @@ C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.API.App\obj\Debug\
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.API.App\obj\Debug\net8.0\CodeBook.API.App.csproj.CoreCompileInputs.cache
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.API.App\obj\Debug\net8.0\CodeBook.API.App.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.API.App\obj\Debug\net8.0\CodeBook.API.App.sourcelink.json
-C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.API.App\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.API.App\bin\Debug\net8.0\appsettings.json
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.API.App\bin\Debug\net8.0\CodeBook.API.App.staticwebassets.endpoints.json
 C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.API.App\bin\Debug\net8.0\CodeBook.API.App.exe

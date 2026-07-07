@@ -12,6 +12,7 @@ namespace CodeBook.Data.App.IRepositories
         List<Report> GetPendingReports();
         void Add(Report report);
         void Update(Report report);
+        void Delete(Report report);
         Report GetReportbyId(int? reportId);
         Report GetCommentReportbyReporter(int reporterId, int? CommentId);
         Report GetPostReportbyReporter(int reporterId, int? postId);

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeBook.Data.App.Migrations
 {
     [DbContext(typeof(CodeBookContext))]
-    [Migration("20260706154557_Add sender in Notification")]
-    partial class AddsenderinNotification
+    [Migration("20260707201903_initialize db")]
+    partial class initializedb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -138,7 +138,7 @@ namespace CodeBook.Data.App.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("OwnerId")
+                    b.Property<int?>("OwnerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Slug")
@@ -553,7 +553,7 @@ namespace CodeBook.Data.App.Migrations
                     b.HasOne("CodeBook.Models.App.Comment", "selfComment")
                         .WithMany("Replies")
                         .HasForeignKey("SelfCommentId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Author");
 
@@ -567,13 +567,13 @@ namespace CodeBook.Data.App.Migrations
                     b.HasOne("CodeBook.Models.App.Comment", "Comment")
                         .WithOne("Removal")
                         .HasForeignKey("CodeBook.Models.App.CommentRemoval", "CommentId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientNoAction)
                         .IsRequired();
 
                     b.HasOne("CodeBook.Models.App.User", "Remover")
                         .WithMany("CommentRemovals")
                         .HasForeignKey("RemoverId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientNoAction)
                         .IsRequired();
 
                     b.HasOne("CodeBook.Models.App.Report", "Report")
@@ -593,8 +593,7 @@ namespace CodeBook.Data.App.Migrations
                     b.HasOne("CodeBook.Models.App.User", "Owner")
                         .WithMany("Communities")
                         .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Owner");
                 });
@@ -671,13 +670,13 @@ namespace CodeBook.Data.App.Migrations
                     b.HasOne("CodeBook.Models.App.Post", "Post")
                         .WithOne("Removal")
                         .HasForeignKey("CodeBook.Models.App.PostRemoval", "PostId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientNoAction)
                         .IsRequired();
 
                     b.HasOne("CodeBook.Models.App.User", "Remover")
                         .WithMany("PostRemovals")
                         .HasForeignKey("RemoverId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientNoAction)
                         .IsRequired();
 
                     b.HasOne("CodeBook.Models.App.Report", "Report")
@@ -722,7 +721,7 @@ namespace CodeBook.Data.App.Migrations
                     b.HasOne("CodeBook.Models.App.Tag", "Tag")
                         .WithMany("PostTags")
                         .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.ClientNoAction)
                         .IsRequired();
 
                     b.Navigation("Post");
@@ -759,17 +758,18 @@ namespace CodeBook.Data.App.Migrations
                 {
                     b.HasOne("CodeBook.Models.App.Comment", "Comment")
                         .WithMany()
-                        .HasForeignKey("CommentId");
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.ClientNoAction);
 
                     b.HasOne("CodeBook.Models.App.Post", "Post")
                         .WithMany("Reports")
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.ClientNoAction);
 
                     b.HasOne("CodeBook.Models.App.User", "Reporter")
                         .WithMany("Reports")
                         .HasForeignKey("ReporterId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientNoAction)
                         .IsRequired();
 
                     b.Navigation("Comment");

@@ -20,8 +20,9 @@ namespace CodeBook.Business.App.Services
         private readonly IPostRepository _postRepository;
         private readonly ICommentRepository _commentRepository;
         private readonly IReactionRepository _reactionRepository;
+        private readonly IReportRepository _reportRepository;
         private readonly IMapper mapper;
-        public UserService(IUserRepository userRepository, IFollowRepository followRepository, IMapper mapper, INotificationService notificationService, IPostRepository postRepository, ICommentRepository commentRepository, IReactionRepository reactionRepository)
+        public UserService(IUserRepository userRepository, IFollowRepository followRepository, IMapper mapper, INotificationService notificationService, IPostRepository postRepository, ICommentRepository commentRepository, IReactionRepository reactionRepository, IReportRepository reportRepository)
         {
             _userRepository = userRepository;
             _followRepository = followRepository;
@@ -30,30 +31,57 @@ namespace CodeBook.Business.App.Services
             _postRepository = postRepository;
             _commentRepository = commentRepository;
             _reactionRepository = reactionRepository;
+            _reportRepository = reportRepository;
         }
         public ErrorResponse DeleteAccount(int userId) 
         {
             User user = _userRepository.GetProfileById(userId);
             if(user == null) return new ErrorResponse { Success = false, Message = "User Not Found!" };
-           
-            foreach(var post in user.Posts)
+            deleteUserRelatedRecords(user);
+            _userRepository.Remove(user);
+            if (_userRepository.SaveChanges())
+            {
+                var reports = _reportRepository.GetPendingReports().Where(report => report.PostId == null && report.CommentId == null).ToList();
+                foreach (var report in reports)
+                {
+                    _reportRepository.Delete(report);
+                }
+                _reportRepository.SaveChanges();
+                return new ErrorResponse { Success = true, Message = "Profile Deleted!" };
+            }
+            return new ErrorResponse { Success = false, Message = "Couldn't Delete!" };
+
+        }
+
+        public void deleteUserRelatedRecords(User user)
+        {
+            foreach (var report in user.Reports)
+            {
+                _reportRepository.Delete(report);
+            }
+
+            foreach (var post in user.Posts)
             {
                 _postRepository.Delete(post);
             }
 
-            foreach(var comment in user.Comments)
+            foreach (var comment in user.Comments)
             {
                 _commentRepository.Delete(comment);
             }
 
-            foreach(var reaction in user.Reactions)
+            foreach (var reaction in user.Reactions)
             {
                 _reactionRepository.Remove(reaction);
             }
-
-            _userRepository.Remove(user);
-           if(_userRepository.SaveChanges()) return new ErrorResponse { Success = true, Message = "Profile Deleted!" };
-            return new ErrorResponse { Success = false, Message = "Couldn't Delete!" };
+            foreach (var followee in user.Followers)
+            {
+                _followRepository.RemoveFollow(followee);
+            }
+            foreach(var post in user.SavedPosts)
+            {
+                _postRepository.UnsavePost(user.Id, post.PostId);
+            }
 
         }
         public UserProfileResponse GetProfile(int userId)

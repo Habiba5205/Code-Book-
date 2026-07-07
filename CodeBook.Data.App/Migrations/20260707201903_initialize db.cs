@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CodeBook.Data.App.Migrations
 {
     /// <inheritdoc />
-    public partial class AddComments : Migration
+    public partial class initializedb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -52,7 +52,7 @@ namespace CodeBook.Data.App.Migrations
                 {
                     Community_ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OwnerId = table.Column<int>(type: "int", nullable: false),
+                    OwnerId = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     IconURL = table.Column<string>(type: "nvarchar(2050)", maxLength: 2050, nullable: true),
@@ -67,7 +67,8 @@ namespace CodeBook.Data.App.Migrations
                         name: "FK_communities_Users_OwnerId",
                         column: x => x.OwnerId,
                         principalTable: "Users",
-                        principalColumn: "User_ID");
+                        principalColumn: "User_ID",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -107,6 +108,7 @@ namespace CodeBook.Data.App.Migrations
                     ReferenceId = table.Column<int>(type: "int", nullable: false),
                     IsSeen = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SenderId = table.Column<int>(type: "int", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -217,8 +219,7 @@ namespace CodeBook.Data.App.Migrations
                         name: "FK_comments_comments_SelfCommentId",
                         column: x => x.SelfCommentId,
                         principalTable: "comments",
-                        principalColumn: "Comment_ID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Comment_ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -241,8 +242,7 @@ namespace CodeBook.Data.App.Migrations
                         name: "FK_Post_Tags_tags_TagId",
                         column: x => x.TagId,
                         principalTable: "tags",
-                        principalColumn: "Tag_ID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Tag_ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -327,14 +327,12 @@ namespace CodeBook.Data.App.Migrations
                         name: "FK_Reports_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
-                        principalColumn: "Post_ID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Post_ID");
                     table.ForeignKey(
                         name: "FK_Reports_Users_ReporterId",
                         column: x => x.ReporterId,
                         principalTable: "Users",
-                        principalColumn: "User_ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "User_ID");
                     table.ForeignKey(
                         name: "FK_Reports_comments_CommentId",
                         column: x => x.CommentId,
@@ -367,14 +365,12 @@ namespace CodeBook.Data.App.Migrations
                         name: "FK_Comment_Removal_Users_RemoverId",
                         column: x => x.RemoverId,
                         principalTable: "Users",
-                        principalColumn: "User_ID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "User_ID");
                     table.ForeignKey(
                         name: "FK_Comment_Removal_comments_CommentId",
                         column: x => x.CommentId,
                         principalTable: "comments",
-                        principalColumn: "Comment_ID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Comment_ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -396,8 +392,7 @@ namespace CodeBook.Data.App.Migrations
                         name: "FK_Post_Removal_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
-                        principalColumn: "Post_ID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Post_ID");
                     table.ForeignKey(
                         name: "FK_Post_Removal_Reports_ReportId",
                         column: x => x.ReportId,
@@ -408,8 +403,7 @@ namespace CodeBook.Data.App.Migrations
                         name: "FK_Post_Removal_Users_RemoverId",
                         column: x => x.RemoverId,
                         principalTable: "Users",
-                        principalColumn: "User_ID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "User_ID");
                 });
 
             migrationBuilder.CreateIndex(
@@ -419,10 +413,9 @@ namespace CodeBook.Data.App.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comment_Removal_RemoverId_CommentId",
+                name: "IX_Comment_Removal_RemoverId",
                 table: "Comment_Removal",
-                columns: new[] { "RemoverId", "CommentId" },
-                unique: true);
+                column: "RemoverId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comment_Removal_ReportId",
@@ -471,10 +464,9 @@ namespace CodeBook.Data.App.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Post_Removal_RemoverId_PostId",
+                name: "IX_Post_Removal_RemoverId",
                 table: "Post_Removal",
-                columns: new[] { "RemoverId", "PostId" },
-                unique: true);
+                column: "RemoverId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Post_Removal_ReportId",

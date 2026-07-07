@@ -33,6 +33,10 @@ namespace CodeBook.Data.App.Repositories
         {
             _context.reports.Update(report);
         }
+        public void Delete(Report report)
+        {
+            _context.reports.Remove(report);
+        }
 
         public Report GetReportbyId(int? reportId)
         {

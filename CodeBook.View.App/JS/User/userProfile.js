@@ -149,6 +149,7 @@ async function showDelete() {
             alert("Account deleted successfully!");
             window.location.href = "../Auth/Login.html";
         } catch (error) {
+            console.log(error.message);
             alert("Failed to delete: " + error.message);
         }
     }

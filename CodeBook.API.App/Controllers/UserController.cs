@@ -53,12 +53,20 @@ namespace CodeBook.API.App.Controllers
         public IActionResult DeleteProfile()
         {
             var currentid = _currentUserInfo.GetCurrentUserId();
-            ErrorResponse result = _userService.DeleteAccount(currentid);
-            if (result.Success)
+            try
             {
-                return Ok(new {message = result.Message});
+                ErrorResponse result = _userService.DeleteAccount(currentid);
+                //if (result.Success)
+                {
+                    return Ok(new { message = result.Message });
+                }
+
             }
-            return BadRequest(new { message = result.Message });
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.InnerException.Message });
+            }
+           // return BadRequest(new { message = result.Message });
         }
 
         [HttpPatch("updatemyprofile")]
