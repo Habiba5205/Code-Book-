@@ -51,7 +51,8 @@ window.onload=()=>{
             }
         }
         catch(error){
-                alert("Couldn't load community details: " + error.message);
+               errorMsg.textContent = "Couldn't load community details" + error.message;
+            errorMsg.style.display = 'block';
         }
         
     }
@@ -146,12 +147,14 @@ window.handleAction = async (communityId,buttonElement) => {
             try{
                 const result = await api.delete(`communities/${communityId}/unjoin`);
                 if(result.message ==="Unjoined Community Successfully"){
-                    alert("Unjoined community!");
+                   succesMsg.textContent = "Unjouned Community!";
+                   succesMsg.style.display = 'block';
                     window.location.href = '../../HTML/Posts/Feed.html';
                 }
             }
         catch(error){
-            alert("Error: " + error.message);
+        errorMsg.textContent = "Error.." + error.message;
+        errorMsg.style.display = 'block';
             buttonElement.disabled = false;
         }
 

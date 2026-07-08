@@ -9,7 +9,8 @@ window.onload=()=>{
             const email = emailinput.value;
             const password = passwordinput.value;
             if(!email || !password){
-                alert("Please Fill all the required fields!");
+                 errorMsg.textContent = 'Please fill all required fields';
+                 errorMsg.style.display = 'block';
                 return;
             }
             try{
@@ -28,7 +29,8 @@ window.onload=()=>{
                 }
                    
             } catch (error) {
-                alert("Login failed: " + error.message);
+                 errorMsg.textContent = "Login failed" + error.message;
+                errorMsg.style.display = 'block';
             } finally {
             button.innerText = "Sign In";
             button.disabled = false;

@@ -24,7 +24,7 @@ async function loadProfile(){
         document.getElementById('followingCount').innerText = data.followingCount;
 
         const avatar = document.getElementById('avatar');
-        avatar.src = data.avatarUrl? data.avatarUrl : 'images/default-avatar.png';
+        avatar.src = data.avatarUrl? data.avatarUrl : 'https://i.pinimg.com/originals/60/b6/6f/60b66f7e6337e0de45cea924a3946dbd.png';
 
      
     }
@@ -36,21 +36,25 @@ async function loadProfile(){
 async function follow(){
     try{
         await api.post(`User/follow?userid=${viewedUserId}`);
-        alert('Followed!!');
+          successMsg.textContent = "Followed!!";
+            successMsg.style.display = 'block';
         await loadProfile();
     }
        catch(error){
-        alert('Failed to follow: '+error.message);
+         errorMsg.textContent = "Failed to follow" + error.message;
+            errorMsg.style.display = 'block';
     }
 }
 async function unfollow(){
     try{
         await api.delete(`User/unfollow?userid=${viewedUserId}`);
-        alert('UnFollowed!!');
+       successMsg.textContent = "Unfollowed!!";
+            successMsg.style.display = 'block';
         await loadProfile();
     }
        catch(error){
-        alert('Failed to unfollow: '+error.message);
+        errorMsg.textContent = "Failed to unfollow" + error.message;
+            errorMsg.style.display = 'block';
     }
 }
 

@@ -138,7 +138,7 @@ function renderUsers(users) {
     users.forEach(user => {
         container.innerHTML += `
             <div class="post-card d-flex align-items-center gap-3">
-                <img src="${user.avatarUrl? user.avatarUrl :'https://via.placeholder.com/50'}" 
+                <img src="${user.avatarUrl? user.avatarUrl :'https://i.pinimg.com/originals/60/b6/6f/60b66f7e6337e0de45cea924a3946dbd.png'}" 
                      style="width:50px; height:50px; border-radius:50%; 
                             border:2px solid #7c3aed; object-fit:cover">
                 <div>
@@ -164,7 +164,7 @@ function renderCommunities(communities) {
     communities.forEach(community => {
         container.innerHTML += `
             <div class="post-card d-flex align-items-center gap-3">
-                <img src="${community.iconURL? community.iconURL : 'https://via.placeholder.com/50'}" 
+                <img src="${community.iconURL? community.iconURL : 'https://cdn-icons-png.freepik.com/512/11925/11925833.png'}" 
                      style="width:50px; height:50px; border-radius:50%; 
                             border:2px solid #7c3aed; object-fit:cover">
                 <div>
@@ -203,7 +203,8 @@ async function viewCommunity(communityId,buttonElement) {
         }
        }
        if(!joined){
-        alert("Join Community to view posts!");
+      errorMsg.textContent = 'Join Community to view posts!';
+            errorMsg.style.display = 'block';
         window.location.href = `../../HTML/Community/Community.html`;
     }
 }
