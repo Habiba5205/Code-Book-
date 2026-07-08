@@ -86,7 +86,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalHost", builder =>
     {
-        builder.WithOrigins("http://localhost:5500", "http://127.0.0.1:5500")
+        builder.WithOrigins("http://localhost:5500", "http://127.0.0.1:5500", "https://Code-Book.azurewebsites.net")
         .AllowAnyMethod()
         .AllowAnyHeader()
         .AllowCredentials();
@@ -104,6 +104,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+var defaultFilesOptions = new DefaultFilesOptions();
+defaultFilesOptions.DefaultFileNames.Clear();
+defaultFilesOptions.DefaultFileNames.Add("HTML/HomePage.html");
+app.UseDefaultFiles(defaultFilesOptions);
+app.UseStaticFiles();
+
 app.UseRouting();
 app.UseHttpsRedirection();
 
@@ -116,5 +122,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapFallbackToFile("HTML/HomePage.html");
 
 app.Run();
