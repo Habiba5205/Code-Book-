@@ -118,14 +118,15 @@ namespace CodeBook.Business.App.Services
             follow.FollowerUserId = followerId;
             follow.FolloweeUserId = followeeId;
             _followRepository.AddFollow(follow);
-           bool result =  _followRepository.SaveChanges();
+            User follower = _userRepository.GetProfileById(followerId);
+            bool result =  _followRepository.SaveChanges();
             if (result)
             {
                  _notificationService.CreateNotification(followeeId, new NotificationDTO
                 {
                     userId = followeeId,
                     Type = "Follow",
-                    Message = "You have a new Follower",
+                    Message = follower + " followed you",
                     ReferenceId = followerId,
                     IsSeen = false,
                     DateCreated = DateTime.UtcNow,

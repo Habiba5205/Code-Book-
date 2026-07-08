@@ -16,7 +16,7 @@ async function loadProfile(){
         document.getElementById('followingCount').innerText = data.followingCount;
 
         const avatar = document.getElementById('avatar');
-         avatar.src = data.avatarUrl || 'images/default-avatar.png';
+         avatar.src = data.avatarUrl || 'https://i.pinimg.com/originals/60/b6/6f/60b66f7e6337e0de45cea924a3946dbd.png';
 
      
     }

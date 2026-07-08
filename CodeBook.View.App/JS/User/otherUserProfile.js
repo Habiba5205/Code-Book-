@@ -90,7 +90,7 @@ async function viewPosts() {
     
             document.getElementById('postsList').innerHTML = posts.map(post => `
                 <div class = "mt-3 mb-3 post-card">
-                <a class="text-decoration-none" href= "../Posts/PostDetail?id=${post.id}" >
+                <a class="text-decoration-none" href= "../Posts/PostDetail.html?id=${post.id}" >
                     <h5 class="post-title">${post.title}</h5>
                     <p class="post-body">${post.body}</p>
                     ${window.escapeHTML(post.codeSnippet)? `

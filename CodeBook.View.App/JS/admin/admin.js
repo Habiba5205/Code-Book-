@@ -52,7 +52,8 @@ window.onload=()=>{
             });
         }
         catch(error){
-            alert("Couldn't load reports: " + error.message);
+            errorMsg.textContent = "Couldn't load reports: " + error.message;
+            errorMsg.style.display = 'block';
         }
         
     }
@@ -66,7 +67,8 @@ window.onload=()=>{
             if(report.commentId){
                 const result = await api.delete(`admin/comments/${report.commentId}/${report.id}`);
                 if(result.message === 'Comment removed successfully'){
-                    alert("Comment removed successfully!");
+                    succesMsg.textContent = "Comment removed successfully";
+                    succesMsg.style.display = 'block';
                     const text = document.createElement('p');
                     text.className = 'status-update'
                     text.innerHTML = '<i class="bi bi-check-lg"></i><span style="color: green;">Accepted</span>';
@@ -77,7 +79,8 @@ window.onload=()=>{
             else if(report.postId){
                 const result = await api.delete(`admin/posts/${report.postId}/${report.id}`);
                 if(result.message === 'Post removed successfully'){
-                    alert("Post removed successfully!");
+                    succesMsg.textContent = "Post removed successfully";
+                    succesMsg.style.display = 'block';
                     const text = document.createElement('p');
                     text.className = 'status-update'
                     text.innerHTML = '<i class="bi bi-check-lg"></i><span style="color: green;">Accepted</span>';
@@ -99,7 +102,8 @@ window.onload=()=>{
             }
         }
     catch (error) {
-        alert("Error: " + error.message);
+          errorMsg.textContent = "Error.." + error.message;
+          errorMsg.style.display = 'block';
         buttonElement.disabled = false;
         actionsContainer.classList.add('d-none');
         document.querySelectorAll('.status-update').forEach(msg => {msg.remove()});
@@ -109,8 +113,9 @@ window.onload=()=>{
         localStorage.clear();
         const result = await api.delete('Auth/logout');
         if(result.message === "Logout Successful!"){
-            alert("Logout Successful!");
-        }
+             alert("Logout Successful!");
+    }
+        
         window.location.href = '../Auth/Login.html';
     }
 

@@ -19,7 +19,7 @@ window.onload=()=>{
                 <div class="row align-items-center justify-content-center">
                 <div class="col-md-3 text-center align-items-center">
                 
-               <img src="${community.iconURL ? community.iconURL : 'https://via.placeholder.com/50'}" 
+               <img src="${community.iconURL ? community.iconURL : 'https://cdn-icons-png.freepik.com/512/11925/11925833.png'}" 
                 alt="Community Icon" 
                 class="profile-img-2">
                 </div>

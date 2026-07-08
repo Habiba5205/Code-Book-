@@ -43,3 +43,20 @@ function goBack(){
     window.history.back();
 }
 window.goBack = goBack;
+function setupPasswordToggle(inputId, toggleId) {
+    const input = document.getElementById(inputId);
+    const toggle = document.getElementById(toggleId);
+
+    toggle.addEventListener("click", () => {
+        const isPassword = input.type === "password";
+
+        input.type = isPassword ? "text" : "password";
+
+        toggle.classList.toggle("fa-eye", !isPassword);
+        toggle.classList.toggle("fa-eye-slash", isPassword);
+    });
+}
+
+setupPasswordToggle("oldPassword", "toggleOldPassword");
+setupPasswordToggle("newPassword", "toggleNewPassword");
+setupPasswordToggle("confirmPassword", "toggleConfirmPassword");

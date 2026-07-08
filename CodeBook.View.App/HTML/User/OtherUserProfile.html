@@ -62,22 +62,23 @@
       <div class="col-md-9">
     <h2 id="username">UserName</h2>
      <p class="bio-text" id="bio">Write your Bio....</p>
-        <span class ="me-5">
+       <div class="d-flex gap-4 mb-3" style="flex-wrap: nowrap;"></div>
+    <span style="white-space: nowrap;">
     <strong id="followersCount">0</strong>
     <span> Followers</span>
     </span>
-     <span>
+ <span style="white-space: nowrap;">
     <strong id="followingCount">0</strong>
      <span> Following</span>
     </span>
     </div>
-   <div class="d-flex justify-content-center gap-3 mt-3">
+<div class="d-flex justify-content-center gap-2 mt-3 flex-wrap">
     <button id = "followBtn"     class = "btn btn-purple"
-             onclick = "follow()">           Follow</button>
+             onclick = "follow()">            <i class="fa-solid fa-user-plus"></i> Follow</button>
        <button id = "unfollowBtn"     class = "btn btn-purple"
-            onclick = "unfollow()">        UnFollow</button>
+            onclick = "unfollow()">     <i class="fa-solid fa-user-minus"></i>    UnFollow</button>
      <button id = "ShowPosts-btn"     class = "btn btn-purple"
-             onclick = "viewPosts()">           View Posts</button>
+             onclick = "viewPosts()">       <i class="fa-solid fa-grid"></i>     View Posts</button>
     </div>
     </div>
     </div>
