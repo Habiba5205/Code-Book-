@@ -97,6 +97,11 @@ builder.Services.AddServices();
 builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
+var defaultFilesOptions = new DefaultFilesOptions();
+defaultFilesOptions.DefaultFileNames.Clear();
+defaultFilesOptions.DefaultFileNames.Add("HTML/HomePage.html");
+app.UseDefaultFiles(defaultFilesOptions);
+app.UseStaticFiles();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -104,11 +109,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-var defaultFilesOptions = new DefaultFilesOptions();
-defaultFilesOptions.DefaultFileNames.Clear();
-defaultFilesOptions.DefaultFileNames.Add("HTML/HomePage.html");
-app.UseDefaultFiles(defaultFilesOptions);
-app.UseStaticFiles();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>{
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "CodeBook API v1");
+    });
+}
 
 app.UseRouting();
 app.UseHttpsRedirection();
