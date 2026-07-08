@@ -78,8 +78,8 @@ async function viewPosts() {
     
         try {
             const data = await api.get('Post/feed?page=1');
-
-            const posts = data.filter (p => p.authorId === Number(viewedUserId) && p.isPublic && !p.communityId);
+           
+            const posts = data.filter (p => (p.authorId === Number(viewedUserId)) && (p.communityId === null));
     
             if (posts.length === 0) {
                 document.getElementById('postsList').innerHTML = `
@@ -93,7 +93,7 @@ async function viewPosts() {
                 <a class="text-decoration-none" href= "../Posts/PostDetail?id=${post.id}" >
                     <h5 class="post-title">${post.title}</h5>
                     <p class="post-body">${post.body}</p>
-                    ${ window.escapeHTML(post.codeSnippet)? `
+                    ${window.escapeHTML(post.codeSnippet)? `
                         <pre class="code-snippet"><code>${post.codeSnippet}</code></pre>
                     ` : ''}
                     <small style="color:#8b949e">
@@ -124,6 +124,7 @@ window.unfollow = unfollow;
 window.viewPosts = viewPosts;
 
 function escapeHTML(htmlString) {
+    if(!htmlString) return "";
   return htmlString
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")

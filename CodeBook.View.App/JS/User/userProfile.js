@@ -214,6 +214,7 @@ window.showMyCommunities = showMyCommunities;
 window.showSaved = showSaved;
 
 function escapeHTML(htmlString) {
+    if(!htmlString) return "";
   return htmlString
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
