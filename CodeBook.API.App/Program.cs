@@ -44,7 +44,8 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddDbContext<CodeBookContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+                        sqlOptions => sqlOptions.MigrationsAssembly("CodeBook.Data.App")));
 
 builder.Services.AddAutoMapper(config => {
     config.AddProfile<MappingProfile>();
