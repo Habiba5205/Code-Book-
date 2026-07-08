@@ -97,13 +97,6 @@ builder.Services.AddServices();
 builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<CodeBookContext>();
-    db.Database.Migrate();
-}
-
-
 var defaultFilesOptions = new DefaultFilesOptions();
 defaultFilesOptions.DefaultFileNames.Clear();
 defaultFilesOptions.DefaultFileNames.Add("HTML/HomePage.html");
@@ -137,5 +130,12 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapFallbackToFile("HTML/HomePage.html");
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<CodeBookContext>();
+    db.Database.Migrate();
+}
+
 
 app.Run();
