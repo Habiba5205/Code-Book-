@@ -15,14 +15,12 @@ namespace CodeBook.API.App.Controllers
     public class PostController : ControllerBase
     {
         private readonly IPostService _postService;
-        private readonly ISearchService _searchService;
         private readonly ICommentService _commentService;
         private readonly CurrentUserInfo _currentUserInfo;
 
-        public PostController(IPostService postService, ISearchService searchService, ICommentService commentService, CurrentUserInfo currentUserInfo)
+        public PostController(IPostService postService, ICommentService commentService, CurrentUserInfo currentUserInfo)
         {
             _postService = postService;
-            _searchService = searchService;
             _commentService = commentService;
             _currentUserInfo = currentUserInfo;
         }
@@ -169,7 +167,7 @@ namespace CodeBook.API.App.Controllers
                                   [FromQuery] string? language,
                                   [FromQuery] string? tag)
         {
-            var results = _postService.SearchPosts(keyword, language, tag);
+            var results = _postService.SearchPosts(_currentUserInfo.GetCurrentUserId(),keyword, language, tag);
             return Ok(results);
         }
 

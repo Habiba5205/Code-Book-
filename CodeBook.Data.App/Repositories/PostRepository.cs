@@ -121,23 +121,37 @@ namespace CodeBook.Data.App.Repositories
             return _context.posts.Include(p=>p.Author).Include(p=>p.Community).Where(p => p.IsRemoved == false);
         }
 
-        public List<Post> SearchPosts(string? keyword, string? language, string? tag)
+        public List<Post> SearchPosts(int userId, string? keyword, string? language, string? tag)
         {
             var query = _context.posts
-                    .Include(p => p.Author)
-                    .Where(p => !p.IsRemoved);
+                .Include(p => p.Author)
+                    .ThenInclude(a => a.Followers)
+                .Include(p => p.Community)
+                    .ThenInclude(c => c.Members)
+                .Where(p => !p.IsRemoved);
+
+            query = query.Where(p =>
+                p.IsPublic ||
+                p.AuthorId == userId ||
+                (p.CommunityId != null &&
+                 p.Community != null &&
+                 p.Community.Members.Any(m => m.UserId == userId)) ||
+                p.Author.Followers.Any(f => f.FollowerUserId == userId)
+            );
 
             if (!string.IsNullOrEmpty(keyword))
-                query = query.Where(p => p.Title.Contains(keyword) ||
-                                         p.Body.Contains(keyword));
+                query = query.Where(p =>
+                    p.Title.Contains(keyword) ||
+                    p.Body.Contains(keyword));
 
             if (!string.IsNullOrEmpty(language))
-                query = query.Where(p => p.Language != null &&
-                                         p.Language == language);
+                query = query.Where(p =>
+                    p.Language != null &&
+                    p.Language == language);
 
             if (!string.IsNullOrEmpty(tag))
-                query = query.Where(p => p.PostTags
-                                          .Any(t => t.Tag.Name == tag));
+                query = query.Where(p =>
+                    p.PostTags.Any(t => t.Tag.Name == tag));
 
             return query.ToList();
         }

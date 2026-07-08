@@ -29,7 +29,6 @@ namespace CodeBook.API.App
             services.AddScoped<AbstractValidator<ForgotPasswordDto>, ForgotPasswordValidator>();
             services.AddScoped<IPostService, PostsService>();
             services.AddScoped<IPostRepository, PostRepository>();
-            services.AddScoped<ISearchService, SearchService>();
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<IReportService, ReportService>();

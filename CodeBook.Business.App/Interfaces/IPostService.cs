@@ -18,7 +18,7 @@ namespace CodeBook.Business.App.Interfaces
         PostResponse GetPost(int postId, int? userId = null);
         int GetPostAuthorId(int postId);
 
-        List<PostResponse> SearchPosts(string? keyword, string? language, string? tag);
+        List<PostResponse> SearchPosts(int userId, string? keyword, string? language, string? tag);
         List<PostResponse> GetSavedPosts(int userId);
         ErrorResponse UnsavePost(int userId, int postId);
         List<PostResponse> GetUserPosts(int userId);

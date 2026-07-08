@@ -30,7 +30,7 @@ namespace CodeBook.Data.App.IRepositories
         List<Post> GetSavedPosts(int userId);
         void UnsavePost(int userId, int postId);
         PostSaved GetSavedPost(int userId, int postId);
-        List<Post> SearchPosts(string? keyword, string? language, string? tag);
+        List<Post> SearchPosts(int userId, string? keyword, string? language, string? tag);
         bool SaveChanges();
        
     }
