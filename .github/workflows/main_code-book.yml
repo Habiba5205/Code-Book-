@@ -24,7 +24,7 @@ jobs:
           dotnet-version: '8.x'
 
       - name: Build with dotnet
-        run: dotnet build CodeBook.API.App/CodeBook.API.App.sln--configuration Release
+        run: dotnet build CodeBook.API.App/CodeBook.API.App.sln --configuration Release
 
       - name: dotnet publish
         run: dotnet publish CodeBook.API.App/CodeBook.API.App.sln -c Release -o ${{env.DOTNET_ROOT}}/myapp
