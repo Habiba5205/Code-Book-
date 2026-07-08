@@ -45,7 +45,14 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddDbContext<CodeBookContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
-                        sqlOptions => sqlOptions.MigrationsAssembly("CodeBook.Data.App")));
+                        sqlOptions =>
+                        {
+                            sqlOptions.MigrationsAssembly("CodeBook.Data.App");
+                            sqlOptions.EnableRetryOnFailure(
+                                maxRetryCount: 5,
+                                maxRetryDelay: TimeSpan.FromSeconds(10),
+                                errorNumbersToAdd: null);
+                        }));
 
 builder.Services.AddAutoMapper(config => {
     config.AddProfile<MappingProfile>();
@@ -135,7 +142,22 @@ app.MapFallbackToFile("HTML/HomePage.html");
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<CodeBookContext>();
-    db.Database.Migrate();
+
+    var retries = 0;
+    while (true)
+    {
+        try
+        {
+            db.Database.Migrate();
+            break;
+        }
+        catch (Exception ex) when (retries < 5)
+        {
+            retries++;
+            Console.WriteLine($"DB not ready yet, retrying in 10s... (attempt {retries}): {ex.Message}");
+            Thread.Sleep(10000);
+        }
+    }
 }
 
 
