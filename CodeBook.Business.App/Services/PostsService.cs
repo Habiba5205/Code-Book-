@@ -139,7 +139,10 @@ namespace CodeBook.Business.App.Services
             int pageSize = 10;
             var feed = _postRepository.GetAllUnremoved()
                 .Where(p => p.IsPublic == true ||
-                (userId != null && p.CommunityId != null && p.Community != null && p.Community.Members.Any(m => m.UserId == userId)))
+                (userId != null && p.CommunityId != null && p.Community != null && p.Community.Members.Any(m => m.UserId == userId)) ||
+                  (userId != null && p.AuthorId == userId) ||
+                    (userId != null &&
+                   p.Author.Followers.Any(f => f.FollowerUserId == userId)))
                 .OrderByDescending(p => p.DateCreated)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
