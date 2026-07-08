@@ -44,7 +44,15 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddDbContext<CodeBookContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+                        sqlOptions =>
+                        {
+                            sqlOptions.MigrationsAssembly("CodeBook.Data.App");
+                            sqlOptions.EnableRetryOnFailure(
+                                maxRetryCount: 5,
+                                maxRetryDelay: TimeSpan.FromSeconds(10),
+                                errorNumbersToAdd: null);
+                        }));
 
 builder.Services.AddAutoMapper(config => {
     config.AddProfile<MappingProfile>();
@@ -86,7 +94,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalHost", builder =>
     {
-        builder.WithOrigins("http://localhost:5500", "http://127.0.0.1:5500", "https://Code-Book.azurewebsites.net")
+        builder.WithOrigins("http://localhost:5500", "http://127.0.0.1:5500", "https://code-book-e6e0cdeke2cfgkgz.polandcentral-01.azurewebsites.net/")
         .AllowAnyMethod()
         .AllowAnyHeader()
         .AllowCredentials();
@@ -97,6 +105,11 @@ builder.Services.AddServices();
 builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
+var defaultFilesOptions = new DefaultFilesOptions();
+defaultFilesOptions.DefaultFileNames.Clear();
+defaultFilesOptions.DefaultFileNames.Add("HTML/HomePage.html");
+app.UseDefaultFiles(defaultFilesOptions);
+app.UseStaticFiles();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -104,11 +117,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-var defaultFilesOptions = new DefaultFilesOptions();
-defaultFilesOptions.DefaultFileNames.Clear();
-defaultFilesOptions.DefaultFileNames.Add("HTML/HomePage.html");
-app.UseDefaultFiles(defaultFilesOptions);
-app.UseStaticFiles();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>{
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "CodeBook API v1");
+    });
+}
 
 app.UseRouting();
 app.UseHttpsRedirection();
@@ -123,5 +138,27 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapFallbackToFile("HTML/HomePage.html");
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<CodeBookContext>();
+
+    var retries = 0;
+    while (true)
+    {
+        try
+        {
+            db.Database.Migrate();
+            break;
+        }
+        catch (Exception ex) when (retries < 5)
+        {
+            retries++;
+            Console.WriteLine($"DB not ready yet, retrying in 10s... (attempt {retries}): {ex.Message}");
+            Thread.Sleep(10000);
+        }
+    }
+}
+
 
 app.Run();
