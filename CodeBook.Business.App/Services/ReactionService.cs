@@ -99,7 +99,7 @@ namespace CodeBook.Business.App.Services
             {
                 userId = _commentService.GetCommentAuthorId(reactionDto.CommentId.Value),
                 Type = "Reaction",
-                Message = $"{user.UserName} reacted to your post",
+                Message = $"{user.UserName} reacted to your comment",
                 ReferenceId = reactionDto.CommentId.Value,
                 IsSeen = false,
                 DateCreated = DateTime.UtcNow
