@@ -37,11 +37,11 @@ async function follow(){
     try{
         await api.post(`User/follow?userid=${viewedUserId}`);
           successMsg.textContent = "Followed!!";
-            successMsg.style.display = 'block';
+        successMsg.style.display = 'block';
         await loadProfile();
     }
        catch(error){
-         errorMsg.textContent = "Failed to follow" + error.message;
+         errorMsg.textContent = "Failed to follow: " + error.message;
             errorMsg.style.display = 'block';
     }
 }
@@ -53,7 +53,7 @@ async function unfollow(){
         await loadProfile();
     }
        catch(error){
-        errorMsg.textContent = "Failed to unfollow" + error.message;
+        errorMsg.textContent = "Failed to unfollow: " + error.message;
             errorMsg.style.display = 'block';
     }
 }

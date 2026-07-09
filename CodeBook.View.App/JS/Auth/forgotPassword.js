@@ -5,6 +5,8 @@ window.onload = () => {
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirmPassword');
+       const errorMsg = document.getElementById('errorMsg');
+    const successMsg = document.getElementById('successMsg');
 
     button.addEventListener('click',async() =>{
         const email = emailInput.value;
@@ -14,7 +16,7 @@ window.onload = () => {
         const hasLowerCase=/[a-z]/.test(password);
         const hasNumber=/[0-9]/.test(password);
         const hasSpecial=/[^a-zA-Z0-9]/.test(password);
-        const hasValidLength=password.length <=12 && password.length > 8;
+        const hasValidLength=password.length <=12 && password.length >= 8;
 
       
 

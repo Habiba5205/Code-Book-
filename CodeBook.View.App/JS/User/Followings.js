@@ -38,7 +38,7 @@ async function loadFollowings(followingsContainer) {
 }
 catch(error){
    errorMsg.textContent = "Couldn't load" ;
-            errorMsg.style.display = 'block';
+    errorMsg.style.display = 'block';
 }
 };
 

@@ -2,7 +2,8 @@ import { api } from '../api.js';
 window.onload=()=>{
     var communitiesContainer = document.getElementById("communities-container");
     var explorecommunities = document.getElementById("explore-communities");
-
+   const errorMsg = document.getElementById('errorMsg');
+    const successMsg = document.getElementById('successMsg');
 
     async function GetCommunities() {
         try{
@@ -47,7 +48,7 @@ window.onload=()=>{
             });
         }
          catch(error){
-            errorMsg.textContent = "Couldn't load communities" + error.message;
+            errorMsg.textContent = "Couldn't load communities: " + error.message;
             errorMsg.style.display = 'block';
         }
         
@@ -100,7 +101,7 @@ window.onload=()=>{
             });
         }
          catch(error){
-            errorMsg.textContent = "Couldn't load communities" + error.message;
+            errorMsg.textContent = "Couldn't load communities: " + error.message;
             errorMsg.style.display = 'block';
         }
 
@@ -117,13 +118,13 @@ window.handleAction = async (communityId ,buttonElement) => {
                 const role = 'Member';
                 const result = await api.post(`communities/${communityId}/joincommunity`,{Role : role});
                 if(result.message ==="Joined Community Successfully"){
-                    succesMsg.textContent = "Joined Community";
-                    succesMsg.style.display = 'block';
+                    successMsg.textContent = "Joined Community";
+                    successMsg.style.display = 'block';
                     window.location.href = `../../HTML/Community/Communityfeed.html?id=${communityId}`;
                 }
             }
         catch(error){
-            errorMsg.textContent = "Error" + error.message;
+            errorMsg.textContent = "Error: " + error.message;
             errorMsg.style.display = 'block';
             buttonElement.disabled = false;
         }

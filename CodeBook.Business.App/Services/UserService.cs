@@ -126,7 +126,7 @@ namespace CodeBook.Business.App.Services
                 {
                     userId = followeeId,
                     Type = "Follow",
-                    Message = follower + " followed you",
+                    Message = follower.UserName + " followed you",
                     ReferenceId = followerId,
                     IsSeen = false,
                     DateCreated = DateTime.UtcNow,

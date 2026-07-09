@@ -7,6 +7,8 @@ let currentPage = parseInt(urlParams.get('page')) || 1;
 const postsContainer = document.getElementById("postsContainer");
 const badge = document.querySelector(".badge");
 const logoutbtn = document.querySelector(".sidebar-logout");
+   const errorMsg = document.getElementById('errorMsg');
+    const successMsg = document.getElementById('successMsg');
 
 logoutbtn.addEventListener('click',() =>{
     logout();

@@ -6,6 +6,8 @@ window.onload = () => {
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirmPassword');
+       const errorMsg = document.getElementById('errorMsg');
+    const successMsg = document.getElementById('successMsg');
 
     button.addEventListener('click',async() =>{
         const username = usernameInput.value;
@@ -16,12 +18,16 @@ window.onload = () => {
         const hasLowerCase=/[a-z]/.test(password);
         const hasNumber=/[0-9]/.test(password);
         const hasSpecial=/[^a-zA-Z0-9]/.test(password);
-        const hasValidLength=password.length <=12 && password.length > 8;
-
-      
+        const hasValidLength=password.length <=12 && password.length >= 8;
+        const isvalidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
 
         if(!username || !email || !password || !confirmPassword){
          errorMsg.textContent = 'Please fill all required fields';
+            errorMsg.style.display = 'block';
+            return;
+        }
+        if(!isvalidEmail){
+            errorMsg.textContent = 'Email Format is Invalid';
             errorMsg.style.display = 'block';
             return;
         }
@@ -29,6 +35,11 @@ window.onload = () => {
             errorMsg.textContent = 'Passwords do not match';
             errorMsg.style.display = 'block';
             return;
+        }
+            if(!hasValidLength){
+             errorMsg.textContent = 'Password must contain at least 8 characters and at most 12 characters ';
+            errorMsg.style.display = 'block';
+             return;
         }
         if(!hasUpperCase ){
              errorMsg.textContent = 'Password must contain at least one Upper character';
@@ -49,12 +60,7 @@ window.onload = () => {
              errorMsg.textContent = 'Password must contain at least one Special character ';
             errorMsg.style.display = 'block';
              return;
-        }
-               if(!hasValidLength){
-             errorMsg.textContent = 'Password must contain at least 8 characters and at most 12 characters ';
-            errorMsg.style.display = 'block';
-             return;
-        }
+            }
 
         try{
             button.innerText = "Creating acount...";

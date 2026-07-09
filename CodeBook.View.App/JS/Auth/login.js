@@ -4,6 +4,8 @@ window.onload=()=>{
         const button = document.getElementById('loginBtn');
         const emailinput = document.getElementById('email');
         const passwordinput = document.getElementById('password');
+           const errorMsg = document.getElementById('errorMsg');
+    const successMsg = document.getElementById('successMsg');
         button.addEventListener('click', async () =>
         {
             const email = emailinput.value;
@@ -29,7 +31,7 @@ window.onload=()=>{
                 }
                    
             } catch (error) {
-                 errorMsg.textContent = "Login failed" + error.message;
+                 errorMsg.textContent = "Login failed: " + error.message;
                 errorMsg.style.display = 'block';
             } finally {
             button.innerText = "Sign In";

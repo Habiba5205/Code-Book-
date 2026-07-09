@@ -5,6 +5,8 @@ window.onload = () => {
     const oldPasswordInput = document.getElementById('oldPassword');
     const newPasswordInput = document.getElementById('newPassword');
     const confirmPasswordInput = document.getElementById('confirmPassword');
+       const errorMsg = document.getElementById('errorMsg');
+    const successMsg = document.getElementById('successMsg');
 
     button.addEventListener('click',async() =>{
         const oldPassword = oldPasswordInput.value;
@@ -15,7 +17,7 @@ window.onload = () => {
         const hasLowerCase=/[a-z]/.test(newPassword);
         const hasNumber=/[0-9]/.test(newPassword);
         const hasSpecial=/[^a-zA-Z0-9]/.test(newPassword);
-        const hasValidLength=newPassword.length <=12 && newPassword.length > 8;
+        const hasValidLength=newPassword.length <=12 && newPassword.length >= 8;
 
       
 

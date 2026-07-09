@@ -3,6 +3,8 @@ import { api } from '../api.js';
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get('id');
 const referrer = document.referrer;
+   const errorMsg = document.getElementById('errorMsg');
+    const successMsg = document.getElementById('successMsg');
 
 document.addEventListener('DOMContentLoaded', () => {
     if (!postId) {
@@ -35,7 +37,7 @@ async function loadPost() {
         }
 
     } catch (error) {
-        console.error('Failed to load post:', error);
+        console.error('Failed to load post: ', error);
     }
 }
 

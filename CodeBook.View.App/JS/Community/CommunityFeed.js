@@ -5,6 +5,8 @@ window.onload=()=>{
     var createpostbtn = document.getElementById("createpost-btn");
     const params = new URLSearchParams(window.location.search);
     const communityId = params.get("id");
+       const errorMsg = document.getElementById('errorMsg');
+    const successMsg = document.getElementById('successMsg');
     console.log(communityId);
 
     createpostbtn.addEventListener('click',() => {
@@ -51,7 +53,7 @@ window.onload=()=>{
             }
         }
         catch(error){
-               errorMsg.textContent = "Couldn't load community details" + error.message;
+               errorMsg.textContent = "Couldn't load community details: " + error.message;
             errorMsg.style.display = 'block';
         }
         
@@ -147,13 +149,13 @@ window.handleAction = async (communityId,buttonElement) => {
             try{
                 const result = await api.delete(`communities/${communityId}/unjoin`);
                 if(result.message ==="Unjoined Community Successfully"){
-                   succesMsg.textContent = "Unjouned Community!";
-                   succesMsg.style.display = 'block';
+                   successMsg.textContent = "Unjouned Community!";
+                   successMsg.style.display = 'block';
                     window.location.href = '../../HTML/Posts/Feed.html';
                 }
             }
         catch(error){
-        errorMsg.textContent = "Error.." + error.message;
+        errorMsg.textContent = "Error: " + error.message;
         errorMsg.style.display = 'block';
             buttonElement.disabled = false;
         }

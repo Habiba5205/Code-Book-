@@ -3,6 +3,8 @@ window.onload=()=>{
     var createcommunitybtn = document.getElementById("createcommunity-btn");
     var communitycontainer = document.getElementById("communities-container");
     var createcontainer = document.getElementById("creation-card");
+    const errorMsg = document.getElementById('errorMsg');
+    const successMsg = document.getElementById('successMsg');
     
      createcommunitybtn.addEventListener('click',(e) => {
                         createCommunity(e.target);});
@@ -78,7 +80,7 @@ window.onload=()=>{
             });
         }
          catch(error){
-           errorMsg.textContent = "Couldn't load communities" + error.message;
+           errorMsg.textContent = "Couldn't load communities: " + error.message;
             errorMsg.style.display = 'block';
         }
         
@@ -173,13 +175,13 @@ window.onload=()=>{
             card.querySelector('#cancel-update').classList.add('d-none');
             card.querySelector('.update-btn').classList.remove('d-none');
 
-                     succesMsg.textContent = 'Updated Community';
-                     succesMsg.style.display = 'block';
+                     successMsg.textContent = 'Updated Community';
+                     successMsg.style.display = 'block';
                     GetCommunities();
                 }
             }
         catch(error){
-       errorMsg.textContent = "Error.." + error.message;
+       errorMsg.textContent = "Error: " + error.message;
             errorMsg.style.display = 'block';
         }
 
@@ -190,13 +192,13 @@ window.onload=()=>{
             try{
                 const result = await api.delete(`communities/${communityId}/deletecommunity`);
                 if(result.message ==="Community Deleted Successfully"){
-                     succesMsg.textContent = 'Community deleted';
-                     succesMsg.style.display = 'block';
+                     successMsg.textContent = 'Community deleted';
+                     successMsg.style.display = 'block';
                     GetCommunities();
                 }
             }
         catch(error){
-          errorMsg.textContent = "Error.." + error.message;
+          errorMsg.textContent = "Error: " + error.message;
             errorMsg.style.display = 'block';
         }
 
@@ -223,14 +225,14 @@ window.onload=()=>{
                 if(result.message === "Community Created Successfully"){
                     var createcontainer = document.getElementById("creation-card");
                     createcontainer.innerHTML = '';
-                    succesMsg.textContent = 'Community created';
-                     succesMsg.style.display = 'block';
+                    successMsg.textContent = 'Community created';
+                     successMsg.style.display = 'block';
                     createcommunitybtn.classList.remove('d-none');
                     GetCommunities();
                 }
             }
             catch(error){
-                  errorMsg.textContent = "Error.." + error.message;
+                  errorMsg.textContent = "Error: " + error.message;
             errorMsg.style.display = 'block';
                 buttonElement.disabled = false;
             }

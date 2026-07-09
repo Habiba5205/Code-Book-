@@ -1,6 +1,8 @@
 import { api } from '../api.js';
 
 let currentTab = 'posts';
+   const errorMsg = document.getElementById('errorMsg');
+    const successMsg = document.getElementById('successMsg');
 
 document.getElementById('searchInput').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') search();

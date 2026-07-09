@@ -4,6 +4,8 @@ import { parseText } from '../Interactions/HashTags.js';
 
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get('id');
+   const errorMsg = document.getElementById('errorMsg');
+    const successMsg = document.getElementById('successMsg');
 
 
 
