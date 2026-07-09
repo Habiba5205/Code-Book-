@@ -22,23 +22,30 @@ namespace CodeBook.API.App.Controllers
         public IActionResult ResolveTags([FromBody] ResolveTagRequest request)
         {
             var tagIds = new List<int>();
-            foreach (var tagName in request.Tags)
+            try
             {
-                var tag= _context.tags.FirstOrDefault(t => t.Name.ToLower() == tagName.ToLower());
-                if (tag == null)
+                foreach (var tagName in request.Tags)
                 {
-                    tag = new Tag
+                    var tag = _context.tags.FirstOrDefault(t => t.Name.ToLower() == tagName.ToLower());
+                    if (tag == null)
                     {
-                        Name = tagName,
-                        Slug = tagName.ToLower(),
-                        DateCreated = DateTime.Now
-                    };
-                    _context.tags.Add(tag);
-                    _context.SaveChanges();
+                        tag = new Tag
+                        {
+                            Name = tagName,
+                            Slug = tagName.ToLower(),
+                            DateCreated = DateTime.Now
+                        };
+                        _context.tags.Add(tag);
+                        _context.SaveChanges();
+                    }
+                    tagIds.Add(tag.Id);
                 }
-                tagIds.Add(tag.Id);
+                return Ok(new { tagIds = tagIds });
             }
-            return Ok(new { tagIds = tagIds });
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
     }

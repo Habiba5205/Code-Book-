@@ -22,7 +22,7 @@ async function loadFollowings(followingsContainer) {
                 <a href="OtherUserProfile.html?userId=${user.id}" class="card p-4 text-decoration-none text-dark shadow-sm hover-card">
                 <div class="row align-items-center">
                 <div class="col-md-3 text-center">
-                <img src="${user.avatarUrl ? user.avatarUrl : 'images/default-avatar.png'}"
+                <img src="${user.avatarUrl ? user.avatarUrl : 'https://i.pinimg.com/originals/60/b6/6f/60b66f7e6337e0de45cea924a3946dbd.png'}"
                 alt="Profile Avatar"
                 class="profile-img">
                 </div>
@@ -37,7 +37,8 @@ async function loadFollowings(followingsContainer) {
         });
 }
 catch(error){
-    alert("Couldn't load Followings: " + error.message);
+   errorMsg.textContent = "Couldn't load" ;
+    errorMsg.style.display = 'block';
 }
 };
 

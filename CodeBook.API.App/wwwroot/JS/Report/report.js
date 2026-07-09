@@ -22,7 +22,8 @@ window.onload= () =>{
         );
 
         if (!selectedReasonEl) {
-            alert("Please select a reason!");
+           errorMsg.textContent = 'Please select a reason!';
+            errorMsg.style.display = 'block';
             return;
         }
 
@@ -35,11 +36,13 @@ window.onload= () =>{
 
     try{
         const result = await api.post("Report/submitreport", reportData);
-        alert("Report Submitted Successfully!");
+        successMsg.textContent = 'Report submitted successfully';
+        successMsg.style.display = 'block';
         window.location.href = `../../html/Posts/Feed.html`;
     }
     catch(error){
-        alert("Couldn't submit report: " + error.message);
+          errorMsg.textContent = "Couldn't submit report" + error.message;
+            errorMsg.style.display = 'block';
     }
     });
 

@@ -351,3 +351,4 @@ C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.API.App\obj\Debug\net8.0\refin
 C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.API.App\obj\Debug\net8.0\CodeBook.API.App.pdb
 C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.API.App\obj\Debug\net8.0\CodeBook.API.App.genruntimeconfig.cache
 C:\Users\Habiba Ahmed\Desktop\Code-Book-\CodeBook.API.App\obj\Debug\net8.0\ref\CodeBook.API.App.dll
+C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.API.App\bin\Debug\net8.0\CodeBook.API.App.staticwebassets.runtime.json
