@@ -18,9 +18,7 @@ finally {
 
 
 function renderNotifications(notifications) {
-     /* notifications.sort(
-        (a, b) => new Date(b.dateCreated) - new Date(a.dateCreated)
-    );*/
+  
 
   const list=document.getElementById("notifications-list");
   list.innerHTML = "";
