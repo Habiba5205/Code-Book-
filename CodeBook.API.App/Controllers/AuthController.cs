@@ -61,7 +61,7 @@ namespace CodeBook.API.App.Controllers
                 return Unauthorized(new { message = "Invalid Email or Password" });
             }
             catch (Exception ex) {
-                return BadRequest(new { message = ex.Message));
+                return BadRequest(new { message = ex.Message });
             }
 
         }
@@ -85,7 +85,7 @@ namespace CodeBook.API.App.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.Message));
+                return BadRequest(new { message = ex.Message });
             }
         }
 
@@ -129,7 +129,7 @@ namespace CodeBook.API.App.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.Message));
+                return BadRequest(new { message = ex.Message });
             }
 
 
@@ -155,7 +155,7 @@ namespace CodeBook.API.App.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.Message));
+                return BadRequest(new { message = ex.Message });
             }
 
         }

@@ -51,7 +51,7 @@ namespace CodeBook.API.App.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.Message));
+                return BadRequest(new { message = ex.Message });
             }
         }
 
@@ -73,7 +73,7 @@ namespace CodeBook.API.App.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.Message));
+                return BadRequest(new { message = ex.Message });
             }
         }
 
@@ -91,7 +91,7 @@ namespace CodeBook.API.App.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.Message));
+                return BadRequest(new { message = ex.Message });
             }
         }
 
@@ -112,7 +112,7 @@ namespace CodeBook.API.App.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.Message));
+                return BadRequest(new { message = ex.Message });
             }
         }
     }
