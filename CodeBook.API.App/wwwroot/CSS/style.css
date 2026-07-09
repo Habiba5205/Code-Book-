@@ -1238,6 +1238,20 @@ body.light-theme #community-data-holder{
     .switch-track .fa-moon {
         display: none !important;
     }
+    .reaction-container{
+    gap:5px;
+}
+
+.reaction-btn{
+    width:34px;
+    height:34px;
+    padding:0;
+    font-size:15px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
     .community-card .btn-purple{
     padding:6px 10px;
     font-size:.8rem;
