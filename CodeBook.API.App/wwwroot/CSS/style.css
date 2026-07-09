@@ -421,8 +421,8 @@
 
 
 .comment-reaction.reacted {
-    background-color: #7C3AED ;   
-    color: white;
+    background-color: white ;   
+    color: #7C3AED;
     border-color: #7C3AED ;
 }
 
@@ -448,6 +448,13 @@
     background-color: #7C3AED ;
     color: white;
 }
+
+.comment-reaction-btn.reacted {
+    background-color:white ;
+    color:#7C3AED;
+    border-color: #7C3AED ;
+}
+
 .reaction-total-box {
     background-color: #21262d;
     color: #ffffff;
