@@ -4,6 +4,8 @@ import { parseText } from '../Interactions/HashTags.js';
 
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get('id');
+   const errorMsg = document.getElementById('errorMsg');
+    const successMsg = document.getElementById('successMsg');
 
 
 
@@ -118,7 +120,16 @@ console.log('Match:', post.authorId === currentUserid);
                 <div id="saveMsg" class="success-msg mt-2"></div>
             </div>
        `;
+if (post.userReaction) {
+    const btn = document.querySelector(
+        `.reaction-btn[data-type="${post.userReaction}"]`
+    );
 
+    if (btn) {
+        btn.classList.add("reacted");
+        btn.dataset.liked = "true";
+    }
+}
 
     } catch (error) {
         document.getElementById('postContainer').innerHTML = 

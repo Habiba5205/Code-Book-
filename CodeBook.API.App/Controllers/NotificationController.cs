@@ -26,31 +26,59 @@ namespace CodeBook.API.App.Controllers
         [Authorize]
         public ActionResult GetNotification()
         {
-            var notification = _notificationService.GetUserNotification(_currentUserInfo.GetCurrentUserId());
-            return Ok(notification);
+            try
+            {
+                var notification = _notificationService.GetUserNotification(_currentUserInfo.GetCurrentUserId());
+                return Ok(notification);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
         [HttpPatch("readNotification")]
         [Authorize]
         public ActionResult MarkAsRead(int id)
         {
-            _notificationService.MarkAsRead(id);
-            return Ok(new { message = "Marked As Read!!" });
+            try
+            {
+                _notificationService.MarkAsRead(id);
+                return Ok(new { message = "Marked As Read!!" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
         [HttpGet("GetUnreadCount")]
         [Authorize]
         public ActionResult GetUnreadCount()
         {
-            var count = _notificationService.GetUnreadNotificationCount(_currentUserInfo.GetCurrentUserId());
-            return Ok(new {unreadCount = count});
+            try
+            {
+                var count = _notificationService.GetUnreadNotificationCount(_currentUserInfo.GetCurrentUserId());
+                return Ok(new { unreadCount = count });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
         [HttpPatch("readAllNotifications")]
         [Authorize]
         public ActionResult MarkAllAsRead()
         {
-            _notificationService.MarkAllAsRead(_currentUserInfo.GetCurrentUserId());
-            return Ok(new { message = "Marked All As Read!!" });
+            try
+            {
+                _notificationService.MarkAllAsRead(_currentUserInfo.GetCurrentUserId());
+                return Ok(new { message = "Marked All As Read!!" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
     }

@@ -31,11 +31,18 @@ namespace CodeBook.API.App.Controllers
         public ActionResult AddPostReaction([FromBody] ReactionDto reactionDto)
         {
             var currentId = _currentUserInfo.GetCurrentUserId();
-            ErrorResponse result = _reactionService.AddPostReaction(currentId, reactionDto);
-            if (result.Success)
-                return Ok(new { message = result.Message});
+            try
+            {
+                ErrorResponse result = _reactionService.AddPostReaction(currentId, reactionDto);
+                if (result.Success)
+                    return Ok(new { message = result.Message });
 
-            return BadRequest(new { message = result.Message });
+                return BadRequest(new { message = result.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
         [HttpPost("addCommentreaction")]
         [Authorize]
@@ -44,11 +51,18 @@ namespace CodeBook.API.App.Controllers
             var currentId = _currentUserInfo.GetCurrentUserId();
             if (reactionDto.CommentId == null)
                 return BadRequest(new { message = "CommentId is required" });
-            ErrorResponse result = _reactionService.AddCommentReaction(currentId, reactionDto);
-            if (result.Success)
-                return Ok(new { message = result.Message });
+            try
+            {
+                ErrorResponse result = _reactionService.AddCommentReaction(currentId, reactionDto);
+                if (result.Success)
+                    return Ok(new { message = result.Message });
 
-            return BadRequest(new { message = result.Message });
+                return BadRequest(new { message = result.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
         [HttpDelete("removePostreaction")]
@@ -56,11 +70,18 @@ namespace CodeBook.API.App.Controllers
         public ActionResult RemovePostReaction(int postId)
         {
             var currentId = _currentUserInfo.GetCurrentUserId();
-            ErrorResponse result = _reactionService.RemovePostReaction(postId, currentId);
-            if (result.Success)
-                return Ok(new { message = result.Message });
+            try
+            {
+                ErrorResponse result = _reactionService.RemovePostReaction(postId, currentId);
+                if (result.Success)
+                    return Ok(new { message = result.Message });
 
-            return BadRequest(new { message = result.Message });
+                return BadRequest(new { message = result.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
         [HttpDelete("removeCommentreaction")]
@@ -68,11 +89,18 @@ namespace CodeBook.API.App.Controllers
         public ActionResult RemoveCommentReaction(int postId,int commentId)
         {
             var currentId = _currentUserInfo.GetCurrentUserId();
-            ErrorResponse result = _reactionService.RemoveCommentReaction(currentId,commentId);
-            if (result.Success)
-                return Ok(new { message = result.Message });
+            try
+            {
+                ErrorResponse result = _reactionService.RemoveCommentReaction(currentId, commentId);
+                if (result.Success)
+                    return Ok(new { message = result.Message });
 
-            return BadRequest(new { message = result.Message });
+                return BadRequest(new { message = result.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
     }
 }

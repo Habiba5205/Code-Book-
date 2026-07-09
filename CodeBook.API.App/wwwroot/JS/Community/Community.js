@@ -2,7 +2,8 @@ import { api } from '../api.js';
 window.onload=()=>{
     var communitiesContainer = document.getElementById("communities-container");
     var explorecommunities = document.getElementById("explore-communities");
-
+   const errorMsg = document.getElementById('errorMsg');
+    const successMsg = document.getElementById('successMsg');
 
     async function GetCommunities() {
         try{
@@ -19,7 +20,7 @@ window.onload=()=>{
                 <div class="row align-items-center community-card p-3 ">
                 <div class="col-md-3 text-center align-items-center">
                 
-               <img src="${community.iconURL ? community.iconURL : ''}" 
+               <img src="${community.iconURL ? community.iconURL : 'https://cdn-icons-png.freepik.com/512/11925/11925833.png'}" 
                 alt="Community Icon" 
                 class="profile-img">
                 </div>
@@ -47,7 +48,8 @@ window.onload=()=>{
             });
         }
          catch(error){
-            alert("Couldn't load communities: " + error.message);
+            errorMsg.textContent = "Couldn't load communities: " + error.message;
+            errorMsg.style.display = 'block';
         }
         
     }
@@ -65,7 +67,7 @@ window.onload=()=>{
                 <div class="row align-items-center community-card pt-4">
                 <div class="col-md-3 text-center align-items-center">
                 
-               <img src="${community.iconURL ? community.iconURL : 'https://via.placeholder.com/50'}" 
+               <img src="${community.iconURL ? community.iconURL : 'https://cdn-icons-png.freepik.com/512/11925/11925833.png'}" 
                 alt="Community Icon" 
                 class="profile-img">
                 </div>
@@ -99,7 +101,8 @@ window.onload=()=>{
             });
         }
          catch(error){
-            alert("Couldn't load communities: " + error.message);
+            errorMsg.textContent = "Couldn't load communities: " + error.message;
+            errorMsg.style.display = 'block';
         }
 
 
@@ -115,12 +118,14 @@ window.handleAction = async (communityId ,buttonElement) => {
                 const role = 'Member';
                 const result = await api.post(`communities/${communityId}/joincommunity`,{Role : role});
                 if(result.message ==="Joined Community Successfully"){
-                    alert("Joined community!");
+                    successMsg.textContent = "Joined Community";
+                    successMsg.style.display = 'block';
                     window.location.href = `../../HTML/Community/Communityfeed.html?id=${communityId}`;
                 }
             }
         catch(error){
-            alert("Error: " + error.message);
+            errorMsg.textContent = "Error: " + error.message;
+            errorMsg.style.display = 'block';
             buttonElement.disabled = false;
         }
 

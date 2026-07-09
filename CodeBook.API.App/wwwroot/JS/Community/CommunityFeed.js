@@ -5,6 +5,8 @@ window.onload=()=>{
     var createpostbtn = document.getElementById("createpost-btn");
     const params = new URLSearchParams(window.location.search);
     const communityId = params.get("id");
+       const errorMsg = document.getElementById('errorMsg');
+    const successMsg = document.getElementById('successMsg');
     console.log(communityId);
 
     createpostbtn.addEventListener('click',() => {
@@ -19,7 +21,7 @@ window.onload=()=>{
                 <div class="row align-items-center justify-content-center">
                 <div class="col-md-3 text-center align-items-center">
                 
-               <img src="${community.iconURL ? community.iconURL : 'https://via.placeholder.com/50'}" 
+               <img src="${community.iconURL ? community.iconURL : 'https://cdn-icons-png.freepik.com/512/11925/11925833.png'}" 
                 alt="Community Icon" 
                 class="profile-img-2">
                 </div>
@@ -51,7 +53,8 @@ window.onload=()=>{
             }
         }
         catch(error){
-                alert("Couldn't load community details: " + error.message);
+               errorMsg.textContent = "Couldn't load community details: " + error.message;
+            errorMsg.style.display = 'block';
         }
         
     }
@@ -146,12 +149,14 @@ window.handleAction = async (communityId,buttonElement) => {
             try{
                 const result = await api.delete(`communities/${communityId}/unjoin`);
                 if(result.message ==="Unjoined Community Successfully"){
-                    alert("Unjoined community!");
+                   successMsg.textContent = "Unjouned Community!";
+                   successMsg.style.display = 'block';
                     window.location.href = '../../HTML/Posts/Feed.html';
                 }
             }
         catch(error){
-            alert("Error: " + error.message);
+        errorMsg.textContent = "Error: " + error.message;
+        errorMsg.style.display = 'block';
             buttonElement.disabled = false;
         }
 

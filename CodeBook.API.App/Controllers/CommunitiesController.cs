@@ -137,12 +137,19 @@ namespace CodeBook.Business.App.Controllers
                 return BadRequest(new { message = "keyword is required" });
             }
             var userId = _currentUserInfo.GetCurrentUserId();
-            var communities = _communityService.SearchCommunities(keyword);
-            foreach (var community in communities)
+            try
             {
-                if (community.OwnerId == userId) community.isOwner = true;
+                var communities = _communityService.SearchCommunities(keyword);
+                foreach (var community in communities)
+                {
+                    if (community.OwnerId == userId) community.isOwner = true;
+                }
+                return Ok(communities);
             }
-            return Ok(communities);
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
 
@@ -207,7 +214,7 @@ namespace CodeBook.Business.App.Controllers
                 return Ok(communities);
             }
             catch (Exception e) {
-                return BadRequest(new { message = "Couldn't load Communities" });
+                return BadRequest(new { message = "Couldn't load Communities: " + e.Message });
             }
 
         }
@@ -222,7 +229,7 @@ namespace CodeBook.Business.App.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(new { message = "Couldn't get community feed" });
+                return BadRequest(new { message = "Couldn't get community feed: "+ e.Message });
             }
         }
 
@@ -237,7 +244,7 @@ namespace CodeBook.Business.App.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(new { message = "Couldn't get communities" });
+                return BadRequest(new { message = "Couldn't get communities: " + e.Message });
             }
         }
 
@@ -251,7 +258,7 @@ namespace CodeBook.Business.App.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(new { message = "Couldn't get communities" });
+                return BadRequest(new { message = "Couldn't get communities: " + e.Message });
             }
         }
 

@@ -3,6 +3,8 @@ window.onload=()=>{
     var createcommunitybtn = document.getElementById("createcommunity-btn");
     var communitycontainer = document.getElementById("communities-container");
     var createcontainer = document.getElementById("creation-card");
+    const errorMsg = document.getElementById('errorMsg');
+    const successMsg = document.getElementById('successMsg');
     
      createcommunitybtn.addEventListener('click',(e) => {
                         createCommunity(e.target);});
@@ -21,7 +23,7 @@ window.onload=()=>{
                 <div class="row align-items-center justify-content-evenly community-card">
                 <div class="col-md-3 text-center align-items-center mt-4">
                 
-               <img src="${community.iconURL ? community.iconURL : 'https://via.placeholder.com/50'}" 
+               <img src="${community.iconURL ? community.iconURL : 'https://cdn-icons-png.freepik.com/512/11925/11925833.png'}" 
                 alt="Community Icon" 
                 class="profile-img">
                 </div>
@@ -78,7 +80,8 @@ window.onload=()=>{
             });
         }
          catch(error){
-            alert("Couldn't load communities: " + error.message);
+           errorMsg.textContent = "Couldn't load communities: " + error.message;
+            errorMsg.style.display = 'block';
         }
         
     }
@@ -143,7 +146,8 @@ window.onload=()=>{
             var urlinput = card.querySelector('#url-input');
             const namevalue = nameinput.value;
             if(!namevalue){
-            alert("Please Fill all the required fields!");
+             errorMsg.textContent = 'Please fill all required fields';
+            errorMsg.style.display = 'block';
                 return;
             }
 
@@ -158,7 +162,7 @@ window.onload=()=>{
 
             namedisplay.textContent = nameinput.value;
             descdisplay.textContent = descinput.value;
-            card.querySelector('.profile-img').src = urlinput.value? urlinput.value : 'https://via.placeholder.com/50';
+            card.querySelector('.profile-img').src = urlinput.value? urlinput.value : 'https://cdn-icons-png.freepik.com/512/11925/11925833.png';
             namedisplay.classList.remove('d-none');
             nameinput.classList.add('d-none');
             urlinput.classList.add('d-none');
@@ -171,13 +175,14 @@ window.onload=()=>{
             card.querySelector('#cancel-update').classList.add('d-none');
             card.querySelector('.update-btn').classList.remove('d-none');
 
-                    alert("Updated community!");
+                     successMsg.textContent = 'Updated Community';
+                     successMsg.style.display = 'block';
                     GetCommunities();
                 }
             }
         catch(error){
-            alert("Error: " + error.message);
-            buttonElement.disabled = false;
+       errorMsg.textContent = "Error: " + error.message;
+            errorMsg.style.display = 'block';
         }
 
     }
@@ -187,13 +192,14 @@ window.onload=()=>{
             try{
                 const result = await api.delete(`communities/${communityId}/deletecommunity`);
                 if(result.message ==="Community Deleted Successfully"){
-                    alert("Community Deleted!");
+                     successMsg.textContent = 'Community deleted';
+                     successMsg.style.display = 'block';
                     GetCommunities();
                 }
             }
         catch(error){
-            alert("Error: " + error.message);
-            buttonElement.disabled = false;
+          errorMsg.textContent = "Error: " + error.message;
+            errorMsg.style.display = 'block';
         }
 
     }
@@ -205,7 +211,8 @@ window.onload=()=>{
         var urlinput = document.getElementById("newurl-input");
         const namevalue = nameinput.value;
         if(!namevalue){
-            alert("Please Fill all the required fields!");
+             errorMsg.textContent = 'Please fill all required fields';
+            errorMsg.style.display = 'block';
                 return;
             }
 
@@ -218,13 +225,15 @@ window.onload=()=>{
                 if(result.message === "Community Created Successfully"){
                     var createcontainer = document.getElementById("creation-card");
                     createcontainer.innerHTML = '';
-                    alert("Community Created!");
+                    successMsg.textContent = 'Community created';
+                     successMsg.style.display = 'block';
                     createcommunitybtn.classList.remove('d-none');
                     GetCommunities();
                 }
             }
             catch(error){
-                alert("Error: " + error.message);
+                  errorMsg.textContent = "Error: " + error.message;
+            errorMsg.style.display = 'block';
                 buttonElement.disabled = false;
             }
     }
