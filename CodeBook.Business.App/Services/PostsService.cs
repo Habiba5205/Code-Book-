@@ -240,7 +240,17 @@ namespace CodeBook.Business.App.Services
                     return null;
                 }   
             }
-            return mapper.Map<PostResponse>(post);
+            var response = mapper.Map<PostResponse>(post);
+
+            if (userId != null)
+            {
+                var reaction = post.Reactions
+                    .FirstOrDefault(r => r.UserId == userId);
+
+                response.UserReaction = reaction?.Type.ToString();
+            }
+
+            return response;
         }
         public List<PostResponse> SearchPosts(int userId,string? keyword, string? language, string? tag)
         {

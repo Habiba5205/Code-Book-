@@ -106,6 +106,16 @@ async function loadFeed() {
 
             `;
             postsContainer.appendChild(div);
+            if (post.userReaction) {
+    const btn = div.querySelector(
+        `[onclick="toggleReaction(this, ${post.id}, '${post.userReaction}')"]`
+    );
+
+    if (btn) {
+        btn.classList.add("reacted");
+        btn.dataset.liked = "true";
+    }
+}
         });
 
         console.log('Current page:', currentPage);
@@ -118,6 +128,8 @@ async function loadFeed() {
 
         document.getElementById('nextBtn').style.display = 
             posts.length < 20 ? 'none' : 'inline-block';
+
+            
 
     } catch (error) {
         postsContainer.innerHTML = `

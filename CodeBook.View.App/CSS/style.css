@@ -1346,3 +1346,14 @@ body.light-theme #community-data-holder{
 .password-toggle:hover{
     color:#5b21b6;
 }
+body.light-theme .error-msg{
+    background: #fdeaea;
+    border: 1px solid #dc3545;
+    color: #dc3545;
+}
+
+body.light-theme .success-msg{
+    background: #eafaf1;
+    border: 1px solid #198754;
+    color: #198754;
+}

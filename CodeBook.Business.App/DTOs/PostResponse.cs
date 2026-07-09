@@ -19,5 +19,6 @@ namespace CodeBook.Business.App.DTOs
         public bool isOwner { get; set; } = false;
         public int? CommunityId { get; set; }
         public string? CommunityName { get; set; }
+        public string? UserReaction { get; set; }
     }
 }

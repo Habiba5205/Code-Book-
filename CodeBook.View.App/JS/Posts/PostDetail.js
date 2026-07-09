@@ -120,7 +120,16 @@ console.log('Match:', post.authorId === currentUserid);
                 <div id="saveMsg" class="success-msg mt-2"></div>
             </div>
        `;
+if (post.userReaction) {
+    const btn = document.querySelector(
+        `.reaction-btn[data-type="${post.userReaction}"]`
+    );
 
+    if (btn) {
+        btn.classList.add("reacted");
+        btn.dataset.liked = "true";
+    }
+}
 
     } catch (error) {
         document.getElementById('postContainer').innerHTML = 
