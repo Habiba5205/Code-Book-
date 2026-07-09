@@ -24,7 +24,7 @@ async function loadProfile(){
         document.getElementById('followingCount').innerText = data.followingCount;
 
         const avatar = document.getElementById('avatar');
-        avatar.src = data.avatarUrl? data.avatarUrl : 'https://i.pinimg.com/originals/60/b6/6f/60b66f7e6337e0de45cea924a3946dbd.png';
+        avatar.src = data.avatarUrl? data.avatarUrl : 'images/default-avatar.png';
 
      
     }
@@ -36,25 +36,21 @@ async function loadProfile(){
 async function follow(){
     try{
         await api.post(`User/follow?userid=${viewedUserId}`);
-          successMsg.textContent = "Followed!!";
-        successMsg.style.display = 'block';
+        alert('Followed!!');
         await loadProfile();
     }
        catch(error){
-         errorMsg.textContent = "Failed to follow: " + error.message;
-            errorMsg.style.display = 'block';
+        alert('Failed to follow: '+error.message);
     }
 }
 async function unfollow(){
     try{
         await api.delete(`User/unfollow?userid=${viewedUserId}`);
-       successMsg.textContent = "Unfollowed!!";
-            successMsg.style.display = 'block';
+        alert('UnFollowed!!');
         await loadProfile();
     }
        catch(error){
-        errorMsg.textContent = "Failed to unfollow: " + error.message;
-            errorMsg.style.display = 'block';
+        alert('Failed to unfollow: '+error.message);
     }
 }
 
@@ -94,7 +90,7 @@ async function viewPosts() {
     
             document.getElementById('postsList').innerHTML = posts.map(post => `
                 <div class = "mt-3 mb-3 post-card">
-                <a class="text-decoration-none" href= "../Posts/PostDetail.html?id=${post.id}" >
+                <a class="text-decoration-none" href= "../Posts/PostDetail?id=${post.id}" >
                     <h5 class="post-title">${post.title}</h5>
                     <p class="post-body">${post.body}</p>
                     ${window.escapeHTML(post.codeSnippet)? `

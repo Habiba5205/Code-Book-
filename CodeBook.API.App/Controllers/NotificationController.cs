@@ -34,44 +34,23 @@ namespace CodeBook.API.App.Controllers
         [Authorize]
         public ActionResult MarkAsRead(int id)
         {
-            try
-            {
-                _notificationService.MarkAsRead(id);
-                return Ok(new { message = "Marked As Read!!" });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            _notificationService.MarkAsRead(id);
+            return Ok(new { message = "Marked As Read!!" });
         }
 
         [HttpGet("GetUnreadCount")]
         [Authorize]
         public ActionResult GetUnreadCount()
         {
-            try
-            {
-                var count = _notificationService.GetUnreadNotificationCount(_currentUserInfo.GetCurrentUserId());
-                return Ok(new { unreadCount = count });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            var count = _notificationService.GetUnreadNotificationCount(_currentUserInfo.GetCurrentUserId());
+            return Ok(new {unreadCount = count});
         }
         [HttpPatch("readAllNotifications")]
         [Authorize]
         public ActionResult MarkAllAsRead()
         {
-            try
-            {
-                _notificationService.MarkAllAsRead(_currentUserInfo.GetCurrentUserId());
-                return Ok(new { message = "Marked All As Read!!" });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            _notificationService.MarkAllAsRead(_currentUserInfo.GetCurrentUserId());
+            return Ok(new { message = "Marked All As Read!!" });
         }
 
     }

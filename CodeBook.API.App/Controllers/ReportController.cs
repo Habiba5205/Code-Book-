@@ -36,18 +36,11 @@ namespace CodeBook.API.App.Controllers
             }
             if (request.CommentId == 0) request.CommentId = null;
             if (request.PostId == 0) request.PostId = null;
-            try
-            {
-                var result = _reportService.SubmitReport(_currentUserInfo.GetCurrentUserId(), request);
-                if (result != null && result.Success)
-                    return Ok(new { message = result.Message });
+            var result = _reportService.SubmitReport(_currentUserInfo.GetCurrentUserId(), request);
+            if(result != null && result.Success)
+                return Ok(new { message = result.Message });
 
-                return BadRequest(new { message = result.Message });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            return BadRequest(new { message = result.Message });
 
         }
 
@@ -60,19 +53,13 @@ namespace CodeBook.API.App.Controllers
             {
                 return BadRequest(validationResult.Errors);
             }
-            try
+
+            ErrorResponse result = _reportService.UpdateReport(_currentUserInfo.GetCurrentUserId(), request);
+            if(result != null && result.Success)
             {
-                ErrorResponse result = _reportService.UpdateReport(_currentUserInfo.GetCurrentUserId(), request);
-                if (result != null && result.Success)
-                {
-                    return Ok(new { message = result.Message });
-                }
-                return BadRequest(new { message = result.Message });
+                return Ok(new { message = result.Message });
             }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            return BadRequest(new { message = result.Message });
         }
     }
 }

@@ -9,16 +9,11 @@ async function toggleReaction(button, postId, reactionType) {
 
     if (currentReaction === button) {
         const success = await removeReaction(postId);
-      if (success) {
-    button.classList.remove("reacted");
-    button.dataset.liked = "false";
-
-    const post = await api.get(`Post/${postId}`);
-
-    if (countBox) {
-        countBox.textContent = post.likeCount;
-    }
-}
+        if (success) {
+            button.classList.remove("reacted");
+            button.dataset.liked = "false";
+            if (countBox) countBox.textContent = Math.max(0, currentCount - 1);
+        }
         return;
     }
 
@@ -29,20 +24,14 @@ async function toggleReaction(button, postId, reactionType) {
         
     }
 
-const success = await addReaction(postId, reactionType);
-
-if (success) {
-    button.classList.add("reacted");
-    button.dataset.liked = "true";
-
-
-    const post = await api.get(`Post/${postId}`);
-
-    if (countBox) {
-        countBox.textContent = post.likeCount;
+    const success = await addReaction(postId, reactionType);
+    if (success) {
+        button.classList.add("reacted");
+        button.dataset.liked = "true";
+        if (!currentReaction && countBox) {
+            countBox.textContent = currentCount + 1;
+        }
     }
-}
-    
 }
 
 let reactionCallCount = 0;

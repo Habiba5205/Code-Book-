@@ -4,15 +4,12 @@ window.onload=()=>{
         const button = document.getElementById('loginBtn');
         const emailinput = document.getElementById('email');
         const passwordinput = document.getElementById('password');
-           const errorMsg = document.getElementById('errorMsg');
-    const successMsg = document.getElementById('successMsg');
         button.addEventListener('click', async () =>
         {
             const email = emailinput.value;
             const password = passwordinput.value;
             if(!email || !password){
-                 errorMsg.textContent = 'Please fill all required fields';
-                 errorMsg.style.display = 'block';
+                alert("Please Fill all the required fields!");
                 return;
             }
             try{
@@ -31,8 +28,7 @@ window.onload=()=>{
                 }
                    
             } catch (error) {
-                 errorMsg.textContent = "Login failed: " + error.message;
-                errorMsg.style.display = 'block';
+                alert("Login failed: " + error.message);
             } finally {
             button.innerText = "Sign In";
             button.disabled = false;
@@ -40,18 +36,4 @@ window.onload=()=>{
     });
 
 }
-const password = document.getElementById("password");
-const togglePassword = document.getElementById("togglePassword");
-
-togglePassword.addEventListener("click", () => {
-
-    if(password.type === "password"){
-        password.type = "text";
-        togglePassword.classList.replace("fa-eye", "fa-eye-slash");
-    }else{
-        password.type = "password";
-        togglePassword.classList.replace("fa-eye-slash", "fa-eye");
-    }
-
-});
 

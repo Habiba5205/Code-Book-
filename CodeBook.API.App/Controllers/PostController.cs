@@ -33,16 +33,9 @@ namespace CodeBook.API.App.Controllers
             { 
                 userId = _currentUserInfo.GetCurrentUserId();
             }
-            try
-            {
-                var feed = _postService.GetFeed(page, userId);
+            var feed = _postService.GetFeed(page, userId);
 
-                return Ok(feed);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            return Ok(feed);
         }
 
         [HttpGet("{postId}")]
@@ -54,20 +47,13 @@ namespace CodeBook.API.App.Controllers
             {
                 userId = _currentUserInfo.GetCurrentUserId();
             }
-            try
+            var post = _postService.GetPost(postId, userId);
+            if (post == null)
             {
-                var post = _postService.GetPost(postId, userId);
-                if (post == null)
-                {
-                    return NotFound(new { message = "Post not found or access denied" });
-                }
-                if (userId != null && post.AuthorId == userId) { post.isOwner = true; }
-                return Ok(post);
+                return NotFound(new { message = "Post not found or access denied" });
             }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            if (userId != null && post.AuthorId == userId) { post.isOwner = true; }
+            return Ok(post);
         }
 
         [HttpPost("create")]
@@ -80,22 +66,16 @@ namespace CodeBook.API.App.Controllers
             }
             request.TagIds ??= new List<int>();
             var userId = _currentUserInfo.GetCurrentUserId();
-            try
-            {
-                var result = request.CommunityId == 0
-                    ? _postService.CreatePost(userId, request, null)
-                    : _postService.CreatePost(userId, request, request.CommunityId);
 
-                if (result.Success)
-                {
-                    return Ok(new { message = result.Message });
-                }
-                return BadRequest(new { message = result.Message });
-            }
-            catch (Exception ex)
+            var result = request.CommunityId == 0
+                ? _postService.CreatePost(userId, request, null)                    
+                : _postService.CreatePost(userId, request, request.CommunityId);
+
+            if (result.Success)
             {
-                return BadRequest(new { message = ex.Message });
+                return Ok(new { message = result.Message });
             }
+            return BadRequest(new { message = result.Message });
         }
 
         [HttpPut("{postId}/update")]
@@ -107,19 +87,12 @@ namespace CodeBook.API.App.Controllers
                 return BadRequest(new { message = "Invalid request" });
             }
             var userId = _currentUserInfo.GetCurrentUserId() ;
-            try
+            var result = _postService.UpdatePost(postId, request, userId);
+            if (result.Success)
             {
-                var result = _postService.UpdatePost(postId, request, userId);
-                if (result.Success)
-                {
-                    return Ok(new { message = result.Message });
-                }
-                return BadRequest(new { message = result.Message });
+                return Ok(new { message = result.Message });
             }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            return BadRequest(new { message = result.Message });
         }
 
         [HttpDelete("{postId}/deletePost")]
@@ -135,7 +108,7 @@ namespace CodeBook.API.App.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest(new { message = ex.Message });
+                return BadRequest(new { message = ex.InnerException.Message });
 
             }
 
@@ -146,19 +119,12 @@ namespace CodeBook.API.App.Controllers
         public IActionResult SavePost(int postId)
         {
             var userId = _currentUserInfo.GetCurrentUserId();
-            try
+            var result = _postService.SavePost(userId, postId);
+            if (result.Success)
             {
-                var result = _postService.SavePost(userId, postId);
-                if (result.Success)
-                {
-                    return Ok(new { message = result.Message });
-                }
-                return BadRequest(new { message = result.Message });
+                return Ok(new { message = result.Message });
             }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            return BadRequest(new { message = result.Message });
         }
 
         [HttpGet("saved")]
@@ -166,15 +132,8 @@ namespace CodeBook.API.App.Controllers
         public IActionResult GetSavedPosts()
         {
             var userId = _currentUserInfo.GetCurrentUserId();
-            try
-            {
-                var posts = _postService.GetSavedPosts(userId);
-                return Ok(posts);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            var posts = _postService.GetSavedPosts(userId);
+            return Ok(posts);
         }
 
         [HttpDelete("{id}/unsave")]
@@ -182,38 +141,24 @@ namespace CodeBook.API.App.Controllers
         public IActionResult UnsavePost(int id)
         {
             var userId = _currentUserInfo.GetCurrentUserId();
-            try
-            {
-                var result = _postService.UnsavePost(userId, id);
+            var result = _postService.UnsavePost(userId, id);
 
-                if (result.Success)
-                    return Ok(new { message = result.Message });
+            if (result.Success)
+                return Ok(new { message = result.Message });
 
-                return BadRequest(new { message = result.Message });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            return BadRequest(new { message = result.Message });
         }
 
         [HttpGet("{postId}/tags")]
         [AllowAnonymous]
         public IActionResult GetPostTag(int postId)
         {
-            try
+            var tags = _postService.GetPostTags(postId);
+            if (tags == null || !tags.Any())
             {
-                var tags = _postService.GetPostTags(postId);
-                if (tags == null || !tags.Any())
-                {
-                    return NotFound(new { message = "No tags found for this post" });
-                }
-                return Ok(tags);
+                return NotFound(new { message = "No tags found for this post" });
             }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            return Ok(tags);
         }
 
         [HttpGet("search")]
@@ -222,15 +167,8 @@ namespace CodeBook.API.App.Controllers
                                   [FromQuery] string? language,
                                   [FromQuery] string? tag)
         {
-            try
-            {
-                var results = _postService.SearchPosts(_currentUserInfo.GetCurrentUserId(), keyword, language, tag);
-                return Ok(results);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            var results = _postService.SearchPosts(_currentUserInfo.GetCurrentUserId(),keyword, language, tag);
+            return Ok(results);
         }
 
         [HttpGet("myposts")]
@@ -238,15 +176,8 @@ namespace CodeBook.API.App.Controllers
         public IActionResult GetMyPosts()
         {
             var userId = _currentUserInfo.GetCurrentUserId();
-            try
-            {
-                var posts = _postService.GetUserPosts(userId);
-                return Ok(posts);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            var posts = _postService.GetUserPosts(userId);
+            return Ok(posts);
         }
     }
 }

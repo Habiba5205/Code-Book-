@@ -31,28 +31,21 @@ namespace CodeBook.API.App.Controllers
             {
                 userId = _currentUserInfo.GetCurrentUserId();
             }
-            try
+            var post = _postService.GetPost(postId, userId);
+            if(post == null)
             {
-                var post = _postService.GetPost(postId, userId);
-                if (post == null)
+                return NotFound(new { message = "Post not found or access denied" });
+            }
+            var comments = _commentService.GetPostComments(postId);
+            if (userId != null && comments.Any())
+            {
+                foreach (var comment in comments)
                 {
-                    return NotFound(new { message = "Post not found or access denied" });
+                    if(comment.AuthorId == userId) comment.isOwner = true;
                 }
-                var comments = _commentService.GetPostComments(postId);
-                if (userId != null && comments.Any())
-                {
-                    foreach (var comment in comments)
-                    {
-                        if (comment.AuthorId == userId) comment.isOwner = true;
-                    }
 
-                }
-                return Ok(comments);
             }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            return Ok(comments);
         }
 
         [HttpPost("{postId}/comments")]
@@ -64,17 +57,10 @@ namespace CodeBook.API.App.Controllers
                 return BadRequest(new { message = "Invalid request" });
             }
             var userId = _currentUserInfo.GetCurrentUserId();
-            try
-            {
-                var result = _commentService.AddComment(userId, postId, request);
-                if (result.Success)
-                    return Ok(new { message = result.Message });
-                return BadRequest(new { message = result.Message });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            var result = _commentService.AddComment(userId, postId, request);
+            if (result.Success)
+                return Ok(new { message = result.Message });
+            return BadRequest(new { message = result.Message });
         }
 
         [HttpDelete("{commentId}/deleteComment")]
@@ -82,17 +68,10 @@ namespace CodeBook.API.App.Controllers
         public IActionResult DeleteComment(int commentId)
         {
             var userId = _currentUserInfo.GetCurrentUserId();
-            try
-            {
-                var result = _commentService.DeleteComment(commentId, userId);
-                if (result.Success)
-                    return Ok(new { message = result.Message });
-                return BadRequest(new { message = result.Message });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            var result = _commentService.DeleteComment(commentId, userId);
+            if (result.Success)
+                return Ok(new { message = result.Message });
+            return BadRequest(new { message = result.Message });
         }
 
         [HttpPut("{commentId}/editComment")]
@@ -103,17 +82,10 @@ namespace CodeBook.API.App.Controllers
                 return BadRequest(new { message = "Invalid request" });
 
             var userId = _currentUserInfo.GetCurrentUserId();
-            try
-            {
-                var result = _commentService.EditComment(commentId, request.Body, userId);
-                if (result.Success)
-                    return Ok(new { message = result.Message });
-                return BadRequest(new { message = result.Message });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            var result = _commentService.EditComment(commentId, request.Body, userId);
+            if (result.Success)
+                return Ok(new { message = result.Message });
+            return BadRequest(new { message = result.Message });
         }
     }
 }

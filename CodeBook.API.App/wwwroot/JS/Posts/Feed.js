@@ -7,8 +7,6 @@ let currentPage = parseInt(urlParams.get('page')) || 1;
 const postsContainer = document.getElementById("postsContainer");
 const badge = document.querySelector(".badge");
 const logoutbtn = document.querySelector(".sidebar-logout");
-   const errorMsg = document.getElementById('errorMsg');
-    const successMsg = document.getElementById('successMsg');
 
 logoutbtn.addEventListener('click',() =>{
     logout();
@@ -106,16 +104,6 @@ async function loadFeed() {
 
             `;
             postsContainer.appendChild(div);
-            if (post.userReaction) {
-    const btn = div.querySelector(
-        `[onclick="toggleReaction(this, ${post.id}, '${post.userReaction}')"]`
-    );
-
-    if (btn) {
-        btn.classList.add("reacted");
-        btn.dataset.liked = "true";
-    }
-}
         });
 
         console.log('Current page:', currentPage);
@@ -128,8 +116,6 @@ async function loadFeed() {
 
         document.getElementById('nextBtn').style.display = 
             posts.length < 20 ? 'none' : 'inline-block';
-
-            
 
     } catch (error) {
         postsContainer.innerHTML = `

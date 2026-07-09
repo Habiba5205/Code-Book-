@@ -27,19 +27,12 @@ namespace CodeBook.API.App.Controllers
         [AllowAnonymous]
         public IActionResult GetProfile(int userId)
         {
-            try
+            UserProfileResponse userProfile = _userService.GetProfile(userId);
+            if (userProfile == null)
             {
-                UserProfileResponse userProfile = _userService.GetProfile(userId);
-                if (userProfile == null)
-                {
-                    return NotFound(new { message = "User not found" });
-                }
-                return Ok(userProfile);
+                return NotFound(new { message = "User not found" });
             }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            return Ok(userProfile);
         }
 
         [HttpGet("viewmyprofile")]
@@ -47,19 +40,12 @@ namespace CodeBook.API.App.Controllers
         public IActionResult GetMyProfile()
         {
             int userId = _currentUserInfo.GetCurrentUserId();
-            try
+            UserProfileResponse userProfile = _userService.GetProfile(userId);
+            if (userProfile == null)
             {
-                UserProfileResponse userProfile = _userService.GetProfile(userId);
-                if (userProfile == null)
-                {
-                    return NotFound(new { message = "User not found" });
-                }
-                return Ok(userProfile);
+                return NotFound(new { message = "User not found" });
             }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            return Ok(userProfile);
         }
 
         [HttpDelete("deletemyprofile")]
@@ -70,17 +56,17 @@ namespace CodeBook.API.App.Controllers
             try
             {
                 ErrorResponse result = _userService.DeleteAccount(currentid);
-                if (result.Success)
+                //if (result.Success)
                 {
                     return Ok(new { message = result.Message });
                 }
-                return BadRequest(new {message = result.Message});
 
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.Message });
+                return BadRequest(new { message = ex.InnerException.Message });
             }
+           // return BadRequest(new { message = result.Message });
         }
 
         [HttpPatch("updatemyprofile")]
@@ -88,20 +74,13 @@ namespace CodeBook.API.App.Controllers
         public IActionResult UpdateProfile(UpdateProfileDto updateProfile)
         {
             var currentid = _currentUserInfo.GetCurrentUserId();
-            try
+            ErrorResponse result = _userService.UpdateProfile(currentid, updateProfile);
+            if (result.Success)
             {
-                ErrorResponse result = _userService.UpdateProfile(currentid, updateProfile);
-                if (result.Success)
-                {
-                    return Ok(new { message = result.Message });
+                return Ok(new { message = result.Message });
 
-                }
-                return BadRequest(new { message = result.Message });
             }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            return BadRequest(new { message = result.Message });
 
         }
 
@@ -114,21 +93,14 @@ namespace CodeBook.API.App.Controllers
             {
                 return BadRequest(new { message = "You cannot follow yourself!" });
             }
-            try
-            {
-                ErrorResponse result = _userService.Follow(currentid, userid);
+            ErrorResponse result = _userService.Follow(currentid, userid);
 
 
-                if (result.Success)
-                {
-                    return Ok(new { message = result.Message });
-                }
-                return BadRequest(new { message = result.Message });
-            }
-            catch (Exception ex)
+            if (result.Success)
             {
-                return BadRequest(new { message = ex.Message });
+                return Ok(new { message = result.Message});
             }
+            return BadRequest(new { message = result.Message });
         }
 
         [HttpDelete("unfollow")]
@@ -140,19 +112,12 @@ namespace CodeBook.API.App.Controllers
             {
                 return BadRequest(new { message = "You cannot unfollow yourself!" });
             }
-            try
+            ErrorResponse result = _userService.Unfollow(currentid, userid);
+            if (result.Success)
             {
-                ErrorResponse result = _userService.Unfollow(currentid, userid);
-                if (result.Success)
-                {
-                    return Ok(new { message = result.Message });
-                }
-                return BadRequest(new { message = result.Message });
+                return Ok(new { message = result.Message });
             }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            return BadRequest(new { message = result.Message });
 
         }
         [HttpGet("followers")]
@@ -160,30 +125,16 @@ namespace CodeBook.API.App.Controllers
         public IActionResult GetFollowers()
         {
             var userId = _currentUserInfo.GetCurrentUserId();
-            try
-            {
-                var followers = _userService.GetFollowers(userId);
-                return Ok(followers);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            var followers = _userService.GetFollowers(userId);
+            return Ok(followers);
         }
         [HttpGet("followings")]
         [Authorize]
         public IActionResult GetFollowing()
         {
             var userId = _currentUserInfo.GetCurrentUserId();
-            try
-            {
-                var following = _userService.GetFollowing(userId);
-                return Ok(following);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            var following = _userService.GetFollowing(userId);
+            return Ok(following);
         }
 
         [HttpGet("search")]
@@ -194,32 +145,19 @@ namespace CodeBook.API.App.Controllers
             {
                 return BadRequest(new { message = "keyword is required" });
             }
-            try
-            {
-                var users = _userService.SearchUsers(keyword).Where(u => u.Role != UserRole.Admin);
-                return Ok(users);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+
+            var users = _userService.SearchUsers(keyword).Where(u => u.Role != UserRole.Admin);
+            return Ok(users); 
         }
 
         [HttpGet("findByUsername")]
         [AllowAnonymous]
         public IActionResult FindByUsername([FromQuery] string username)
         {
-            try
-            {
-                var user = _userService.FindByUsername(username);
-                if (user == null)
-                    return NotFound(new { message = "User not found" });
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            var user = _userService.FindByUsername(username);
+            if (user == null)
+                return NotFound(new { message = "User not found" });
+            return Ok(user);
         }
     }
 }

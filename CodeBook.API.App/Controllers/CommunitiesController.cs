@@ -137,19 +137,12 @@ namespace CodeBook.Business.App.Controllers
                 return BadRequest(new { message = "keyword is required" });
             }
             var userId = _currentUserInfo.GetCurrentUserId();
-            try
+            var communities = _communityService.SearchCommunities(keyword);
+            foreach (var community in communities)
             {
-                var communities = _communityService.SearchCommunities(keyword);
-                foreach (var community in communities)
-                {
-                    if (community.OwnerId == userId) community.isOwner = true;
-                }
-                return Ok(communities);
+                if (community.OwnerId == userId) community.isOwner = true;
             }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            return Ok(communities);
         }
 
 

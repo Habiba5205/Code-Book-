@@ -1,6 +1,4 @@
 import { api } from '../api.js';
-   const errorMsg = document.getElementById('errorMsg');
-    const successMsg = document.getElementById('successMsg');
 
 document.addEventListener('DOMContentLoaded', () => {
     loadSavedPosts();

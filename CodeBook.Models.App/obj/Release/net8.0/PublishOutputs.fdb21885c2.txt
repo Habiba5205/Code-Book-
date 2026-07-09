@@ -1,3 +1,0 @@
-C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Models.App\bin\Release\net8.0\publish\CodeBook.Models.App.dll
-C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Models.App\bin\Release\net8.0\publish\CodeBook.Models.App.deps.json
-C:\Users\roaab\Downloads\Engineering\DEPI\Code-Book-\CodeBook.Models.App\bin\Release\net8.0\publish\CodeBook.Models.App.pdb

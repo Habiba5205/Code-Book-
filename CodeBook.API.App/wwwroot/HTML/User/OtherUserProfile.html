@@ -50,9 +50,6 @@
             <span class="floating-word" style="left:62%; top:100%; font-size:1.15rem; animation-duration:16s; animation-delay:14s;">CSS</span>
             <span class="floating-word" style="left:94%; top:100%; font-size:0.9rem; animation-duration:19s; animation-delay:15s;">CodeBook</span>
         </div>
-   <div id="errorMsg" class="error-msg"></div>
-
-    <div id="successMsg" class="success-msg"></div>
      <div class="container mt-3">
     <div class="card p-4">
     <div class ="row align-items-center">
@@ -65,23 +62,22 @@
       <div class="col-md-9">
     <h2 id="username">UserName</h2>
      <p class="bio-text" id="bio">Write your Bio....</p>
-       <div class="d-flex gap-4 mb-3" style="flex-wrap: nowrap;"></div>
-    <span style="white-space: nowrap;">
+        <span class ="me-5">
     <strong id="followersCount">0</strong>
     <span> Followers</span>
     </span>
- <span style="white-space: nowrap;">
+     <span>
     <strong id="followingCount">0</strong>
      <span> Following</span>
     </span>
     </div>
-<div class="d-flex justify-content-center gap-2 mt-3 flex-wrap">
+   <div class="d-flex justify-content-center gap-3 mt-3">
     <button id = "followBtn"     class = "btn btn-purple"
-             onclick = "follow()">            <i class="fa-solid fa-user-plus"></i> Follow</button>
+             onclick = "follow()">           Follow</button>
        <button id = "unfollowBtn"     class = "btn btn-purple"
-            onclick = "unfollow()">     <i class="fa-solid fa-user-minus"></i>    UnFollow</button>
+            onclick = "unfollow()">        UnFollow</button>
      <button id = "ShowPosts-btn"     class = "btn btn-purple"
-             onclick = "viewPosts()">       <i class="fa-solid fa-grid"></i>     View Posts</button>
+             onclick = "viewPosts()">           View Posts</button>
     </div>
     </div>
     </div>

@@ -41,30 +41,23 @@ namespace CodeBook.API.App.Controllers
             {
                 return BadRequest(validationResult.Errors);
             }
-            try
+            var response = _authService.Login(logininfo);
+            if (response != null && response.Token != null)
             {
-                var response = _authService.Login(logininfo);
-                if (response != null && response.Token != null)
+                var cookieOptions = new CookieOptions
                 {
-                    var cookieOptions = new CookieOptions
-                    {
-                        HttpOnly = true, //so JavaScript cannot access it
-                        Secure = true, //secure it to https access
-                        SameSite = SameSiteMode.Lax, //protection to not be accessed through header
-                        Expires = DateTime.UtcNow.AddDays(7),
-                        IsEssential = true
+                    HttpOnly = true, //so JavaScript cannot access it
+                    Secure = true, //secure it to https access
+                    SameSite = SameSiteMode.None, //protection to not be accessed through header
+                    Expires = DateTime.UtcNow.AddDays(7)
 
-                    };
-                    Response.Cookies.Append("jwt_token", response.Token, cookieOptions);
+                };
+                Response.Cookies.Append("jwt_token",response.Token,cookieOptions);
 
-                    return Ok(new { message = "Login Successful.", Role = response.Role });
-                }
-                return Unauthorized(new { message = "Invalid Email or Password" });
+                return Ok(new { message = "Login Successful.", Role = response.Role});
             }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            return Unauthorized(new { message = "Invalid Email or Password" });
+
         }
 
         [HttpPost("register")]
@@ -75,20 +68,12 @@ namespace CodeBook.API.App.Controllers
             {
                 return BadRequest(validationResult.Errors);
             }
-            try
+            ErrorResponse result = _authService.Register(registerinfo);
+            if (result.Success)
             {
-                ErrorResponse result = _authService.Register(registerinfo);
-                if (result.Success)
-                {
-                    return Created(result.Message, registerinfo);
-                }
-
-                return Conflict(new { message = result.Message });
+                return Created(result.Message, registerinfo);
             }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            return Conflict(new { message = result.Message });
         }
 
         [HttpDelete("logout")]
@@ -106,32 +91,27 @@ namespace CodeBook.API.App.Controllers
         {
             var currentId = _currentUserInfo.GetCurrentUserId();
             resetPassword.userId = currentId;
-            try
+
+            bool verifyold = _authService.VerifyPassword(resetPassword.password,resetPassword.userId);
+            if (!verifyold)
             {
-                bool verifyold = _authService.VerifyPassword(resetPassword.password, resetPassword.userId);
-                if (!verifyold)
-                {
-                    return BadRequest(new { message = "Incorrect Old Password" });
-                }
-
-                var validationResult = _resetPasswordValidator.Validate(resetPassword);
-                if (!validationResult.IsValid)
-                {
-                    return BadRequest(validationResult.Errors);
-                }
-                ErrorResponse result = _authService.ResetPassword(resetPassword);
-
-                if (result.Success)
-                {
-                    return Ok(new { message = result.Message });
-                }
-
-                return BadRequest(result.Message);
+                return BadRequest(new { message = "Incorrect Old Password" });
             }
-            catch (Exception ex)
+
+            var validationResult = _resetPasswordValidator.Validate(resetPassword);
+            if (!validationResult.IsValid)
             {
-                return BadRequest(new { message = ex.Message });
+                return BadRequest(validationResult.Errors);
             }
+            ErrorResponse result = _authService.ResetPassword(resetPassword);
+
+            if (result.Success)
+            {
+                return Ok(new { message = result.Message });
+            }
+
+            return BadRequest(result.Message);
+
 
         }
         [HttpPost("forgotPassword")]
@@ -142,21 +122,15 @@ namespace CodeBook.API.App.Controllers
             {
                 return BadRequest(validationResult.Errors);
             }
-            try
-            {
-                ErrorResponse result = _authService.ForgotPassword(forgotPassword);
+            ErrorResponse result = _authService.ForgotPassword(forgotPassword);
 
-                if (result.Success)
-                {
-                    return Ok(new { message = result.Message });
-                }
-
-                return BadRequest(result.Message);
-            }
-            catch (Exception ex)
+            if (result.Success)
             {
-                return BadRequest(new { message = ex.Message });
+                return Ok(new { message = result.Message });
             }
+
+            return BadRequest(result.Message);
+
 
         }
     }
