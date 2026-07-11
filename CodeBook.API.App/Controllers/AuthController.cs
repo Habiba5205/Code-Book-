@@ -31,6 +31,12 @@ namespace CodeBook.API.App.Controllers
             _currentUserInfo = currentUserInfo;
         }
 
+        [HttpGet("isValid")]
+        [Authorize]
+        public IActionResult AuthenticationAccess()
+        {
+            return Ok(new { id = User.FindFirstValue(ClaimTypes.NameIdentifier) });
+        }
 
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDto logininfo)

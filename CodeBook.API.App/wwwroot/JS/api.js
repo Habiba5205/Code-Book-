@@ -34,3 +34,27 @@ export const api = {
     delete: (endpoint) => apirequest(endpoint,'DELETE'),
     patch: (endpoint,body) => apirequest(endpoint,'PATCH',body)
 };
+
+export async function isAuthenticated() {
+    try{
+    const result = await api.get("auth/isValid");
+    if(result.id === null){
+        throw new error;
+    }
+    }
+    catch(error){
+        window.location.href = "../HomePage.html";
+    }
+    
+}
+
+export async function RedirectToFeed(params) {
+    try{
+        const result = await api.get("auth/isValid");
+        if(result.id === null){ throw new error;}
+         window.location.href = "../Posts/Feed.html";
+    }
+    catch(error){
+    }
+    
+}

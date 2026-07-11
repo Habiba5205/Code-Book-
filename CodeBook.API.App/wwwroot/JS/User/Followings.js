@@ -1,4 +1,6 @@
 import { api } from '../api.js';
+import { isAuthenticated } from '../api.js';
+isAuthenticated();
 
 window.onload = async () => {
    var followingsContainer =   document.getElementById("followings-container");

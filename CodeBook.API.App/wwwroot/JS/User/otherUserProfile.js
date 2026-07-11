@@ -1,6 +1,5 @@
 import { api } from '../api.js';
 
-
 let viewedUserId = null;
 
 window.onload = async() =>{
