@@ -1,4 +1,4 @@
-const URL_BASE = "https://localhost:44313/";
+const URL_BASE = window.location.origin + "/";
 
 async function apirequest(endpoint,verb,body = null){
     const options = {
