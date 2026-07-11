@@ -386,13 +386,15 @@
     margin:20px auto;
 }
 
-#communities-container{
-    display: flex ;
-    justify-content: space-between;
+.communities-container {
+    display: flex;
+    flex-direction: column; 
+    gap: 20px;              
 }
-#explore-communities{
-    display: flex ;
-    justify-content: space-between;
+#explore-communities {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 #community-data-holder{
     justify-content: center;
