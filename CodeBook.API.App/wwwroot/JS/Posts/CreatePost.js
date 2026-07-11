@@ -1,5 +1,6 @@
 import { api } from '../api.js';
-
+import { isAuthenticated } from '../api.js';
+isAuthenticated();
 const urlParams = new URLSearchParams(window.location.search);
 const communityId = urlParams.get('communityId');
 

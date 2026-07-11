@@ -1,4 +1,6 @@
 import { api } from '../api.js';
+import { RedirectToFeed } from '../api.js';
+RedirectToFeed();
 
 window.onload=()=>{
         const button = document.getElementById('loginBtn');

@@ -1,4 +1,6 @@
 import { api } from '../api.js';
+import { isAuthenticated } from '../api.js';
+isAuthenticated();
 window.onload=()=>{
     var createcommunitybtn = document.getElementById("createcommunity-btn");
     var communitycontainer = document.getElementById("communities-container");

@@ -1,4 +1,6 @@
 import { api } from '../api.js';
+import { isAuthenticated } from '../api.js';
+isAuthenticated();
    const errorMsg = document.getElementById('errorMsg');
     const successMsg = document.getElementById('successMsg');
 

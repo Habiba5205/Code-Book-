@@ -1,4 +1,6 @@
 import { api } from '../api.js';
+import { isAuthenticated } from '../api.js';
+isAuthenticated();
 
 const urlParams = new URLSearchParams(window.location.search);
 const postId = urlParams.get('id');

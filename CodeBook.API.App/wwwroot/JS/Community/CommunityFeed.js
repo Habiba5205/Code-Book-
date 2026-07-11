@@ -1,4 +1,6 @@
 import { api } from '../api.js';
+import { isAuthenticated } from '../api.js';
+isAuthenticated();
 window.onload=()=>{
     var communitydatacard = document.getElementById("community-data-holder");
     var communityfeed = document.getElementById("community-feed");

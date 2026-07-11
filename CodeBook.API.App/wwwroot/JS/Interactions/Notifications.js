@@ -1,5 +1,6 @@
 import { api } from '../api.js';
-
+import { isAuthenticated } from '../api.js';
+isAuthenticated();
 
 async function getNotifications() {
 document.getElementById("loading").classList.remove("d-none");
