@@ -56,7 +56,7 @@ namespace CodeBook.API.App.Controllers
                     {
                         HttpOnly = true, //so JavaScript cannot access it
                         Secure = true, //secure it to https access
-                        SameSite = SameSiteMode.None, //protection to not be accessed through header
+                        SameSite = SameSiteMode.Strict, //protection to not be accessed through header
                         Expires = DateTime.UtcNow.AddDays(7)
 
                     };
@@ -100,7 +100,15 @@ namespace CodeBook.API.App.Controllers
 
         public IActionResult Logout()
         {
-            Response.Cookies.Delete("jwt_token");
+            Response.Cookies.Delete("jwt_token",new CookieOptions
+            {
+                HttpOnly = true,
+                Secure   = true,
+                SameSite = SameSiteMode.Strict,
+                Path     = "/",
+                Expires  = DateTime.UtcNow.AddDays(-1)
+            };
+            );
             return Ok(new { message = "Logout Successful!" });
         }
 
