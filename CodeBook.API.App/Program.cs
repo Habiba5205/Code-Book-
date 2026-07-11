@@ -94,7 +94,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalHost", builder =>
     {
-        builder.WithOrigins("http://localhost:5500", "http://127.0.0.1:5500", "https://code-book-e6e0cdeke2cfgkgz.polandcentral-01.azurewebsites.net/")
+        builder.WithOrigins("http://localhost:5500", "http://127.0.0.1:5500", "https://code-book-e6e0cdeke2cfgkgz.polandcentral-01.azurewebsites.net")
         .AllowAnyMethod()
         .AllowAnyHeader()
         .AllowCredentials();
